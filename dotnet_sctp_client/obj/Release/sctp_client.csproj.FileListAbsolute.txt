@@ -1,0 +1,5 @@
+c:\WinDevLab\sctp_client\sctp_client\obj\Release\ResolveAssemblyReference.cache
+c:\WinDevLab\sctp_client\sctp_client\bin\Release\sctp_client.dll
+c:\WinDevLab\sctp_client\sctp_client\bin\Release\sctp_client.pdb
+c:\WinDevLab\sctp_client\sctp_client\obj\Release\sctp_client.dll
+c:\WinDevLab\sctp_client\sctp_client\obj\Release\sctp_client.pdb

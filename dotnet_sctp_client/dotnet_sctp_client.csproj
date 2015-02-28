@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B0EC7362-1026-4E1B-967A-A9292EDE17D8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>dotnet_sctp_client</RootNamespace>
+    <AssemblyName>dotnet_sctp_client</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Arguments\ConstrTemplate.cs" />
+    <Compile Include="Arguments\ConstrTemplateType.cs" />
+    <Compile Include="Arguments\Construction.cs" />
+    <Compile Include="Arguments\DateTimeUNIX.cs" />
+    <Compile Include="Arguments\ElementType.cs" />
+    <Compile Include="Arguments\EventsType.cs" />
+    <Compile Include="Arguments\Identifier.cs" />
+    <Compile Include="Arguments\LinkContent.cs" />
+    <Compile Include="Arguments\LinkContentType.cs" />
+    <Compile Include="Arguments\ScAddress.cs" />
+    <Compile Include="Arguments\StatisticData.cs" />
+    <Compile Include="Arguments\SubScriptionId.cs" />
+    <Compile Include="AsyncClient\ASctpClient.cs" />
+    <Compile Include="AsyncClient\StageObject.cs" />
+    <Compile Include="CallBacks\CommandDoneEventArgs.cs" />
+    <Compile Include="CallBacks\enumReturnCode.cs" />
+    <Compile Include="CallBacks\ReceiveEventArgs.cs" />
+    <Compile Include="Commands\CmdCheckElement.cs" />
+    <Compile Include="Commands\CmdCreateArc.cs" />
+    <Compile Include="Commands\CmdCreateLink.cs" />
+    <Compile Include="Commands\CmdCreateNode.cs" />
+    <Compile Include="Commands\CmdCreateSubSciption.cs" />
+    <Compile Include="Commands\CmdDeleteElement.cs" />
+    <Compile Include="Commands\CmdDeleteSubSciption.cs" />
+    <Compile Include="Commands\CmdFindElementById.cs" />
+    <Compile Include="Commands\CmdFindLinks.cs" />
+    <Compile Include="Commands\CmdGetArc.cs" />
+    <Compile Include="Commands\CmdGetElementType.cs" />
+    <Compile Include="Commands\CmdGetLinkContent.cs" />
+    <Compile Include="Commands\CmdGetProtocolVersion.cs" />
+    <Compile Include="Commands\CmdGetStatistics.cs" />
+    <Compile Include="Commands\CmdIterateElements.cs" />
+    <Compile Include="Commands\CmdSetLinkContent.cs" />
+    <Compile Include="Commands\CmdSetSysId.cs" />
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Responses\RspCheckElement.cs" />
+    <Compile Include="Responses\RspCreateArc.cs" />
+    <Compile Include="Responses\RspCreateEventSubscription.cs" />
+    <Compile Include="Responses\RspCreateLink.cs" />
+    <Compile Include="Responses\RspCreateNode.cs" />
+    <Compile Include="Responses\RspDeleteElement.cs" />
+    <Compile Include="Responses\RspDeleteEventSubscription.cs" />
+    <Compile Include="Responses\RspFindElementById.cs" />
+    <Compile Include="Responses\RspFindLinks.cs" />
+    <Compile Include="Responses\RspGetArc.cs" />
+    <Compile Include="Responses\RspGetElementType.cs" />
+    <Compile Include="Responses\RspGetLinkContent.cs" />
+    <Compile Include="Responses\RspGetProtocolVersion.cs" />
+    <Compile Include="Responses\RspGetStatistics.cs" />
+    <Compile Include="Responses\RspIterateElements.cs" />
+    <Compile Include="Responses\RspSetLinkContent.cs" />
+    <Compile Include="Responses\RspSetSysId.cs" />
+    <Compile Include="Responses\RspUnknown.cs" />
+    <Compile Include="SyncClient\SSctp_Client.cs" />
+    <Compile Include="ACommand.cs" />
+    <Compile Include="AResponse.cs" />
+    <Compile Include="Argument.cs" />
+    <Compile Include="ClientFactory.cs" />
+    <Compile Include="ClientType.cs" />
+    <Compile Include="CommandHeader.cs" />
+    <Compile Include="CommandPool.cs" />
+    <Compile Include="IArgument.cs" />
+    <Compile Include="IClient.cs" />
+    <Compile Include="ResponseFactory.cs" />
+    <Compile Include="ResponseHeader.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="bin\Debug\sctp_client.dll" />
+    <None Include="bin\Debug\sctp_client.dll.mdb" />
+    <None Include="bin\Debug\sctp_client.pdb" />
+    <None Include="bin\Release\sctp_client.dll" />
+    <None Include="bin\Release\sctp_client.dll.mdb" />
+    <None Include="bin\Release\sctp_client.pdb" />
+    <None Include="bin\Release\sctp_client.XML" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\sctp_client.csproj.FileListAbsolute.txt" />
+    <None Include="obj\Debug\sctp_client.dll" />
+    <None Include="obj\Debug\sctp_client.pdb" />
+    <None Include="obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Release\sctp_client.csproj.FileListAbsolute.txt" />
+    <None Include="obj\Release\sctp_client.dll" />
+    <None Include="obj\Release\sctp_client.pdb" />
+  </ItemGroup>
+</Project>
