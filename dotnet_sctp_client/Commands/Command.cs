@@ -169,6 +169,7 @@ namespace sctp_client.Commands
 		/// <returns></returns>
 		public static ACommand CreateEventSubscription(EventsType Type, ScAddress address)
 		{
+
 			return new CmdCreateSubScription(Type,address);
 		}
 
@@ -180,5 +181,15 @@ namespace sctp_client.Commands
 		{
 			return new CmdDeleteSubScription(id);
 		}
+
+		/// <summary>
+		/// Запрос всех произошдших событий
+		/// </summary>
+		/// <returns></returns>
+		public static ACommand EmitEvents()
+		{
+			return new CmdEventsEmit();
+		}
+
   }
 }

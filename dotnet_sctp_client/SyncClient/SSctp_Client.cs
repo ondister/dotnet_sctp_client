@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
@@ -74,7 +73,7 @@ namespace sctp_client.SyncClient
             
 				int bytes = _client.Receive (bytesReceived, 0, bytesReceived.Length, SocketFlags.None);
 				stream.Write (bytesReceived, 0, bytes);
-
+			   
 				while (_client.Available != 0) {
 					bytes = _client.Receive (bytesReceived, 0, bytesReceived.Length, SocketFlags.None);
 					stream.Write (bytesReceived, 0, bytes);

@@ -3,19 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet_sctp_client", "dotnet_sctp_client\dotnet_sctp_client.csproj", "{B0EC7362-1026-4E1B-967A-A9292EDE17D8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "client_demo", "client_demo\client_demo.csproj", "{53A637FB-45FE-48EA-A42B-EB50E8428B72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{53A637FB-45FE-48EA-A42B-EB50E8428B72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53A637FB-45FE-48EA-A42B-EB50E8428B72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53A637FB-45FE-48EA-A42B-EB50E8428B72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53A637FB-45FE-48EA-A42B-EB50E8428B72}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B0EC7362-1026-4E1B-967A-A9292EDE17D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B0EC7362-1026-4E1B-967A-A9292EDE17D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0EC7362-1026-4E1B-967A-A9292EDE17D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0EC7362-1026-4E1B-967A-A9292EDE17D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = dotnet_sctp_client\dotnet_sctp_client.csproj
+		StartupItem = client_demo\client_demo.csproj
 		Policies = $0
 		$0.DotNetNamingPolicy = $1
 		$1.DirectoryNamespaceAssociation = None

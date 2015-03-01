@@ -2,10 +2,12 @@
 
 namespace sctp_client.Arguments
 {
+	/// <summary>
+	/// Тип элемента
+	/// </summary>
    [Flags]
     public enum ElementType:ushort
     {
-      //sc-element types
         /// <summary>
         /// Не известный или не указанный тип
         /// </summary>
