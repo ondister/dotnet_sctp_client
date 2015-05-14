@@ -104,6 +104,7 @@
     <Compile Include="Commands\CmdEventsEmit.cs" />
     <Compile Include="Arguments\ScEvent.cs" />
     <Compile Include="Responses\RspEventsEmit.cs" />
+    <Compile Include="Commands\CmdIterateConstructions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

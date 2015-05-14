@@ -98,6 +98,10 @@ namespace sctp_client.Arguments
             set { _offset = value; }
         }
 
+		public string ToString()
+		{
+			return String.Concat("segment: ",_segment.ToString(),", offset: ",_offset.ToString());
+		}
 
        
     }

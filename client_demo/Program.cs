@@ -13,32 +13,30 @@ namespace client_demo
 	{
 		public static void Main (string[] args)
 		{
-			CommandPool pool = new CommandPool ("127.0.0.1", 55770, ClientType.SyncClient);
+		
+//			List<ScAddress> adresses = new List<ScAddress> ();
+//			Console.WriteLine ("Start to create 10000 nodes");
+//			CommandPool pool = new CommandPool ("127.0.0.1", 55770, ClientType.SyncClient);
+//			Stopwatch watch = new  Stopwatch ();
+//			watch.Start ();
+//
+//			for (int i=0; i<10000; i++) {
+//				ACommand cmd_create_node = Command.CreateNode (ElementType.sc_type_node_const);
+//				pool.Send (cmd_create_node);
+//				adresses.Add ((cmd_create_node.Response as RspCreateNode).CreatedNodeAddress);
+//			}
+//
+//			foreach (ScAddress adr in adresses ){
+//				ACommand cmd_delnode = Command.DeleteElement (adr);
+//				pool.Send (cmd_delnode);
+//			}
+//
+//
+//			watch.Stop ();
+//			Console.WriteLine ("Times elapsed: {0}", watch.Elapsed.ToString());
+			Demo demo_test = new Demo ();
+			demo_test.demoCreateNode ();
 
-
-			List<ScAddress> adresses = new List<ScAddress> ();
-			Console.WriteLine ("Start to create 10000 nodes");
-			Stopwatch watch = new  Stopwatch ();
-			watch.Start ();
-
-			CommandPool pool = new CommandPool ("127.0.0.1", 55770, ClientType.SyncClient);
-			for (int i=0; i<10000; i++) {
-				ACommand cmd_create_node = Command.CreateNode (ElementType.sc_type_node_const);
-				pool.Send (cmd_create_node);
-				adresses.Add ((cmd_create_node.Response as RspCreateNode).CreatedNodeAddress);
-			}
-
-			foreach (ScAddress adr in adresses ){
-				ACommand cmd_gettype = Command.GetElementType (adr);
-				pool.Send (cmd_gettype);
-
-				Console.WriteLine ("Type of Node is: {0}", (cmd_gettype.Response as RspGetElementType).ElementType.ToString ());
-			}
-
-
-
-			watch.Stop ();
-			Console.WriteLine ("Times elapsed: {0}", watch.Elapsed.ToString());
 		}
 	}
 }

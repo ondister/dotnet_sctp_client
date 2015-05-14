@@ -45,6 +45,19 @@ namespace sctp_client.Arguments
            _bytesstream = txtcoder.GetBytes(value);
         }
        
+		public LinkContent(byte[] bytesstream)
+		{
+			_contenttype = LinkContentType.unknown;	
+			_bytesstream = bytesstream;
+		}
+
+		public LinkContent(double value)
+		{
+			_contenttype = LinkContentType.numeric;	
+			_bytesstream = BitConverter.GetBytes(value);
+		}
+
+
        
         public static implicit operator LinkContent(String value)
         {
