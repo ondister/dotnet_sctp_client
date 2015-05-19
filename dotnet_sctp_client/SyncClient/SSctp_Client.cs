@@ -29,10 +29,10 @@ namespace sctp_client.SyncClient
         {
             try
             {
-
-                IPHostEntry ipHostInfo = Dns.GetHostEntry(address);
-                IPAddress ipAddress = ipHostInfo.AddressList[0];
-                IPEndPoint remoteEP = new IPEndPoint(ipAddress, port);
+				//IPHostEntry ipHostInfo = Dns.GetHostEntry(address);
+				//IPAddress ipAddress = ipHostInfo.AddressList[0];
+				IPAddress ipAddress = IPAddress.Parse(address);
+				IPEndPoint remoteEP = new IPEndPoint(ipAddress, port);
 
                 _client.Connect(remoteEP);
                 if (_client.Connected)
