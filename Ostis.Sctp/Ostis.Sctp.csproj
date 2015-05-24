@@ -107,21 +107,4 @@
     <Compile Include="Commands\CmdIterateConstructions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <None Include="bin\Debug\sctp_client.dll" />
-    <None Include="bin\Debug\sctp_client.dll.mdb" />
-    <None Include="bin\Debug\sctp_client.pdb" />
-    <None Include="bin\Release\sctp_client.dll" />
-    <None Include="bin\Release\sctp_client.dll.mdb" />
-    <None Include="bin\Release\sctp_client.pdb" />
-    <None Include="bin\Release\sctp_client.XML" />
-    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <None Include="obj\Debug\sctp_client.csproj.FileListAbsolute.txt" />
-    <None Include="obj\Debug\sctp_client.dll" />
-    <None Include="obj\Debug\sctp_client.pdb" />
-    <None Include="obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <None Include="obj\Release\sctp_client.csproj.FileListAbsolute.txt" />
-    <None Include="obj\Release\sctp_client.dll" />
-    <None Include="obj\Release\sctp_client.pdb" />
-  </ItemGroup>
 </Project>

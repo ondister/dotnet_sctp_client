@@ -1,5 +1,0 @@
-c:\WinDevLab\sctp_client\sctp_client\bin\Debug\sctp_client.dll
-c:\WinDevLab\sctp_client\sctp_client\bin\Debug\sctp_client.pdb
-c:\WinDevLab\sctp_client\sctp_client\obj\Debug\ResolveAssemblyReference.cache
-c:\WinDevLab\sctp_client\sctp_client\obj\Debug\sctp_client.dll
-c:\WinDevLab\sctp_client\sctp_client\obj\Debug\sctp_client.pdb
