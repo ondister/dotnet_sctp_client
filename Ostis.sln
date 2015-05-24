@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet_sctp_client", "Ostis.Sctp\dotnet_sctp_client.csproj", "{B0EC7362-1026-4E1B-967A-A9292EDE17D8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ostis.Sctp", "Ostis.Sctp\Ostis.Sctp.csproj", "{B0EC7362-1026-4E1B-967A-A9292EDE17D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "client_demo", "Ostis.SctpDemo\client_demo.csproj", "{53A637FB-45FE-48EA-A42B-EB50E8428B72}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ostis.SctpDemo", "Ostis.SctpDemo\Ostis.SctpDemo.csproj", "{53A637FB-45FE-48EA-A42B-EB50E8428B72}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

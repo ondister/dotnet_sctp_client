@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -38,7 +38,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\dotnet_sctp_client\dotnet_sctp_client.csproj">
+    <ProjectReference Include="..\Ostis.Sctp\Ostis.Sctp.csproj">
       <Project>{B0EC7362-1026-4E1B-967A-A9292EDE17D8}</Project>
       <Name>dotnet_sctp_client</Name>
     </ProjectReference>
