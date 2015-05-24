@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using sctp_client.CallBacks;
+using Ostis.Sctp.CallBacks;
 
-namespace sctp_client
+namespace Ostis.Sctp
 {
     /// <summary>
     /// Абстрактный класс комманды

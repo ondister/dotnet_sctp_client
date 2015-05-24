@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using sctp_client.Arguments;
+using Ostis.Sctp.Arguments;
 
-namespace sctp_client.Commands
+namespace Ostis.Sctp.Commands
 {
   public partial class Command
     {

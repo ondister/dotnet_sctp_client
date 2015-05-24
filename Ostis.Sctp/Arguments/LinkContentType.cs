@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace sctp_client.Arguments
+namespace Ostis.Sctp.Arguments
 {
     /// <summary>
     /// Типы контента ссылки (не используется в связи с непонятками в сервере)

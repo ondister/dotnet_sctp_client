@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace sctp_client.Arguments
+namespace Ostis.Sctp.Arguments
 {
     /// <summary>
     /// Дата и время в форме Unix (http://en.wikipedia.org/wiki/Unix_time)

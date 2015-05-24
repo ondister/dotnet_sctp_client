@@ -1,8 +1,8 @@
-﻿using sctp_client.CallBacks;
-using sctp_client.Arguments;
+﻿using Ostis.Sctp.CallBacks;
+using Ostis.Sctp.Arguments;
 using System;
 
-namespace sctp_client.Responses
+namespace Ostis.Sctp.Responses
 {
     public class RspDeleteElement:AResponse
     {

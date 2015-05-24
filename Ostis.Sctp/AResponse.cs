@@ -1,6 +1,6 @@
 ﻿
 
-namespace sctp_client
+namespace Ostis.Sctp
 {
     /// <summary>
     /// Абстрактный класс ответа сервера

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using sctp_client.AsyncClient;
+using Ostis.Sctp.AsyncClient;
 
 
-namespace sctp_client
+namespace Ostis.Sctp
 {
     /// <summary>
     /// Пулл команд для сервера. Соединение с сервером происходит при создании экземпляра класса

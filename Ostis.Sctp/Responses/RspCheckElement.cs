@@ -1,6 +1,6 @@
-﻿using sctp_client.CallBacks;
+﻿using Ostis.Sctp.CallBacks;
 
-namespace sctp_client.Responses
+namespace Ostis.Sctp.Responses
 {
     public class RspCheckElement:AResponse
     {

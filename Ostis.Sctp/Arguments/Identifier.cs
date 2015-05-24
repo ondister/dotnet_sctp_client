@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace sctp_client.Arguments
+namespace Ostis.Sctp.Arguments
 {
     /// <summary>
     /// Идентификатор sc-элемента

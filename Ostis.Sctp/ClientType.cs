@@ -1,5 +1,5 @@
 ﻿
-namespace sctp_client
+namespace Ostis.Sctp
 {
     /// <summary>
     /// Перечислитель типа используемого сокет клиента

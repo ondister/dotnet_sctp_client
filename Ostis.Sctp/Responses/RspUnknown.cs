@@ -1,5 +1,5 @@
 ﻿
-namespace sctp_client.Responses
+namespace Ostis.Sctp.Responses
 {
     public class RspUnknown : AResponse
     {

@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Net.Sockets;
 
-namespace sctp_client.AsyncClient
+namespace Ostis.Sctp.AsyncClient
 {
     internal class StateObject
     {

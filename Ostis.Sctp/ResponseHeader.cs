@@ -1,7 +1,7 @@
 ﻿using System;
-using sctp_client.CallBacks;
+using Ostis.Sctp.CallBacks;
 
-namespace sctp_client
+namespace Ostis.Sctp
 {
     /// <summary>
     /// Заголовок ответа сервера

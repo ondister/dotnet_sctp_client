@@ -2,10 +2,10 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using sctp_client.CallBacks;
+using Ostis.Sctp.CallBacks;
 
 
-namespace sctp_client.AsyncClient
+namespace Ostis.Sctp.AsyncClient
 {
 
 	/// <summary>

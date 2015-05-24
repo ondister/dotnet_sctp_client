@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace sctp_client.Arguments
+namespace Ostis.Sctp.Arguments
 {
     /// <summary>
     /// sc-конструкция, представленная в виде sc-адресов

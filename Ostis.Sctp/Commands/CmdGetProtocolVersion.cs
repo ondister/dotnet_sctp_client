@@ -1,7 +1,7 @@
 ﻿using System;
-using sctp_client.Arguments;
+using Ostis.Sctp.Arguments;
 
-namespace sctp_client.Commands
+namespace Ostis.Sctp.Commands
 {
 
     internal class CmdGetProtocolVersion : ACommand

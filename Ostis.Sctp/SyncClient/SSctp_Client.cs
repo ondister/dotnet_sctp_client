@@ -4,10 +4,10 @@ using System.Text;
 using System.Net;
 using System.Net.Sockets;
 using System.IO;
-using sctp_client.CallBacks;
+using Ostis.Sctp.CallBacks;
 using System.Threading;
 
-namespace sctp_client.SyncClient
+namespace Ostis.Sctp.SyncClient
 {
    internal class SSctp_Client:IClient
     {

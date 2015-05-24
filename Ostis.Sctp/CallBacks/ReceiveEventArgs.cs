@@ -1,7 +1,7 @@
 ﻿using System;
-using sctp_client.AsyncClient;
+using Ostis.Sctp.AsyncClient;
 
-namespace sctp_client.CallBacks
+namespace Ostis.Sctp.CallBacks
 {
    internal delegate void ReceiveEventHandler(IClient sender,ReceiveEventArgs arg);
 

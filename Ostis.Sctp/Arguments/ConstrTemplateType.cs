@@ -1,5 +1,5 @@
 ﻿
-namespace sctp_client.Arguments
+namespace Ostis.Sctp.Arguments
 {
 
    internal enum ConstrTemplateType:byte

@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace sctp_client.CallBacks
+namespace Ostis.Sctp.CallBacks
 {
     /// <summary>
     /// Делегат для события завершения выполнения команды

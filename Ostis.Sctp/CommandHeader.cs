@@ -3,7 +3,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace sctp_client
+namespace Ostis.Sctp
 {
     internal class CommandHeader
     {

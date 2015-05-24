@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using sctp_client.Arguments;
-namespace sctp_client
+using Ostis.Sctp.Arguments;
+namespace Ostis.Sctp
 {
     internal class Argument<T> : IArgument where T : struct
     {

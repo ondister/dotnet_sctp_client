@@ -1,6 +1,6 @@
-﻿using sctp_client.Responses;
+﻿using Ostis.Sctp.Responses;
 
-namespace sctp_client
+namespace Ostis.Sctp
 {
 	internal class ResponseFactory
 	{

@@ -1,13 +1,13 @@
 using System;
-using sctp_client;
-using sctp_client.Commands;
-using sctp_client.Responses;
-using sctp_client.Arguments;
+using Ostis.Sctp;
+using Ostis.Sctp.Commands;
+using Ostis.Sctp.Responses;
+using Ostis.Sctp.Arguments;
 using System.Diagnostics;
 using System.Collections.Generic;
 
 
-namespace client_demo
+namespace Ostis.SctpDemo
 {
 	class MainClass
 	{

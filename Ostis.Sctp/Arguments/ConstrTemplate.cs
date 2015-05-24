@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace sctp_client.Arguments
+namespace Ostis.Sctp.Arguments
 {
     /// <summary>
     /// Шаблон поиска конструкции для команды CmdGetIterateElements

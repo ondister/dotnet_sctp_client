@@ -1,11 +1,11 @@
 using System;
-using sctp_client;//бщее пространство имен, оно всегда обязательно
-using sctp_client.Commands;// пространство имен команд для сервера
-using sctp_client.Responses;// пространсво имен ответов сервера
-using sctp_client.Arguments;//пространство имен аргументов команд для сервера
+using Ostis.Sctp;//бщее пространство имен, оно всегда обязательно
+using Ostis.Sctp.Commands;// пространство имен команд для сервера
+using Ostis.Sctp.Responses;// пространсво имен ответов сервера
+using Ostis.Sctp.Arguments;//пространство имен аргументов команд для сервера
 using System.Collections.Generic;
 
-namespace client_demo
+namespace Ostis.SctpDemo
 {
 	//ВНИМАНИЕ!!! Все примеры учебные, их правильное выполнение зависит от вашей базы. Если у вас нет элементов по указанным адресам - выйдут ошибки!!!
 	//Все консультации и справки по скайпу ondister
