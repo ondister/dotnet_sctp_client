@@ -7,8 +7,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{53A637FB-45FE-48EA-A42B-EB50E8428B72}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>client_demo</RootNamespace>
-    <AssemblyName>client_demo</AssemblyName>
+    <RootNamespace>Ostis.SctpDemo</RootNamespace>
+    <AssemblyName>Ostis.SctpDemo</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

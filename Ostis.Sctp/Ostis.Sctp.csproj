@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -7,8 +7,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{B0EC7362-1026-4E1B-967A-A9292EDE17D8}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>dotnet_sctp_client</RootNamespace>
-    <AssemblyName>dotnet_sctp_client</AssemblyName>
+    <RootNamespace>Ostis.Sctp</RootNamespace>
+    <AssemblyName>Ostis.Sctp</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
