@@ -21,7 +21,7 @@ Global
 		{B0EC7362-1026-4E1B-967A-A9292EDE17D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = client_demo\client_demo.csproj
+		StartupItem = Ostis.SctpDemo\Ostis.SctpDemo.csproj
 		Policies = $0
 		$0.DotNetNamingPolicy = $1
 		$1.DirectoryNamespaceAssociation = None
