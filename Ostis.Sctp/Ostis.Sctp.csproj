@@ -51,7 +51,7 @@
     <Compile Include="AsyncClient\AsynchronousClient.cs" />
     <Compile Include="AsyncClient\StageObject.cs" />
     <Compile Include="CallBacks\CommandDoneEventArgs.cs" />
-    <Compile Include="CallBacks\enumReturnCode.cs" />
+    <Compile Include="CallBacks\ReturnCode.cs" />
     <Compile Include="CallBacks\ReceiveEventArgs.cs" />
     <Compile Include="Commands\CmdCheckElement.cs" />
     <Compile Include="Commands\CmdCreateArc.cs" />
