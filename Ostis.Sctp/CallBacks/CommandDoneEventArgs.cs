@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace Ostis.Sctp.CallBacks
 {
     /// <summary>
@@ -15,14 +14,13 @@ namespace Ostis.Sctp.CallBacks
     /// </summary>
     public class CommandDoneEventArgs : EventArgs
     {
-
         /// <summary>
         /// Возвращает и задает код окончания выполнения команд
         /// </summary>
         /// <value>
         /// Код окончания выполнения команды
         /// </value>
-       public ReturnCode ReturnCode{get;set;}
-
+        public ReturnCode ReturnCode 
+        { get; set; }
     }
 }
