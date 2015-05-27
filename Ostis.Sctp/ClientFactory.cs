@@ -13,7 +13,7 @@ namespace Ostis.Sctp
                     client = new AsyncClient.ASctp_client();
                     break;
                 case ClientType.SyncClient:
-                    client = new SyncClient.SSctp_Client();
+                    client = new SyncClient.SynchronousClient();
                     break;
                 default:
                     throw new NotImplementedException();

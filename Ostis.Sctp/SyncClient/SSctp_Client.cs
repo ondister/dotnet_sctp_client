@@ -1,48 +1,51 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.IO;
-using Ostis.Sctp.CallBacks;
 using System.Threading;
+
+using Ostis.Sctp.CallBacks;
 
 namespace Ostis.Sctp.SyncClient
 {
-   internal class SSctp_Client:IClient
+    internal class SynchronousClient : IClient
+#warning Сделать этот класс IDisposable
     {
-       private Socket _client;
-       private ReceiveEventArgs arg;
-       private void OnReceive() { if (Received != null) { Received(this, arg); } }
+        private readonly Socket client;
+        private readonly ReceiveEventArgs receiveArguments;
 
-
-        public event CallBacks.ReceiveEventHandler Received;
-
-        public SSctp_Client()
+        private void OnReceive()
         {
-            _client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            arg = new ReceiveEventArgs();
+            var handler = Received;
+#warning var handler = Volatile.Read(ref Received);
+            if (handler != null)
+            {
+                handler(this, receiveArguments);
+            }
         }
 
+        public event ReceiveEventHandler Received;
+
+        public SynchronousClient()
+        {
+            client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            receiveArguments = new ReceiveEventArgs();
+        }
 
         public void Connect(string address, int port)
         {
             try
             {
-				//IPHostEntry ipHostInfo = Dns.GetHostEntry(address);
-				//IPAddress ipAddress = ipHostInfo.AddressList[0];
-				IPAddress ipAddress = IPAddress.Parse(address);
-				IPEndPoint remoteEP = new IPEndPoint(ipAddress, port);
-
-                _client.Connect(remoteEP);
-                if (_client.Connected)
+                client.Connect(new IPEndPoint(IPAddress.Parse(address), port));
+#warning Убрать все консольные вызовы из этого класса, так как в оконном приложении это вызовет ошибку.
+                if (client.Connected)
                 {
-                    Console.WriteLine("Socket connected to {0}", _client.RemoteEndPoint.ToString());
+                    Console.WriteLine("Socket connected to " + client.RemoteEndPoint);
                 }
             }
-            catch (Exception e)
+            catch (Exception exeption)
             {
-                Console.WriteLine(e.ToString());
+                Console.WriteLine(exeption.ToString());
             }
         }
 
@@ -50,10 +53,10 @@ namespace Ostis.Sctp.SyncClient
         {
             try
             {
-                if (_client.Connected)
+                if (client.Connected)
                 {
-                    _client.Disconnect(true);
-                    _client.Close();
+                    client.Disconnect(true);
+                    client.Close();
                 }
             }
             catch (Exception e)
@@ -62,34 +65,29 @@ namespace Ostis.Sctp.SyncClient
             }
         }
 
-        public void Send(byte[] bytestosend)
-        { 
-				_client.Send (bytestosend, bytestosend.Length, 0);
-				Console.WriteLine ("Sent {0} bytes to server.", bytestosend.Length);
+        public void Send(byte[] bytes)
+        {
+            client.Send(bytes, bytes.Length, 0);
+            Console.WriteLine("Sent {0} bytes to server.", bytes.Length);
             
-            
-				Byte[] bytesReceived = new Byte[1024];
-				MemoryStream stream = new MemoryStream ();
-            
-				int bytes = _client.Receive (bytesReceived, 0, bytesReceived.Length, SocketFlags.None);
-				stream.Write (bytesReceived, 0, bytes);
-			   
-				while (_client.Available != 0) {
-					bytes = _client.Receive (bytesReceived, 0, bytesReceived.Length, SocketFlags.None);
-					stream.Write (bytesReceived, 0, bytes);
-					Thread.Sleep (0);
-				}
-           
-				stream.Close ();
-				arg.ReceivedBytes = stream.ToArray ();
-				OnReceive ();
-
-
+#warning Вынести размер буффера в константу
+            var bytesReceived = new Byte[1024];
+            using (var stream = new MemoryStream())
+            {
+                int receivedSize = client.Receive(bytesReceived, 0, bytesReceived.Length, SocketFlags.None);
+                stream.Write(bytesReceived, 0, receivedSize);
+                while (client.Available != 0)
+                {
+                    receivedSize = client.Receive(bytesReceived, 0, bytesReceived.Length, SocketFlags.None);
+                    stream.Write(bytesReceived, 0, receivedSize);
+                    Thread.Sleep(0);
+                }
+                receiveArguments.ReceivedBytes = stream.ToArray();
+            }
+            OnReceive();
         }
 
         public bool Connected
-        {
-            get { return _client.Connected; }
-        }
+        { get { return client.Connected; } }
     }
 }
