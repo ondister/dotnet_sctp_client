@@ -1,22 +1,24 @@
-﻿
+﻿using System;
+
 namespace Ostis.Sctp
 {
     static internal class ClientFactory
     {
-        public static IClient CreateClient(ClientType clienttype)
+        public static IClient CreateClient(ClientType type)
         {
-            IClient _client = new SyncClient.SSctp_Client();
-            switch (clienttype)
+            IClient client;
+            switch (type)
             {
                 case ClientType.AsyncClient:
-                    _client = new AsyncClient.ASctp_client();
+                    client = new AsyncClient.ASctp_client();
                     break;
                 case ClientType.SyncClient:
-                    _client = new SyncClient.SSctp_Client();
+                    client = new SyncClient.SSctp_Client();
                     break;
+                default:
+                    throw new NotImplementedException();
             }
-
-            return _client;
+            return client;
         }
     }
 }
