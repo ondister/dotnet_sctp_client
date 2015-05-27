@@ -21,7 +21,7 @@ namespace Ostis.Sctp.Responses
                 if (base.Header.ReturnCode == enumReturnCode.Successfull)
                 {
 
-                    _timecheckscount  = BitConverter.ToUInt32(base.BytesStream, base.Header.Leight);
+                    _timecheckscount  = BitConverter.ToUInt32(base.BytesStream, base.Header.Length);
                 }
 
                 return _timecheckscount;
@@ -34,7 +34,7 @@ namespace Ostis.Sctp.Responses
             _statdata = new List<StatisticData>();
             if (this.TimeChecksCount != 0)
             {
-                int beginindex = sizeof(UInt32) + base.Header.Leight;
+                int beginindex = sizeof(UInt32) + base.Header.Length;
                 int statdatalength = 89;
                 for (int statscount = 0; statscount < this.TimeChecksCount; statscount++)
                 {

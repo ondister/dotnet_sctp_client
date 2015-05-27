@@ -16,7 +16,7 @@ namespace Ostis.Sctp.Responses
 			{
 				if (base.Header.ReturnCode == enumReturnCode.Successfull)
 				{
-					_protocolversion = BitConverter.ToInt32(base.BytesStream, base.Header.Leight);
+					_protocolversion = BitConverter.ToInt32(base.BytesStream, base.Header.Length);
 				}
 
 				return _protocolversion;

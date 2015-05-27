@@ -14,7 +14,7 @@ namespace Ostis.Sctp.Responses
             {
                 if (base.Header.ReturnCode == enumReturnCode.Successfull)
                 {
-					_id.ID=BitConverter.ToInt32(base.BytesStream, base.Header.Leight);
+					_id.ID=BitConverter.ToInt32(base.BytesStream, base.Header.Length);
                     
 				}
 

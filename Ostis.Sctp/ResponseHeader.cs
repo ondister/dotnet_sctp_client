@@ -1,4 +1,5 @@
 ﻿using System;
+
 using Ostis.Sctp.CallBacks;
 
 namespace Ostis.Sctp
@@ -8,69 +9,56 @@ namespace Ostis.Sctp
     /// </summary>
     public class ResponseHeader
     {
-        private byte _code;
-        private UInt32 _id;
-        private byte _returncode;
-        private UInt32 _returnsize;
-
-        private int _leight;
+        private readonly byte code;
+        private readonly UInt32 id;
+        private readonly enumReturnCode returnCode;
+        private readonly UInt32 returnSize;
+        private readonly int length;
 
         /// <summary>
         /// Длина заголовка
         /// </summary>
-        public int Leight
-        {
-            get { return _leight; }
-           
-        }
+        public int Length
+        { get { return length; } }
 
         /// <summary>
         /// Код команды, на которую получен ответ
         /// </summary>
         public byte Code
-        {
-            get { return _code; }
-        }
+        { get { return code; } }
 
         /// <summary>
         /// Уникальный идентификатор команды в потоке команд
         /// </summary>
-       public UInt32 Id
-        {
-            get { return _id; }
-        }
+        public UInt32 Id
+        { get { return id; } }
 
-       /// <summary>
-       ///Возвращает код успешности выполнения команды
-       /// </summary>
+        /// <summary>
+        ///Возвращает код успешности выполнения команды
+        /// </summary>
         public enumReturnCode ReturnCode
-       {
-           get { return (enumReturnCode)_returncode; }
-       }
+        { get { return returnCode; } }
 
         /// <summary>
         /// Возвращает размер содержимого ответа
         /// </summary>
         public UInt32 ReturnSize
-        {
-            get { return _returnsize; }
-        }
+        { get { return returnSize; } }
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="ResponseHeader"/>
         /// </summary>
-        /// <param name="bytesdata">Массив байт заголовка</param>
-        public ResponseHeader(byte[] bytesdata)
+        /// <param name="bytes">Массив байт заголовка</param>
+        public ResponseHeader(byte[] bytes)
         {
-            if (bytesdata.Length >= 10)
+            if (bytes.Length >= 10)
             {
-                _code = bytesdata[0];
-                _id = BitConverter.ToUInt32(bytesdata, 1);
-                _returncode = bytesdata[5];
-                _returnsize = BitConverter.ToUInt32(bytesdata, 6);
-                _leight = bytesdata.Length;
+                code = bytes[0];
+                id = BitConverter.ToUInt32(bytes, 1);
+                returnCode = (enumReturnCode) bytes[5];
+                returnSize = BitConverter.ToUInt32(bytes, 6);
+                length = bytes.Length;
             }
         }
-
     }
 }

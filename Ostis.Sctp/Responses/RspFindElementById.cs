@@ -24,8 +24,8 @@ namespace Ostis.Sctp.Responses
                 if (base.Header.ReturnCode == enumReturnCode.Successfull)
                 {
                    
-                    _address.Offset = BitConverter.ToUInt16(base.BytesStream, base.Header.Leight + 2);
-                    _address.Segment = BitConverter.ToUInt16(base.BytesStream, base.Header.Leight);
+                    _address.Offset = BitConverter.ToUInt16(base.BytesStream, base.Header.Length + 2);
+                    _address.Segment = BitConverter.ToUInt16(base.BytesStream, base.Header.Length);
                 }
 
                 return _address;

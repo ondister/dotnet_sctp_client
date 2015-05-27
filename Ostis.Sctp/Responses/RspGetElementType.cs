@@ -14,7 +14,7 @@ namespace Ostis.Sctp.Responses
             {
                 if (base.Header.ReturnCode == enumReturnCode.Successfull)
                 {
-               _elementtype=(ElementType)BitConverter.ToUInt16(base.BytesStream, base.Header.Leight);
+               _elementtype=(ElementType)BitConverter.ToUInt16(base.BytesStream, base.Header.Length);
                 }
                 return _elementtype; 
             }

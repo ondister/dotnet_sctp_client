@@ -23,7 +23,7 @@ namespace Ostis.Sctp.Responses
 				if (base.Header.ReturnCode == enumReturnCode.Successfull) {
 					if (this.EventsCount != 0) {
 
-						int beginindex = sizeof(UInt32) + base.Header.Leight;
+						int beginindex = sizeof(UInt32) + base.Header.Length;
 						int sceventlength = 12;
 						for (int eventcount = 0; eventcount < this.EventsCount; eventcount++) {
 							ScEvent tmpevent = ScEvent.GetFromBytes (base.BytesStream, beginindex);
@@ -77,7 +77,7 @@ namespace Ostis.Sctp.Responses
 			_scevents = new List<ScEvent> ();
          
 			if (base.Header.ReturnCode == enumReturnCode.Successfull) {
-				_eventscount = BitConverter.ToUInt32 (base.BytesStream, base.Header.Leight);
+				_eventscount = BitConverter.ToUInt32 (base.BytesStream, base.Header.Length);
 			} else {
 				_eventscount = 0;
 			}

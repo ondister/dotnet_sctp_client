@@ -17,10 +17,10 @@ namespace Ostis.Sctp.Responses
 
             if (base.Header.ReturnCode == enumReturnCode.Successfull)
             {
-                int addrcount = (base.BytesStream.Length - base.Header.Leight - 4) / 4;
+                int addrcount = (base.BytesStream.Length - base.Header.Length - 4) / 4;
                 int addrinconstruction = (int)_constrcount==0?0:addrcount / (int)_constrcount;
 
-                int offset = sizeof(UInt32) + base.Header.Leight;
+                int offset = sizeof(UInt32) + base.Header.Length;
                 int scaddresslength = 4;
 
                 for (uint iteration = 0; iteration < _constrcount; iteration++)
@@ -60,7 +60,7 @@ namespace Ostis.Sctp.Responses
             _scaddresses = new List<ScAddress>();
             if (base.Header.ReturnCode == enumReturnCode.Successfull)
             {
-                _constrcount = BitConverter.ToUInt32(base.BytesStream, base.Header.Leight);
+                _constrcount = BitConverter.ToUInt32(base.BytesStream, base.Header.Length);
             }
             else
             {

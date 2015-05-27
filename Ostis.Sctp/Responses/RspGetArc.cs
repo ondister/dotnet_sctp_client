@@ -15,8 +15,8 @@ namespace Ostis.Sctp.Responses
                 if (base.Header.ReturnCode == enumReturnCode.Successfull)
                 {
                    
-                    _baddress.Offset = BitConverter.ToUInt16(base.BytesStream, base.Header.Leight + 2);
-                    _baddress.Segment = BitConverter.ToUInt16(base.BytesStream, base.Header.Leight);
+                    _baddress.Offset = BitConverter.ToUInt16(base.BytesStream, base.Header.Length + 2);
+                    _baddress.Segment = BitConverter.ToUInt16(base.BytesStream, base.Header.Length);
                 }
 
                 return _baddress;
@@ -30,8 +30,8 @@ namespace Ostis.Sctp.Responses
 				if (base.Header.ReturnCode == enumReturnCode.Successfull)
 				{
 
-					_eaddress.Offset = BitConverter.ToUInt16(base.BytesStream, base.Header.Leight + 6);
-					_eaddress.Segment = BitConverter.ToUInt16(base.BytesStream, base.Header.Leight+4);
+					_eaddress.Offset = BitConverter.ToUInt16(base.BytesStream, base.Header.Length + 6);
+					_eaddress.Segment = BitConverter.ToUInt16(base.BytesStream, base.Header.Length+4);
 				}
 
 				return _eaddress;

@@ -18,7 +18,7 @@ namespace Ostis.Sctp.Responses
                 {
                     if (this.LinksCount!= 0)
                     {
-                       int beginindex = sizeof(UInt32) + base.Header.Leight;
+                       int beginindex = sizeof(UInt32) + base.Header.Length;
                         int scaddresslength = 4;
                         for (int addrcount = 0; addrcount < this.LinksCount; addrcount++)
                         {
@@ -52,7 +52,7 @@ namespace Ostis.Sctp.Responses
          
             if (base.Header.ReturnCode == enumReturnCode.Successfull)
             {
-                _linkscount = BitConverter.ToUInt32(base.BytesStream, base.Header.Leight);
+                _linkscount = BitConverter.ToUInt32(base.BytesStream, base.Header.Length);
               
             }
             else
