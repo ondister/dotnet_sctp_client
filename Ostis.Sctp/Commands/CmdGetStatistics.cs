@@ -14,16 +14,16 @@ namespace Ostis.Sctp.Commands
             UInt32 argsize = 0;
 
             Argument<DateTimeUNIX> argstt = new Argument<DateTimeUNIX>(starttime);
-            base._arguments.Add(argstt);
+            base.Arguments.Add(argstt);
 
             Argument<DateTimeUNIX> argent = new Argument<DateTimeUNIX>(endtime);
-            base._arguments.Add(argent);
+            base.Arguments.Add(argent);
 
-            foreach (IArgument arg in base._arguments)
+            foreach (IArgument arg in base.Arguments)
             {
                 argsize += arg.Length;
             }
-            base._header.ArgumentsSize = argsize;
+            base.Header.ArgumentsSize = argsize;
         }
 
 

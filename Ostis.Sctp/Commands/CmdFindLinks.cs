@@ -15,16 +15,16 @@ namespace Ostis.Sctp.Commands
           
             UInt32 contlenght = (uint)content.BytesStream.Length;
             Argument<UInt32> _argcontlenght = new Argument<UInt32>(contlenght);
-            base._arguments.Add(_argcontlenght);
+            base.Arguments.Add(_argcontlenght);
 
             Argument<LinkContent> _argcontent = new Argument<LinkContent>(content);
-            base._arguments.Add(_argcontent);
+            base.Arguments.Add(_argcontent);
 
-            foreach (IArgument arg in base._arguments)
+            foreach (IArgument arg in base.Arguments)
             {
                 argsize += arg.Length;
             }
-            base._header.ArgumentsSize = argsize;
+            base.Header.ArgumentsSize = argsize;
         }
 
     }

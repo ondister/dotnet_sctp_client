@@ -17,13 +17,13 @@ namespace Ostis.Sctp.Commands
 			Argument<EventsType> argt = new Argument<EventsType> (Type);
 			Argument<ScAddress> argf = new Argument<ScAddress>(address);
             
-			base._arguments.Add (argt);
-			base._arguments.Add(argf);
-            foreach (IArgument arg in base._arguments)
+			base.Arguments.Add (argt);
+			base.Arguments.Add(argf);
+            foreach (IArgument arg in base.Arguments)
             {
                 argsize += arg.Length;
             }
-            base._header.ArgumentsSize = argsize;
+            base.Header.ArgumentsSize = argsize;
         }
 
 

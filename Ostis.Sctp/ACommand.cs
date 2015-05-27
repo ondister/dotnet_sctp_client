@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
+
 using Ostis.Sctp.CallBacks;
 
 namespace Ostis.Sctp
@@ -10,36 +11,36 @@ namespace Ostis.Sctp
     /// </summary>
     public abstract class ACommand
     {
-        internal CommandHeader _header;
-        protected List<IArgument> _arguments;
-        private AResponse _response;
+        internal CommandHeader Header
+        { get; private set; }
+
+        private AResponse response;
 
         /// <summary>
         /// Событие происходит при выполнении команды
         /// </summary>
         public event CommandDoneEventHandler CommandDone;
 
-        private CommandDoneEventArgs arg;
+        private CommandDoneEventArgs commandDoneArgument;
 
-        private void OnCommandDone() { if (CommandDone != null) { CommandDone(this, arg); } }
+        private void raiseCommandDone()
+        {
+#warning var handler = Volatile.Read(ref CommandDone);
+            var handler = CommandDone;
+            if (handler != null)
+            {
+                handler(this, commandDoneArgument);
+            }
+        }
 
         /// <summary>
         /// Аргументы команды
         /// </summary>
         public List<IArgument> Arguments
-        {
-            get { return _arguments; }
-        }
-
+        { get; private set; }
         
 		public uint Code
-		{
-			get
-			{
-				return _header.Code;
-			}
-
-		}
+		{ get { return Header.Code; } }
 
 		/// <summary>
         ///Возвращает и задает уникальный идентификатор команды
@@ -49,28 +50,24 @@ namespace Ostis.Sctp
         /// </value>
         public uint Id
         {
-            get
-            {
-                return _header.Id;
-            }
-            set
-            {
-                _header.Id = value;
-            }
+            get { return Header.Id; }
+            set { Header.Id = value; }
         }
 
         /// <summary>
         /// Конструктор класса <see cref="ACommand"/> 
         /// </summary>
         /// <param name="code">Код команды</param>
-        /// <param name="flag">Флаг команды</param>
-        public ACommand(byte code,byte flag)
+        /// <param name="flags">Флаг команды</param>
+        protected ACommand(byte code, byte flags)
         {
-            _header = new CommandHeader();
-            _header.Code = code;
-            _header.Flags = flag;
-            _arguments = new List<IArgument>();
-            arg = new CommandDoneEventArgs();
+            Header = new CommandHeader
+            {
+                Code = code,
+                Flags = flags,
+            };
+            Arguments = new List<IArgument>();
+            commandDoneArgument = new CommandDoneEventArgs();
         }
 
         /// <summary>
@@ -80,21 +77,18 @@ namespace Ostis.Sctp
         {
             get
             {
-                MemoryStream stream = new MemoryStream();
-                BinaryWriter writer = new BinaryWriter(stream, Encoding.UTF8);
-
-                if (_header.Id != 0)
+                var stream = new MemoryStream();
+                if (Header.Id != 0)
                 {
-                    writer.Write(_header.BytesStream);
-
-                    foreach (IArgument arg in _arguments)
+                    using (var writer = new BinaryWriter(stream, Encoding.UTF8))
                     {
-                        writer.Write(arg.BytesStream);
+                        writer.Write(Header.BytesStream);
+                        foreach (var argument in Arguments)
+                        {
+                            writer.Write(argument.BytesStream);
+                        }
                     }
-
                 }
-                writer.Close();
-
                 return stream.ToArray();
             }
         }
@@ -102,18 +96,14 @@ namespace Ostis.Sctp
         /// <summary>
         /// Возвращает и задает ответ сервера команды
         /// </summary>
-  
         public AResponse Response
         {
-            get
-            {
-                return _response;
-            }
+            get { return response; }
             set
             {
-                _response = value;
-                arg.ReturnCode = _response.Header.ReturnCode;
-                this.OnCommandDone();
+                response = value;
+                commandDoneArgument.ReturnCode = response.Header.ReturnCode;
+                raiseCommandDone();
             }
         }
     }

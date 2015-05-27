@@ -16,12 +16,12 @@ namespace Ostis.Sctp.Commands
           
 			Argument<SubScriptionId> argt = new Argument<SubScriptionId> (id);
             
-			base._arguments.Add (argt);
-            foreach (IArgument arg in base._arguments)
+			base.Arguments.Add (argt);
+            foreach (IArgument arg in base.Arguments)
             {
                 argsize += arg.Length;
             }
-            base._header.ArgumentsSize = argsize;
+            base.Header.ArgumentsSize = argsize;
         }
 
 

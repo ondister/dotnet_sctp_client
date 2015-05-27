@@ -14,20 +14,20 @@ namespace Ostis.Sctp.Commands
             UInt32 argsize = 0;
 
             Argument<ScAddress> _address = new Argument<ScAddress>(address);
-            base._arguments.Add(_address);
+            base.Arguments.Add(_address);
 
             UInt32 contlenght = (uint)identifier.BytesStream.Length;
             Argument<UInt32> _argidlenght = new Argument<UInt32>(contlenght);
-            base._arguments.Add(_argidlenght);
+            base.Arguments.Add(_argidlenght);
 
             Argument<Identifier> _argid = new Argument<Identifier>(identifier);
-            base._arguments.Add(_argid);
+            base.Arguments.Add(_argid);
 
-            foreach (IArgument arg in base._arguments)
+            foreach (IArgument arg in base.Arguments)
             {
                 argsize += arg.Length;
             }
-            base._header.ArgumentsSize = argsize;
+            base.Header.ArgumentsSize = argsize;
         }
 
     }
