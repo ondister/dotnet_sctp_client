@@ -48,7 +48,7 @@
     <Compile Include="Arguments\ScAddress.cs" />
     <Compile Include="Arguments\StatisticData.cs" />
     <Compile Include="Arguments\SubScriptionId.cs" />
-    <Compile Include="AsyncClient\ASctpClient.cs" />
+    <Compile Include="AsyncClient\AsynchronousClient.cs" />
     <Compile Include="AsyncClient\StageObject.cs" />
     <Compile Include="CallBacks\CommandDoneEventArgs.cs" />
     <Compile Include="CallBacks\enumReturnCode.cs" />
