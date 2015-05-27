@@ -10,7 +10,7 @@ namespace Ostis.Sctp
             switch (type)
             {
                 case ClientType.AsyncClient:
-                    client = new AsyncClient.ASctp_client();
+                    client = new AsyncClient.AsynchronousClient();
                     break;
                 case ClientType.SyncClient:
                     client = new SyncClient.SynchronousClient();

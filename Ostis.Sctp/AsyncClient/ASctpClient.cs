@@ -2,71 +2,72 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using Ostis.Sctp.CallBacks;
 
+using Ostis.Sctp.CallBacks;
 
 namespace Ostis.Sctp.AsyncClient
 {
-
-	/// <summary>
+    /// <summary>
 	/// Этот класс всего лишь заготовка для асинхронного клиента, когда будет асинхронный сервер
 	/// </summary>
-   internal class ASctp_client:IClient
+#warning Асинхронному клиенту не нужен асинхронный сервер. Просто реализовать асинхронную работу.
+    internal class AsynchronousClient : IClient
     {
-        private  ManualResetEvent connectDone = new ManualResetEvent(false);
-        private  ManualResetEvent disconnectDone = new ManualResetEvent(false);
-        private  ManualResetEvent sendDone = new ManualResetEvent(false);
-        private  ManualResetEvent receiveDone = new ManualResetEvent(false);
+        private readonly ManualResetEvent connectDone = new ManualResetEvent(false);
+        private readonly ManualResetEvent disconnectDone = new ManualResetEvent(false);
+        private readonly ManualResetEvent sendDone = new ManualResetEvent(false);
+        private readonly ManualResetEvent receiveDone = new ManualResetEvent(false);
 
         public event ReceiveEventHandler Received;
-        private ReceiveEventArgs arg;
-        private void OnReceive() { if (Received != null) { Received(this, arg); } }
+        private readonly ReceiveEventArgs receiveArgs;
 
+	    private void raiseReceived()
+	    {
+	        var handler = Received;
+#warning var handler = Volatile.Read(ref Received);
+            if (handler != null)
+	        {
+                handler(this, receiveArgs);
+	        }
+	    }
 
-        private Socket _client;
-        private StateObject _state;
+	    private readonly Socket client;
+        private StateObject state;
 
-        public ASctp_client()
+        public AsynchronousClient()
         {
-            _client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            arg = new ReceiveEventArgs();
+            client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            receiveArgs = new ReceiveEventArgs();
         }
 
         public void Connect(string address, int port)
         {
             try
             {
-
-                IPHostEntry ipHostInfo = Dns.GetHostEntry(address);
-                IPAddress ipAddress = ipHostInfo.AddressList[0];
-                IPEndPoint remoteEP = new IPEndPoint(ipAddress, port);
-
-                _client.BeginConnect(remoteEP, new AsyncCallback(ConnectCallback), _client);
+#warning Взятие адреса сделать аналогично синхронному клиенту.
+#warning Передача клиента в метод необязательна, так как он и так доступен как поле.
+                client.BeginConnect(new IPEndPoint(Dns.GetHostEntry(address).AddressList[0], port), connectCallback, client);
                 connectDone.WaitOne();
-
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                Console.WriteLine(e.ToString());
+#warning Из этого класса нужно тоже удалить все вызовы консоли.
+                Console.WriteLine(exception.ToString());
             }
         }
 
-        private void ConnectCallback(IAsyncResult ar)
+        private void connectCallback(IAsyncResult asyncResult)
         {
             try
             {
-
-                Socket client = (Socket)ar.AsyncState;
-
-                client.EndConnect(ar);
-
-                Console.WriteLine("Socket connected to {0}", client.RemoteEndPoint.ToString());
-
+                Socket client = (Socket) asyncResult.AsyncState;
+                client.EndConnect(asyncResult);
+                Console.WriteLine("Socket connected to {0}", client.RemoteEndPoint);
                 connectDone.Set();
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                Console.WriteLine(e.ToString());
+                Console.WriteLine(exception.ToString());
             }
         }
 
@@ -74,10 +75,9 @@ namespace Ostis.Sctp.AsyncClient
         {
             try
             {
-                _client.BeginDisconnect(true, new AsyncCallback(DisConnectCallback), _client);
+                client.BeginDisconnect(true, disconnectCallback, client);
                 disconnectDone.WaitOne();
-                _client.Close();
-
+                client.Close();
             }
             catch (Exception e)
             {
@@ -86,41 +86,35 @@ namespace Ostis.Sctp.AsyncClient
 
         }
 
-        private void DisConnectCallback(IAsyncResult ar)
+        private void disconnectCallback(IAsyncResult asyncResult)
         {
             try
             {
-
-                Socket client = (Socket)ar.AsyncState;
-
-                client.EndDisconnect(ar);
-
-                Console.WriteLine("Socket disconnected from {0}", client.RemoteEndPoint.ToString());
-
+                Socket client = (Socket) asyncResult.AsyncState;
+                client.EndDisconnect(asyncResult);
+                Console.WriteLine("Socket disconnected from {0}", client.RemoteEndPoint);
                 disconnectDone.Set();
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                Console.WriteLine(e.ToString());
+                Console.WriteLine(exception.ToString());
             }
         }
 
-
-        public  void Send(byte[] bytestosend)
+        public void Send(byte[] bytestosend)
         {
-            this.Send(bytestosend);
+            Send(bytestosend);
             sendDone.WaitOne();
-            this.Receive(_client);
+            receive(client);
             receiveDone.WaitOne();
-           
         }
 
-        private  void SendAsync(byte[] bytes)
+        private void sendAsync(byte[] bytes)
         {
-            _client.BeginSend(bytes, 0, bytes.Length, 0,new AsyncCallback(SendCallback), _client);
+            client.BeginSend(bytes, 0, bytes.Length, 0, sendCallback, client);
         }
 
-        private  void SendCallback(IAsyncResult ar)
+        private void sendCallback(IAsyncResult ar)
         {
             try
             {
@@ -129,41 +123,31 @@ namespace Ostis.Sctp.AsyncClient
                 Console.WriteLine("Sent {0} bytes to server.", bytesSent);
                 sendDone.Set();
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                Console.WriteLine(e.ToString());
+                Console.WriteLine(exception.ToString());
             }
         }
         
-        private  void  Receive(Socket client)
+        private void receive(Socket client)
         {
             try
             {
-                
-               _state = new StateObject();
-                _state.WorkSocket = client;
-
-              
-                _state.WorkSocket.BeginReceive(_state.Buffer, 0, StateObject.BufferSize, SocketFlags.None,
-                                        new AsyncCallback(ReceiveCallback), _state);
-
+                state = new StateObject { WorkSocket = client };
+                state.WorkSocket.BeginReceive(state.Buffer, 0, StateObject.BufferSize, SocketFlags.None, receiveCallback, state);
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                Console.WriteLine(e.ToString());
-
+                Console.WriteLine(exception.ToString());
             }
-            
         }
 
-        private void ReceiveCallback(IAsyncResult ar)
+        private void receiveCallback(IAsyncResult asyncResult)
         {
             try
             {
-                StateObject state = (StateObject)ar.AsyncState;
-
-                int bytesRead = state.WorkSocket.EndReceive(ar);
-
+                var state = (StateObject) asyncResult.AsyncState;
+                int bytesRead = state.WorkSocket.EndReceive(asyncResult);
                 if (bytesRead > 0)
                 {
                    state.Stream.Write(state.Buffer, 0, bytesRead);
@@ -171,16 +155,14 @@ namespace Ostis.Sctp.AsyncClient
 
                 if (bytesRead == StateObject.BufferSize)
                 {
-                    state.WorkSocket.BeginReceive(state.Buffer, 0, StateObject.BufferSize, SocketFlags.None,
-                    new AsyncCallback(ReceiveCallback), state);
+                    state.WorkSocket.BeginReceive(state.Buffer, 0, StateObject.BufferSize, SocketFlags.None, receiveCallback, state);
                 }
-
                 else
                 {
                     state.Stream.Close();
-                    arg.ReceivedBytes = state.Stream.ToArray();
+                    receiveArgs.ReceivedBytes = state.Stream.ToArray();
                     receiveDone.Set();
-                    OnReceive();
+                    raiseReceived();
                 }
             }
             catch (Exception e)
@@ -189,12 +171,7 @@ namespace Ostis.Sctp.AsyncClient
             }
         }
 
-
-
         public bool Connected
-        {
-            get {return _client.Connected; }
-        }
+        { get { return client.Connected; } }
     }
-
 }
