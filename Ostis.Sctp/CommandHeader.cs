@@ -7,66 +7,38 @@ namespace Ostis.Sctp
 {
     internal class CommandHeader
     {
-        private byte _code;
-        private byte _flags;
-        private UInt32 _id;
-        private UInt32 _argsize;
-
         public byte Code
-        {
-            get { return _code; }
-            set { _code = value; }
-        }
-       
+        { get; set; }
+
         public byte Flags
-        {
-            get { return _flags; }
-            set { _flags = value; }
-        }
-       
-        public UInt32 Id
-        {
-            get { return _id; }
-            set { _id = value; }
-        }
-       
-        public UInt32 ArgSize
-        {
-            get { return _argsize; }
-            set { _argsize = value; }
-        }
+        { get; set; }
+
+        public uint Id
+        { get; set; }
+
+        public uint ArgumentsSize
+        { get; set; }
 
         public UInt32 Length
-        {
-            get 
-            {
-                return Convert.ToUInt32(Marshal.SizeOf(_code) + 
-                                        Marshal.SizeOf(_flags) + 
-                                        Marshal.SizeOf(_id) + 
-                                        Marshal.SizeOf(_argsize));
-            }
-        }
+        { get { return (UInt32)(Marshal.SizeOf(Code) + Marshal.SizeOf(Flags) + Marshal.SizeOf(Id) + Marshal.SizeOf(ArgumentsSize)); } }
 
         public byte[] BytesStream
         {
             get
             {
-                MemoryStream stream = new MemoryStream();
-                BinaryWriter writer = new BinaryWriter(stream, Encoding.UTF8);
-             
-                if (_id != 0)
+                var stream = new MemoryStream();
+                if (Id != 0)
                 {
-                    writer.Write((byte)_code);
-                    writer.Write((byte)_flags);
-                    writer.Write(_id);
-                    writer.Write(_argsize);
+                    using (var writer = new BinaryWriter(stream, Encoding.UTF8))
+                    {
+                        writer.Write(Code);
+                        writer.Write(Flags);
+                        writer.Write(Id);
+                        writer.Write(ArgumentsSize);
+                    }
                 }
-               writer.Close();
-
-
-               return stream.ToArray();
+                return stream.ToArray();
             }
         }
-
     }
 }

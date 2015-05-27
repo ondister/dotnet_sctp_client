@@ -20,7 +20,7 @@ namespace Ostis.Sctp.Commands
             {
                 argsize += arg.Length;
             }
-            base._header.ArgSize = argsize;
+            base._header.ArgumentsSize = argsize;
         }
 
 

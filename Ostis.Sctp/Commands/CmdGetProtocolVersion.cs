@@ -13,7 +13,7 @@ namespace Ostis.Sctp.Commands
            
             UInt32 argsize = 0;
 
-            base._header.ArgSize = argsize;
+            base._header.ArgumentsSize = argsize;
         }
 
 
