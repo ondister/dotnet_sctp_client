@@ -12,7 +12,7 @@ namespace Ostis.Sctp.Responses
         {
             get 
             {
-                if (base.Header.ReturnCode == enumReturnCode.Successfull)
+                if (base.Header.ReturnCode == ReturnCode.Successfull)
                 {
                _elementtype=(ElementType)BitConverter.ToUInt16(base.BytesStream, base.Header.Length);
                 }

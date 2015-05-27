@@ -9,7 +9,7 @@ namespace Ostis.Sctp.Responses
         public bool ElementIsExist
         {
             get {
-                if (base.Header.ReturnCode == enumReturnCode.Successfull)
+                if (base.Header.ReturnCode == ReturnCode.Successfull)
                 {
                     _elementisexist = true;
                 }

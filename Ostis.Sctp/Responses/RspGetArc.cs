@@ -12,7 +12,7 @@ namespace Ostis.Sctp.Responses
         {
             get
             {
-                if (base.Header.ReturnCode == enumReturnCode.Successfull)
+                if (base.Header.ReturnCode == ReturnCode.Successfull)
                 {
                    
                     _baddress.Offset = BitConverter.ToUInt16(base.BytesStream, base.Header.Length + 2);
@@ -27,7 +27,7 @@ namespace Ostis.Sctp.Responses
 		{
 			get
 			{
-				if (base.Header.ReturnCode == enumReturnCode.Successfull)
+				if (base.Header.ReturnCode == ReturnCode.Successfull)
 				{
 
 					_eaddress.Offset = BitConverter.ToUInt16(base.BytesStream, base.Header.Length + 6);

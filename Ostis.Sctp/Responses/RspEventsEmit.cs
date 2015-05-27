@@ -20,7 +20,7 @@ namespace Ostis.Sctp.Responses
 		public List<ScEvent> ScEvents {
 			get {
 				_scevents = new List<ScEvent> ();
-				if (base.Header.ReturnCode == enumReturnCode.Successfull) {
+				if (base.Header.ReturnCode == ReturnCode.Successfull) {
 					if (this.EventsCount != 0) {
 
 						int beginindex = sizeof(UInt32) + base.Header.Length;
@@ -76,7 +76,7 @@ namespace Ostis.Sctp.Responses
 		{
 			_scevents = new List<ScEvent> ();
          
-			if (base.Header.ReturnCode == enumReturnCode.Successfull) {
+			if (base.Header.ReturnCode == ReturnCode.Successfull) {
 				_eventscount = BitConverter.ToUInt32 (base.BytesStream, base.Header.Length);
 			} else {
 				_eventscount = 0;

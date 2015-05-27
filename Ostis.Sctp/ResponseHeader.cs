@@ -11,7 +11,7 @@ namespace Ostis.Sctp
     {
         private readonly byte code;
         private readonly UInt32 id;
-        private readonly enumReturnCode returnCode;
+        private readonly ReturnCode returnCode;
         private readonly UInt32 returnSize;
         private readonly int length;
 
@@ -36,7 +36,7 @@ namespace Ostis.Sctp
         /// <summary>
         ///Возвращает код успешности выполнения команды
         /// </summary>
-        public enumReturnCode ReturnCode
+        public ReturnCode ReturnCode
         { get { return returnCode; } }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Ostis.Sctp
             {
                 code = bytes[0];
                 id = BitConverter.ToUInt32(bytes, 1);
-                returnCode = (enumReturnCode) bytes[5];
+                returnCode = (ReturnCode) bytes[5];
                 returnSize = BitConverter.ToUInt32(bytes, 6);
                 length = bytes.Length;
             }

@@ -14,7 +14,7 @@ namespace Ostis.Sctp.Responses
         {
             get 
             {
-                if (base.Header.ReturnCode == enumReturnCode.Successfull)
+                if (base.Header.ReturnCode == ReturnCode.Successfull)
                 {
                     if (this.LinksCount!= 0)
                     {
@@ -50,7 +50,7 @@ namespace Ostis.Sctp.Responses
         {
             _scaddresses = new List<ScAddress>();
          
-            if (base.Header.ReturnCode == enumReturnCode.Successfull)
+            if (base.Header.ReturnCode == ReturnCode.Successfull)
             {
                 _linkscount = BitConverter.ToUInt32(base.BytesStream, base.Header.Length);
               

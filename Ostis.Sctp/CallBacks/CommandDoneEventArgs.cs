@@ -22,7 +22,7 @@ namespace Ostis.Sctp.CallBacks
         /// <value>
         /// Код окончания выполнения команды
         /// </value>
-       public enumReturnCode ReturnCode{get;set;}
+       public ReturnCode ReturnCode{get;set;}
 
     }
 }

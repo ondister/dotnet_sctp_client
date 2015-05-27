@@ -15,7 +15,7 @@ namespace Ostis.Sctp.Responses
         {
             _constructions = new List<Construction>();
 
-            if (base.Header.ReturnCode == enumReturnCode.Successfull)
+            if (base.Header.ReturnCode == ReturnCode.Successfull)
             {
                 int addrcount = (base.BytesStream.Length - base.Header.Length - 4) / 4;
                 int addrinconstruction = (int)_constrcount==0?0:addrcount / (int)_constrcount;
@@ -58,7 +58,7 @@ namespace Ostis.Sctp.Responses
             : base(bytesstream)
         {
             _scaddresses = new List<ScAddress>();
-            if (base.Header.ReturnCode == enumReturnCode.Successfull)
+            if (base.Header.ReturnCode == ReturnCode.Successfull)
             {
                 _constrcount = BitConverter.ToUInt32(base.BytesStream, base.Header.Length);
             }

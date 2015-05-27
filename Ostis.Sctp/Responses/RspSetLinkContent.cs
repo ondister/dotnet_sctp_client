@@ -12,7 +12,7 @@ namespace Ostis.Sctp.Responses
         {
             get
             {
-                if (base.Header.ReturnCode == enumReturnCode.Successfull)
+                if (base.Header.ReturnCode == ReturnCode.Successfull)
                 {
                     _contentisset = true;
                 }
