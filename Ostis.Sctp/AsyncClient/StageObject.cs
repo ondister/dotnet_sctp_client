@@ -5,30 +5,22 @@ namespace Ostis.Sctp.AsyncClient
 {
     internal class StateObject
     {
-        private Socket workSocket = null;
-
-        public Socket WorkSocket
-        {
-            get { return workSocket; }
-            set { workSocket = value; }
-        }
         public const int BufferSize = 1024;
 
-
-
-        private byte[] buffer = new byte[BufferSize];
-
+        public Socket WorkSocket
+        { get; set; }
+        
         public byte[] Buffer
-        {
-            get { return buffer; }
-            set { buffer = value; }
-        }
-        private MemoryStream stream = new MemoryStream();
+        { get; set; }
 
         public MemoryStream Stream
+        { get; set; }
+
+        public StateObject()
         {
-            get { return stream; }
-            set { stream = value; }
+            Stream = new MemoryStream();
+            Buffer = new byte[BufferSize];
+            WorkSocket = null;
         }
     }
 }
