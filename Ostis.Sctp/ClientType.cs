@@ -1,19 +1,18 @@
-﻿
-namespace Ostis.Sctp
+﻿namespace Ostis.Sctp
 {
     /// <summary>
-    /// Перечислитель типа используемого сокет клиента
+    /// Тип используемого клиента.
     /// </summary>
-   public enum ClientType
+    public enum ClientType
     {
         /// <summary>
-        /// Асинхронный клиент
+        /// Асинхронный.
         /// </summary>
-       AsyncClient=1,
+        AsyncClient = 1,
 
-       /// <summary>
-       /// Синхронный клиент
-       /// </summary>
-       SyncClient=2
+        /// <summary>
+        /// Синхронный.
+        /// </summary>
+        SyncClient = 2,
     }
 }
