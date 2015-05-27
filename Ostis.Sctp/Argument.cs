@@ -1,115 +1,113 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+
 using Ostis.Sctp.Arguments;
+
 namespace Ostis.Sctp
 {
-    internal class Argument<T> : IArgument where T : struct
+    internal class Argument<T> : IArgument
+        where T : struct
     {
-        T _arg;
-        public T Value { get { return _arg; } }
+        private readonly T value;
 
-        public Argument(T arg)
-        {
-            _arg = arg;
-        }
+        public T Value
+        { get { return value; } }
+
+        public Argument(T value)
+        { this.value = value; }
 
         public UInt32 Length
         {
             get
             {
-                UInt32 _leight = 0;
-                if (_arg is ElementType)
+#warning Заменить эту цепочку IF-ов нормальным наследованием с полиморфизмом
+                UInt32 length;
+                if (value is ElementType)
                 {
-                    byte[] bytes = BitConverter.GetBytes(Convert.ToUInt16(_arg));
-                    _leight = (uint)bytes.Length;
+                    byte[] bytes = BitConverter.GetBytes(Convert.ToUInt16(value));
+                    length = (uint) bytes.Length;
                 }
-				else if (_arg is EventsType)
-				{
-					byte[] bytes =new byte[1]{Convert.ToByte(_arg)};
-					_leight = (uint)bytes.Length;
-				}
-                else if (_arg is LinkContent)
+                else if (value is EventsType)
                 {
-                    LinkContent tmpcont = (LinkContent)(object)_arg;
-                    _leight = (uint)tmpcont.BytesStream.Length;
+                    byte[] bytes = { Convert.ToByte(value) };
+                    length = (uint) bytes.Length;
                 }
-                else if (_arg is Identifier)
+                else if (value is LinkContent)
                 {
-                    Identifier tmpcont = (Identifier)(object)_arg;
-                    _leight = (uint)tmpcont.BytesStream.Length;
+                    var linkContent = (LinkContent) (object) value;
+                    length = (uint) linkContent.BytesStream.Length;
                 }
-                else if (_arg is ConstrTemplate)
+                else if (value is Identifier)
                 {
-                    ConstrTemplate tmpcont = (ConstrTemplate)(object)_arg;
-                    _leight = (uint)tmpcont.BytesStream.Length;
+                    var identifier = (Identifier) (object) value;
+                    length = (uint) identifier.BytesStream.Length;
                 }
-                else if (_arg is DateTimeUNIX)
+                else if (value is ConstrTemplate)
                 {
-                    DateTimeUNIX tmpcont = (DateTimeUNIX)(object)_arg;
-                    _leight = (uint)tmpcont.BytesStream.Length;
+                    var constructorTemplate = (ConstrTemplate) (object) value;
+                    length = (uint) constructorTemplate.BytesStream.Length;
                 }
-                else if (_arg is ScAddress)
+                else if (value is DateTimeUNIX)
                 {
-                    ScAddress tmpadr = (ScAddress)(object)_arg;
-                    _leight = (uint)tmpadr.BytesStream.Length;
+                    var dateTimeUnix = (DateTimeUNIX) (object) value;
+                    length = (uint) dateTimeUnix.BytesStream.Length;
+                }
+                else if (value is ScAddress)
+                {
+                    var scAddress = (ScAddress) (object) value;
+                    length = (uint) scAddress.BytesStream.Length;
                 }
                 else
                 {
-                    _leight = Convert.ToUInt32(Marshal.SizeOf(_arg));
+                    length = Convert.ToUInt32(Marshal.SizeOf(value));
                 }
-                return _leight;
-
+                return length;
             }
         }
-
 
         public byte[] BytesStream
-        {
-            get
-            {
-                return GetBytes<T>(_arg);
-            }
-        }
+        { get { return getBytes(value); } }
 
-        static unsafe byte[] GetBytes<To>(To obj) where To : struct
+        private static unsafe byte[] getBytes(T obj)
         {
-
+#warning Заменить эту цепочку IF-ов нормальным наследованием с полиморфизмом
+#warning Проверить корреляцию этого кода с кодом предыдущего метода.
             if (obj is ElementType)
             {
                 return BitConverter.GetBytes(Convert.ToUInt16(obj));
             }
-			else if (obj is EventsType)
-			{
-				return new byte[1]{Convert.ToByte(obj)};
-			}
+            else if (obj is EventsType)
+            {
+                return new[] { Convert.ToByte(obj) };
+            }
             else if (obj is LinkContent)
             {
-                LinkContent tmpcont = (LinkContent)(object)obj;
-                return tmpcont.BytesStream;
+                var linkContent = (LinkContent) (object) obj;
+                return linkContent.BytesStream;
             }
             else if (obj is Identifier)
             {
-                Identifier tmpcont = (Identifier)(object)obj;
-                return tmpcont.BytesStream;
+                var identifier = (Identifier)(object)obj;
+                return identifier.BytesStream;
             }
             else if (obj is ConstrTemplate)
             {
-                ConstrTemplate tmpcont = (ConstrTemplate)(object)obj;
-                return tmpcont.BytesStream;
+                var constructorTemplate = (ConstrTemplate)(object)obj;
+                return constructorTemplate.BytesStream;
             }
             else if (obj is DateTimeUNIX)
             {
-                DateTimeUNIX tmpcont = (DateTimeUNIX)(object)obj;
-                return tmpcont.BytesStream;
+                var dateTimeUnix = (DateTimeUNIX)(object)obj;
+                return dateTimeUnix.BytesStream;
             }
             else if (obj is ScAddress)
             {
-                ScAddress tmpadr = (ScAddress)(object)obj;
-                return tmpadr.BytesStream;
+                var scAddress = (ScAddress)(object)obj;
+                return scAddress.BytesStream;
             }
             else
             {
-                int size = Marshal.SizeOf(typeof(To));
+                int size = Marshal.SizeOf(typeof (T));
                 byte[] buffer = new byte[size];
                 fixed (void* pointer = buffer)
                 {
@@ -118,9 +116,6 @@ namespace Ostis.Sctp
                 }
                 return buffer;
             }
-
-
-
         }
     }
 }
