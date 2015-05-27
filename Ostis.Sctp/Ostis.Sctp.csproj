@@ -89,7 +89,7 @@
     <Compile Include="Responses\RspSetLinkContent.cs" />
     <Compile Include="Responses\RspSetSysId.cs" />
     <Compile Include="Responses\RspUnknown.cs" />
-    <Compile Include="SyncClient\SSctp_Client.cs" />
+    <Compile Include="SyncClient\SynchronousClient.cs" />
     <Compile Include="ACommand.cs" />
     <Compile Include="AResponse.cs" />
     <Compile Include="Argument.cs" />
