@@ -106,7 +106,7 @@ namespace Ostis.Sctp.AsyncClient
         }
 
 
-        public  void SendBytes(byte[] bytestosend)
+        public  void Send(byte[] bytestosend)
         {
             this.Send(bytestosend);
             sendDone.WaitOne();
@@ -115,7 +115,7 @@ namespace Ostis.Sctp.AsyncClient
            
         }
 
-        private  void Send(byte[] bytes)
+        private  void SendAsync(byte[] bytes)
         {
             _client.BeginSend(bytes, 0, bytes.Length, 0,new AsyncCallback(SendCallback), _client);
         }

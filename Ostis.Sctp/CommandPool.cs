@@ -72,7 +72,7 @@ namespace Ostis.Sctp
        {
            command.Id = _counter;
            _commands.Add(command);
-           _client.SendBytes(command.BytesStream);
+           _client.Send(command.BytesStream);
            _counter++;
 
        }

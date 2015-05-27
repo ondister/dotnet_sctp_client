@@ -62,7 +62,7 @@ namespace Ostis.Sctp.SyncClient
             }
         }
 
-        public void SendBytes(byte[] bytestosend)
+        public void Send(byte[] bytestosend)
         { 
 				_client.Send (bytestosend, bytestosend.Length, 0);
 				Console.WriteLine ("Sent {0} bytes to server.", bytestosend.Length);
