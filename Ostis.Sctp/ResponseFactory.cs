@@ -4,7 +4,7 @@ namespace Ostis.Sctp
 {
     internal class ResponseFactory
     {
-        public AResponse GetResponse(byte[] bytes)
+        public Response GetResponse(byte[] bytes)
         {
             byte code = 0;
             if (bytes.Length != 0)
@@ -12,7 +12,7 @@ namespace Ostis.Sctp
                 code = bytes[0];
             }
 
-            AResponse response = new RspUnknown(bytes);
+            Response response = new RspUnknown(bytes);
             switch (code)
             {
                 case 0x00:

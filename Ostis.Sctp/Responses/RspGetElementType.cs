@@ -4,7 +4,7 @@ using System;
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspGetElementType:AResponse
+    public class RspGetElementType:Response
     {
         private ElementType _elementtype = ElementType.unknown;
 

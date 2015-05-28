@@ -4,7 +4,7 @@ using System;
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspSetSysId:AResponse
+    public class RspSetSysId:Response
     {
         private bool _issetsuccessfull = false;
 

@@ -4,7 +4,7 @@ using System;
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspGetProtocolVersion:AResponse
+    public class RspGetProtocolVersion:Response
     {
        
 		Int32 _protocolversion=0;

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspGetStatistics:AResponse
+    public class RspGetStatistics:Response
     {
         private UInt32 _timecheckscount;
         private List<StatisticData> _statdata;

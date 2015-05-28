@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspFindLinks:AResponse
+    public class RspFindLinks:Response
     {
         private UInt32 _linkscount=0;
         private List<ScAddress> _scaddresses;

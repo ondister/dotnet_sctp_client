@@ -7,7 +7,7 @@ namespace Ostis.Sctp.CallBacks
     /// </summary>
     /// <param name="sender">Команда</param>
     /// <param name="arg">Данные события</param>
-    public delegate void CommandDoneEventHandler(ACommand sender, CommandDoneEventArgs arg);
+    public delegate void CommandDoneEventHandler(Command sender, CommandDoneEventArgs arg);
 
     /// <summary>
     /// Данные события завершения исполнения команды

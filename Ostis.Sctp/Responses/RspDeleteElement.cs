@@ -4,7 +4,7 @@ using System;
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspDeleteElement:AResponse
+    public class RspDeleteElement:Response
     {
         private bool _elementisdelete = false;
 

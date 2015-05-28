@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspIterateElements : AResponse
+    public class RspIterateElements : Response
     {
         private UInt32 _constrcount = 0;
         private List<ScAddress> _scaddresses;

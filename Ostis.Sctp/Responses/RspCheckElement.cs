@@ -2,7 +2,7 @@
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspCheckElement:AResponse
+    public class RspCheckElement:Response
     {
         private bool _elementisexist=false;
 

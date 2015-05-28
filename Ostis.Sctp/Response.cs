@@ -3,16 +3,16 @@
     /// <summary>
     /// Абстрактный класс ответа сервера
     /// </summary>
-    public abstract class AResponse
+    public abstract class Response
     {
         private readonly byte[] bytes;
         private readonly ResponseHeader header;
 
         /// <summary>
-        /// Конструктор класса <see cref="AResponse"/>
+        /// Конструктор класса <see cref="Response"/>
         /// </summary>
         /// <param name="bytes">Массив байт</param>
-        protected AResponse(byte[] bytes)
+        protected Response(byte[] bytes)
         {
             this.bytes = bytes;
             var headerBytes = new byte[10];

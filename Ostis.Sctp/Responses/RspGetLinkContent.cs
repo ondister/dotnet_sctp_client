@@ -4,7 +4,7 @@ using System;
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspGetLInkContent:AResponse
+    public class RspGetLInkContent:Response
     {
         private byte[] _linkcontent;
 

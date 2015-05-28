@@ -4,7 +4,7 @@ using System;
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspFindElementById:AResponse
+    public class RspFindElementById:Response
     {
         private ScAddress _address=new ScAddress();
         private bool _isfounded;

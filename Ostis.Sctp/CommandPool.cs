@@ -10,7 +10,7 @@ namespace Ostis.Sctp
 #warning Привести к единообразию используемые типы данных - UInt32 к uint
     public class CommandPool : IDisposable
     {
-        private readonly List<ACommand> commands;
+        private readonly List<Command> commands;
         private uint counter;
         private readonly IClient client;
         private readonly ResponseFactory responseFactory;
@@ -35,7 +35,7 @@ namespace Ostis.Sctp
             client = ClientFactory.CreateClient(clientType);
             client.Received += client_Received;
             client.Connect(address, port);
-            commands = new List<ACommand>();
+            commands = new List<Command>();
             responseFactory = new ResponseFactory();
             counter = 1;
         }
@@ -44,14 +44,14 @@ namespace Ostis.Sctp
         {
             if (arg.ReceivedBytes.Length >= 10)
             {
-                AResponse _resp = responseFactory.GetResponse(arg.ReceivedBytes);
+                Response _resp = responseFactory.GetResponse(arg.ReceivedBytes);
                 commands.Find(cmd => cmd.Id == _resp.Header.Id).Response = _resp;
-                ACommand cmdforremuve = commands.Find(cmd => cmd.Id == _resp.Header.Id);
+                Command cmdforremuve = commands.Find(cmd => cmd.Id == _resp.Header.Id);
                 commands.Remove(cmdforremuve);
             }
             else
             {
-                AResponse _resp = responseFactory.GetResponse(arg.ReceivedBytes);
+                Response _resp = responseFactory.GetResponse(arg.ReceivedBytes);
             }
             if (commands.Count == 0)
             {
@@ -63,7 +63,7 @@ namespace Ostis.Sctp
         /// Добавляет команду в поток команд и отправляет ее на сервер
         /// </summary>
         /// <param name="command">Команда</param>
-        public void Send(ACommand command)
+        public void Send(Command command)
         {
             command.Id = counter;
             commands.Add(command);

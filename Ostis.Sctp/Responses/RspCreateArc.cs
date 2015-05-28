@@ -4,7 +4,7 @@ using System;
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspCreateArc:AResponse
+    public class RspCreateArc:Response
     {
         private ScAddress _address=new ScAddress();
 

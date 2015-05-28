@@ -9,12 +9,12 @@ namespace Ostis.Sctp
     /// <summary>
     /// Абстрактный класс комманды
     /// </summary>
-    public abstract class ACommand
+    public abstract class Command
     {
         internal CommandHeader Header
         { get; private set; }
 
-        private AResponse response;
+        private Response response;
 
         /// <summary>
         /// Событие происходит при выполнении команды
@@ -55,11 +55,11 @@ namespace Ostis.Sctp
         }
 
         /// <summary>
-        /// Конструктор класса <see cref="ACommand"/> 
+        /// Конструктор класса <see cref="Command"/> 
         /// </summary>
         /// <param name="code">Код команды</param>
         /// <param name="flags">Флаг команды</param>
-        protected ACommand(byte code, byte flags)
+        protected Command(byte code, byte flags)
         {
             Header = new CommandHeader
             {
@@ -96,7 +96,7 @@ namespace Ostis.Sctp
         /// <summary>
         /// Возвращает и задает ответ сервера команды
         /// </summary>
-        public AResponse Response
+        public Response Response
         {
             get { return response; }
             set

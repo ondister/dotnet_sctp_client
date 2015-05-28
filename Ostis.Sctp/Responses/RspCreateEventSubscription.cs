@@ -4,7 +4,7 @@ using System;
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspCreateEventSubscription:AResponse
+    public class RspCreateEventSubscription:Response
     {
         private SubScriptionId _id=new SubScriptionId();
 

@@ -31,7 +31,7 @@ namespace Ostis.SctpDemo
 		public void CheckElement()
 		{
 			// статический класс command содержит все команды, доступные для использования
-			var command = Command.CheckElement(new ScAddress(0, 1));
+			var command = CommandFactory.CheckElement(new ScAddress(0, 1));
 			// отправка команды на сервер
 			commandPool.Send(command);
 			// Так как для каждой команды есть свой тип ответа, то нетипизированный ответ сервера нужно преобразовать к требуемому типу.
@@ -48,7 +48,7 @@ namespace Ostis.SctpDemo
         // Результат: ElementType (подробнее тут Ostis.Sctp.Arguments файл ElementType.cs
 		public void GetElementType()
 		{
-            var command = Command.GetElementType(new ScAddress(0, 0));
+            var command = CommandFactory.GetElementType(new ScAddress(0, 0));
 			commandPool.Send(command);
             var response = (RspGetElementType) command.Response;
             Console.WriteLine(response.ElementType.ToString());
@@ -60,7 +60,7 @@ namespace Ostis.SctpDemo
         // Результат: Команда возвращает true в случае удачного выполнения, если элемент удален успешно, иначе возвращается false.
 		public void DeleteElement()
 		{
-            var command = Command.DeleteElement(new ScAddress(0, 0));
+            var command = CommandFactory.DeleteElement(new ScAddress(0, 0));
 			commandPool.Send(command);
             var response = (RspDeleteElement) command.Response;
             Console.WriteLine(response.ElementIsDelete);
@@ -73,7 +73,7 @@ namespace Ostis.SctpDemo
         // Иначе адрес нулевой, то есть недействительный (сегмент и смещение (offset) равны нулю).
 		public void CreateNode()
 		{
-            var command = Command.CreateNode(ElementType.sc_type_node_const);
+            var command = CommandFactory.CreateNode(ElementType.sc_type_node_const);
 			commandPool.Send(command);
             var response = (RspCreateNode) command.Response;
             Console.WriteLine(response.CreatedNodeAddress.ToString());
@@ -88,7 +88,7 @@ namespace Ostis.SctpDemo
 		{
 			// Есть нюанс в создании ссылки. Сначала создается ссылка, а затем ей можно задать контент.
 			// Вы можете сделать команду более высокого уровня, объединив две в одну для удобства.
-            var command = Command.CreateLink();
+            var command = CommandFactory.CreateLink();
 			commandPool.Send(command);
             var response = (RspCreateLink) command.Response;
             Console.WriteLine(response.CreatedLinkAddress.ToString());
@@ -104,7 +104,7 @@ namespace Ostis.SctpDemo
         // Иначе адрес нулевой, то есть недействительный (сегмент и смещение (offset) равны нулю).
 		public void CreateArc()
 		{
-            var command = Command.CreateArc(ElementType.sc_type_arc_const_comm, new ScAddress(0, 1), new ScAddress(0, 2));
+            var command = CommandFactory.CreateArc(ElementType.sc_type_arc_const_comm, new ScAddress(0, 1), new ScAddress(0, 2));
 			commandPool.Send(command);
             var response = (RspCreateArc) command.Response;
             Console.WriteLine(response.CreatedArcAddress.ToString());
@@ -117,7 +117,7 @@ namespace Ostis.SctpDemo
         // sc-адрес конечного элементе дуги 
 		public void GetArc()
 		{
-            var command = Command.GetArc(new ScAddress(0, 1));
+            var command = CommandFactory.GetArc(new ScAddress(0, 1));
 			commandPool.Send(command);
             var response = (RspGetArc) command.Response;
             Console.WriteLine(response.ToString());
@@ -136,7 +136,7 @@ namespace Ostis.SctpDemo
 		//		Результат: Если выполнение команды успешно, то возвращается содержимое в виде структуры LinkContent. 
 		public void GetLinkContent()
 		{
-            var command = Command.GetLinkContent(new ScAddress(0, 1));
+            var command = CommandFactory.GetLinkContent(new ScAddress(0, 1));
 			commandPool.Send(command);
             var response = (RspGetLInkContent) command.Response;
 
@@ -154,7 +154,7 @@ namespace Ostis.SctpDemo
         // Результат: Если выполнение команды успешно, то в качестве результата возвращается коллекция адресов ссылок.
 		public void FindLinks()
 		{
-            var command = Command.FindLinks(new LinkContent("aaaaa"));
+            var command = CommandFactory.FindLinks(new LinkContent("aaaaa"));
 			commandPool.Send(command);
             var response = (RspFindLinks) command.Response;
             Console.WriteLine(response.LinksCount);
@@ -171,7 +171,7 @@ namespace Ostis.SctpDemo
         // Результат: True или False
 		public void SetLinkContent()
 		{
-            var command = Command.SetLinkContent(new ScAddress(0, 1), new LinkContent("aaa"));
+            var command = CommandFactory.SetLinkContent(new ScAddress(0, 1), new LinkContent("aaa"));
 			commandPool.Send(command);
             var response = (RspSetLinkContent) command.Response;
 			Console.WriteLine(response.ContentIsSet);
@@ -184,7 +184,7 @@ namespace Ostis.SctpDemo
 		public void Iterator()
 		{
 			ConstrTemplate template = new ConstrTemplate(new ScAddress(0, 1), ElementType.sc_type_arc_access, ElementType.sc_type_node);
-            var command = Command.IterateElements(template);
+            var command = CommandFactory.IterateElements(template);
 			commandPool.Send(command);
             var response = (RspIterateElements) command.Response;
             Console.WriteLine(response.ConstructionsCount);

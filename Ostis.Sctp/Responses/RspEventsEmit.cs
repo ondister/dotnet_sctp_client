@@ -8,7 +8,7 @@ namespace Ostis.Sctp.Responses
 	/// <summary>
 	/// Rsp events emit.
 	/// </summary>
-	public class RspEventsEmit:AResponse
+	public class RspEventsEmit:Response
 	{
 		private UInt32 _eventscount = 0;
 		private List<ScEvent> _scevents;

@@ -4,7 +4,7 @@ using System;
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspSetLinkContent:AResponse
+    public class RspSetLinkContent:Response
     {
         private bool _contentisset = false;
 

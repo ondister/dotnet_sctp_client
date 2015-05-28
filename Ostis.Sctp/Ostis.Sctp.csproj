@@ -90,8 +90,8 @@
     <Compile Include="Responses\RspSetSysId.cs" />
     <Compile Include="Responses\RspUnknown.cs" />
     <Compile Include="SyncClient\SynchronousClient.cs" />
-    <Compile Include="ACommand.cs" />
-    <Compile Include="AResponse.cs" />
+    <Compile Include="Command.cs" />
+    <Compile Include="Response.cs" />
     <Compile Include="Argument.cs" />
     <Compile Include="ClientFactory.cs" />
     <Compile Include="ClientType.cs" />
