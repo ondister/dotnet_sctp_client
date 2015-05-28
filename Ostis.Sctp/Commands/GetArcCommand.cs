@@ -1,28 +1,21 @@
 ﻿using System;
+
 using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
-
-    internal class CmdGetArc : ACommand
+    internal class GetArcCommand : Command
     {
-
-        public CmdGetArc(ScAddress arcaddress)
-            : base(0x07,0)
+        public GetArcCommand(ScAddress arcAddress)
+            : base(0x07, 0)
         {
-           
-            UInt32 argsize = 0;
-
-            Argument<ScAddress> _arcaddress = new Argument<ScAddress>(arcaddress);
-            base.Arguments.Add(_arcaddress);
-
-            foreach (IArgument arg in base.Arguments)
+            UInt32 argumentsSize = 0;
+            Arguments.Add(new Argument<ScAddress>(arcAddress));
+            foreach (var argument in Arguments)
             {
-                argsize += arg.Length;
+                argumentsSize += argument.Length;
             }
-            base.Header.ArgumentsSize = argsize;
+            Header.ArgumentsSize = argumentsSize;
         }
-
-
     }
 }

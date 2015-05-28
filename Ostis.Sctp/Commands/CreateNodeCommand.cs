@@ -1,27 +1,22 @@
 ﻿using System;
+
 using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
-
-    internal class CmdCreateNode : ACommand
+    internal class CreateNodeCommand : Command
     {
-
-        public CmdCreateNode(ElementType nodetype)
-            : base(0x04,0)
+        public CreateNodeCommand(ElementType nodeType)
+            : base(0x04, 0)
         {
-           
-            UInt32 argsize = 0;
-
-            Argument<ElementType> argf = new Argument<ElementType>(nodetype);
-            base.Arguments.Add(argf);
-            foreach (IArgument arg in base.Arguments)
+            UInt32 argumentsSize = 0;
+            Arguments.Add(new Argument<ElementType>(nodeType));
+            foreach (var argument in Arguments)
             {
-                argsize += arg.Length;
+                argumentsSize += argument.Length;
             }
-            base.Header.ArgumentsSize = argsize;
+            Header.ArgumentsSize = argumentsSize;
+#warning Header.ArgumentsSize должен быть по-хорошему автовычислимым свойством.
         }
-
-
     }
 }

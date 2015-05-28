@@ -9,9 +9,9 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="address">sc-адрес проверяемого sc-элемента</param>
         /// <returns></returns>
-        public static ACommand CheckElement(ScAddress address)
+        public static Command CheckElement(ScAddress address)
         {
-            return new CmdCheckElement(address);
+            return new CheckElementCommand(address);
         }
 
         /// <summary>
@@ -21,18 +21,18 @@ namespace Ostis.Sctp.Commands
         /// <param name="beginAddress">sc-адрес начального элемента sc-дуги</param>
         /// <param name="endAddress">sc-адрес конечного элемента sc-дуги</param>
         /// <returns></returns>
-        public static ACommand CreateArc(ElementType arcType, ScAddress beginAddress, ScAddress endAddress)
+        public static Command CreateArc(ElementType arcType, ScAddress beginAddress, ScAddress endAddress)
         {
-            return new CmdCreateArc(arcType, beginAddress, endAddress);
+            return new CreateArcCommand(arcType, beginAddress, endAddress);
         }
 
         /// <summary>
         /// Создание новой sc-ссылки
         /// </summary>
         /// <returns></returns>
-        public static ACommand CreateLink()
+        public static Command CreateLink()
         {
-            return new CmdCreateLink();
+            return new CreateLinkCommand();
         }
 
         /// <summary>
@@ -40,9 +40,9 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="type">тип создаваемого sc-узла</param>
         /// <returns></returns>
-        public static ACommand CreateNode(ElementType type)
+        public static Command CreateNode(ElementType type)
         {
-            return new CmdCreateNode(type);
+            return new CreateNodeCommand(type);
         }
 
         /// <summary>
@@ -50,9 +50,9 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="address"> sc-адрес удаляемого sc-элемента</param>
         /// <returns></returns>
-        public static ACommand DeleteElement(ScAddress address)
+        public static Command DeleteElement(ScAddress address)
         {
-            return new CmdDeleteElement(address);
+            return new DeleteElementCommand(address);
         }
 
         /// <summary>
@@ -60,9 +60,9 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="identifier">Идентификатор</param>
         /// <returns></returns>
-        public static ACommand FindElementById(Identifier identifier)
+        public static Command FindElementById(Identifier identifier)
         {
-            return new CmdFindElementById(identifier);
+            return new FindElementCommand(identifier);
         }
 
         /// <summary>
@@ -70,9 +70,9 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="content">содержимое для поиска </param>
         /// <returns></returns>
-        public static ACommand FindLinks(LinkContent content)
+        public static Command FindLinks(LinkContent content)
         {
-            return new CmdFindLinks(content);
+            return new FindLinksCommand(content);
         }
 
         /// <summary>
@@ -80,9 +80,9 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="address">sc-адрес дуги у которой необходимо получить начальный элемент</param>
         /// <returns></returns>
-        public static ACommand GetArc(ScAddress address)
+        public static Command GetArc(ScAddress address)
         {
-            return new CmdGetArc(address);
+            return new GetArcCommand(address);
         }
 
         /// <summary>
@@ -90,9 +90,9 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="address">sc-адрес элемента для получения типа</param>
         /// <returns></returns>
-        public static ACommand GetElementType(ScAddress address)
+        public static Command GetElementType(ScAddress address)
         {
-            return new CmdGetElementType(address);
+            return new GetElementTypeCommand(address);
         }
 
         /// <summary>
@@ -100,9 +100,9 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="address">sc-адрес ссылки для получения содержимого</param>
         /// <returns></returns>
-        public static ACommand GetLinkContent(ScAddress address)
+        public static Command GetLinkContent(ScAddress address)
         {
-            return new CmdGetLinkContent(address);
+            return new GetLinkContentCommand(address);
         }
 
         /// <summary>
@@ -111,9 +111,9 @@ namespace Ostis.Sctp.Commands
         /// <param name="startTime">Нижняя временная граница</param>
         /// <param name="endTime">Верхняя временная граница</param>
         /// <returns></returns>
-        public static ACommand GetStatistics(DateTimeUNIX startTime, DateTimeUNIX endTime)
+        public static Command GetStatistics(DateTimeUNIX startTime, DateTimeUNIX endTime)
         {
-            return new CmdGetStatistics(startTime, endTime);
+            return new GetStatisticsCommand(startTime, endTime);
         }
 
         /// <summary>
@@ -121,9 +121,9 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="template">Шаблон для поиска</param>
         /// <returns></returns>
-        public static ACommand IterateElements(ConstrTemplate template)
+        public static Command IterateElements(ConstrTemplate template)
         {
-            return new CmdIterateElements(template);
+            return new IterateElementsCommand(template);
         }
 
         /// <summary>
@@ -132,9 +132,9 @@ namespace Ostis.Sctp.Commands
         /// <param name="address">sc-адрес ссылки </param>
         /// <param name="linkcontent">данные устанавливаемого содержимого</param>
         /// <returns></returns>
-        public static ACommand SetLinkContent(ScAddress address, LinkContent linkcontent)
+        public static Command SetLinkContent(ScAddress address, LinkContent linkcontent)
         {
-            return new CmdSetLinkContent(address, linkcontent);
+            return new SetLinkContentCommand(address, linkcontent);
         }
 
         /// <summary>
@@ -143,45 +143,45 @@ namespace Ostis.Sctp.Commands
         /// <param name="address"> адрес sc-эелемента </param>
         /// <param name="identifier">Идентификатор</param>
         /// <returns></returns>
-        public static ACommand SetSysId(ScAddress address, Identifier identifier)
+        public static Command SetSysId(ScAddress address, Identifier identifier)
         {
-            return new CmdSetSysId(address, identifier);
+            return new SetSystemIdCommand(address, identifier);
         }
 
         /// <summary>
         /// Получение версии протокола
         /// </summary>
         /// <returns></returns>
-        public static ACommand GetProtocolVersion()
+        public static Command GetProtocolVersion()
         {
-            return new CmdGetProtocolVersion();
+            return new GetProtocolVersionCommand();
         }
 
         /// <summary>
         /// Создание подписки на событие
         /// </summary>
         /// <returns></returns>
-        public static ACommand CreateEventSubscription(EventsType type, ScAddress address)
+        public static Command CreateEventSubscription(EventsType type, ScAddress address)
         {
-            return new CmdCreateSubScription(type, address);
+            return new CreateSubscriptionCommand(type, address);
         }
 
         /// <summary>
         /// Удаление подписки на событие
         /// </summary>
         /// <returns></returns>
-        public static ACommand DeleteEventSubscription(SubScriptionId id)
+        public static Command DeleteEventSubscription(SubScriptionId id)
         {
-            return new CmdDeleteSubScription(id);
+            return new DeleteSubscriptionCommand(id);
         }
 
         /// <summary>
         /// Запрос всех произошдших событий
         /// </summary>
         /// <returns></returns>
-        public static ACommand EmitEvents()
+        public static Command EmitEvents()
         {
-            return new CmdEventsEmit();
+            return new EmitEventsCommand();
         }
     }
 }

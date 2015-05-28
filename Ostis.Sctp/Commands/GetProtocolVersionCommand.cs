@@ -1,21 +1,11 @@
-﻿using System;
-using Ostis.Sctp.Arguments;
-
-namespace Ostis.Sctp.Commands
+﻿namespace Ostis.Sctp.Commands
 {
-
-    internal class CmdGetProtocolVersion : ACommand
+    internal class GetProtocolVersionCommand : Command
     {
-
-		public CmdGetProtocolVersion()
-            : base(0xa3,0)
+		public GetProtocolVersionCommand()
+            : base(0xa3, 0)
         {
-           
-            UInt32 argsize = 0;
-
-            base.Header.ArgumentsSize = argsize;
+            Header.ArgumentsSize = 0;
         }
-
-
     }
 }

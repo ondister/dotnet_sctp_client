@@ -1,21 +1,11 @@
-﻿using System;
-using Ostis.Sctp.Arguments;
-
-namespace Ostis.Sctp.Commands
+﻿namespace Ostis.Sctp.Commands
 {
-
-    internal class CmdEventsEmit : ACommand
+    internal class EmitEventsCommand : Command
     {
-
-		public CmdEventsEmit()
-            : base(0x10,0)
+        public EmitEventsCommand()
+            : base(0x10, 0)
         {
-           
-            UInt32 argsize = 0;
-
-            base.Header.ArgumentsSize = argsize;
+            Header.ArgumentsSize = 0;
         }
-
-
     }
 }

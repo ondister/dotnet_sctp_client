@@ -1,29 +1,21 @@
 ﻿using System;
+
 using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
-
-    internal class CmdDeleteSubScription : ACommand
+    internal class DeleteSubscriptionCommand : Command
     {
-
-		public CmdDeleteSubScription(SubScriptionId id)
-			: base(0x0f,0)
+		public DeleteSubscriptionCommand(SubScriptionId id)
+			: base(0x0f, 0)
         {
-           
-            UInt32 argsize = 0;
-
-          
-			Argument<SubScriptionId> argt = new Argument<SubScriptionId> (id);
-            
-			base.Arguments.Add (argt);
-            foreach (IArgument arg in base.Arguments)
+            UInt32 argumentsSize = 0;
+            Arguments.Add(new Argument<SubScriptionId>(id));
+            foreach (var argument in Arguments)
             {
-                argsize += arg.Length;
+                argumentsSize += argument.Length;
             }
-            base.Header.ArgumentsSize = argsize;
+            Header.ArgumentsSize = argumentsSize;
         }
-
-
     }
 }

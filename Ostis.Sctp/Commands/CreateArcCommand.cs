@@ -1,34 +1,24 @@
 ﻿using System;
+
 using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
-
-    internal class CmdCreateArc : ACommand
+    internal class CreateArcCommand : Command
     {
-
-        public CmdCreateArc(ElementType arctype,ScAddress beginaddress, ScAddress endaddress)
-            : base(0x06,0)
+#warning Во всех командах в базовый конструктор должен передаваться enum, а не числовой код!
+        public CreateArcCommand(ElementType arcType, ScAddress beginAddress, ScAddress endAddress)
+            : base(0x06, 0)
         {
-           
-            UInt32 argsize = 0;
-
-            Argument<ElementType> _argtypearc = new Argument<ElementType>(arctype);
-            base.Arguments.Add(_argtypearc);
-           
-            Argument<ScAddress> _argstaddress = new Argument<ScAddress>(beginaddress);
-            base.Arguments.Add(_argstaddress);
-
-            Argument<ScAddress> _argendaddress = new Argument<ScAddress>(endaddress);
-            base.Arguments.Add(_argendaddress);
-
-            foreach (IArgument arg in base.Arguments)
+            UInt32 argumentsSize = 0;
+            Arguments.Add(new Argument<ElementType>(arcType));
+            Arguments.Add(new Argument<ScAddress>(beginAddress));
+            Arguments.Add(new Argument<ScAddress>(endAddress));
+            foreach (var argument in Arguments)
             {
-                argsize += arg.Length;
+                argumentsSize += argument.Length;
             }
-            base.Header.ArgumentsSize = argsize;
+            Header.ArgumentsSize = argumentsSize;
         }
-
-
     }
 }

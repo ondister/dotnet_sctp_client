@@ -1,21 +1,12 @@
-﻿using System;
-using Ostis.Sctp.Arguments;
-
-namespace Ostis.Sctp.Commands
+﻿namespace Ostis.Sctp.Commands
 {
-
-    internal class CmdCreateLink : ACommand
+    internal class CreateLinkCommand : Command
     {
-
-        public CmdCreateLink()
-            : base(0x05,0)
+        public CreateLinkCommand()
+            : base(0x05, 0)
         {
-           
-            UInt32 argsize = 0;
-
-            base.Header.ArgumentsSize = argsize;
+            Header.ArgumentsSize = 0;
+#warning Значение размера аргументов должно устанавливаться в абстрактном виртуальном методе.
         }
-
-
     }
 }

@@ -1,29 +1,22 @@
 ﻿using System;
+
 using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
-
-    internal class CmdCreateSubScription : ACommand
+    internal class CreateSubscriptionCommand : Command
     {
-
-		public CmdCreateSubScription(EventsType Type, ScAddress address)
-            : base(0x0e,0)
+		public CreateSubscriptionCommand(EventsType Type, ScAddress address)
+            : base(0x0e ,0)
         {
-           
-            UInt32 argsize = 0; 
-
-          
-			Argument<EventsType> argt = new Argument<EventsType> (Type);
-			Argument<ScAddress> argf = new Argument<ScAddress>(address);
-            
-			base.Arguments.Add (argt);
-			base.Arguments.Add(argf);
-            foreach (IArgument arg in base.Arguments)
+            UInt32 argumentsSize = 0; 
+            Arguments.Add (new Argument<EventsType>(Type));
+			Arguments.Add(new Argument<ScAddress>(address));
+            foreach (var argument in Arguments)
             {
-                argsize += arg.Length;
+                argumentsSize += argument.Length;
             }
-            base.Header.ArgumentsSize = argsize;
+            Header.ArgumentsSize = argumentsSize;
         }
 
 

@@ -1,27 +1,21 @@
 ﻿using System;
+
 using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
-
-    internal class CmdDeleteElement : ACommand
+    internal class DeleteElementCommand : Command
     {
-
-        public CmdDeleteElement(ScAddress address)
-            : base(0x03,0)
+        public DeleteElementCommand(ScAddress address)
+            : base(0x03, 0)
         {
-           
-            UInt32 argsize = 0;
-
-            Argument<ScAddress> argf = new Argument<ScAddress>(address);
-            base.Arguments.Add(argf);
-            foreach (IArgument arg in base.Arguments)
+            UInt32 argumentsSize = 0;
+            Arguments.Add(new Argument<ScAddress>(address));
+            foreach (var argument in Arguments)
             {
-                argsize += arg.Length;
+                argumentsSize += argument.Length;
             }
-            base.Header.ArgumentsSize = argsize;
+            Header.ArgumentsSize = argumentsSize;
         }
-
-
     }
 }
