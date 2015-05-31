@@ -12,73 +12,74 @@ namespace Ostis.Sctp
                 code = bytes[0];
             }
 
-            Response response = new RspUnknown(bytes);
+            Response response = new UnknownResponse(bytes);
             switch (code)
             {
                 case 0x00:
-                    response = new RspUnknown(bytes);
+                    response = new UnknownResponse(bytes);
                     break;
                 case 0x01:
-                    response = new RspCheckElement(bytes);
+                    response = new CheckElementResponse(bytes);
                     break;
                 case 0x02:
-                    response = new RspGetElementType(bytes);
+                    response = new GetElementTypeResponse(bytes);
                     break;
                 case 0x03:
-                    response = new RspDeleteElement(bytes);
+                    response = new DeleteElementResponse(bytes);
                     break;
                 case 0x04:
-                    response = new RspCreateNode(bytes);
+                    response = new CreateNodeResponse(bytes);
                     break;
                 case 0x05:
-                    response = new RspCreateLink(bytes);
+                    response = new CreateLinkResponse(bytes);
                     break;
                 case 0x06:
-                    response = new RspCreateArc(bytes);
+                    response = new CreateArcResponse(bytes);
                     break;
                 case 0x07:
-                    response = new RspGetArc(bytes);
+                    response = new GetArcResponse(bytes);
                     break;
                 case 0x08:
-                    //TODO:reserved
+                    //TODO: reserved
                     break;
                 case 0x09:
-                    response = new RspGetLInkContent(bytes);
+                    response = new GetLinkContentResponse(bytes);
                     break;
                 case 0x0A:
-                    response = new RspFindLinks(bytes);
+                    response = new FindLinksResponse(bytes);
                     break;
                 case 0x0B:
-                    response = new RspSetLinkContent(bytes);
+                    response = new SetLinkContentResponse(bytes);
                     break;
                 case 0x0C:
-                    response = new RspIterateElements(bytes);
+                    response = new IterateElementsResponse(bytes);
                     break;
                 case 0x0E:
-                    response = new RspCreateEventSubscription(bytes);
+                    response = new CreateSubscriptionResponse(bytes);
                     break;
                 case 0x0F:
-                    response = new RspDeleteEventSubscription(bytes);
+                    response = new DeleteSubscriptionResponse(bytes);
                     break;
                 case 0x10:
-                    response = new RspEventsEmit(bytes);
+                    response = new EmitEventsResponse(bytes);
                     break;
                 case 0xA0:
-                    response = new RspFindElementById(bytes);
+                    response = new FindElementResponse(bytes);
                     break;
                 case 0xA1:
-                    response = new RspSetSysId(bytes);
+                    response = new SetSystemIdResponse(bytes);
                     break;
                 case 0xA2:
-                    response = new RspGetStatistics(bytes);
+                    response = new GetStatisticsResponse(bytes);
                     break;
                 case 0xFE:
-                    response = new RspUnknown(bytes);
+                    response = new UnknownResponse(bytes);
                     break;
                 default:
-                    response = new RspUnknown(bytes);
+                    response = new UnknownResponse(bytes);
                     break;
             }
+#warning Заменить лишнюю переменную-результат на return.
             return response;
         }
     }

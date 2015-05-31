@@ -1,13 +1,9 @@
-﻿
-namespace Ostis.Sctp.Responses
+﻿namespace Ostis.Sctp.Responses
 {
-    public class RspUnknown : Response
+    public class UnknownResponse : Response
     {
-      
-        public RspUnknown(byte[] bytesstream):base(bytesstream)
-        {
-            
-        }
-              
+        public UnknownResponse(byte[] bytes)
+            : base(bytes)
+        { }
     }
 }

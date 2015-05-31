@@ -1,36 +1,22 @@
 ﻿using Ostis.Sctp.CallBacks;
-using Ostis.Sctp.Arguments;
-using System;
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspSetLinkContent:Response
+    public class SetLinkContentResponse : Response
     {
-        private bool _contentisset = false;
+        private bool contentIsSet;
 
         public bool ContentIsSet
         {
             get
             {
-                if (base.Header.ReturnCode == ReturnCode.Successfull)
-                {
-                    _contentisset = true;
-                }
-                else
-                {
-                    _contentisset = false;
-                }
-                return _contentisset;
+                contentIsSet = Header.ReturnCode == ReturnCode.Successfull;
+                return contentIsSet;
             }
         }
 
-
-        public RspSetLinkContent(byte[] bytesstream)
-            : base(bytesstream)
-        {
-            
-        }
-
-     
+        public SetLinkContentResponse(byte[] bytes)
+            : base(bytes)
+        { }
     }
 }

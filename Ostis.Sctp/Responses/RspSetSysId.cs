@@ -1,35 +1,22 @@
 ﻿using Ostis.Sctp.CallBacks;
-using Ostis.Sctp.Arguments;
-using System;
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspSetSysId:Response
+    public class SetSystemIdResponse : Response
     {
-        private bool _issetsuccessfull = false;
+        private bool isSuccessfull;
 
-        public bool IsSetSuccesfull
+        public bool IsSuccesfull
         {
             get
             {
-                if (base.Header.ReturnCode == ReturnCode.Successfull)
-                {
-                    _issetsuccessfull = true;
-                }
-                else
-                {
-                    _issetsuccessfull = false;
-                }
-                return _issetsuccessfull;
+                isSuccessfull = Header.ReturnCode == ReturnCode.Successfull;
+                return isSuccessfull;
             }
         }
 
-        public RspSetSysId(byte[] bytesstream)
-            : base(bytesstream)
-        {
-            
-        }
-
-     
+        public SetSystemIdResponse(byte[] bytes)
+            : base(bytes)
+        { }
     }
 }

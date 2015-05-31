@@ -1,32 +1,28 @@
-﻿using Ostis.Sctp.CallBacks;
+﻿using System;
+
 using Ostis.Sctp.Arguments;
-using System;
+using Ostis.Sctp.CallBacks;
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspGetElementType:Response
+    public class GetElementTypeResponse : Response
     {
-        private ElementType _elementtype = ElementType.unknown;
+        private ElementType elementType = ElementType.unknown;
 
         public ElementType ElementType
         {
             get 
             {
-                if (base.Header.ReturnCode == ReturnCode.Successfull)
+                if (Header.ReturnCode == ReturnCode.Successfull)
                 {
-               _elementtype=(ElementType)BitConverter.ToUInt16(base.BytesStream, base.Header.Length);
+                    elementType = (ElementType) BitConverter.ToUInt16(BytesStream, Header.Length);
                 }
-                return _elementtype; 
+                return elementType; 
             }
         }
 
-      
-        public RspGetElementType(byte[] bytesstream)
-            : base(bytesstream)
-        {
-            
-        }
-
-     
+        public GetElementTypeResponse(byte[] bytes)
+            : base(bytes)
+        { }
     }
 }

@@ -1,34 +1,28 @@
-﻿using Ostis.Sctp.CallBacks;
-using Ostis.Sctp.Arguments;
-using System;
+﻿using System;
+
+using Ostis.Sctp.CallBacks;
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspGetProtocolVersion:Response
+    public class GetProtocolVersionResponse : Response
     {
        
-		Int32 _protocolversion=0;
+		Int32 protocolVersion;
 
 		public Int32 ProtocolVersion
 		{
-
 			get
 			{
-				if (base.Header.ReturnCode == ReturnCode.Successfull)
+				if (Header.ReturnCode == ReturnCode.Successfull)
 				{
-					_protocolversion = BitConverter.ToInt32(base.BytesStream, base.Header.Length);
+					protocolVersion = BitConverter.ToInt32(BytesStream, Header.Length);
 				}
-
-				return _protocolversion;
+				return protocolVersion;
 			}
 		}
 
-        public RspGetProtocolVersion(byte[] bytesstream)
-            : base(bytesstream)
-        {
-            
-        }
-
-     
+        public GetProtocolVersionResponse(byte[] bytes)
+            : base(bytes)
+        { }
     }
 }

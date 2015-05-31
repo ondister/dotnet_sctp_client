@@ -1,35 +1,30 @@
-﻿using Ostis.Sctp.CallBacks;
+﻿using System;
+
 using Ostis.Sctp.Arguments;
-using System;
+using Ostis.Sctp.CallBacks;
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspCreateArc:Response
+    public class CreateArcResponse : Response
     {
-        private ScAddress _address=new ScAddress();
+#warning Это поле - явно лишнее.
+        private ScAddress address;
 
         public ScAddress CreatedArcAddress
         {
             get
             {
-                if (base.Header.ReturnCode == ReturnCode.Successfull)
+                if (Header.ReturnCode == ReturnCode.Successfull)
                 {
-                   
-                    _address.Offset = BitConverter.ToUInt16(base.BytesStream, base.Header.Length + 2);
-                    _address.Segment = BitConverter.ToUInt16(base.BytesStream, base.Header.Length);
+                    address.Offset = BitConverter.ToUInt16(BytesStream, Header.Length + 2);
+                    address.Segment = BitConverter.ToUInt16(BytesStream, Header.Length);
                 }
-
-                return _address;
+                return address;
             }
         }
 
-
-        public RspCreateArc(byte[] bytesstream)
-            : base(bytesstream)
-        {
-            
-        }
-
-     
+        public CreateArcResponse(byte[] bytes)
+            : base(bytes)
+        { }
     }
 }

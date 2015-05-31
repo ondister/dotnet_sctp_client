@@ -1,89 +1,81 @@
-﻿using Ostis.Sctp.CallBacks;
-using Ostis.Sctp.Arguments;
-using System;
+﻿using System;
 using System.Collections.Generic;
+
+using Ostis.Sctp.Arguments;
+using Ostis.Sctp.CallBacks;
 
 namespace Ostis.Sctp.Responses
 {
-	/// <summary>
-	/// Rsp events emit.
-	/// </summary>
-	public class RspEventsEmit:Response
-	{
-		private UInt32 _eventscount = 0;
-		private List<ScEvent> _scevents;
+    /// <summary>
+    /// Rsp events emit.
+    /// </summary>
+    public class EmitEventsResponse : Response
+    {
+        private readonly UInt32 eventsCount;
+        private List<ScEvent> events;
 
-		/// <summary>
-		/// Gets the sc events.
-		/// </summary>
-		/// <value>The sc events.</value>
-		public List<ScEvent> ScEvents {
-			get {
-				_scevents = new List<ScEvent> ();
-				if (base.Header.ReturnCode == ReturnCode.Successfull) {
-					if (this.EventsCount != 0) {
+        /// <summary>
+        /// Gets the sc events.
+        /// </summary>
+        /// <value>The sc events.</value>
+        public List<ScEvent> ScEvents
+        {
+            get
+            {
+                events = new List<ScEvent>();
+                if (Header.ReturnCode == ReturnCode.Successfull)
+                {
+                    if (EventsCount != 0)
+                    {
+                        int beginindex = sizeof(UInt32) + Header.Length;
+#warning Вынести в более глобальную константу
+                        const int scEventLength = 12;
+                        for (int eventcount = 0; eventcount < EventsCount; eventcount++)
+                        {
+                            ScEvent tmpevent = ScEvent.GetFromBytes(BytesStream, beginindex);
+                            events.Add(tmpevent);
+                            beginindex += scEventLength;
+                        }
+                    }
+                }
+                return events;
+            }
+        }
 
-						int beginindex = sizeof(UInt32) + base.Header.Length;
-						int sceventlength = 12;
-						for (int eventcount = 0; eventcount < this.EventsCount; eventcount++) {
-							ScEvent tmpevent = ScEvent.GetFromBytes (base.BytesStream, beginindex);
-							_scevents.Add (tmpevent);
-							beginindex += sceventlength;
-						
-						}
+        //        public List<ScAddress> ScAddresses
+        //        {
+        //            get 
+        //            {
+        //                if (base.Header.ReturnCode == enumReturnCode.Successfull)
+        //                {
+        //                    if (this.LinksCount!= 0)
+        //                    {
+        //                       int beginindex = sizeof(UInt32) + base.Header.Leight;
+        //                        int scaddresslength = 4;
+        //                        for (int addrcount = 0; addrcount < this.LinksCount; addrcount++)
+        //                        {
+        //                            ScAddress tmpadr = ScAddress.GetFromBytes(base.BytesStream, beginindex);
+        //                            _scaddresses.Add(tmpadr);
+        //                            beginindex += scaddresslength;
+        //
+        //                        }
+        //                    }
+        //
+        //                    return _scaddresses;
+        //                }
+        //
+        //                return _scaddresses; 
+        //            }
+        //        }
 
+        public UInt32 EventsCount
+        { get { return eventsCount; } }
 
-
-					}
-				}
-				return _scevents;
-			}
-		}
-		//        public List<ScAddress> ScAddresses
-		//        {
-		//            get 
-		//            {
-		//                if (base.Header.ReturnCode == enumReturnCode.Successfull)
-		//                {
-		//                    if (this.LinksCount!= 0)
-		//                    {
-		//                       int beginindex = sizeof(UInt32) + base.Header.Leight;
-		//                        int scaddresslength = 4;
-		//                        for (int addrcount = 0; addrcount < this.LinksCount; addrcount++)
-		//                        {
-		//                            ScAddress tmpadr = ScAddress.GetFromBytes(base.BytesStream, beginindex);
-		//                            _scaddresses.Add(tmpadr);
-		//                            beginindex += scaddresslength;
-		//
-		//                        }
-		//                    }
-		//
-		//                    return _scaddresses;
-		//                }
-		//
-		//                return _scaddresses; 
-		//            }
-		//        }
-		public UInt32 EventsCount {
-			get {
-                
-				return _eventscount;
-			}
-		}
-
-		public RspEventsEmit (byte[] bytesstream)
-            : base(bytesstream)
-		{
-			_scevents = new List<ScEvent> ();
-         
-			if (base.Header.ReturnCode == ReturnCode.Successfull) {
-				_eventscount = BitConverter.ToUInt32 (base.BytesStream, base.Header.Length);
-			} else {
-				_eventscount = 0;
-			}
-
-
-
-		}
-	}
+        public EmitEventsResponse(byte[] bytes)
+            : base(bytes)
+        {
+            events = new List<ScEvent>();
+            eventsCount = Header.ReturnCode == ReturnCode.Successfull ? BitConverter.ToUInt32(BytesStream, Header.Length) : 0;
+        }
+    }
 }

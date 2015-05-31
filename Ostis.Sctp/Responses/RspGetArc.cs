@@ -1,25 +1,25 @@
-﻿using Ostis.Sctp.CallBacks;
+﻿using System;
+
 using Ostis.Sctp.Arguments;
-using System;
+using Ostis.Sctp.CallBacks;
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspGetArc:Response
+    public class GetArcResponse : Response
     {
-        private ScAddress _baddress=new ScAddress();
-		private ScAddress _eaddress=new ScAddress();
+        private ScAddress beginElementAddress;
+        private ScAddress endElementAddress;
+
         public ScAddress BeginElementAddress
         {
             get
             {
-                if (base.Header.ReturnCode == ReturnCode.Successfull)
+                if (Header.ReturnCode == ReturnCode.Successfull)
                 {
-                   
-                    _baddress.Offset = BitConverter.ToUInt16(base.BytesStream, base.Header.Length + 2);
-                    _baddress.Segment = BitConverter.ToUInt16(base.BytesStream, base.Header.Length);
+                    beginElementAddress.Offset = BitConverter.ToUInt16(BytesStream, Header.Length + 2);
+                    beginElementAddress.Segment = BitConverter.ToUInt16(BytesStream, Header.Length);
                 }
-
-                return _baddress;
+                return beginElementAddress;
             }
         }
 
@@ -27,23 +27,17 @@ namespace Ostis.Sctp.Responses
 		{
 			get
 			{
-				if (base.Header.ReturnCode == ReturnCode.Successfull)
+				if (Header.ReturnCode == ReturnCode.Successfull)
 				{
-
-					_eaddress.Offset = BitConverter.ToUInt16(base.BytesStream, base.Header.Length + 6);
-					_eaddress.Segment = BitConverter.ToUInt16(base.BytesStream, base.Header.Length+4);
+                    endElementAddress.Offset = BitConverter.ToUInt16(BytesStream, Header.Length + 6);
+                    endElementAddress.Segment = BitConverter.ToUInt16(BytesStream, Header.Length + 4);
 				}
-
-				return _eaddress;
+                return endElementAddress;
 			}
 		}
 
-        public RspGetArc(byte[] bytesstream)
-            : base(bytesstream)
-        {
-            
-        }
-
-     
+        public GetArcResponse(byte[] bytes)
+            : base(bytes)
+        { }
     }
 }

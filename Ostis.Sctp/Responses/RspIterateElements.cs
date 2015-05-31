@@ -1,76 +1,52 @@
-﻿using Ostis.Sctp.CallBacks;
-using Ostis.Sctp.Arguments;
-using System;
+﻿using System;
 using System.Collections.Generic;
+
+using Ostis.Sctp.Arguments;
+using Ostis.Sctp.CallBacks;
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspIterateElements : Response
+    public class IterateElementsResponse : Response
     {
-        private UInt32 _constrcount = 0;
-        private List<ScAddress> _scaddresses;
-        private List<Construction> _constructions;
+        private readonly UInt32 constructionsCount;
+        private List<ScAddress> addresses;
+        private List<Construction> constructions;
 
         public List<Construction> GetConstructions()
         {
-            _constructions = new List<Construction>();
-
-            if (base.Header.ReturnCode == ReturnCode.Successfull)
+            constructions = new List<Construction>();
+            if (Header.ReturnCode == ReturnCode.Successfull)
             {
-                int addrcount = (base.BytesStream.Length - base.Header.Length - 4) / 4;
-                int addrinconstruction = (int)_constrcount==0?0:addrcount / (int)_constrcount;
+                int addressesCount = (BytesStream.Length - Header.Length - 4) / 4;
+                int addressesInConstruction = (int) constructionsCount == 0 ? 0 : addressesCount / (int)constructionsCount;
 
-                int offset = sizeof(UInt32) + base.Header.Length;
-                int scaddresslength = 4;
+                int offset = sizeof(UInt32) + Header.Length;
+#warning Вынести в более глобальную константу
+                const int scAddressLength = 4;
 
-                for (uint iteration = 0; iteration < _constrcount; iteration++)
+                for (uint c = 0; c < constructionsCount; c++)
                 {
-                    Construction tmpconstr = new Construction();
-                    for (int addrit = 0; addrit < addrinconstruction; addrit++)
+                    var construction = new Construction();
+                    for (int a = 0; a < addressesInConstruction; a++)
                     {
-                        ScAddress tmpaddr =ScAddress.GetFromBytes(base.BytesStream, offset);
-                        tmpconstr.AddScAddress(tmpaddr);
-                        offset += scaddresslength;
+                        var address = ScAddress.GetFromBytes(BytesStream, offset);
+                        construction.AddScAddress(address);
+                        offset += scAddressLength;
                     }
-                    _constructions.Add(tmpconstr);
+                    constructions.Add(construction);
                 }
-
-
             }
-
-
-            return _constructions;
+            return constructions;
         }
-
-       
 
         public UInt32 ConstructionsCount
+        { get { return constructionsCount; } }
+
+        public IterateElementsResponse(byte[] bytes)
+            : base(bytes)
         {
-            get
-            {
-
-                return _constrcount;
-            }
+            addresses = new List<ScAddress>();
+            constructionsCount = Header.ReturnCode == ReturnCode.Successfull ? BitConverter.ToUInt32(BytesStream, Header.Length) : 0;
         }
-
-
-        public RspIterateElements(byte[] bytesstream)
-            : base(bytesstream)
-        {
-            _scaddresses = new List<ScAddress>();
-            if (base.Header.ReturnCode == ReturnCode.Successfull)
-            {
-                _constrcount = BitConverter.ToUInt32(base.BytesStream, base.Header.Length);
-            }
-            else
-            {
-                _constrcount = 0;
-            }
-
-
-
-        }
-
-
     }
 }

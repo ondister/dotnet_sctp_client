@@ -4,6 +4,7 @@ namespace Ostis.Sctp.Commands
 {
     public static class CommandFactory
     {
+#warning Этот класс не нужен
         /// <summary>
         /// Проверка существования элемента с указанным sc-адресом
         /// </summary>

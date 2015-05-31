@@ -2,30 +2,22 @@
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspCheckElement:Response
+    public class CheckElementResponse : Response
     {
-        private bool _elementisexist=false;
+#warning Это поле - явно лишнее.
+        private bool elementExists;
 
         public bool ElementIsExist
         {
-            get {
-                if (base.Header.ReturnCode == ReturnCode.Successfull)
-                {
-                    _elementisexist = true;
-                }
-                else 
-                {
-                    _elementisexist = false;
-                }
-                return _elementisexist;
-               }
+            get
+            {
+                elementExists = Header.ReturnCode == ReturnCode.Successfull;
+                return elementExists;
+            }
         }
 
-        public RspCheckElement(byte[] bytesstream):base(bytesstream)
-        {
-            
-        }
-
-     
+        public CheckElementResponse(byte[] bytes)
+            : base(bytes)
+        { }
     }
 }

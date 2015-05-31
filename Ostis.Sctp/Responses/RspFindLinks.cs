@@ -1,69 +1,48 @@
-﻿using Ostis.Sctp.CallBacks;
-using Ostis.Sctp.Arguments;
-using System;
+﻿using System;
 using System.Collections.Generic;
+
+using Ostis.Sctp.Arguments;
+using Ostis.Sctp.CallBacks;
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspFindLinks:Response
+    public class FindLinksResponse : Response
     {
-        private UInt32 _linkscount=0;
-        private List<ScAddress> _scaddresses;
+        private readonly UInt32 linksCount;
+        private readonly List<ScAddress> addresses;
       
         public List<ScAddress> ScAddresses
         {
             get 
             {
-                if (base.Header.ReturnCode == ReturnCode.Successfull)
+                if (Header.ReturnCode == ReturnCode.Successfull)
                 {
-                    if (this.LinksCount!= 0)
+                    if (LinksCount != 0)
                     {
-                       int beginindex = sizeof(UInt32) + base.Header.Length;
-                        int scaddresslength = 4;
-                        for (int addrcount = 0; addrcount < this.LinksCount; addrcount++)
+                        int beginIndex = sizeof(UInt32) + Header.Length;
+#warning Вынести в более глобальную константу
+                        const int scAddressLength = 4;
+                        for (int addrcount = 0; addrcount < LinksCount; addrcount++)
                         {
-                            ScAddress tmpadr = ScAddress.GetFromBytes(base.BytesStream, beginindex);
-                            _scaddresses.Add(tmpadr);
-                            beginindex += scaddresslength;
-
+                            var a = ScAddress.GetFromBytes(BytesStream, beginIndex);
+                            addresses.Add(a);
+                            beginIndex += scAddressLength;
                         }
                     }
-
-                    return _scaddresses;
+                    return addresses;
                 }
-
-                return _scaddresses; 
+                return addresses; 
             }
         }
+
         public UInt32 LinksCount
+        { get { return linksCount; } }
+
+        public FindLinksResponse(byte[] bytes)
+            : base(bytes)
         {
-            get
-            {
-                
-                return _linkscount;
-            }
+            addresses = new List<ScAddress>();
+            linksCount = Header.ReturnCode == ReturnCode.Successfull ? BitConverter.ToUInt32(BytesStream, Header.Length) : 0;
         }
-
-
-        public RspFindLinks(byte[] bytesstream)
-            : base(bytesstream)
-        {
-            _scaddresses = new List<ScAddress>();
-         
-            if (base.Header.ReturnCode == ReturnCode.Successfull)
-            {
-                _linkscount = BitConverter.ToUInt32(base.BytesStream, base.Header.Length);
-              
-            }
-            else
-            {
-                _linkscount = 0;
-            }
-
-
-
-        }
-
-     
     }
 }

@@ -1,36 +1,22 @@
 ﻿using Ostis.Sctp.CallBacks;
-using Ostis.Sctp.Arguments;
-using System;
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspDeleteElement:Response
+    public class DeleteElementResponse : Response
     {
-        private bool _elementisdelete = false;
+        private bool isDeleted;
 
-        public bool ElementIsDelete
+        public bool IsDeleted
         {
             get
             {
-                if (base.Header.ReturnCode == ReturnCode.Successfull)
-                {
-                    _elementisdelete = true;
-                }
-                else
-                {
-                    _elementisdelete = false;
-                }
-                return _elementisdelete;
+                isDeleted = Header.ReturnCode == ReturnCode.Successfull;
+                return isDeleted;
             }
         }
 
-
-        public RspDeleteElement(byte[] bytesstream)
-            : base(bytesstream)
-        {
-            
-        }
-
-     
+        public DeleteElementResponse(byte[] bytes)
+            : base(bytes)
+        { }
     }
 }

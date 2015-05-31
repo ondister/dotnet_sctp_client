@@ -1,32 +1,26 @@
-﻿using Ostis.Sctp.CallBacks;
-using Ostis.Sctp.Arguments;
-using System;
+﻿using System;
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspGetLInkContent:Response
+    public class GetLinkContentResponse : Response
     {
-        private byte[] _linkcontent;
+        private readonly byte[] linkContent;
 
         public byte[] LinkContent
+        { get { return linkContent; } }
+
+        public GetLinkContentResponse(byte[] bytes)
+            : base(bytes)
         {
-            get { return _linkcontent; }
-        }
-
-
-
-        public RspGetLInkContent(byte[] bytesstream)
-            : base(bytesstream)
-        {
-            if (base.Header.ReturnSize != 0)
+            if (Header.ReturnSize != 0)
             {
-                _linkcontent = new byte[base.Header.ReturnSize];
-                Array.Copy(base.BytesStream, base.Header.Length, _linkcontent, 0, _linkcontent.Length);
+                linkContent = new byte[Header.ReturnSize];
+                Array.Copy(BytesStream, Header.Length, linkContent, 0, linkContent.Length);
             }
             else
-            { _linkcontent = new byte[0]; }
+            {
+                linkContent = new byte[0];
+            }
         }
-
-     
     }
 }

@@ -1,12 +1,13 @@
-﻿using Ostis.Sctp.CallBacks;
+﻿using System;
+
 using Ostis.Sctp.Arguments;
-using System;
+using Ostis.Sctp.CallBacks;
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspCreateNode:Response
+    public class CreateNodeResponse : Response
     {
-        private ScAddress _address=new ScAddress();
+        private ScAddress address;
 
         public ScAddress CreatedNodeAddress
         {
@@ -15,21 +16,16 @@ namespace Ostis.Sctp.Responses
                 if (base.Header.ReturnCode == ReturnCode.Successfull)
                 {
                    
-                    _address.Offset = BitConverter.ToUInt16(base.BytesStream, base.Header.Length + 2);
-                    _address.Segment = BitConverter.ToUInt16(base.BytesStream, base.Header.Length);
+                    address.Offset = BitConverter.ToUInt16(BytesStream, Header.Length + 2);
+                    address.Segment = BitConverter.ToUInt16(BytesStream, Header.Length);
                 }
 
-                return _address;
+                return address;
             }
         }
 
-
-        public RspCreateNode(byte[] bytesstream)
-            : base(bytesstream)
-        {
-            
-        }
-
-     
+        public CreateNodeResponse(byte[] bytes)
+            : base(bytes)
+        { }
     }
 }

@@ -1,34 +1,28 @@
-﻿using Ostis.Sctp.CallBacks;
+﻿using System;
+
 using Ostis.Sctp.Arguments;
-using System;
+using Ostis.Sctp.CallBacks;
 
 namespace Ostis.Sctp.Responses
 {
-    public class RspDeleteEventSubscription:Response
+    public class DeleteSubscriptionResponse : Response
     {
-        private SubScriptionId _id=new SubScriptionId();
+        private SubScriptionId subscriptionId;
 
-        public SubScriptionId IDofSubscribe
+        public SubScriptionId SubscriptionId
         {
             get
             {
-                if (base.Header.ReturnCode == ReturnCode.Successfull)
+                if (Header.ReturnCode == ReturnCode.Successfull)
                 {
-					_id.ID=BitConverter.ToInt32(base.BytesStream, base.Header.Length);
-                    
+					subscriptionId.ID=BitConverter.ToInt32(BytesStream, Header.Length);
 				}
-
-                return _id;
+                return subscriptionId;
             }
         }
 
-
-		public RspDeleteEventSubscription(byte[] bytesstream)
-            : base(bytesstream)
-        {
-            
-        }
-
-     
+        public DeleteSubscriptionResponse(byte[] bytes)
+            : base(bytes)
+        { }
     }
 }
