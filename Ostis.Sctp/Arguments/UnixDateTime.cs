@@ -26,16 +26,13 @@ namespace Ostis.Sctp.Arguments
         /// <summary>
         /// Инициализирует новую структуру <see cref="UnixDateTime"/> 
         /// </summary>
-        /// <param name="datetime">Дата и время <see cref="System.DateTime"/> </param>
-        public UnixDateTime(DateTime datetime)
+        /// <param name="dateTime">Дата и время <see cref="System.DateTime"/> </param>
+        public UnixDateTime(DateTime dateTime)
         {
             length = 0;
             bytes = new byte[0];
-#warning Вынести origin в константы
-            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-            TimeSpan diff = datetime - origin;
+            TimeSpan diff = dateTime - Origin;
             value = (Int64) diff.TotalMilliseconds;
-
             bytes = BitConverter.GetBytes(value);
             length = (uint) bytes.Length;
         }
@@ -45,11 +42,9 @@ namespace Ostis.Sctp.Arguments
         /// </summary>
         /// <param name="unixtime">Время DateTimeUnix</param>
         /// <returns></returns>
-#warning static здесь не нужен - это обычный метод класса.
-        public static DateTime ToDateTime(UnixDateTime unixtime)
+        public DateTime ToDateTime()
         {
-            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-            return origin.AddMilliseconds(unixtime.value);
+            return Origin.AddMilliseconds(value);
         }
 
         /// <summary>
@@ -59,8 +54,9 @@ namespace Ostis.Sctp.Arguments
         /// <returns></returns>
         public static DateTime ToDateTime(UInt64 milliseconds)
         {
-            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-            return origin.AddMilliseconds(milliseconds);
+            return Origin.AddMilliseconds(milliseconds);
         }
+
+        public static readonly DateTime Origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
     }
 }
