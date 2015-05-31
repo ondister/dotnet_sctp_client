@@ -5,7 +5,7 @@ using Ostis.Sctp.CallBacks;
 namespace Ostis.Sctp
 {
     /// <summary>
-    /// Заголовок ответа сервера
+    /// Заголовок ответа сервера.
     /// </summary>
     public class ResponseHeader
     {
@@ -16,39 +16,39 @@ namespace Ostis.Sctp
         private readonly int length;
 
         /// <summary>
-        /// Длина заголовка
+        /// Длина.
         /// </summary>
         public int Length
         { get { return length; } }
 
         /// <summary>
-        /// Код команды, на которую получен ответ
+        /// Код команды, на которую получен ответ.
         /// </summary>
         public byte Code
         { get { return code; } }
 
         /// <summary>
-        /// Уникальный идентификатор команды в потоке команд
+        /// Уникальный идентификатор команды в потоке команд.
         /// </summary>
         public UInt32 Id
         { get { return id; } }
 
         /// <summary>
-        ///Возвращает код успешности выполнения команды
+        /// Код результата выполнения команды.
         /// </summary>
         public ReturnCode ReturnCode
         { get { return returnCode; } }
 
         /// <summary>
-        /// Возвращает размер содержимого ответа
+        /// Размер содержимого ответа.
         /// </summary>
         public UInt32 ReturnSize
         { get { return returnSize; } }
 
         /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="ResponseHeader"/>
+        /// ctor.
         /// </summary>
-        /// <param name="bytes">Массив байт заголовка</param>
+        /// <param name="bytes">массив байт заголовка</param>
         public ResponseHeader(byte[] bytes)
         {
             if (bytes.Length >= 10)

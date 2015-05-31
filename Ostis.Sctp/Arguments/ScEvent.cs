@@ -3,7 +3,7 @@ using System;
 namespace Ostis.Sctp.Arguments
 {
 	/// <summary>
-	/// Событие в sc памяти
+	/// Событие в SC-памяти.
 	/// </summary>
 	public struct ScEvent : IArgument
 	{
@@ -13,32 +13,29 @@ namespace Ostis.Sctp.Arguments
 		private byte[] bytes;
 
 	    /// <summary>
-	    /// Gets the ID
+	    /// ID подписки.
 	    /// </summary>
-	    /// <value>The I.</value>
 	    public SubscriptionId ID
 	    { get { return subscriptionId; } }
 
 	    /// <summary>
-	    /// Gets the element address.
+	    /// Адрес элемента.
 	    /// </summary>
-	    /// <value>The element address.</value>
 	    public ScAddress ElementAddress
 	    { get { return elementAddress; } }
 
 	    /// <summary>
-	    /// Gets the arc address.
+	    /// Адрес дуги.
 	    /// </summary>
-	    /// <value>The arc address.</value>
 	    public ScAddress ArcAddress
 	    { get { return arcAddress; } }
 
 	    /// <summary>
-		/// Initializes a new instance of the <see cref="sctp_client.Arguments.ScEvent"/> struct.
+		/// ctor.
 		/// </summary>
-        /// <param name="subscriptionId">ID</param>
-        /// <param name="elementAddress">Element address.</param>
-        /// <param name="arcAddress">Arc address.</param>
+        /// <param name="subscriptionId">id подписки</param>
+        /// <param name="elementAddress">адрес элемента</param>
+        /// <param name="arcAddress">адрес дуги</param>
         public ScEvent(SubscriptionId subscriptionId, ScAddress elementAddress, ScAddress arcAddress)
 		{
             this.subscriptionId = subscriptionId;
@@ -49,16 +46,14 @@ namespace Ostis.Sctp.Arguments
 		}
 
 	    /// <summary>
-	    /// Возвращает длину массива байт аргумента
+	    /// Длина массива байт.
 	    /// </summary>
-	    /// <value>The length.</value>
 	    public uint Length
 	    { get { return (uint) bytes.Length; } }
 
 	    /// <summary>
-	    /// Возвращает массив байт аргумента
+	    /// Массив байт.
 	    /// </summary>
-	    /// <value>The bytes stream.</value>
 	    public byte[] BytesStream
 	    {
 	        get
@@ -73,10 +68,10 @@ namespace Ostis.Sctp.Arguments
 	    }
 
 	    /// <summary>
-		/// Получает значение события из массива байт
+		/// Получает значение события из массива байт.
 		/// </summary>
-		/// <param name="bytesstream">Массив байт </param>
-		/// <param name="offset">Смещение в массиве</param>
+		/// <param name="bytesstream">массив байт</param>
+		/// <param name="offset">смещение в массиве</param>
 		/// <returns></returns>
 		public static ScEvent GetFromBytes(byte[] bytesstream, int offset)
 	    {

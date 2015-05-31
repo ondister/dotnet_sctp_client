@@ -4,6 +4,7 @@ using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
+#warning На эту команду нет класса ответа!
     internal class IterateConstructionsCommand : Command
     {
 		public IterateConstructionsCommand(ConstructionTemplate template)

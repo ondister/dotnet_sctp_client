@@ -6,18 +6,25 @@ using Ostis.Sctp.CallBacks;
 
 namespace Ostis.Sctp.Responses
 {
+    /// <summary>
+    /// Ответ на команду IterateElementsCommand.
+    /// </summary>
     public class IterateElementsResponse : Response
     {
         private readonly UInt32 constructionsCount;
         private List<ScAddress> addresses;
         private List<Construction> constructions;
 
+        /// <summary>
+        /// Получение списка конструкций.
+        /// </summary>
+        /// <returns>список</returns>
         public List<Construction> GetConstructions()
         {
             constructions = new List<Construction>();
             if (Header.ReturnCode == ReturnCode.Successfull)
             {
-                int addressesCount = (BytesStream.Length - Header.Length - 4) / 4;
+                int addressesCount = (Bytes.Length - Header.Length - 4) / 4;
                 int addressesInConstruction = (int) constructionsCount == 0 ? 0 : addressesCount / (int)constructionsCount;
 
                 int offset = sizeof(UInt32) + Header.Length;
@@ -29,7 +36,7 @@ namespace Ostis.Sctp.Responses
                     var construction = new Construction();
                     for (int a = 0; a < addressesInConstruction; a++)
                     {
-                        var address = ScAddress.GetFromBytes(BytesStream, offset);
+                        var address = ScAddress.GetFromBytes(Bytes, offset);
                         construction.AddAddress(address);
                         offset += scAddressLength;
                     }
@@ -39,14 +46,22 @@ namespace Ostis.Sctp.Responses
             return constructions;
         }
 
+        /// <summary>
+        /// Количество конструкций в списке.
+        /// </summary>
+#warning Не нужно.
         public UInt32 ConstructionsCount
         { get { return constructionsCount; } }
 
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="bytes">массив байт</param>
         public IterateElementsResponse(byte[] bytes)
             : base(bytes)
         {
             addresses = new List<ScAddress>();
-            constructionsCount = Header.ReturnCode == ReturnCode.Successfull ? BitConverter.ToUInt32(BytesStream, Header.Length) : 0;
+            constructionsCount = Header.ReturnCode == ReturnCode.Successfull ? BitConverter.ToUInt32(Bytes, Header.Length) : 0;
         }
     }
 }

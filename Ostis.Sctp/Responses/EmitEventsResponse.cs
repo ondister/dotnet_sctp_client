@@ -7,7 +7,7 @@ using Ostis.Sctp.CallBacks;
 namespace Ostis.Sctp.Responses
 {
     /// <summary>
-    /// Rsp events emit.
+    /// Ответ на команду EmitEventsCommand.
     /// </summary>
     public class EmitEventsResponse : Response
     {
@@ -15,9 +15,8 @@ namespace Ostis.Sctp.Responses
         private List<ScEvent> events;
 
         /// <summary>
-        /// Gets the sc events.
+        /// События.
         /// </summary>
-        /// <value>The sc events.</value>
         public List<ScEvent> ScEvents
         {
             get
@@ -32,7 +31,7 @@ namespace Ostis.Sctp.Responses
                         const int scEventLength = 12;
                         for (int e = 0; e < EventsCount; e++)
                         {
-                            events.Add(ScEvent.GetFromBytes(BytesStream, beginIndex));
+                            events.Add(ScEvent.GetFromBytes(Bytes, beginIndex));
                             beginIndex += scEventLength;
                         }
                     }
@@ -67,14 +66,22 @@ namespace Ostis.Sctp.Responses
         //            }
         //        }
 
+        /// <summary>
+        /// Количество событий.
+        /// </summary>
+#warning Удалить лишнее?
         public UInt32 EventsCount
         { get { return eventsCount; } }
 
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="bytes">массив байт</param>
         public EmitEventsResponse(byte[] bytes)
             : base(bytes)
         {
             events = new List<ScEvent>();
-            eventsCount = Header.ReturnCode == ReturnCode.Successfull ? BitConverter.ToUInt32(BytesStream, Header.Length) : 0;
+            eventsCount = Header.ReturnCode == ReturnCode.Successfull ? BitConverter.ToUInt32(Bytes, Header.Length) : 0;
         }
     }
 }

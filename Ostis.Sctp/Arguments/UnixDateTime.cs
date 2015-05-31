@@ -3,7 +3,7 @@
 namespace Ostis.Sctp.Arguments
 {
     /// <summary>
-    /// Дата и время в форме Unix (http://en.wikipedia.org/wiki/Unix_time)
+    /// Дата и время в форме Unix (http://en.wikipedia.org/wiki/Unix_time).
     /// </summary>
     public struct UnixDateTime : IArgument
     {
@@ -12,21 +12,21 @@ namespace Ostis.Sctp.Arguments
         private readonly Int64 value;
 
         /// <summary>
-        /// Возвращает длину массива байт
+        /// Длина массива байт.
         /// </summary>
         public uint Length
         { get { return length; } }
 
         /// <summary>
-        /// Возвращает массив байт
+        /// Массив байт.
         /// </summary>
         public byte[] BytesStream
         { get { return bytes; } }
 
         /// <summary>
-        /// Инициализирует новую структуру <see cref="UnixDateTime"/> 
+        /// ctor.
         /// </summary>
-        /// <param name="dateTime">Дата и время <see cref="System.DateTime"/> </param>
+        /// <param name="dateTime">дата и время</param>
         public UnixDateTime(DateTime dateTime)
         {
             length = 0;
@@ -38,17 +38,17 @@ namespace Ostis.Sctp.Arguments
         }
 
         /// <summary>
-        /// Конвертирует дату и время Unix  в дату и время <see cref="System.DateTime"/>
+        /// Конвертирует дату и время Unix в дату и время.
         /// </summary>
-        /// <param name="unixtime">Время DateTimeUnix</param>
-        /// <returns></returns>
+        /// <returns>System.DateTime</returns>
         public DateTime ToDateTime()
         {
-            return Origin.AddMilliseconds(value);
+#warning Разобраться с Long/ULong.
+            return ToDateTime((ulong) value);
         }
 
         /// <summary>
-        /// Конвертирует дату и время Unix  в дату и время <see cref="System.DateTime"/>
+        /// Конвертирует дату и время Unix в дату и время <see cref="System.DateTime"/>
         /// </summary>
         /// <param name="milliseconds">Время в миллисекундах</param>
         /// <returns></returns>
@@ -57,6 +57,9 @@ namespace Ostis.Sctp.Arguments
             return Origin.AddMilliseconds(milliseconds);
         }
 
+        /// <summary>
+        /// Начальная дата Unix.
+        /// </summary>
         public static readonly DateTime Origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
     }
 }

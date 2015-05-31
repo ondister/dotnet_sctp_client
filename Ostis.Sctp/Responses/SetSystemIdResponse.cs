@@ -2,10 +2,16 @@
 
 namespace Ostis.Sctp.Responses
 {
+    /// <summary>
+    /// Ответ на команду SetSystemIdCommand.
+    /// </summary>
     public class SetSystemIdResponse : Response
     {
         private bool isSuccessfull;
 
+        /// <summary>
+        /// Успешно.
+        /// </summary>
         public bool IsSuccesfull
         {
             get
@@ -15,6 +21,10 @@ namespace Ostis.Sctp.Responses
             }
         }
 
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="bytes">массив байт</param>
         public SetSystemIdResponse(byte[] bytes)
             : base(bytes)
         { }

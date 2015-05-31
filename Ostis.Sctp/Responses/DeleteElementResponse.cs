@@ -2,10 +2,16 @@
 
 namespace Ostis.Sctp.Responses
 {
+    /// <summary>
+    /// Ответ на команду DeleteElementCommand.
+    /// </summary>
     public class DeleteElementResponse : Response
     {
         private bool isDeleted;
 
+        /// <summary>
+        /// Было ли удалено.
+        /// </summary>
         public bool IsDeleted
         {
             get
@@ -15,6 +21,10 @@ namespace Ostis.Sctp.Responses
             }
         }
 
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="bytes">массив байт</param>
         public DeleteElementResponse(byte[] bytes)
             : base(bytes)
         { }

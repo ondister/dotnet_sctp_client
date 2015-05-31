@@ -4,14 +4,14 @@ namespace Ostis.Sctp.Arguments
 {
 #warning См. примечание ниже: Зачем здесь этот класс?
     /// <summary>
-    /// sc-конструкция, представленная в виде sc-адресов
+    /// Sc-конструкция, представленная в виде sc-адресов.
     /// </summary>
     public class Construction
     {
         private readonly List<ScAddress> adresses;
 
         /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="Construction"/>
+        /// ctor.
         /// </summary>
         public Construction()
         {
@@ -19,7 +19,7 @@ namespace Ostis.Sctp.Arguments
         }
 
         /// <summary>
-        /// Содержит sc-адреса элементов конструкции
+        /// Sc-адреса элементов конструкции.
         /// </summary>
         public List<ScAddress> ScAdresses
         { get { return adresses; } }

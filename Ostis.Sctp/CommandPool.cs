@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Ostis.Sctp
 {
     /// <summary>
-    /// Пулл команд для сервера. Соединение с сервером происходит при создании экземпляра класса
+    /// Пулл команд для сервера (авто-соединение с сервером).
     /// </summary>
 #warning Реализовать интерфейс IDisposable как рекомендовано в MSDN
 #warning Привести к единообразию используемые типы данных - UInt32 к uint
@@ -16,20 +16,18 @@ namespace Ostis.Sctp
         private readonly ResponseFactory responseFactory;
 
         /// <summary>
-        /// Возвращает значение, указывающее подключен ли клиент к серверу
+        /// Подключен ли клиент к серверу.
         /// </summary>
-        /// <value>
-        ///   <c>true</c> если подключен; в противном случае <c>false</c>.
-        /// </value>
-        public bool Connected
+        /// <value><b>true</b> если подключен; в противном случае <b>false</b>.</value>
+        public bool IsConnected
         { get { return client.Connected; } }
 
         /// <summary>
-        /// Инициализирует пулл команд для сервера.
+        /// ctor.
         /// </summary>
-        /// <param name="address">Адрес сервера</param>
-        /// <param name="port">Порт сервера</param>
-        /// <param name="clientType">Тип используемого клиента (синхронный/асинхронный)</param>
+        /// <param name="address">IP-адрес</param>
+        /// <param name="port">номер порта</param>
+        /// <param name="clientType">тип используемого клиента (синхронный/асинхронный)</param>
         public CommandPool(string address, int port, ClientType clientType)
         {
             client = ClientFactory.CreateClient(clientType);
@@ -42,16 +40,17 @@ namespace Ostis.Sctp
 
         private void client_Received(IClient sender, CallBacks.ReceiveEventArgs arg)
         {
+#warning Что означает магическое число 10?
             if (arg.ReceivedBytes.Length >= 10)
             {
-                Response _resp = responseFactory.GetResponse(arg.ReceivedBytes);
-                commands.Find(cmd => cmd.Id == _resp.Header.Id).Response = _resp;
-                Command cmdforremuve = commands.Find(cmd => cmd.Id == _resp.Header.Id);
-                commands.Remove(cmdforremuve);
+                var response = responseFactory.GetResponse(arg.ReceivedBytes);
+                commands.Find(cmd => cmd.Id == response.Header.Id).Response = response;
+                commands.Remove(commands.Find(cmd => cmd.Id == response.Header.Id));
             }
             else
             {
-                Response _resp = responseFactory.GetResponse(arg.ReceivedBytes);
+#warning Куда идёт это значение?
+                Response response = responseFactory.GetResponse(arg.ReceivedBytes);
             }
             if (commands.Count == 0)
             {
@@ -60,9 +59,9 @@ namespace Ostis.Sctp
         }
 
         /// <summary>
-        /// Добавляет команду в поток команд и отправляет ее на сервер
+        /// Добавление команды в поток команд и отправкат её на сервер.
         /// </summary>
-        /// <param name="command">Команда</param>
+        /// <param name="command">команда</param>
         public void Send(Command command)
         {
             command.Id = counter;
@@ -72,8 +71,9 @@ namespace Ostis.Sctp
         }
 
         /// <summary>
-        /// Выполняет определяемые приложением задачи, связанные с удалением, высвобождением или сбросом неуправляемых ресурсов. При этом пулл отсоединяется от сервера.
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
+        /// <filterpriority>2</filterpriority>
         public void Dispose()
         {
             client.Disconnect();

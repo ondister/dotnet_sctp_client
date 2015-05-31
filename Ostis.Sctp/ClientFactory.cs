@@ -2,6 +2,7 @@
 
 namespace Ostis.Sctp
 {
+#warning Существование этого класса - нецелесообразно.
     static internal class ClientFactory
     {
         public static IClient CreateClient(ClientType type)

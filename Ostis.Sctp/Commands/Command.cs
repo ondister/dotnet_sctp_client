@@ -2,6 +2,9 @@
 
 namespace Ostis.Sctp.Commands
 {
+    /// <summary>
+    /// !!!
+    /// </summary>
     public static class CommandFactory
     {
 #warning Этот класс не нужен

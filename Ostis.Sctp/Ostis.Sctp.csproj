@@ -24,6 +24,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GenerateDocumentation>true</GenerateDocumentation>
     <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>bin\Debug\Ostis.Sctp.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>

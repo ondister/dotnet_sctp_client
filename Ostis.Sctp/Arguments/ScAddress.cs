@@ -3,7 +3,7 @@
 namespace Ostis.Sctp.Arguments
 {
     /// <summary>
-    /// Адрес sc-элемента в памяти
+    /// Адрес SC-элемента в памяти.
     /// </summary>
     public struct ScAddress : IArgument
     {
@@ -13,13 +13,13 @@ namespace Ostis.Sctp.Arguments
 
 #warning Удалить это свойство - оно лишнее.
         /// <summary>
-        /// Возвращает длину массива байт адреса
+        /// Длина массива байт.
         /// </summary>
         public uint Length
         { get { return (uint) bytes.Length; } }
 
         /// <summary>
-        /// Возвращает массив байт адреса
+        /// Массив байт.
         /// </summary>
         public byte[] BytesStream
         {
@@ -33,10 +33,10 @@ namespace Ostis.Sctp.Arguments
         }
 
         /// <summary>
-        /// Инициализирует новый экземпляр структуры <see cref="ScAddress"/>
+        /// ctor.
         /// </summary>
-        /// <param name="segment">Сегмент</param>
-        /// <param name="offset">Смещение</param>
+        /// <param name="segment">сегмент</param>
+        /// <param name="offset">смещение</param>
         public ScAddress(ushort segment, ushort offset)
         {
             this.segment = segment;
@@ -45,11 +45,11 @@ namespace Ostis.Sctp.Arguments
         }
 
         /// <summary>
-        /// Получает значение адреса из массива байт
+        /// Получает значение адреса из массива байт.
         /// </summary>
-        /// <param name="bytes">Массив байт </param>
-        /// <param name="offset">Смещение в массиве</param>
-        /// <returns></returns>
+        /// <param name="bytes">массив байт</param>
+        /// <param name="offset">смещение в массиве</param>
+        /// <returns>SC-адрес</returns>
         public static ScAddress GetFromBytes(byte[] bytes, int offset)
         {
             var address = new ScAddress();
@@ -67,13 +67,10 @@ namespace Ostis.Sctp.Arguments
             return address;
         }
 
-#warning Что за загадочная хрень соструктурами мешает сконвертировать эти 2 свойства в авто-свойства?
+#warning Что за загадочная хрень со структурами мешает сконвертировать эти 2 свойства в авто-свойства?
         /// <summary>
-        /// Возвращает значение сегмента адреса
+        /// Сегмент.
         /// </summary>
-        /// <value>
-        /// Сегмент
-        /// </value>
         public ushort Segment
         {
             get { return segment; }
@@ -81,18 +78,22 @@ namespace Ostis.Sctp.Arguments
         }
 
         /// <summary>
-        /// Возвращает значение смещения адреса
+        /// Смещение.
         /// </summary>
-        /// <value>
-        /// Смещение адреса
-        /// </value>
         public ushort Offset
         {
             get { return offset; }
             set { offset = value; }
         }
 
-		public override string ToString()
+        /// <summary>
+        /// Returns the fully qualified type name of this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:System.String"/> containing a fully qualified type name.
+        /// </returns>
+        /// <filterpriority>2</filterpriority>
+        public override string ToString()
 		{
 		    return string.Format("segment: {0}, offset: {1}", segment, offset);
 		}

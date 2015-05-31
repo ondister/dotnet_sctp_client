@@ -8,7 +8,7 @@ using Ostis.Sctp.CallBacks;
 namespace Ostis.Sctp
 {
     /// <summary>
-    /// Абстрактный класс комманды
+    /// Команда.
     /// </summary>
     public abstract class Command
     {
@@ -17,8 +17,9 @@ namespace Ostis.Sctp
 
         private Response response;
 
+#warning Необходимость этого события - под вопросом.
         /// <summary>
-        /// Событие происходит при выполнении команды
+        /// Выполнение команды.
         /// </summary>
         public event CommandDoneEventHandler CommandDone;
 
@@ -34,20 +35,20 @@ namespace Ostis.Sctp
         }
 
         /// <summary>
-        /// Аргументы команды
+        /// Аргументы.
         /// </summary>
         public List<IArgument> Arguments
         { get; private set; }
         
+        /// <summary>
+        /// Код.
+        /// </summary>
 		public uint Code
 		{ get { return Header.Code; } }
 
 		/// <summary>
-        ///Возвращает и задает уникальный идентификатор команды
+        /// Уникальный идентификатор.
         /// </summary>
-        /// <value>
-        /// Уникальный идентификатор команды
-        /// </value>
         public uint Id
         {
             get { return Header.Id; }
@@ -55,10 +56,10 @@ namespace Ostis.Sctp
         }
 
         /// <summary>
-        /// Конструктор класса <see cref="Command"/> 
+        /// ctor.
         /// </summary>
-        /// <param name="code">Код команды</param>
-        /// <param name="flags">Флаг команды</param>
+        /// <param name="code">код</param>
+        /// <param name="flags">флаги</param>
         protected Command(byte code, byte flags)
         {
             Header = new CommandHeader
@@ -70,8 +71,9 @@ namespace Ostis.Sctp
             commandDoneArgument = new CommandDoneEventArgs();
         }
 
+#warning Переименовать в Bytes и рассмотреть возможность сохранения в виде поля или преобразовать в метод.
         /// <summary>
-        /// Возвращает массив байт команды
+        /// Массив байт.
         /// </summary>
         public byte[] BytesStream
         {
@@ -94,12 +96,12 @@ namespace Ostis.Sctp
         }
 
         /// <summary>
-        /// Возвращает и задает ответ сервера команды
+        /// Ответ сервера.
         /// </summary>
         public Response Response
         {
             get { return response; }
-            set
+            internal set
             {
                 response = value;
                 commandDoneArgument.ReturnCode = response.Header.ReturnCode;

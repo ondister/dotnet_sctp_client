@@ -3,7 +3,7 @@
 namespace Ostis.Sctp.Arguments
 {
     /// <summary>
-    /// Статистика сервера для временной метки
+    /// Статистика сервера для временной метки.
     /// </summary>
     public struct StatisticsData
     {
@@ -22,83 +22,85 @@ namespace Ostis.Sctp.Arguments
         private byte mIsInitStat;   // flag on initial stat save
 
         /// <summary>
-        /// Время временной метки
+        /// Время временной метки.
         /// </summary>
         public DateTime Time
         { get { return mTime; } }
 
         /// <summary>
-        /// Общее количество sc-узлов, которые есть в sc-памяти (включая помеченные на удаление)
+        /// Общее количество SC-узлов, которые есть в SC-памяти (включая помеченные на удаление).
         /// </summary>
         public UInt64 NodeCount
         { get { return mNodeCount; } }
 
         /// <summary>
-        /// Общее количество sc-дуг, которые есть в sc-памяти (включая помеченные на удаление)
+        /// Общее количество SC-дуг, которые есть в SC-памяти (включая помеченные на удаление).
         /// </summary>
         public UInt64 ArcCount
         { get { return mArcCount; } }
 
         /// <summary>
-        /// Общее количество sc-ссылок, которые есть в sc-памяти (включаея помеченные на удаление)
+        /// Общее количество SC-ссылок, которые есть в sc-памяти (включаея помеченные на удаление).
         /// </summary>
         public UInt64 LinksCount
         { get { return mLinksCount; } }
 
         /// <summary>
-        /// Количество sc-узлов, которые не помечены на удалениеt.
+        /// Количество SC-узлов, которые не помечены на удаление.
         /// </summary>
         public UInt64 LiveNodeCount
         { get { return mLiveNodeCount; } }
 
         /// <summary>
-        /// Количество sc-дуг, которые не помечены на удаление
+        /// Количество SC-дуг, которые не помечены на удаление.
         /// </summary>
         public UInt64 LiveArcCount
         { get { return mLiveArcCount; } }
 
         /// <summary>
-        /// Количество sc-ссылок, которые не помечены на удаление
+        /// Количество SC-ссылок, которые не помечены на удаление.
         /// </summary>
         public UInt64 LiveLinkCount
         { get { return mLiveLinkCount; } }
 
         /// <summary>
-        ///  Количество пустых ячеек в sc-памяти
+        ///  Количество пустых ячеек в SC-памяти.
         /// </summary>
         public UInt64 EmptyCount
         { get { return mEmptyCount; } }
 
         /// <summary>
-        /// Общее количество подключений клиентов к sctp серверу (не активных, а общее число включая и завершенные)
+        /// Общее количество подключений клиентов к SCTP-серверу (не активных, а общее число включая и завершенные).
         /// </summary>
         public UInt64 ConnectionsCount
         { get { return mConnectionsCount; } }
 
         /// <summary>
-        /// Количество обработанных sctp команд (включая обработанные с ошибками)
+        /// Количество обработанных SCTP-команд (включая обработанные с ошибками).
         /// </summary>
         public UInt64 CommandsCount
         { get { return mCommandsCount; } }
 
         /// <summary>
-        /// Количество обработанных с ошибками sctp команд
+        /// Количество обработанных с ошибками SCTP-команд.
         /// </summary>
         public UInt64 CommandErrorsCount
         { get { return mCommandErrorsCount; } }
 
+#warning Заменить на bool.
         /// <summary>
-        /// Флаг начального сбора статистики. Другими словами, если это значание равно 1, то статистика была собрана при запуске sctp сервера. Если значание равно 0, то статистика собрана уже во время работы сервера
+        /// Флаг начального сбора статистики.
+        /// Другими словами, если это значание равно 1, то статистика была собрана при запуске sctp сервера.
+        /// Если значание равно 0, то статистика собрана уже во время работы сервера.
         /// </summary>
         public byte IsInitStat
         { get { return mIsInitStat; } }
 
         /// <summary>
-        /// Создает новый экземпляр статистики для временой метки из массива байт
+        /// ctor.
         /// </summary>
-        /// <param name="bytes">Массив байт</param>
-        /// <param name="offset">Смещение в массиве</param>
-        /// <returns></returns>
+        /// <param name="bytes">массив байт</param>
+        /// <param name="offset">ммещение в массиве</param>
 #warning Этот метод должен превратиться в конструктор.
         public static StatisticsData GetFromBytes(byte[] bytes, int offset)
         {

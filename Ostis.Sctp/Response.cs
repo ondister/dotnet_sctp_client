@@ -1,7 +1,7 @@
 ﻿namespace Ostis.Sctp
 {
     /// <summary>
-    /// Абстрактный класс ответа сервера
+    /// Базовый класс ответа.
     /// </summary>
     public abstract class Response
     {
@@ -9,9 +9,21 @@
         private readonly ResponseHeader header;
 
         /// <summary>
-        /// Конструктор класса <see cref="Response"/>
+        /// Массив байт.
         /// </summary>
-        /// <param name="bytes">Массив байт</param>
+        public byte[] Bytes
+        { get { return bytes; } }
+
+        /// <summary>
+        /// Заголовок.
+        /// </summary>
+        public ResponseHeader Header
+        { get { return header; } }
+
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="bytes">массив байт ответа</param>
         protected Response(byte[] bytes)
         {
             this.bytes = bytes;
@@ -25,17 +37,5 @@
             }
             header = new ResponseHeader(headerBytes);
         }
-
-        /// <summary>
-        /// Возвращает массив байт
-        /// </summary>
-        public byte[] BytesStream
-        { get { return bytes; } }
-
-        /// <summary>
-        /// Возвращает заголовок ответа
-        /// </summary>
-        public ResponseHeader Header
-        { get { return header; } }
     }
 }

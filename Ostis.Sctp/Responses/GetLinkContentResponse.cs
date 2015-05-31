@@ -2,20 +2,30 @@
 
 namespace Ostis.Sctp.Responses
 {
+    /// <summary>
+    /// Ответ на команду GetLinkContentCommand.
+    /// </summary>
     public class GetLinkContentResponse : Response
     {
         private readonly byte[] linkContent;
 
+        /// <summary>
+        /// Содержимое ссылки.
+        /// </summary>
         public byte[] LinkContent
         { get { return linkContent; } }
 
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="bytes">массив байт</param>
         public GetLinkContentResponse(byte[] bytes)
             : base(bytes)
         {
             if (Header.ReturnSize != 0)
             {
                 linkContent = new byte[Header.ReturnSize];
-                Array.Copy(BytesStream, Header.Length, linkContent, 0, linkContent.Length);
+                Array.Copy(Bytes, Header.Length, linkContent, 0, linkContent.Length);
             }
             else
             {

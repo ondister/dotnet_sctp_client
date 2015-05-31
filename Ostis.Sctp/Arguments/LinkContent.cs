@@ -4,34 +4,42 @@ using System.Text;
 namespace Ostis.Sctp.Arguments
 {
     /// <summary>
-    /// Структра представляет контент sc-ссылки. Пока поддерживаются только строки
+    /// Содержимое SC-ссылки (пока поддерживаются только строки).
     /// </summary>
     public struct LinkContent
     {
         private byte[] bytes;
         private LinkContentType contentType;
 
+        /// <summary>
+        /// Массив байт.
+        /// </summary>
         public byte[] Bytes
         { get { return bytes; } }
 
         /// <summary>
-        /// Возвращает тип (OSTIS) контента ссылки. Пока поддерживается только текст
+        /// OSTIS-тип содержимого ссылки.
         /// </summary>
         public LinkContentType ContentType
         { get { return contentType; } }
 
         /// <summary>
-        /// Конвертирует байтовое представление контента ссылки в строковое
+        /// Преобразование байтового представления содержимого ссылки в строковое.
         /// </summary>
-        /// <param name="bytecontent">Массив байт ссылки</param>
-        /// <returns></returns>
-        public static string ConvertToString(byte[] bytecontent)
+        /// <param name="byteContent">массив байт ссылки</param>
+        /// <returns>строка</returns>
+        public static string ConvertToString(byte[] byteContent)
         {
 #warning Кодировщик нужно вынести в private static.
             UTF8Encoding txtcoder = new UTF8Encoding();
-            return txtcoder.GetString(bytecontent);
+            return txtcoder.GetString(byteContent);
         }
 
+#warning Конструкторы не вызывают один другой.
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="value">значение</param>
         public LinkContent(String value)
         {
             contentType = LinkContentType.text;
@@ -39,18 +47,31 @@ namespace Ostis.Sctp.Arguments
             bytes = txtcoder.GetBytes(value);
         }
 
-        public LinkContent(byte[] bytesstream)
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="bytes">массив байт</param>
+        public LinkContent(byte[] bytes)
 		{
 			contentType = LinkContentType.unknown;	
-			bytes = bytesstream;
+			this.bytes = bytes;
 		}
 
-		public LinkContent(double value)
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="value">значение</param>
+        public LinkContent(double value)
 		{
 			contentType = LinkContentType.numeric;	
 			bytes = BitConverter.GetBytes(value);
 		}
-       
+
+        /// <summary>
+        /// Преобразование из строки.
+        /// </summary>
+        /// <param name="value">строковое значение</param>
+        /// <returns>соднржимое ссылки+</returns>
         public static implicit operator LinkContent(String value)
         {
             UTF8Encoding txtcoder = new UTF8Encoding();

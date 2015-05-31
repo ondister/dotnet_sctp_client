@@ -4,35 +4,29 @@ using System.Text;
 namespace Ostis.Sctp.Arguments
 {
     /// <summary>
-    /// Идентификатор sc-элемента
+    /// Идентификатор SC-элемента.
     /// </summary>
     public struct Identifier : IArgument
     {
         private byte[] bytes;
 
         /// <summary>
-        /// Возвращает массив байт идентификатора
+        /// Массив байт идентификатора.
         /// </summary>
-        /// <value>
-        /// Массив байт
-        /// </value>
         public byte[] BytesStream
         { get { return bytes; } }
 
 #warning Удалить это свойство - оно лишнее.
         /// <summary>
-        /// Возвращает длину массива байт идентификатора
+        /// Длина массива байт идентификатора.
         /// </summary>
-        /// <value>
-        /// The length.
-        /// </value>
         public uint Length
         { get { return (uint) bytes.Length; } }
 
         /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="Identifier"/>
+        /// ctor.
         /// </summary>
-        /// <param name="value">Значение идентификатора</param>
+        /// <param name="value">значение</param>
         public Identifier(String value)
         {
 #warning Кодировщик нужно вынести в private static.
@@ -40,6 +34,11 @@ namespace Ostis.Sctp.Arguments
             bytes = txtcoder.GetBytes(value);
         }
 
+        /// <summary>
+        /// Преобразование из строки.
+        /// </summary>
+        /// <param name="value">строковое значение</param>
+        /// <returns>SC-идентификатор</returns>
         public static implicit operator Identifier(String value)
         {
             var identifier = new Identifier();
@@ -49,11 +48,12 @@ namespace Ostis.Sctp.Arguments
         }
 
         /// <summary>
-        /// Возвращает строковое представление идентификатора
+        /// Returns the fully qualified type name of this instance.
         /// </summary>
         /// <returns>
-        /// Объект типа <see cref="T:System.String" />, содержащий строковое представление идентификатора
+        /// A <see cref="T:System.String"/> containing a fully qualified type name.
         /// </returns>
+        /// <filterpriority>2</filterpriority>
         public override String ToString()
         {
             UTF8Encoding txtcoder = new UTF8Encoding();

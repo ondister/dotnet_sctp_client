@@ -12,14 +12,13 @@ namespace Ostis.Sctp.Arguments
 
 #warning Удалить это свойство - оно лишнее.
         /// <summary>
-	    /// Возвращает длину массива байт аргумента
+	    /// Длина массива байт.
 	    /// </summary>
-	    /// <value>The length.</value>
 	    public uint Length
 	    { get { return (uint) bytes.Length; } }
 
 	    /// <summary>
-	    /// Возвращает массив байт аргумента
+	    /// Массив байт.
 	    /// </summary>
 	    /// <value>The bytes stream.</value>
 	    public byte[] BytesStream
@@ -33,9 +32,8 @@ namespace Ostis.Sctp.Arguments
 
 #warning Что за загадочная хрень соструктурами мешает сконвертировать эти 2 свойства в авто-свойства?
         /// <summary>
-		/// Gets or sets the I.
+		/// Идентификатор.
 		/// </summary>
-		/// <value>The I.</value>
 		public Int32 ID
 		{
 			get { return id; }
@@ -43,20 +41,20 @@ namespace Ostis.Sctp.Arguments
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="sctp_client.Arguments.SubScriptionId"/> struct.
+		/// ctor.
 		/// </summary>
-		/// <param name="id">Identifier.</param>
+		/// <param name="id">идентификатор.</param>
 		public SubscriptionId(Int32 id)
 		{
 			this.id = id;
-            this.bytes = new byte[4];
+            bytes = new byte[4];
 		}
 
 		/// <summary>
-		/// Gets from bytes.
+		/// Получение числа из массива байт.
 		/// </summary>
-		/// <returns>The from bytes.</returns>
-		/// <param name="bytes">Bytesstream.</param>
+        /// <param name="bytes">массив байт</param>
+        /// <returns>число</returns>
 		public static Int32 GetFromBytes(byte[] bytes)
 		{
 			return bytes.Length >= sizeof(Int32) ? BitConverter.ToInt32(bytes, sizeof(Int32)) : 0;

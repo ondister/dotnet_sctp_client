@@ -3,21 +3,21 @@
 namespace Ostis.Sctp
 {
     /// <summary>
-    /// Интерфейс аргумента для команд
+    /// Аргумент команды.
     /// </summary>
     public interface IArgument
     {
         /// <summary>
-        /// Возвращает длину массива байт аргумента
+        /// Длина массива байт.
         /// </summary>
         UInt32 Length
         { get; }
+#warning Удалить это свойство - оно лишнее.
 
         /// <summary>
-        /// Возвращает массив байт аргумента
+        /// Массив байт.
         /// </summary>
-        /// <value>
-#warning Переименовать в Bytes
+#warning Переименовать в Bytes.
         byte[] BytesStream
         { get; }
     }

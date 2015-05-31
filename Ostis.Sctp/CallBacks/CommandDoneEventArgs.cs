@@ -3,23 +3,20 @@
 namespace Ostis.Sctp.CallBacks
 {
     /// <summary>
-    /// Делегат для события завершения выполнения команды
+    /// Делегат события завершения выполнения команды.
     /// </summary>
-    /// <param name="sender">Команда</param>
-    /// <param name="arg">Данные события</param>
+    /// <param name="sender">команда</param>
+    /// <param name="arg">данные события</param>
     public delegate void CommandDoneEventHandler(Command sender, CommandDoneEventArgs arg);
 
     /// <summary>
-    /// Данные события завершения исполнения команды
+    /// Данные события завершения исполнения команды.
     /// </summary>
     public class CommandDoneEventArgs : EventArgs
     {
         /// <summary>
-        /// Возвращает и задает код окончания выполнения команд
+        /// Код завешения.
         /// </summary>
-        /// <value>
-        /// Код окончания выполнения команды
-        /// </value>
         public ReturnCode ReturnCode 
         { get; set; }
     }
