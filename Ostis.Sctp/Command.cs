@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading;
 
 using Ostis.Sctp.CallBacks;
 
@@ -25,8 +26,7 @@ namespace Ostis.Sctp
 
         private void raiseCommandDone()
         {
-#warning var handler = Volatile.Read(ref CommandDone);
-            var handler = CommandDone;
+            var handler = Volatile.Read(ref CommandDone);
             if (handler != null)
             {
                 handler(this, commandDoneArgument);

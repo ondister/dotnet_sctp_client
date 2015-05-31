@@ -16,8 +16,7 @@ namespace Ostis.Sctp.SyncClient
 
         private void OnReceive()
         {
-            var handler = Received;
-#warning var handler = Volatile.Read(ref Received);
+            var handler = Volatile.Read(ref Received);
             if (handler != null)
             {
                 handler(this, receiveArguments);

@@ -23,8 +23,7 @@ namespace Ostis.Sctp.AsyncClient
 
 	    private void raiseReceived()
 	    {
-	        var handler = Received;
-#warning var handler = Volatile.Read(ref Received);
+	        var handler = Volatile.Read(ref Received);
             if (handler != null)
 	        {
                 handler(this, receiveArgs);
