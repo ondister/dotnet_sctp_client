@@ -6,9 +6,9 @@ namespace Ostis.Sctp.Arguments
     /// <summary>
     /// Идентификатор sc-элемента
     /// </summary>
-    public struct Identifier:IArgument
+    public struct Identifier : IArgument
     {
-        private byte[] _bytesstream;
+        private byte[] bytes;
 
         /// <summary>
         /// Возвращает массив байт идентификатора
@@ -17,10 +17,9 @@ namespace Ostis.Sctp.Arguments
         /// Массив байт
         /// </value>
         public byte[] BytesStream
-        {
-            get { return _bytesstream; }
-        }
+        { get { return bytes; } }
 
+#warning Удалить это свойство - оно лишнее.
         /// <summary>
         /// Возвращает длину массива байт идентификатора
         /// </summary>
@@ -28,9 +27,7 @@ namespace Ostis.Sctp.Arguments
         /// The length.
         /// </value>
         public uint Length
-        {
-            get { return (uint)_bytesstream.Length; }
-        }
+        { get { return (uint) bytes.Length; } }
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Identifier"/>
@@ -38,16 +35,17 @@ namespace Ostis.Sctp.Arguments
         /// <param name="value">Значение идентификатора</param>
         public Identifier(String value)
         {
+#warning Кодировщик нужно вынести в private static.
             UTF8Encoding txtcoder = new UTF8Encoding();
-           _bytesstream = txtcoder.GetBytes(value);
+            bytes = txtcoder.GetBytes(value);
         }
 
         public static implicit operator Identifier(String value)
         {
-            Identifier tempid = new Identifier();
+            var identifier = new Identifier();
             UTF8Encoding txtcoder = new UTF8Encoding();
-            tempid._bytesstream = txtcoder.GetBytes(value);
-            return tempid;
+            identifier.bytes = txtcoder.GetBytes(value);
+            return identifier;
         }
 
         /// <summary>
@@ -59,9 +57,7 @@ namespace Ostis.Sctp.Arguments
         public override String ToString()
         {
             UTF8Encoding txtcoder = new UTF8Encoding();
-            return txtcoder.GetString(_bytesstream);
+            return txtcoder.GetString(bytes);
         }
-
-        
     }
 }

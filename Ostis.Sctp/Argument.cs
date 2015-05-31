@@ -35,21 +35,21 @@ namespace Ostis.Sctp
                 else if (value is LinkContent)
                 {
                     var linkContent = (LinkContent) (object) value;
-                    length = (uint) linkContent.BytesStream.Length;
+                    length = (uint) linkContent.Bytes.Length;
                 }
                 else if (value is Identifier)
                 {
                     var identifier = (Identifier) (object) value;
                     length = (uint) identifier.BytesStream.Length;
                 }
-                else if (value is ConstrTemplate)
+                else if (value is ConstructionTemplate)
                 {
-                    var constructorTemplate = (ConstrTemplate) (object) value;
+                    var constructorTemplate = (ConstructionTemplate) (object) value;
                     length = (uint) constructorTemplate.BytesStream.Length;
                 }
-                else if (value is DateTimeUNIX)
+                else if (value is UnixDateTime)
                 {
-                    var dateTimeUnix = (DateTimeUNIX) (object) value;
+                    var dateTimeUnix = (UnixDateTime) (object) value;
                     length = (uint) dateTimeUnix.BytesStream.Length;
                 }
                 else if (value is ScAddress)
@@ -83,21 +83,21 @@ namespace Ostis.Sctp
             else if (obj is LinkContent)
             {
                 var linkContent = (LinkContent) (object) obj;
-                return linkContent.BytesStream;
+                return linkContent.Bytes;
             }
             else if (obj is Identifier)
             {
                 var identifier = (Identifier)(object)obj;
                 return identifier.BytesStream;
             }
-            else if (obj is ConstrTemplate)
+            else if (obj is ConstructionTemplate)
             {
-                var constructorTemplate = (ConstrTemplate)(object)obj;
+                var constructorTemplate = (ConstructionTemplate)(object)obj;
                 return constructorTemplate.BytesStream;
             }
-            else if (obj is DateTimeUNIX)
+            else if (obj is UnixDateTime)
             {
-                var dateTimeUnix = (DateTimeUNIX)(object)obj;
+                var dateTimeUnix = (UnixDateTime)(object)obj;
                 return dateTimeUnix.BytesStream;
             }
             else if (obj is ScAddress)

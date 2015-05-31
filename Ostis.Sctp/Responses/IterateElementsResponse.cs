@@ -30,7 +30,7 @@ namespace Ostis.Sctp.Responses
                     for (int a = 0; a < addressesInConstruction; a++)
                     {
                         var address = ScAddress.GetFromBytes(BytesStream, offset);
-                        construction.AddScAddress(address);
+                        construction.AddAddress(address);
                         offset += scAddressLength;
                     }
                     constructions.Add(construction);

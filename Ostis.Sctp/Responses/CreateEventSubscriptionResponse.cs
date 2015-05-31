@@ -7,9 +7,9 @@ namespace Ostis.Sctp.Responses
 {
     public class CreateSubscriptionResponse : Response
     {
-        private SubScriptionId subscriptionId;
+        private SubscriptionId subscriptionId;
 
-        public SubScriptionId IDofSubscribe
+        public SubscriptionId IDofSubscribe
         {
             get
             {

@@ -17,6 +17,7 @@ namespace Ostis.Sctp
         /// Возвращает массив байт аргумента
         /// </summary>
         /// <value>
+#warning Переименовать в Bytes
         byte[] BytesStream
         { get; }
     }

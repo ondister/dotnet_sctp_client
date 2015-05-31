@@ -8,24 +8,17 @@ namespace Ostis.Sctp.Arguments
     /// </summary>
     public struct LinkContent
     {
-        private byte[] _bytesstream;
+        private byte[] bytes;
+        private LinkContentType contentType;
 
-        public byte[] BytesStream
-        {
-            get { return _bytesstream; }
-        }
-
-
-        private LinkContentType _contenttype;
+        public byte[] Bytes
+        { get { return bytes; } }
 
         /// <summary>
         /// Возвращает тип (OSTIS) контента ссылки. Пока поддерживается только текст
         /// </summary>
-        
         public LinkContentType ContentType
-        {
-            get { return _contenttype; }
-        }
+        { get { return contentType; } }
 
         /// <summary>
         /// Конвертирует байтовое представление контента ссылки в строковое
@@ -33,42 +26,39 @@ namespace Ostis.Sctp.Arguments
         /// <param name="bytecontent">Массив байт ссылки</param>
         /// <returns></returns>
         public static string ConvertToString(byte[] bytecontent)
-        { 
-         UTF8Encoding txtcoder = new UTF8Encoding();
-         return txtcoder.GetString(bytecontent);
+        {
+#warning Кодировщик нужно вынести в private static.
+            UTF8Encoding txtcoder = new UTF8Encoding();
+            return txtcoder.GetString(bytecontent);
         }
 
         public LinkContent(String value)
         {
-           _contenttype = LinkContentType.text;
+            contentType = LinkContentType.text;
             UTF8Encoding txtcoder = new UTF8Encoding();
-           _bytesstream = txtcoder.GetBytes(value);
+            bytes = txtcoder.GetBytes(value);
         }
-       
-		public LinkContent(byte[] bytesstream)
+
+        public LinkContent(byte[] bytesstream)
 		{
-			_contenttype = LinkContentType.unknown;	
-			_bytesstream = bytesstream;
+			contentType = LinkContentType.unknown;	
+			bytes = bytesstream;
 		}
 
 		public LinkContent(double value)
 		{
-			_contenttype = LinkContentType.numeric;	
-			_bytesstream = BitConverter.GetBytes(value);
+			contentType = LinkContentType.numeric;	
+			bytes = BitConverter.GetBytes(value);
 		}
-
-
        
         public static implicit operator LinkContent(String value)
         {
-            LinkContent templc = new LinkContent();
-            templc._contenttype = LinkContentType.text;
             UTF8Encoding txtcoder = new UTF8Encoding();
-            templc._bytesstream = txtcoder.GetBytes(value);
-            return templc;
+            return new LinkContent
+            {
+                contentType = LinkContentType.text,
+                bytes = txtcoder.GetBytes(value),
+            };
         }
-
-       
-
     }
 }

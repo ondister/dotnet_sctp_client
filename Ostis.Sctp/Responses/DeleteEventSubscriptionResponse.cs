@@ -7,9 +7,9 @@ namespace Ostis.Sctp.Responses
 {
     public class DeleteSubscriptionResponse : Response
     {
-        private SubScriptionId subscriptionId;
+        private SubscriptionId subscriptionId;
 
-        public SubScriptionId SubscriptionId
+        public SubscriptionId SubscriptionId
         {
             get
             {

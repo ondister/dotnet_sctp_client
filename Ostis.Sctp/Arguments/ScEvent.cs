@@ -5,109 +5,88 @@ namespace Ostis.Sctp.Arguments
 	/// <summary>
 	/// Событие в sc памяти
 	/// </summary>
-	public struct ScEvent:IArgument
+	public struct ScEvent : IArgument
 	{
+        private SubscriptionId subscriptionId;
+		private ScAddress elementAddress;
+		private ScAddress arcAddress;
+		private byte[] bytes;
 
+	    /// <summary>
+	    /// Gets the ID
+	    /// </summary>
+	    /// <value>The I.</value>
+	    public SubscriptionId ID
+	    { get { return subscriptionId; } }
 
-		private SubScriptionId _id;
-		private ScAddress _elementaddress;
-		private ScAddress _arcaddress;
-		private byte[] _bytestream;
+	    /// <summary>
+	    /// Gets the element address.
+	    /// </summary>
+	    /// <value>The element address.</value>
+	    public ScAddress ElementAddress
+	    { get { return elementAddress; } }
 
-		/// <summary>
-		/// Gets the ID
-		/// </summary>
-		/// <value>The I.</value>
-		public SubScriptionId ID {
-			get {
-				return _id;
-			}
-		}
+	    /// <summary>
+	    /// Gets the arc address.
+	    /// </summary>
+	    /// <value>The arc address.</value>
+	    public ScAddress ArcAddress
+	    { get { return arcAddress; } }
 
-		/// <summary>
-		/// Gets the element address.
-		/// </summary>
-		/// <value>The element address.</value>
-		public ScAddress ElementAddress {
-			get {
-				return _elementaddress;
-			}
-		}
-
-		/// <summary>
-		/// Gets the arc address.
-		/// </summary>
-		/// <value>The arc address.</value>
-		public ScAddress ArcAddress {
-			get {
-				return _arcaddress;
-			}
-		}
-
-		/// <summary>
+	    /// <summary>
 		/// Initializes a new instance of the <see cref="sctp_client.Arguments.ScEvent"/> struct.
 		/// </summary>
-		/// <param name="ID">ID</param>
-		/// <param name="ElementAddress">Element address.</param>
-		/// <param name="ArcAddress">Arc address.</param>
-		public ScEvent(SubScriptionId ID, ScAddress ElementAddress, ScAddress ArcAddress)
+        /// <param name="subscriptionId">ID</param>
+        /// <param name="elementAddress">Element address.</param>
+        /// <param name="arcAddress">Arc address.</param>
+        public ScEvent(SubscriptionId subscriptionId, ScAddress elementAddress, ScAddress arcAddress)
 		{
-			_id = ID;
-			_elementaddress = ElementAddress;
-			_arcaddress = ArcAddress;
-			_bytestream = new byte[12];
+            this.subscriptionId = subscriptionId;
+            this.elementAddress = elementAddress;
+            this.arcAddress = arcAddress;
+#warning Magic number 12
+            this.bytes = new byte[12];
 		}
 
-		#region IArgument implementation
-		/// <summary>
-		/// Возвращает длину массива байт аргумента
-		/// </summary>
-		/// <value>The length.</value>
-		public uint Length {
-			get {
-				return (uint)_bytestream.Length;
-			}
-		}
-		/// <summary>
-		/// Возвращает массив байт аргумента
-		/// </summary>
-		/// <value>The bytes stream.</value>
-		public byte[] BytesStream {
-			get
-			{
-				_bytestream = new byte[12];
-				Array.Copy(_id.BytesStream, _bytestream, 4);
-				Array.Copy(_elementaddress.BytesStream, 0, _bytestream, 4, 4);
-				Array.Copy(_arcaddress.BytesStream, 0, _bytestream, 8, 4);
-				return _bytestream;
-			}
-		}
+	    /// <summary>
+	    /// Возвращает длину массива байт аргумента
+	    /// </summary>
+	    /// <value>The length.</value>
+	    public uint Length
+	    { get { return (uint) bytes.Length; } }
 
-		#endregion
+	    /// <summary>
+	    /// Возвращает массив байт аргумента
+	    /// </summary>
+	    /// <value>The bytes stream.</value>
+	    public byte[] BytesStream
+	    {
+	        get
+            {
+#warning Magic number 12
+	            bytes = new byte[12];
+	            Array.Copy(subscriptionId.BytesStream, bytes, 4);
+	            Array.Copy(elementAddress.BytesStream, 0, bytes, 4, 4);
+	            Array.Copy(arcAddress.BytesStream, 0, bytes, 8, 4);
+	            return bytes;
+	        }
+	    }
 
-		/// <summary>
+	    /// <summary>
 		/// Получает значение события из массива байт
 		/// </summary>
 		/// <param name="bytesstream">Массив байт </param>
 		/// <param name="offset">Смещение в массиве</param>
 		/// <returns></returns>
 		public static ScEvent GetFromBytes(byte[] bytesstream, int offset)
-		{
-			ScEvent tmpevent= new ScEvent(new SubScriptionId (),new ScAddress (),new ScAddress ());
-			if (bytesstream.Length >= sizeof(Int32) * 3 + offset)
-			{
-				SubScriptionId id = new SubScriptionId(BitConverter.ToInt32(bytesstream, sizeof(UInt32) * 0 + offset));
-				ScAddress elementadr= ScAddress.GetFromBytes(bytesstream, sizeof(UInt32) * 1 + offset);
-				ScAddress arcadr= ScAddress.GetFromBytes(bytesstream, sizeof(UInt32) * 2 + offset);
-				tmpevent= new ScEvent(id,elementadr,arcadr);
-			}
-
-			return tmpevent;
+	    {
+	        return bytesstream.Length >= sizeof(Int32) * 3 + offset
+                ? new ScEvent(
+                    new SubscriptionId(BitConverter.ToInt32(bytesstream, sizeof(UInt32) * 0 + offset)),
+                    ScAddress.GetFromBytes(bytesstream, sizeof(UInt32) * 1 + offset),
+                    ScAddress.GetFromBytes(bytesstream, sizeof(UInt32) * 2 + offset))
+                : new ScEvent(new SubscriptionId(), new ScAddress(), new ScAddress());
 		}
-
-
-
-
 	}
 }
 

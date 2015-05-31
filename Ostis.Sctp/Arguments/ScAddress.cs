@@ -2,23 +2,21 @@
 
 namespace Ostis.Sctp.Arguments
 {
-
     /// <summary>
     /// Адрес sc-элемента в памяти
     /// </summary>
-    public struct ScAddress:IArgument
+    public struct ScAddress : IArgument
     {
-        private ushort _segment;
-        private ushort _offset;
-        private byte[] _bytestream;
+        private ushort segment;
+        private ushort offset;
+        private byte[] bytes;
 
+#warning Удалить это свойство - оно лишнее.
         /// <summary>
         /// Возвращает длину массива байт адреса
         /// </summary>
         public uint Length
-        {
-            get { return (uint)_bytestream.Length; }
-        }
+        { get { return (uint) bytes.Length; } }
 
         /// <summary>
         /// Возвращает массив байт адреса
@@ -27,13 +25,12 @@ namespace Ostis.Sctp.Arguments
         {
             get
             {
-                _bytestream = new byte[4];
-                Array.Copy(BitConverter.GetBytes(_segment), _bytestream, 2);
-                Array.Copy(BitConverter.GetBytes(_offset), 0, _bytestream, 2, 2);
-                return _bytestream;
+                bytes = new byte[4];
+                Array.Copy(BitConverter.GetBytes(segment), bytes, 2);
+                Array.Copy(BitConverter.GetBytes(offset), 0, bytes, 2, 2);
+                return bytes;
             }
         }
-
 
         /// <summary>
         /// Инициализирует новый экземпляр структуры <see cref="ScAddress"/>
@@ -42,38 +39,35 @@ namespace Ostis.Sctp.Arguments
         /// <param name="offset">Смещение</param>
         public ScAddress(ushort segment, ushort offset)
         {
-            _segment = segment;
-            _offset = offset;
-            _bytestream = new byte[4];
-
+            this.segment = segment;
+            this.offset = offset;
+            bytes = new byte[4];
         }
-
 
         /// <summary>
         /// Получает значение адреса из массива байт
         /// </summary>
-        /// <param name="bytesstream">Массив байт </param>
+        /// <param name="bytes">Массив байт </param>
         /// <param name="offset">Смещение в массиве</param>
         /// <returns></returns>
-        public static ScAddress GetFromBytes(byte[] bytesstream, int offset)
+        public static ScAddress GetFromBytes(byte[] bytes, int offset)
         {
-            ScAddress tmpaddr = new ScAddress();
-            if (bytesstream.Length >= sizeof(ushort) * 2 + offset)
+            var address = new ScAddress();
+#warning Что за константа должна быть в этом условии?
+            if (bytes.Length >= sizeof(ushort) * 2 + offset)
             {
-
-                tmpaddr._segment = BitConverter.ToUInt16(bytesstream, sizeof(ushort) * 0 + offset);
-                tmpaddr._offset = BitConverter.ToUInt16(bytesstream, sizeof(ushort) * 1 + offset);
+                address.segment = BitConverter.ToUInt16(bytes, sizeof(ushort) * 0 + offset);
+                address.offset = BitConverter.ToUInt16(bytes, sizeof(ushort) * 1 + offset);
             }
-
             else
             {
-
-                tmpaddr._segment = 0;
-                tmpaddr._offset = 0;
+                address.segment = 0;
+                address.offset = 0;
             }
-            return tmpaddr;
+            return address;
         }
 
+#warning Что за загадочная хрень соструктурами мешает сконвертировать эти 2 свойства в авто-свойства?
         /// <summary>
         /// Возвращает значение сегмента адреса
         /// </summary>
@@ -82,8 +76,8 @@ namespace Ostis.Sctp.Arguments
         /// </value>
         public ushort Segment
         {
-            get { return _segment; }
-            set { _segment = value; }
+            get { return segment; }
+            set { segment = value; }
         }
 
         /// <summary>
@@ -94,15 +88,13 @@ namespace Ostis.Sctp.Arguments
         /// </value>
         public ushort Offset
         {
-            get { return _offset; }
-            set { _offset = value; }
+            get { return offset; }
+            set { offset = value; }
         }
 
-		public string ToString()
+		public override string ToString()
 		{
-			return String.Concat("segment: ",_segment.ToString(),", offset: ",_offset.ToString());
+		    return string.Format("segment: {0}, offset: {1}", segment, offset);
 		}
-
-       
     }
 }

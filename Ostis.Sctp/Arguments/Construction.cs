@@ -2,33 +2,32 @@
 
 namespace Ostis.Sctp.Arguments
 {
+#warning См. примечание ниже: Зачем здесь этот класс?
     /// <summary>
     /// sc-конструкция, представленная в виде sc-адресов
     /// </summary>
     public class Construction
     {
-        private List<ScAddress> _scadresses;
+        private readonly List<ScAddress> adresses;
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Construction"/>
         /// </summary>
         public Construction()
         {
-            _scadresses = new List<ScAddress>();
+            adresses = new List<ScAddress>();
         }
 
         /// <summary>
         /// Содержит sc-адреса элементов конструкции
         /// </summary>
         public List<ScAddress> ScAdresses
-        {
-            get { return _scadresses; }
-        }
+        { get { return adresses; } }
 
-        internal void AddScAddress(ScAddress address)
+#warning Зачем здесь этот метод?
+        internal void AddAddress(ScAddress address)
         {
-            _scadresses.Add(address);
+            adresses.Add(address);
         }
-
     }
 }

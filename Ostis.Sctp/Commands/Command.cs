@@ -112,7 +112,7 @@ namespace Ostis.Sctp.Commands
         /// <param name="startTime">Нижняя временная граница</param>
         /// <param name="endTime">Верхняя временная граница</param>
         /// <returns></returns>
-        public static Command GetStatistics(DateTimeUNIX startTime, DateTimeUNIX endTime)
+        public static Command GetStatistics(UnixDateTime startTime, UnixDateTime endTime)
         {
             return new GetStatisticsCommand(startTime, endTime);
         }
@@ -122,7 +122,7 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="template">Шаблон для поиска</param>
         /// <returns></returns>
-        public static Command IterateElements(ConstrTemplate template)
+        public static Command IterateElements(ConstructionTemplate template)
         {
             return new IterateElementsCommand(template);
         }
@@ -171,7 +171,7 @@ namespace Ostis.Sctp.Commands
         /// Удаление подписки на событие
         /// </summary>
         /// <returns></returns>
-        public static Command DeleteEventSubscription(SubScriptionId id)
+        public static Command DeleteEventSubscription(SubscriptionId id)
         {
             return new DeleteSubscriptionCommand(id);
         }

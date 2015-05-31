@@ -11,7 +11,7 @@ namespace Ostis.Sctp.Commands
         {
             UInt32 argumentsSize = 0;
             Arguments.Add(new Argument<ScAddress>(linkaddress));
-            Arguments.Add(new Argument<UInt32>((uint)content.BytesStream.Length));
+            Arguments.Add(new Argument<UInt32>((uint)content.Bytes.Length));
             Arguments.Add(new Argument<LinkContent>(content));
             foreach (var argument in Arguments)
             {

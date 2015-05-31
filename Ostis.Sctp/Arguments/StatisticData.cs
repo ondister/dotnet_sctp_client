@@ -5,8 +5,9 @@ namespace Ostis.Sctp.Arguments
     /// <summary>
     /// Статистика сервера для временной метки
     /// </summary>
-    public struct StatisticData
+    public struct StatisticsData
     {
+#warning Переименовать все поля и свойства, поля станут readonly.
         private DateTime mTime; // unix time
         private UInt64 mNodeCount; // amount of all nodes
         private UInt64 mArcCount; // amount of all arcs
@@ -24,123 +25,99 @@ namespace Ostis.Sctp.Arguments
         /// Время временной метки
         /// </summary>
         public DateTime Time
-        {
-            get { return mTime; }
-        }
+        { get { return mTime; } }
 
         /// <summary>
         /// Общее количество sc-узлов, которые есть в sc-памяти (включая помеченные на удаление)
         /// </summary>
         public UInt64 NodeCount
-        {
-            get { return mNodeCount; }
-        }
+        { get { return mNodeCount; } }
 
         /// <summary>
         /// Общее количество sc-дуг, которые есть в sc-памяти (включая помеченные на удаление)
         /// </summary>
         public UInt64 ArcCount
-        {
-            get { return mArcCount; }
-        }
+        { get { return mArcCount; } }
 
         /// <summary>
         /// Общее количество sc-ссылок, которые есть в sc-памяти (включаея помеченные на удаление)
         /// </summary>
         public UInt64 LinksCount
-        {
-            get { return mLinksCount; }
-        }
+        { get { return mLinksCount; } }
 
         /// <summary>
         /// Количество sc-узлов, которые не помечены на удалениеt.
         /// </summary>
         public UInt64 LiveNodeCount
-        {
-            get { return mLiveNodeCount; }
-        }
+        { get { return mLiveNodeCount; } }
 
         /// <summary>
         /// Количество sc-дуг, которые не помечены на удаление
         /// </summary>
         public UInt64 LiveArcCount
-        {
-            get { return mLiveArcCount; }
-        }
+        { get { return mLiveArcCount; } }
 
         /// <summary>
         /// Количество sc-ссылок, которые не помечены на удаление
         /// </summary>
-
         public UInt64 LiveLinkCount
-        {
-            get { return mLiveLinkCount; }
-        }
+        { get { return mLiveLinkCount; } }
 
         /// <summary>
         ///  Количество пустых ячеек в sc-памяти
         /// </summary>
         public UInt64 EmptyCount
-        {
-            get { return mEmptyCount; }
-        }
+        { get { return mEmptyCount; } }
 
         /// <summary>
         /// Общее количество подключений клиентов к sctp серверу (не активных, а общее число включая и завершенные)
         /// </summary>
         public UInt64 ConnectionsCount
-        {
-            get { return mConnectionsCount; }
-        }
+        { get { return mConnectionsCount; } }
 
         /// <summary>
         /// Количество обработанных sctp команд (включая обработанные с ошибками)
         /// </summary>
         public UInt64 CommandsCount
-        {
-            get { return mCommandsCount; }
-        }
+        { get { return mCommandsCount; } }
 
         /// <summary>
         /// Количество обработанных с ошибками sctp команд
         /// </summary>
         public UInt64 CommandErrorsCount
-        {
-            get { return mCommandErrorsCount; }
-        }
+        { get { return mCommandErrorsCount; } }
 
         /// <summary>
         /// Флаг начального сбора статистики. Другими словами, если это значание равно 1, то статистика была собрана при запуске sctp сервера. Если значание равно 0, то статистика собрана уже во время работы сервера
         /// </summary>
         public byte IsInitStat
-        {
-            get { return mIsInitStat; }
-        }
-
+        { get { return mIsInitStat; } }
 
         /// <summary>
         /// Создает новый экземпляр статистики для временой метки из массива байт
         /// </summary>
-        /// <param name="bytesstream">Массив байт</param>
+        /// <param name="bytes">Массив байт</param>
         /// <param name="offset">Смещение в массиве</param>
         /// <returns></returns>
-        public static StatisticData GetFromBytes(byte[] bytesstream, int offset)
+#warning Этот метод должен превратиться в конструктор.
+        public static StatisticsData GetFromBytes(byte[] bytes, int offset)
         {
-            StatisticData tmpstat = new StatisticData();
-            if (bytesstream.Length >= sizeof(UInt64) * 11 + 1 + offset)
+            StatisticsData tmpstat = new StatisticsData();
+#warning Magic number.
+            if (bytes.Length >= sizeof(UInt64) * 11 + 1 + offset)
             {
-                tmpstat.mTime = DateTimeUNIX.ToDateTime(BitConverter.ToUInt64(bytesstream, sizeof(UInt64) * 0 + offset));
-                tmpstat.mNodeCount = BitConverter.ToUInt64(bytesstream, sizeof(UInt64) * 1 + offset);
-                tmpstat.mArcCount = BitConverter.ToUInt64(bytesstream, sizeof(UInt64) * 2 + offset);
-                tmpstat.mLinksCount = BitConverter.ToUInt64(bytesstream, sizeof(UInt64) * 3 + offset);
-                tmpstat.mLiveNodeCount = BitConverter.ToUInt64(bytesstream, sizeof(UInt64) * 4 + offset);
-                tmpstat.mLiveArcCount = BitConverter.ToUInt64(bytesstream, sizeof(UInt64) * 5 + offset);
-                tmpstat.mLiveLinkCount = BitConverter.ToUInt64(bytesstream, sizeof(UInt64) * 6 + offset);
-                tmpstat.mEmptyCount = BitConverter.ToUInt64(bytesstream, sizeof(UInt64) * 7 + offset);
-                tmpstat.mConnectionsCount = BitConverter.ToUInt64(bytesstream, sizeof(UInt64) * 8 + offset);
-                tmpstat.mCommandsCount = BitConverter.ToUInt64(bytesstream, sizeof(UInt64) * 9 + offset);
-                tmpstat.mCommandErrorsCount = BitConverter.ToUInt64(bytesstream, sizeof(UInt64) * 10 + offset);
-                tmpstat.mIsInitStat = bytesstream[sizeof(UInt64) * 11 + offset];
+                tmpstat.mTime = UnixDateTime.ToDateTime(BitConverter.ToUInt64(bytes, sizeof(UInt64) * 0 + offset));
+                tmpstat.mNodeCount = BitConverter.ToUInt64(bytes, sizeof(UInt64) * 1 + offset);
+                tmpstat.mArcCount = BitConverter.ToUInt64(bytes, sizeof(UInt64) * 2 + offset);
+                tmpstat.mLinksCount = BitConverter.ToUInt64(bytes, sizeof(UInt64) * 3 + offset);
+                tmpstat.mLiveNodeCount = BitConverter.ToUInt64(bytes, sizeof(UInt64) * 4 + offset);
+                tmpstat.mLiveArcCount = BitConverter.ToUInt64(bytes, sizeof(UInt64) * 5 + offset);
+                tmpstat.mLiveLinkCount = BitConverter.ToUInt64(bytes, sizeof(UInt64) * 6 + offset);
+                tmpstat.mEmptyCount = BitConverter.ToUInt64(bytes, sizeof(UInt64) * 7 + offset);
+                tmpstat.mConnectionsCount = BitConverter.ToUInt64(bytes, sizeof(UInt64) * 8 + offset);
+                tmpstat.mCommandsCount = BitConverter.ToUInt64(bytes, sizeof(UInt64) * 9 + offset);
+                tmpstat.mCommandErrorsCount = BitConverter.ToUInt64(bytes, sizeof(UInt64) * 10 + offset);
+                tmpstat.mIsInitStat = bytes[sizeof(UInt64) * 11 + offset];
             }
             else
             {
@@ -159,6 +136,5 @@ namespace Ostis.Sctp.Arguments
             }
             return tmpstat;
         }
-
     }
 }

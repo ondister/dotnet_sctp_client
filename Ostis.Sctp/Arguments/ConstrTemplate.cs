@@ -6,54 +6,47 @@ namespace Ostis.Sctp.Arguments
     /// <summary>
     /// Шаблон поиска конструкции для команды CmdGetIterateElements
     /// </summary>
-    
-    public struct ConstrTemplate : IArgument
+    public struct ConstructionTemplate : IArgument
     {
-        private List<IArgument> _args;
-        private byte[] _bytes;
-        private uint _lenght;
-        private ConstrTemplateType _templtype;
+        private readonly List<IArgument> arguments;
+        private byte[] bytes;
+        private uint length;
+        private readonly ConstructionTemplateType templateType;
 
-        internal ConstrTemplateType Type
-        {
-            get { return _templtype; }
-        }
+        internal ConstructionTemplateType Type
+        { get { return templateType; } }
 
         /// <summary>
         /// Возвращает длину массива байт шаблона
         /// </summary>
         public uint Length
-        {
-            get { return _lenght; }
-        }
+        { get { return length; } }
 
         /// <summary>
         /// Возвращает массив байт шаблона
         /// </summary>
         public byte[] BytesStream
-        {
-            get { return _bytes; }
-        }
+        { get { return bytes; } }
 
+#warning Конструкторы не вызывают друг друга!
         /// <summary>
         /// Инициализирует шаблон из трех sc-элементов для поиска исходящих дуг из указанного элемента
         /// </summary>
         /// <param name="f">Адрес начального sc-элемента</param>
         /// <param name="a1">Тип исходящей дуги дуги</param>
         /// <param name="a2">Тип конечного sc-элемента (дуги или узла)</param>
-        public ConstrTemplate(ScAddress f, ElementType a1, ElementType a2)
+        public ConstructionTemplate(ScAddress f, ElementType a1, ElementType a2)
         {
-            _lenght = 0;
-            _bytes = new byte[0];
-            _args = new List<IArgument>();
+            length = 0;
+            bytes = new byte[0];
+            arguments = new List<IArgument>();
 
-            _templtype = ConstrTemplateType.t_3F_A_A;
-            _args.Add(new Argument<ScAddress>(f));
-            _args.Add(new Argument<ElementType>(a1));
-            _args.Add(new Argument<ElementType>(a2));
+            templateType = ConstructionTemplateType.t_3F_A_A;
+            arguments.Add(new Argument<ScAddress>(f));
+            arguments.Add(new Argument<ElementType>(a1));
+            arguments.Add(new Argument<ElementType>(a2));
 
-
-            this.CreateByteStream();
+            CreateByteStream();
         }
 
         /// <summary>
@@ -62,19 +55,18 @@ namespace Ostis.Sctp.Arguments
         /// <param name="a1">Тип начального sc-элемента</param>
         /// <param name="a2">Тип входящей дуги</param>
         /// <param name="f">Адрес конечного sc-элемента</param>
-        public ConstrTemplate(ElementType a1, ElementType a2, ScAddress f)
+        public ConstructionTemplate(ElementType a1, ElementType a2, ScAddress f)
         {
-            _lenght = 0;
-            _bytes = new byte[0];
-            _args = new List<IArgument>();
+            length = 0;
+            bytes = new byte[0];
+            arguments = new List<IArgument>();
 
-            _templtype = ConstrTemplateType.t_3A_A_F;
-            _args.Add(new Argument<ElementType>(a1));
-            _args.Add(new Argument<ElementType>(a2));
-            _args.Add(new Argument<ScAddress>(f));
+            templateType = ConstructionTemplateType.t_3A_A_F;
+            arguments.Add(new Argument<ElementType>(a1));
+            arguments.Add(new Argument<ElementType>(a2));
+            arguments.Add(new Argument<ScAddress>(f));
 
-
-            this.CreateByteStream();
+            CreateByteStream();
         }
 
         /// <summary>
@@ -83,19 +75,18 @@ namespace Ostis.Sctp.Arguments
         /// <param name="f1">Адрес начального sc-элемента</param>
         /// <param name="a1">Тип искомой дуги</param>
         /// <param name="f2">Адрес конечного sc-элемента</param>
-        public ConstrTemplate(ScAddress f1, ElementType a1, ScAddress f2)
+        public ConstructionTemplate(ScAddress f1, ElementType a1, ScAddress f2)
         {
-            _lenght = 0;
-            _bytes = new byte[0];
-            _args = new List<IArgument>();
+            length = 0;
+            bytes = new byte[0];
+            arguments = new List<IArgument>();
 
-            _templtype = ConstrTemplateType.t_3F_A_F;
-            _args.Add(new Argument<ScAddress>(f1));
-            _args.Add(new Argument<ElementType>(a1));
-            _args.Add(new Argument<ScAddress>(f2));
+            templateType = ConstructionTemplateType.t_3F_A_F;
+            arguments.Add(new Argument<ScAddress>(f1));
+            arguments.Add(new Argument<ElementType>(a1));
+            arguments.Add(new Argument<ScAddress>(f2));
 
-
-            this.CreateByteStream();
+            CreateByteStream();
         }
 
         /// <summary>
@@ -106,21 +97,20 @@ namespace Ostis.Sctp.Arguments
         /// <param name="f">Адрес третьего sc-элемента</param>
         /// <param name="a3">Тип четвертого sc-элемента конструкции</param>
         /// <param name="a4">Тип пятого sc-элемента конструкции</param>
-        public ConstrTemplate(ElementType a1, ElementType a2, ScAddress f, ElementType a3, ElementType a4)
+        public ConstructionTemplate(ElementType a1, ElementType a2, ScAddress f, ElementType a3, ElementType a4)
         {
-            _lenght = 0;
-            _bytes = new byte[0];
-            _args = new List<IArgument>();
+            length = 0;
+            bytes = new byte[0];
+            arguments = new List<IArgument>();
 
-            _templtype = ConstrTemplateType.t_5A_A_F_A_A;
-            _args.Add(new Argument<ElementType>(a1));
-            _args.Add(new Argument<ElementType>(a2));
-            _args.Add(new Argument<ScAddress>(f));
-            _args.Add(new Argument<ElementType>(a3));
-            _args.Add(new Argument<ElementType>(a4));
+            templateType = ConstructionTemplateType.t_5A_A_F_A_A;
+            arguments.Add(new Argument<ElementType>(a1));
+            arguments.Add(new Argument<ElementType>(a2));
+            arguments.Add(new Argument<ScAddress>(f));
+            arguments.Add(new Argument<ElementType>(a3));
+            arguments.Add(new Argument<ElementType>(a4));
 
-
-            this.CreateByteStream();
+            CreateByteStream();
         }
 
         /// <summary>
@@ -131,21 +121,20 @@ namespace Ostis.Sctp.Arguments
         /// <param name="f1">Адрес третьего sc-элемента</param>
         /// <param name="a3">Тип четвертого sc-элемента конструкции</param>
         /// <param name="f2">Адрес пятого sc-элемента</param>
-        public ConstrTemplate(ElementType a1, ElementType a2, ScAddress f1, ElementType a3, ScAddress f2)
+        public ConstructionTemplate(ElementType a1, ElementType a2, ScAddress f1, ElementType a3, ScAddress f2)
         {
-            _lenght = 0;
-            _bytes = new byte[0];
-            _args = new List<IArgument>();
+            length = 0;
+            bytes = new byte[0];
+            arguments = new List<IArgument>();
 
-            _templtype = ConstrTemplateType.t_5A_A_F_A_F;
-            _args.Add(new Argument<ElementType>(a1));
-            _args.Add(new Argument<ElementType>(a2));
-            _args.Add(new Argument<ScAddress>(f1));
-            _args.Add(new Argument<ElementType>(a3));
-            _args.Add(new Argument<ScAddress>(f2));
+            templateType = ConstructionTemplateType.t_5A_A_F_A_F;
+            arguments.Add(new Argument<ElementType>(a1));
+            arguments.Add(new Argument<ElementType>(a2));
+            arguments.Add(new Argument<ScAddress>(f1));
+            arguments.Add(new Argument<ElementType>(a3));
+            arguments.Add(new Argument<ScAddress>(f2));
 
-
-            this.CreateByteStream();
+            CreateByteStream();
         }
 
         /// <summary>
@@ -156,21 +145,20 @@ namespace Ostis.Sctp.Arguments
         /// <param name="a2">Тип третьего sc-элемента конструкции</param>
         /// <param name="a3">Тип четвертого sc-элемента конструкции</param>
         /// <param name="a4">Тип пятого sc-элемента конструкции</param>
-        public ConstrTemplate(ScAddress f, ElementType a1, ElementType a2, ElementType a3, ElementType a4)
+        public ConstructionTemplate(ScAddress f, ElementType a1, ElementType a2, ElementType a3, ElementType a4)
         {
-            _lenght = 0;
-            _bytes = new byte[0];
-            _args = new List<IArgument>();
+            length = 0;
+            bytes = new byte[0];
+            arguments = new List<IArgument>();
 
-            _templtype = ConstrTemplateType.t_5F_A_A_A_A;
-            _args.Add(new Argument<ScAddress>(f));
-            _args.Add(new Argument<ElementType>(a1));
-            _args.Add(new Argument<ElementType>(a2));
-            _args.Add(new Argument<ElementType>(a3));
-            _args.Add(new Argument<ElementType>(a4));
+            templateType = ConstructionTemplateType.t_5F_A_A_A_A;
+            arguments.Add(new Argument<ScAddress>(f));
+            arguments.Add(new Argument<ElementType>(a1));
+            arguments.Add(new Argument<ElementType>(a2));
+            arguments.Add(new Argument<ElementType>(a3));
+            arguments.Add(new Argument<ElementType>(a4));
 
-
-            this.CreateByteStream();
+            CreateByteStream();
         }
 
         /// <summary>
@@ -181,21 +169,20 @@ namespace Ostis.Sctp.Arguments
         /// <param name="a2">Тип третьего sc-элемента конструкции</param>
         /// <param name="a3">Тип четвертого sc-элемента конструкции</param>
         /// <param name="f2">Адрес пятого sc-элемента</param>
-        public ConstrTemplate(ScAddress f1, ElementType a1, ElementType a2, ElementType a3, ScAddress f2)
+        public ConstructionTemplate(ScAddress f1, ElementType a1, ElementType a2, ElementType a3, ScAddress f2)
         {
-            _lenght = 0;
-            _bytes = new byte[0];
-            _args = new List<IArgument>();
+            length = 0;
+            bytes = new byte[0];
+            arguments = new List<IArgument>();
 
-            _templtype = ConstrTemplateType.t_5F_A_A_A_F;
-            _args.Add(new Argument<ScAddress>(f1));
-            _args.Add(new Argument<ElementType>(a1));
-            _args.Add(new Argument<ElementType>(a2));
-            _args.Add(new Argument<ElementType>(a3));
-            _args.Add(new Argument<ScAddress>(f2));
+            templateType = ConstructionTemplateType.t_5F_A_A_A_F;
+            arguments.Add(new Argument<ScAddress>(f1));
+            arguments.Add(new Argument<ElementType>(a1));
+            arguments.Add(new Argument<ElementType>(a2));
+            arguments.Add(new Argument<ElementType>(a3));
+            arguments.Add(new Argument<ScAddress>(f2));
 
-
-            this.CreateByteStream();
+            CreateByteStream();
         }
 
         /// <summary>
@@ -207,21 +194,20 @@ namespace Ostis.Sctp.Arguments
         /// <param name="a2">Тип четвертого sc-элемента конструкции</param>
         /// <param name="a3">Тип пятого sc-элемента конструкции
         /// </param>
-        public ConstrTemplate(ScAddress f1, ElementType a1, ScAddress f2, ElementType a2, ElementType a3)
+        public ConstructionTemplate(ScAddress f1, ElementType a1, ScAddress f2, ElementType a2, ElementType a3)
         {
-            _lenght = 0;
-            _bytes = new byte[0];
-            _args = new List<IArgument>();
+            length = 0;
+            bytes = new byte[0];
+            arguments = new List<IArgument>();
 
-            _templtype = ConstrTemplateType.t_5F_A_F_A_A;
-            _args.Add(new Argument<ScAddress>(f1));
-            _args.Add(new Argument<ElementType>(a1));
-            _args.Add(new Argument<ScAddress>(f2));
-            _args.Add(new Argument<ElementType>(a2));
-            _args.Add(new Argument<ElementType>(a3));
+            templateType = ConstructionTemplateType.t_5F_A_F_A_A;
+            arguments.Add(new Argument<ScAddress>(f1));
+            arguments.Add(new Argument<ElementType>(a1));
+            arguments.Add(new Argument<ScAddress>(f2));
+            arguments.Add(new Argument<ElementType>(a2));
+            arguments.Add(new Argument<ElementType>(a3));
 
-
-            this.CreateByteStream();
+            CreateByteStream();
         }
 
         /// <summary>
@@ -232,35 +218,32 @@ namespace Ostis.Sctp.Arguments
         /// <param name="f2">Адрес третьего sc-элемента</param>
         /// <param name="a2">Тип четвертого sc-элемента конструкции</param>
         /// <param name="f3">Адрес пятого sc-элемента</param>
-        public ConstrTemplate(ScAddress f1, ElementType a1, ScAddress f2, ElementType a2, ScAddress f3)
+        public ConstructionTemplate(ScAddress f1, ElementType a1, ScAddress f2, ElementType a2, ScAddress f3)
         {
-            _lenght = 0;
-            _bytes = new byte[0];
-            _args = new List<IArgument>();
+            length = 0;
+            bytes = new byte[0];
+            arguments = new List<IArgument>();
 
-            _templtype = ConstrTemplateType.t_5F_A_F_A_F;
-            _args.Add(new Argument<ScAddress>(f1));
-            _args.Add(new Argument<ElementType>(a1));
-            _args.Add(new Argument<ScAddress>(f2));
-            _args.Add(new Argument<ElementType>(a2));
-            _args.Add(new Argument<ScAddress>(f3));
+            templateType = ConstructionTemplateType.t_5F_A_F_A_F;
+            arguments.Add(new Argument<ScAddress>(f1));
+            arguments.Add(new Argument<ElementType>(a1));
+            arguments.Add(new Argument<ScAddress>(f2));
+            arguments.Add(new Argument<ElementType>(a2));
+            arguments.Add(new Argument<ScAddress>(f3));
 
-
-            this.CreateByteStream();
+            CreateByteStream();
         }
 
         private void CreateByteStream()
         {
             MemoryStream mstream = new MemoryStream();
-            mstream.Write(new byte[] { (byte)_templtype }, 0, 1);
-            foreach (IArgument arg in _args)
+            mstream.Write(new[] { (byte)templateType }, 0, 1);
+            foreach (var argument in arguments)
             {
-                mstream.Write(arg.BytesStream, 0, (int)arg.Length);
+                mstream.Write(argument.BytesStream, 0, (int)argument.Length);
             }
-            _bytes = mstream.ToArray();
-            _lenght = (uint)_bytes.Length;
+            bytes = mstream.ToArray();
+            length = (uint)bytes.Length;
         }
-
-
     }
 }
