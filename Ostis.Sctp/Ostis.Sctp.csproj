@@ -36,18 +36,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Arguments\ConstrTemplate.cs" />
-    <Compile Include="Arguments\ConstrTemplateType.cs" />
+    <Compile Include="Arguments\ConstructionTemplate.cs" />
+    <Compile Include="Arguments\ConstructionTemplateType.cs" />
     <Compile Include="Arguments\Construction.cs" />
-    <Compile Include="Arguments\DateTimeUNIX.cs" />
+    <Compile Include="Arguments\UnixDateTime.cs" />
     <Compile Include="Arguments\ElementType.cs" />
     <Compile Include="Arguments\EventsType.cs" />
     <Compile Include="Arguments\Identifier.cs" />
     <Compile Include="Arguments\LinkContent.cs" />
     <Compile Include="Arguments\LinkContentType.cs" />
     <Compile Include="Arguments\ScAddress.cs" />
-    <Compile Include="Arguments\StatisticData.cs" />
-    <Compile Include="Arguments\SubScriptionId.cs" />
+    <Compile Include="Arguments\StatisticsData.cs" />
+    <Compile Include="Arguments\SubscriptionId.cs" />
     <Compile Include="AsyncClient\AsynchronousClient.cs" />
     <Compile Include="AsyncClient\StageObject.cs" />
     <Compile Include="CallBacks\CommandDoneEventArgs.cs" />
