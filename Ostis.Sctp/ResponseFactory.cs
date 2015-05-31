@@ -12,75 +12,52 @@ namespace Ostis.Sctp
                 code = bytes[0];
             }
 
-            Response response = new UnknownResponse(bytes);
+#warning Заменить числовые коды на enum.
             switch (code)
             {
                 case 0x00:
-                    response = new UnknownResponse(bytes);
-                    break;
+                    return new UnknownResponse(bytes);
                 case 0x01:
-                    response = new CheckElementResponse(bytes);
-                    break;
+                    return new CheckElementResponse(bytes);
                 case 0x02:
-                    response = new GetElementTypeResponse(bytes);
-                    break;
+                    return new GetElementTypeResponse(bytes);
                 case 0x03:
-                    response = new DeleteElementResponse(bytes);
-                    break;
+                    return new DeleteElementResponse(bytes);
                 case 0x04:
-                    response = new CreateNodeResponse(bytes);
-                    break;
+                    return new CreateNodeResponse(bytes);
                 case 0x05:
-                    response = new CreateLinkResponse(bytes);
-                    break;
+                    return new CreateLinkResponse(bytes);
                 case 0x06:
-                    response = new CreateArcResponse(bytes);
-                    break;
+                    return new CreateArcResponse(bytes);
                 case 0x07:
-                    response = new GetArcResponse(bytes);
-                    break;
-                case 0x08:
-                    //TODO: reserved
-                    break;
+                    return new GetArcResponse(bytes);
+                //case 0x08:
+                    // TODO: reserved
                 case 0x09:
-                    response = new GetLinkContentResponse(bytes);
-                    break;
+                    return new GetLinkContentResponse(bytes);
                 case 0x0A:
-                    response = new FindLinksResponse(bytes);
-                    break;
+                    return new FindLinksResponse(bytes);
                 case 0x0B:
-                    response = new SetLinkContentResponse(bytes);
-                    break;
+                    return new SetLinkContentResponse(bytes);
                 case 0x0C:
-                    response = new IterateElementsResponse(bytes);
-                    break;
+                    return new IterateElementsResponse(bytes);
                 case 0x0E:
-                    response = new CreateSubscriptionResponse(bytes);
-                    break;
+                    return new CreateSubscriptionResponse(bytes);
                 case 0x0F:
-                    response = new DeleteSubscriptionResponse(bytes);
-                    break;
+                    return new DeleteSubscriptionResponse(bytes);
                 case 0x10:
-                    response = new EmitEventsResponse(bytes);
-                    break;
+                    return new EmitEventsResponse(bytes);
                 case 0xA0:
-                    response = new FindElementResponse(bytes);
-                    break;
+                    return new FindElementResponse(bytes);
                 case 0xA1:
-                    response = new SetSystemIdResponse(bytes);
-                    break;
+                    return new SetSystemIdResponse(bytes);
                 case 0xA2:
-                    response = new GetStatisticsResponse(bytes);
-                    break;
+                    return new GetStatisticsResponse(bytes);
                 case 0xFE:
-                    response = new UnknownResponse(bytes);
-                    break;
+                    return new UnknownResponse(bytes);
                 default:
-                    response = new UnknownResponse(bytes);
-                    break;
+                    return new UnknownResponse(bytes);
             }
-#warning Заменить лишнюю переменную-результат на return.
-            return response;
         }
     }
 }
