@@ -3,7 +3,7 @@
 namespace Ostis.Sctp.Responses
 {
     /// <summary>
-    /// Ответ на команду DeleteElementCommand.
+    /// Ответ на команду: Удаление SC-элемента с указанным SC-адресом.
     /// </summary>
     public class DeleteElementResponse : Response
     {

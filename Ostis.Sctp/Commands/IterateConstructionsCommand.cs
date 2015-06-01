@@ -5,8 +5,15 @@ using Ostis.Sctp.Arguments;
 namespace Ostis.Sctp.Commands
 {
 #warning На эту команду нет класса ответа!
-    internal class IterateConstructionsCommand : Command
+    /// <summary>
+    /// Команда: .
+    /// </summary>
+    public class IterateConstructionsCommand : Command
     {
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="template">шаблон поиска</param>
 		public IterateConstructionsCommand(ConstructionTemplate template)
 			: base(0x0d, 0)
         {

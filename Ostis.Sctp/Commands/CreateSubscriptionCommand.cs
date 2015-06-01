@@ -4,13 +4,21 @@ using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
-    internal class CreateSubscriptionCommand : Command
+    /// <summary>
+    /// Команда: Создание подписки на события.
+    /// </summary>
+    public class CreateSubscriptionCommand : Command
     {
-		public CreateSubscriptionCommand(EventsType Type, ScAddress address)
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="type">тип события</param>
+        /// <param name="address">SC-адрес</param>
+		public CreateSubscriptionCommand(EventsType type, ScAddress address)
             : base(0x0e ,0)
         {
             UInt32 argumentsSize = 0; 
-            Arguments.Add (new Argument<EventsType>(Type));
+            Arguments.Add (new Argument<EventsType>(type));
 			Arguments.Add(new Argument<ScAddress>(address));
             foreach (var argument in Arguments)
             {

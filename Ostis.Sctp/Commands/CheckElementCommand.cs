@@ -4,8 +4,15 @@ using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
-    internal class CheckElementCommand : Command
+    /// <summary>
+    /// Команда: Проверка существования элемента с указанным SC-адресом.
+    /// </summary>
+    public class CheckElementCommand : Command
     {
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="address">SC-адрес проверяемого SC-элемента</param>
         public CheckElementCommand(ScAddress address)
             : base(0x01, 0)
         {

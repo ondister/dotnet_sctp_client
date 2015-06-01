@@ -6,7 +6,7 @@ using Ostis.Sctp.CallBacks;
 namespace Ostis.Sctp.Responses
 {
     /// <summary>
-    /// Ответ на команду CreateNodeCommand.
+    /// Ответ на команду: Создание нового SC-узла указанного типа.
     /// </summary>
     public class CreateNodeResponse : Response
     {

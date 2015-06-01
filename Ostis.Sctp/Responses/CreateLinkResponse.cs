@@ -6,7 +6,7 @@ using Ostis.Sctp.CallBacks;
 namespace Ostis.Sctp.Responses
 {
     /// <summary>
-    /// Ответ на команду CreateLinkCommand.
+    /// Ответ на команду: Создание новой SC-ссылки.
     /// </summary>
     public class CreateLinkResponse : Response
     {

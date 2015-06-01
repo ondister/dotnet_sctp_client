@@ -6,7 +6,7 @@ using Ostis.Sctp.CallBacks;
 namespace Ostis.Sctp.Responses
 {
     /// <summary>
-    /// Ответ на команду GetElementTypeCommand.
+    /// Ответ на команду: Получение типа SC-элемента по SC-адресу.
     /// </summary>
     public class GetElementTypeResponse : Response
     {

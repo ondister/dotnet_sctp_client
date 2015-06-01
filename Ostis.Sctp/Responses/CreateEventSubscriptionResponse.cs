@@ -6,7 +6,7 @@ using Ostis.Sctp.CallBacks;
 namespace Ostis.Sctp.Responses
 {
     /// <summary>
-    /// Ответ на команду CreateSubscriptionCommand.
+    /// Ответ на команду: Создание подписки на события.
     /// </summary>
     public class CreateSubscriptionResponse : Response
     {

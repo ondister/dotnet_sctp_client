@@ -6,7 +6,7 @@ using Ostis.Sctp.CallBacks;
 namespace Ostis.Sctp.Responses
 {
     /// <summary>
-    /// Ответ на команду GetArcCommand.
+    /// Ответ на команду: Получение начального элемента SC-дуги.
     /// </summary>
     public class GetArcResponse : Response
     {

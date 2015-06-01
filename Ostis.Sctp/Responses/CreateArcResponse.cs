@@ -6,7 +6,7 @@ using Ostis.Sctp.CallBacks;
 namespace Ostis.Sctp.Responses
 {
     /// <summary>
-    /// Ответ на команду CreateArcCommand.
+    /// Ответ на команду: Создание новой SC-дуги указанного типа, с указнным начальным и конечным элементами..
     /// </summary>
     public class CreateArcResponse : Response
     {

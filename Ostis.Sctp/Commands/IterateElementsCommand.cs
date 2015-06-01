@@ -4,8 +4,15 @@ using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
-    internal class IterateElementsCommand : Command
+    /// <summary>
+    /// Команда: Поиск конструкции по указанному 3-х или 5-ти элементному шаблону.
+    /// </summary>
+    public class IterateElementsCommand : Command
     {
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="template">шаблон для поиска</param>
         public IterateElementsCommand(ConstructionTemplate template)
             : base(0x0c, 0)
         {

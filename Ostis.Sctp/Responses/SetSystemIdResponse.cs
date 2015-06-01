@@ -3,7 +3,7 @@
 namespace Ostis.Sctp.Responses
 {
     /// <summary>
-    /// Ответ на команду SetSystemIdCommand.
+    /// Ответ на команду: Установка системного идентификатора SC-элемента.
     /// </summary>
     public class SetSystemIdResponse : Response
     {

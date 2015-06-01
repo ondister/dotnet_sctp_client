@@ -7,7 +7,7 @@ using Ostis.Sctp.CallBacks;
 namespace Ostis.Sctp.Responses
 {
     /// <summary>
-    /// Ответ на команду IterateElementsCommand.
+    /// Ответ на команду: Поиск конструкции по указанному 3-х или 5-ти элементному шаблону.
     /// </summary>
     public class IterateElementsResponse : Response
     {

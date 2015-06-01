@@ -4,8 +4,16 @@ using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
-    internal class GetStatisticsCommand : Command
+    /// <summary>
+    /// Команда: Получение статистики с сервера, во временных границах.
+    /// </summary>
+    public class GetStatisticsCommand : Command
     {
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="startTime">нижняя временная граница</param>
+        /// <param name="endTime">верхняя временная граница</param>
         public GetStatisticsCommand(UnixDateTime startTime, UnixDateTime endTime)
             : base(0xa2, 0)
         {

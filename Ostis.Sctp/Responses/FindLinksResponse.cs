@@ -7,7 +7,7 @@ using Ostis.Sctp.CallBacks;
 namespace Ostis.Sctp.Responses
 {
     /// <summary>
-    /// Ответ на команду FindLinksCommand.
+    /// Ответ на команду: Поиск всех SC-ссылок с указанным содержимым.
     /// </summary>
     public class FindLinksResponse : Response
     {

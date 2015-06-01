@@ -4,8 +4,15 @@ using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
-    internal class CreateNodeCommand : Command
+    /// <summary>
+    /// Команда: Создание нового SC-узла указанного типа.
+    /// </summary>
+    public class CreateNodeCommand : Command
     {
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="nodeType">тип создаваемого SC-узла</param>
         public CreateNodeCommand(ElementType nodeType)
             : base(0x04, 0)
         {

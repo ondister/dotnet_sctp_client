@@ -5,7 +5,7 @@ using Ostis.Sctp.CallBacks;
 namespace Ostis.Sctp.Responses
 {
     /// <summary>
-    /// Ответ на команду GetProtocolVersionCommand.
+    /// Ответ на команду: Получение версии протокола.
     /// </summary>
     public class GetProtocolVersionResponse : Response
     {

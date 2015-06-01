@@ -75,7 +75,6 @@
     <Compile Include="Commands\IterateElementsCommand.cs" />
     <Compile Include="Commands\SetLinkContentCommand.cs" />
     <Compile Include="Commands\SetSystemIdCommand.cs" />
-    <Compile Include="Commands\Command.cs" />
     <Compile Include="Responses\CheckElementResponse.cs" />
     <Compile Include="Responses\CreateArcResponse.cs" />
     <Compile Include="Responses\CreateEventSubscriptionResponse.cs" />

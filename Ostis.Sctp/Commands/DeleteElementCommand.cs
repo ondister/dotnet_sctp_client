@@ -4,8 +4,15 @@ using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
-    internal class DeleteElementCommand : Command
+    /// <summary>
+    /// Команда: Удаление SC-элемента с указанным SC-адресом.
+    /// </summary>
+    public class DeleteElementCommand : Command
     {
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="address">SC-адрес удаляемого sc-элемента</param>
         public DeleteElementCommand(ScAddress address)
             : base(0x03, 0)
         {

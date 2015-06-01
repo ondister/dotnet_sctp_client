@@ -4,8 +4,15 @@ using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
-    internal class DeleteSubscriptionCommand : Command
+    /// <summary>
+    /// Команда: Удаление подписки на события.
+    /// </summary>
+    public class DeleteSubscriptionCommand : Command
     {
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="id">событие</param>
 		public DeleteSubscriptionCommand(SubscriptionId id)
 			: base(0x0f, 0)
         {

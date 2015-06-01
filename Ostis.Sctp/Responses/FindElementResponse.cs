@@ -6,7 +6,7 @@ using Ostis.Sctp.CallBacks;
 namespace Ostis.Sctp.Responses
 {
     /// <summary>
-    /// Ответ на команду FindElementCommand.
+    /// Ответ на команду: Поиск SC-элемента по его системному идентификатору.
     /// </summary>
     public class FindElementResponse : Response
     {

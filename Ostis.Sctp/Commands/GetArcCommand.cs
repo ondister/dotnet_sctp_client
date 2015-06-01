@@ -4,8 +4,15 @@ using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
-    internal class GetArcCommand : Command
+    /// <summary>
+    /// Команда: Получение начального элемента SC-дуги.
+    /// </summary>
+    public class GetArcCommand : Command
     {
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="arcAddress">SC-адрес дуги у которой необходимо получить начальный элемент</param>
         public GetArcCommand(ScAddress arcAddress)
             : base(0x07, 0)
         {

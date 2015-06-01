@@ -3,7 +3,7 @@
 namespace Ostis.Sctp.Responses
 {
     /// <summary>
-    /// Ответ на команду SetLinkContentCommand.
+    /// Ответ на команду: Установка содержимого SC-ссылки.
     /// </summary>
     public class SetLinkContentResponse : Response
     {

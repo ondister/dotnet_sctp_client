@@ -4,19 +4,23 @@ using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
-    internal class SetSystemIdCommand : Command
+    /// <summary>
+    /// Команда: Установка системного идентификатора SC-элемента.
+    /// </summary>
+    public class SetSystemIdCommand : Command
     {
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="address">адрес SC-эелемента</param>
+        /// <param name="identifier">идентификатор</param>
         public SetSystemIdCommand(ScAddress address, Identifier identifier)
             : base(0xa1, 0)
         {
             UInt32 argumentsSize = 0;
-            Argument<ScAddress> _address = new Argument<ScAddress>(address);
-            Arguments.Add(_address);
-            UInt32 contlenght = (uint)identifier.BytesStream.Length;
-            Argument<UInt32> _argidlenght = new Argument<UInt32>(contlenght);
-            Arguments.Add(_argidlenght);
-            Argument<Identifier> _argid = new Argument<Identifier>(identifier);
-            Arguments.Add(_argid);
+            Arguments.Add(new Argument<ScAddress>(address));
+            Arguments.Add(new Argument<UInt32>((uint) identifier.BytesStream.Length));
+            Arguments.Add(new Argument<Identifier>(identifier));
             foreach (var argument in Arguments)
             {
                 argumentsSize += argument.Length;

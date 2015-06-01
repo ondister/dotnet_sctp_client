@@ -4,8 +4,15 @@ using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
-    internal class GetLinkContentCommand : Command
+    /// <summary>
+    /// Команда: Получение содержимого SC-ссылки.
+    /// </summary>
+    public class GetLinkContentCommand : Command
     {
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="address">SC-адрес ссылки для получения содержимого</param>
         public GetLinkContentCommand(ScAddress address)
             : base(0x09, 0)
         {

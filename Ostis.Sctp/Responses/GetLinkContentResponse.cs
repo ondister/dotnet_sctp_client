@@ -3,7 +3,7 @@
 namespace Ostis.Sctp.Responses
 {
     /// <summary>
-    /// Ответ на команду GetLinkContentCommand.
+    /// Ответ на команду: Получение содержимого SC-ссылки.
     /// </summary>
     public class GetLinkContentResponse : Response
     {

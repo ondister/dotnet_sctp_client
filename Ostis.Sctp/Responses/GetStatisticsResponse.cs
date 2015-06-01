@@ -7,7 +7,7 @@ using Ostis.Sctp.CallBacks;
 namespace Ostis.Sctp.Responses
 {
     /// <summary>
-    /// Ответ на команду GetStatisticsCommand.
+    /// Ответ на команду: Получение статистики с сервера, во временных границах.
     /// </summary>
     public class GetStatisticsResponse : Response
     {
