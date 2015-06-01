@@ -48,8 +48,7 @@ namespace Ostis.Sctp.Responses
                 int beginindex = sizeof(UInt32) + Header.Length;
                 for (int statscount = 0; statscount < TimeChecksCount; statscount++)
                 {
-                    var statisticsData = StatisticsData.GetFromBytes(bytes, beginindex);
-                    statisticsDataList.Add(statisticsData);
+                    statisticsDataList.Add(new StatisticsData(bytes, beginindex));
                     beginindex += SctpProtocol.StatisticsDataLength;
                 }
             }
