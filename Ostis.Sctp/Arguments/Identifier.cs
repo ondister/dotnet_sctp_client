@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 
 namespace Ostis.Sctp.Arguments
 {
@@ -8,7 +7,7 @@ namespace Ostis.Sctp.Arguments
     /// </summary>
     public struct Identifier : IArgument
     {
-        private byte[] bytes;
+        private readonly byte[] bytes;
 
         /// <summary>
         /// Массив байт идентификатора.
@@ -29,9 +28,7 @@ namespace Ostis.Sctp.Arguments
         /// <param name="value">значение</param>
         public Identifier(String value)
         {
-#warning Кодировщик нужно вынести в private static.
-            UTF8Encoding txtcoder = new UTF8Encoding();
-            bytes = txtcoder.GetBytes(value);
+            bytes = SctpProtocol.TextEncoding.GetBytes(value);
         }
 
         /// <summary>
@@ -41,10 +38,7 @@ namespace Ostis.Sctp.Arguments
         /// <returns>SC-идентификатор</returns>
         public static implicit operator Identifier(String value)
         {
-            var identifier = new Identifier();
-            UTF8Encoding txtcoder = new UTF8Encoding();
-            identifier.bytes = txtcoder.GetBytes(value);
-            return identifier;
+            return new Identifier(value);
         }
 
         /// <summary>
@@ -56,8 +50,7 @@ namespace Ostis.Sctp.Arguments
         /// <filterpriority>2</filterpriority>
         public override String ToString()
         {
-            UTF8Encoding txtcoder = new UTF8Encoding();
-            return txtcoder.GetString(bytes);
+            return SctpProtocol.TextEncoding.GetString(bytes);
         }
     }
 }

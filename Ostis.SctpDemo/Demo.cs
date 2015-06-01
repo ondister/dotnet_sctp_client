@@ -20,8 +20,8 @@ namespace Ostis.SctpDemo
 			// Создание пула команд, который будет отправлять запросы на сервер.
             // Обратите внимание на IP-адрес сервера! При работе с сервером на удалённой или виртуальной машине, нужно выставить здесь правильный IP-адрес.
             // Номер порта, к которому нужно подключаться, можно посмотреть в конфигурации OSTIS в файле .../config/scweb.ini (параметр Port в секции Network).
-#warning Вынести номер порта в константы, а IP-адрес ввсести с клавиатуры
-            commandPool = new CommandPool("127.0.0.1", 55770, ClientType.SyncClient);
+#warning IP-адрес и номер порта предложить ввести с клавиатуры
+            commandPool = new CommandPool("127.0.0.1", SctpProtocol.DefaultPortNumber, ClientType.SyncClient);
 		}
 
         // Код: 0x01 

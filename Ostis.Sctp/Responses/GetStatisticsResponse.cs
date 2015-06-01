@@ -46,13 +46,11 @@ namespace Ostis.Sctp.Responses
             if (TimeChecksCount != 0)
             {
                 int beginindex = sizeof(UInt32) + Header.Length;
-#warning Вынести в более глобальную константу
-                const int statisticsDataLength = 89;
                 for (int statscount = 0; statscount < TimeChecksCount; statscount++)
                 {
                     var statisticsData = StatisticsData.GetFromBytes(bytes, beginindex);
                     statisticsDataList.Add(statisticsData);
-                    beginindex += statisticsDataLength;
+                    beginindex += SctpProtocol.StatisticsDataLength;
                 }
             }
         }

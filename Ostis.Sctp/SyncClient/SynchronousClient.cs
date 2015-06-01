@@ -68,9 +68,7 @@ namespace Ostis.Sctp.SyncClient
         {
             client.Send(bytes, bytes.Length, 0);
             Console.WriteLine("Sent {0} bytes to server.", bytes.Length);
-            
-#warning Вынести размер буффера в константу
-            var bytesReceived = new Byte[1024];
+            var bytesReceived = new Byte[SctpProtocol.DefaultBufferSize];
             using (var stream = new MemoryStream())
             {
                 int receivedSize = client.Receive(bytesReceived, 0, bytesReceived.Length, SocketFlags.None);

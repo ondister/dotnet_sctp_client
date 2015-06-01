@@ -25,12 +25,9 @@ namespace Ostis.Sctp.Responses
             if (Header.ReturnCode == ReturnCode.Successfull)
             {
                 int addressesCount = (Bytes.Length - Header.Length - 4) / 4;
-                int addressesInConstruction = (int) constructionsCount == 0 ? 0 : addressesCount / (int)constructionsCount;
-
+#warning Правильно ли записано выражение после расстановки скобок согласно правилам приоритета операторов C#???
+                int addressesInConstruction = ((int) constructionsCount == 0 ? 0 : addressesCount) / (int) constructionsCount;
                 int offset = sizeof(UInt32) + Header.Length;
-#warning Вынести в более глобальную константу
-                const int scAddressLength = 4;
-
                 for (uint c = 0; c < constructionsCount; c++)
                 {
                     var construction = new Construction();
@@ -38,7 +35,7 @@ namespace Ostis.Sctp.Responses
                     {
                         var address = ScAddress.GetFromBytes(Bytes, offset);
                         construction.AddAddress(address);
-                        offset += scAddressLength;
+                        offset += SctpProtocol.ScAddressLength;
                     }
                     constructions.Add(construction);
                 }

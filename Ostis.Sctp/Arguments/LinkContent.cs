@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 
 namespace Ostis.Sctp.Arguments
 {
@@ -30,9 +29,7 @@ namespace Ostis.Sctp.Arguments
         /// <returns>строка</returns>
         public static string ConvertToString(byte[] byteContent)
         {
-#warning Кодировщик нужно вынести в private static.
-            UTF8Encoding txtcoder = new UTF8Encoding();
-            return txtcoder.GetString(byteContent);
+            return SctpProtocol.TextEncoding.GetString(byteContent);
         }
 
 #warning Конструкторы не вызывают один другой.
@@ -43,8 +40,7 @@ namespace Ostis.Sctp.Arguments
         public LinkContent(String value)
         {
             contentType = LinkContentType.text;
-            UTF8Encoding txtcoder = new UTF8Encoding();
-            bytes = txtcoder.GetBytes(value);
+            bytes = SctpProtocol.TextEncoding.GetBytes(value);
         }
 
         /// <summary>
@@ -74,11 +70,10 @@ namespace Ostis.Sctp.Arguments
         /// <returns>соднржимое ссылки+</returns>
         public static implicit operator LinkContent(String value)
         {
-            UTF8Encoding txtcoder = new UTF8Encoding();
             return new LinkContent
             {
                 contentType = LinkContentType.text,
-                bytes = txtcoder.GetBytes(value),
+                bytes = SctpProtocol.TextEncoding.GetBytes(value),
             };
         }
     }

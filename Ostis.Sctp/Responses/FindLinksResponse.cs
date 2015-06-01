@@ -26,13 +26,11 @@ namespace Ostis.Sctp.Responses
                     if (LinksCount != 0)
                     {
                         int beginIndex = sizeof(UInt32) + Header.Length;
-#warning Вынести в более глобальную константу
-                        const int scAddressLength = 4;
                         for (int addrcount = 0; addrcount < LinksCount; addrcount++)
                         {
                             var a = ScAddress.GetFromBytes(Bytes, beginIndex);
                             addresses.Add(a);
-                            beginIndex += scAddressLength;
+                            beginIndex += SctpProtocol.ScAddressLength;
                         }
                     }
                     return addresses;

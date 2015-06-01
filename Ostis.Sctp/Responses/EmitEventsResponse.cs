@@ -27,12 +27,10 @@ namespace Ostis.Sctp.Responses
                     if (EventsCount != 0)
                     {
                         int beginIndex = sizeof(UInt32) + Header.Length;
-#warning Вынести в более глобальную константу
-                        const int scEventLength = 12;
                         for (int e = 0; e < EventsCount; e++)
                         {
                             events.Add(ScEvent.GetFromBytes(Bytes, beginIndex));
-                            beginIndex += scEventLength;
+                            beginIndex += SctpProtocol.ScEventLength;
                         }
                     }
                 }

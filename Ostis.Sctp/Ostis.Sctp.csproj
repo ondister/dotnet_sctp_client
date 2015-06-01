@@ -93,6 +93,7 @@
     <Compile Include="Responses\SetLinkContentResponse.cs" />
     <Compile Include="Responses\SetSystemIdResponse.cs" />
     <Compile Include="Responses\UnknownResponse.cs" />
+    <Compile Include="SctpProtocol.cs" />
     <Compile Include="SyncClient\SynchronousClient.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="Response.cs" />
