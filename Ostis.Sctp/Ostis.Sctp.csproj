@@ -77,11 +77,11 @@
     <Compile Include="Commands\SetSystemIdCommand.cs" />
     <Compile Include="Responses\CheckElementResponse.cs" />
     <Compile Include="Responses\CreateArcResponse.cs" />
-    <Compile Include="Responses\CreateEventSubscriptionResponse.cs" />
+    <Compile Include="Responses\CreateSubscriptionResponse.cs" />
     <Compile Include="Responses\CreateLinkResponse.cs" />
     <Compile Include="Responses\CreateNodeResponse.cs" />
     <Compile Include="Responses\DeleteElementResponse.cs" />
-    <Compile Include="Responses\DeleteEventSubscriptionResponse.cs" />
+    <Compile Include="Responses\DeleteSubscriptionResponse.cs" />
     <Compile Include="Responses\FindElementResponse.cs" />
     <Compile Include="Responses\FindLinksResponse.cs" />
     <Compile Include="Responses\GetArcResponse.cs" />
