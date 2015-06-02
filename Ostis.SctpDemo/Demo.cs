@@ -44,7 +44,7 @@ namespace Ostis.SctpDemo
         // Результат: True или False.
 		public void CheckElement()
 		{
-			// статический класс command содержит все команды, доступные для использования
+			// выбираем команду из пространства имен Ostis.Sctp.Commands
 			var command = new CheckElementCommand(new ScAddress(0, 1));
 			// отправка команды на сервер
 			commandPool.Send(command);
