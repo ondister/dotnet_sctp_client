@@ -9,6 +9,7 @@ namespace Ostis.Sctp.AsyncClient
 {
     // Этот класс всего лишь заготовка для асинхронного клиента, когда будет асинхронный сервер
 #warning Асинхронному клиенту не нужен асинхронный сервер. Просто реализовать асинхронную работу.
+//я делал, даже работало. Крайне нужно протестить на скорость после окончания работы, есть предположения, что работать буде медленней
     internal class AsynchronousClient : IClient
     {
         private readonly ManualResetEvent connectDone = new ManualResetEvent(false);
