@@ -37,6 +37,8 @@ namespace Ostis.Sctp.SyncClient
             {
                 client.Connect(new IPEndPoint(IPAddress.Parse(address), port));
 #warning Убрать все консольные вызовы из этого класса, так как в оконном приложении это вызовет ошибку.
+//есть мисли, что нужно делать класс для хранения сообщений клиента и кодов ответов сервера. 
+//либо только нефатальных ошибок, ибо их случаться будет много
                 if (client.Connected)
                 {
                     Console.WriteLine("Socket connected to " + client.RemoteEndPoint);
