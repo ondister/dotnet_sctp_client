@@ -54,6 +54,7 @@ namespace Ostis.Sctp.Arguments
         {
             var address = new ScAddress();
 #warning Что за константа должна быть в этом условии?
+//а вот как раз sizeof(ushort) * 2 это длина одного адреса
             if (bytes.Length >= sizeof(ushort) * 2 + offset)
             {
                 address.segment = BitConverter.ToUInt16(bytes, sizeof(ushort) * 0 + offset);
@@ -68,6 +69,7 @@ namespace Ostis.Sctp.Arguments
         }
 
 #warning Что за загадочная хрень со структурами мешает сконвертировать эти 2 свойства в авто-свойства?
+//автосвойства зло
         /// <summary>
         /// Сегмент.
         /// </summary>
