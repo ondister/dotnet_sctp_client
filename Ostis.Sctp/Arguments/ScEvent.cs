@@ -42,6 +42,7 @@ namespace Ostis.Sctp.Arguments
             this.elementAddress = elementAddress;
             this.arcAddress = arcAddress;
 #warning Magic number 12
+//что-то мне подсказывает, что это длина подиски
             this.bytes = new byte[12];
 		}
 
