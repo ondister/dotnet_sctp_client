@@ -41,6 +41,7 @@ namespace Ostis.Sctp
         private void client_Received(IClient sender, CallBacks.ReceiveEventArgs arg)
         {
 #warning Что означает магическое число 10?
+//это число байт заголовка ответа
             if (arg.ReceivedBytes.Length >= 10)
             {
                 var response = responseFactory.GetResponse(arg.ReceivedBytes);
@@ -50,6 +51,7 @@ namespace Ostis.Sctp
             else
             {
 #warning Куда идёт это значение?
+//никуда это нужно как-то обработать, если получены непонятные байты
                 Response response = responseFactory.GetResponse(arg.ReceivedBytes);
             }
             if (commands.Count == 0)
