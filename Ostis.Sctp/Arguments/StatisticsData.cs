@@ -102,6 +102,7 @@ namespace Ostis.Sctp.Arguments
         public StatisticsData(byte[] bytes, int offset)
         {
 #warning Magic number. SctpProtocol.StatisticsDataLength?
+//очень похоже на это
             if (bytes.Length >= sizeof(UInt64) * 11 + 1 + offset)
             {
                 time = UnixDateTime.ToDateTime(BitConverter.ToUInt64(bytes, sizeof(UInt64) * 0 + offset));
