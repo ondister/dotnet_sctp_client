@@ -3,6 +3,7 @@
 namespace Ostis.Sctp.Arguments
 {
 #warning См. примечание ниже: Зачем здесь этот класс?
+//этот клас инкапсулирует ответы итератора, без него просто запутаемся в конструкциях ответов
     /// <summary>
     /// Sc-конструкция, представленная в виде sc-адресов.
     /// </summary>
@@ -25,6 +26,7 @@ namespace Ostis.Sctp.Arguments
         { get { return adresses; } }
 
 #warning Зачем здесь этот метод?
+//метод дурацкий, можно удалять, все равно коллекция открыта
         internal void AddAddress(ScAddress address)
         {
             adresses.Add(address);
