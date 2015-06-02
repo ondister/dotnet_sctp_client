@@ -13,7 +13,7 @@ namespace Ostis.Sctp
         UInt32 Length
         { get; }
 #warning Удалить это свойство - оно лишнее.
-
+//не лишнее оно, используется оно
         /// <summary>
         /// Массив байт.
         /// </summary>
