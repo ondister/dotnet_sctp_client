@@ -20,6 +20,7 @@ namespace Ostis.Sctp.Arguments
         /// Длина массива байт шаблона.
         /// </summary>
 #warning Поле и свойство явно лишние.
+//пока не лишнее в некоторых случаях нужно знать длину аргумента
         public uint Length
         { get { return length; } }
 
@@ -30,6 +31,7 @@ namespace Ostis.Sctp.Arguments
         { get { return bytes; } }
 
 #warning Конструкторы не вызывают друг друга!
+//тут я не понял что по чем, поясни для докторов
         /// <summary>
         /// ctor.
         /// </summary>
