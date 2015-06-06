@@ -35,7 +35,7 @@ namespace Ostis.SctpDemo
                 serverPort = SctpProtocol.DefaultPortNumber;
             }
 
-            commandPool = new CommandPool(serverAddress, serverPort, ClientType.SyncClient);
+            commandPool = new CommandPool(serverAddress, serverPort, false);
 		}
 
         // Код: 0x01 

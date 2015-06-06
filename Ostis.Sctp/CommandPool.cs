@@ -27,10 +27,10 @@ namespace Ostis.Sctp
         /// </summary>
         /// <param name="address">IP-адрес</param>
         /// <param name="port">номер порта</param>
-        /// <param name="clientType">тип используемого клиента (синхронный/асинхронный)</param>
-        public CommandPool(string address, int port, ClientType clientType)
+        /// <param name="asyncClient">тип используемого клиента (синхронный/асинхронный)</param>
+        public CommandPool(string address, int port, bool asyncClient)
         {
-            client = ClientFactory.CreateClient(clientType);
+            client = asyncClient ? new AsyncClient.AsynchronousClient() as IClient : new SyncClient.SynchronousClient();
             client.Received += client_Received;
             client.Connect(address, port);
             commands = new List<Command>();
