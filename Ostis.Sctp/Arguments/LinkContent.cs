@@ -39,7 +39,7 @@ namespace Ostis.Sctp.Arguments
         /// <param name="value">значение</param>
         public LinkContent(String value)
         {
-            contentType = LinkContentType.text;
+            contentType = LinkContentType.Text;
             bytes = SctpProtocol.TextEncoding.GetBytes(value);
         }
 
@@ -49,7 +49,7 @@ namespace Ostis.Sctp.Arguments
         /// <param name="bytes">массив байт</param>
         public LinkContent(byte[] bytes)
 		{
-			contentType = LinkContentType.unknown;	
+			contentType = LinkContentType.Unknown;	
 			this.bytes = bytes;
 		}
 
@@ -59,7 +59,7 @@ namespace Ostis.Sctp.Arguments
         /// <param name="value">значение</param>
         public LinkContent(double value)
 		{
-			contentType = LinkContentType.numeric;	
+			contentType = LinkContentType.Numeric;	
 			bytes = BitConverter.GetBytes(value);
 		}
 
@@ -72,7 +72,7 @@ namespace Ostis.Sctp.Arguments
         {
             return new LinkContent
             {
-                contentType = LinkContentType.text,
+                contentType = LinkContentType.Text,
                 bytes = SctpProtocol.TextEncoding.GetBytes(value),
             };
         }
