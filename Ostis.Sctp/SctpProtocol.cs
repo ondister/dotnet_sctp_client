@@ -18,6 +18,11 @@ namespace Ostis.Sctp
         public const int DefaultPortNumber = 55770;
 
         /// <summary>
+        /// Длина SCTP-заголовка.
+        /// </summary>
+        public const int HeaderLength = 10;
+
+        /// <summary>
         /// Размер данных SC-адреса.
         /// </summary>
         public const int ScAddressLength = 4;

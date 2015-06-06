@@ -27,12 +27,12 @@
         protected Response(byte[] bytes)
         {
             this.bytes = bytes;
-            var headerBytes = new byte[10];
-            if (bytes.Length >= 10)
+            var headerBytes = new byte[SctpProtocol.HeaderLength];
+            if (bytes.Length >= SctpProtocol.HeaderLength)
             {
-                for (int index = 0; index < 10; index++)
+                for (int i = 0; i < SctpProtocol.HeaderLength; i++)
                 {
-                    headerBytes[index] = bytes[index];
+                    headerBytes[i] = bytes[i];
                 }
             }
             header = new ResponseHeader(headerBytes);
