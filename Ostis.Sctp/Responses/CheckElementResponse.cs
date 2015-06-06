@@ -7,20 +7,13 @@ namespace Ostis.Sctp.Responses
     /// </summary>
     public class CheckElementResponse : Response
     {
-#warning Это поле - явно лишнее.
-        private bool elementExists;
+        private readonly bool elementExists;
 
         /// <summary>
         /// Элемент существует.
         /// </summary>
-        public bool ElementIsExist
-        {
-            get
-            {
-                elementExists = Header.ReturnCode == ReturnCode.Successfull;
-                return elementExists;
-            }
-        }
+        public bool ElementExists
+        { get { return elementExists; } }
 
         /// <summary>
         /// ctor.
@@ -28,6 +21,8 @@ namespace Ostis.Sctp.Responses
         /// <param name="bytes">массив байт</param>
         public CheckElementResponse(byte[] bytes)
             : base(bytes)
-        { }
+        {
+            elementExists = Header.ReturnCode == ReturnCode.Successfull;
+        }
     }
 }

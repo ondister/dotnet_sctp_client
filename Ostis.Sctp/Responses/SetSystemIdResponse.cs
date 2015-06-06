@@ -7,19 +7,13 @@ namespace Ostis.Sctp.Responses
     /// </summary>
     public class SetSystemIdResponse : Response
     {
-        private bool isSuccessfull;
+        private readonly bool isSuccessfull;
 
         /// <summary>
         /// Успешно.
         /// </summary>
         public bool IsSuccesfull
-        {
-            get
-            {
-                isSuccessfull = Header.ReturnCode == ReturnCode.Successfull;
-                return isSuccessfull;
-            }
-        }
+        { get { return isSuccessfull; } }
 
         /// <summary>
         /// ctor.
@@ -27,6 +21,8 @@ namespace Ostis.Sctp.Responses
         /// <param name="bytes">массив байт</param>
         public SetSystemIdResponse(byte[] bytes)
             : base(bytes)
-        { }
+        {
+            isSuccessfull = Header.ReturnCode == ReturnCode.Successfull;
+        }
     }
 }

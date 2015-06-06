@@ -11,7 +11,7 @@ namespace Ostis.Sctp.Responses
     /// </summary>
     public class GetStatisticsResponse : Response
     {
-        private UInt32 timeChecksCount;
+        private readonly UInt32 timeChecksCount;
         private readonly List<StatisticsData> statisticsDataList;
 
         /// <summary>
@@ -24,16 +24,7 @@ namespace Ostis.Sctp.Responses
         /// Количество проверок времени.
         /// </summary>
         public uint TimeChecksCount
-        {
-            get 
-            {
-                if (Header.ReturnCode == ReturnCode.Successfull)
-                {
-                    timeChecksCount  = BitConverter.ToUInt32(Bytes, Header.Length);
-                }
-                return timeChecksCount;
-            }
-        }
+        { get { return timeChecksCount; } }
 
         /// <summary>
         /// ctor.
@@ -43,13 +34,17 @@ namespace Ostis.Sctp.Responses
             : base(bytes)
         {
             statisticsDataList = new List<StatisticsData>();
+            if (Header.ReturnCode == ReturnCode.Successfull)
+            {
+                timeChecksCount = BitConverter.ToUInt32(Bytes, Header.Length);
+            }
             if (TimeChecksCount != 0)
             {
-                int beginindex = sizeof(UInt32) + Header.Length;
+                int beginIndex = sizeof(UInt32) + Header.Length;
                 for (int statscount = 0; statscount < TimeChecksCount; statscount++)
                 {
-                    statisticsDataList.Add(new StatisticsData(bytes, beginindex));
-                    beginindex += SctpProtocol.StatisticsDataLength;
+                    statisticsDataList.Add(new StatisticsData(bytes, beginIndex));
+                    beginIndex += SctpProtocol.StatisticsDataLength;
                 }
             }
         }

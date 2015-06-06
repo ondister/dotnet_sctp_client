@@ -51,7 +51,7 @@ namespace Ostis.SctpDemo
 			// Так как для каждой команды есть свой тип ответа, то нетипизированный ответ сервера нужно преобразовать к требуемому типу.
 			// Это, конечно, не очень безопасно, зато точно получим то, что надо.
             var response = (CheckElementResponse) command.Response;
-			Console.WriteLine(response.ElementIsExist);
+			Console.WriteLine(response.ElementExists);
 			// Дополнительно обратите внимание, что в ответе есть свойства Header и BytesStream.
 			// Это тот самый нижний уровень ответа, который можно не приводить к типу, и который описан на wiki товарища Корончика.
 		}
@@ -171,7 +171,7 @@ namespace Ostis.SctpDemo
             var command = new FindLinksCommand(new LinkContent("aaaaa"));
 			commandPool.Send(command);
             var response = (FindLinksResponse) command.Response;
-            Console.WriteLine(response.LinksCount);
+            Console.WriteLine(response.Addresses.Count);
             /*foreach (var address in response.ScAddresses)
 		    {
 		        Console.WriteLine(".. " + address.);
@@ -201,7 +201,7 @@ namespace Ostis.SctpDemo
             var command = new IterateElementsCommand(template);
 			commandPool.Send(command);
             var response = (IterateElementsResponse) command.Response;
-            Console.WriteLine(response.ConstructionsCount);
+            Console.WriteLine(response.Constructions.Count);
             /*foreach (var construction in response.GetConstructions())
 		    {
 		        Console.WriteLine(".. " + construction.);

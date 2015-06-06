@@ -7,19 +7,13 @@ namespace Ostis.Sctp.Responses
     /// </summary>
     public class DeleteElementResponse : Response
     {
-        private bool isDeleted;
+        private readonly bool isDeleted;
 
         /// <summary>
         /// Было ли удалено.
         /// </summary>
         public bool IsDeleted
-        {
-            get
-            {
-                isDeleted = Header.ReturnCode == ReturnCode.Successfull;
-                return isDeleted;
-            }
-        }
+        { get { return isDeleted; } }
 
         /// <summary>
         /// ctor.
@@ -27,6 +21,8 @@ namespace Ostis.Sctp.Responses
         /// <param name="bytes">массив байт</param>
         public DeleteElementResponse(byte[] bytes)
             : base(bytes)
-        { }
+        {
+            isDeleted = Header.ReturnCode == ReturnCode.Successfull;
+        }
     }
 }

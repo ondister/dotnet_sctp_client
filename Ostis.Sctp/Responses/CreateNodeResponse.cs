@@ -10,25 +10,13 @@ namespace Ostis.Sctp.Responses
     /// </summary>
     public class CreateNodeResponse : Response
     {
-        private ScAddress address;
+        private readonly ScAddress createdNodeAddress;
 
         /// <summary>
         /// Адрес созданного узла.
         /// </summary>
         public ScAddress CreatedNodeAddress
-        {
-            get
-            {
-                if (base.Header.ReturnCode == ReturnCode.Successfull)
-                {
-                   
-                    address.Offset = BitConverter.ToUInt16(Bytes, Header.Length + 2);
-                    address.Segment = BitConverter.ToUInt16(Bytes, Header.Length);
-                }
-
-                return address;
-            }
-        }
+        { get { return createdNodeAddress; } }
 
         /// <summary>
         /// ctor.
@@ -36,6 +24,12 @@ namespace Ostis.Sctp.Responses
         /// <param name="bytes">массив байт</param>
         public CreateNodeResponse(byte[] bytes)
             : base(bytes)
-        { }
+        {
+            if (Header.ReturnCode == ReturnCode.Successfull)
+            {
+                createdNodeAddress.Offset = BitConverter.ToUInt16(bytes, Header.Length + 2);
+                createdNodeAddress.Segment = BitConverter.ToUInt16(bytes, Header.Length);
+            }
+        }
     }
 }

@@ -10,23 +10,13 @@ namespace Ostis.Sctp.Responses
     /// </summary>
     public class CreateLinkResponse : Response
     {
-        private ScAddress address;
+        private readonly ScAddress createdLinkAddress;
 
         /// <summary>
         /// Адрес созданной ссылки.
         /// </summary>
         public ScAddress CreatedLinkAddress
-        {
-            get
-            {
-                if (Header.ReturnCode == ReturnCode.Successfull)
-                {
-                    address.Offset = BitConverter.ToUInt16(Bytes, Header.Length + 2);
-                    address.Segment = BitConverter.ToUInt16(Bytes, Header.Length);
-                }
-                return address;
-            }
-        }
+        { get { return createdLinkAddress; } }
 
         /// <summary>
         /// ctor.
@@ -34,6 +24,12 @@ namespace Ostis.Sctp.Responses
         /// <param name="bytes">массив байт</param>
         public CreateLinkResponse(byte[] bytes)
             : base(bytes)
-        { }
+        {
+            if (Header.ReturnCode == ReturnCode.Successfull)
+            {
+                createdLinkAddress.Offset = BitConverter.ToUInt16(bytes, Header.Length + 2);
+                createdLinkAddress.Segment = BitConverter.ToUInt16(bytes, Header.Length);
+            }
+        }
     }
 }

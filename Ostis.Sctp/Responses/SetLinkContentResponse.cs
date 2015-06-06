@@ -7,19 +7,13 @@ namespace Ostis.Sctp.Responses
     /// </summary>
     public class SetLinkContentResponse : Response
     {
-        private bool contentIsSet;
+        private readonly bool contentIsSet;
 
         /// <summary>
         /// Признак того, что содержимое было корректно установлено.
         /// </summary>
         public bool ContentIsSet
-        {
-            get
-            {
-                contentIsSet = Header.ReturnCode == ReturnCode.Successfull;
-                return contentIsSet;
-            }
-        }
+        { get { return contentIsSet; } }
 
         /// <summary>
         /// ctor.
@@ -27,6 +21,8 @@ namespace Ostis.Sctp.Responses
         /// <param name="bytes">массив байт</param>
         public SetLinkContentResponse(byte[] bytes)
             : base(bytes)
-        { }
+        {
+            contentIsSet = Header.ReturnCode == ReturnCode.Successfull;
+        }
     }
 }

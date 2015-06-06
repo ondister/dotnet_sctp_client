@@ -7,36 +7,17 @@ using Ostis.Sctp.CallBacks;
 namespace Ostis.Sctp.Responses
 {
     /// <summary>
-    /// Ответ на команду: Запрос всех произошедших событий..
+    /// Ответ на команду: Запрос всех произошедших событий.
     /// </summary>
     public class EmitEventsResponse : Response
     {
-        private readonly UInt32 eventsCount;
-        private List<ScEvent> events;
+        private readonly List<ScEvent> events;
 
         /// <summary>
         /// События.
         /// </summary>
         public List<ScEvent> ScEvents
-        {
-            get
-            {
-                events = new List<ScEvent>();
-                if (Header.ReturnCode == ReturnCode.Successfull)
-                {
-                    if (EventsCount != 0)
-                    {
-                        int beginIndex = sizeof(UInt32) + Header.Length;
-                        for (int e = 0; e < EventsCount; e++)
-                        {
-                            events.Add(ScEvent.GetFromBytes(Bytes, beginIndex));
-                            beginIndex += SctpProtocol.ScEventLength;
-                        }
-                    }
-                }
-                return events;
-            }
-        }
+        { get { return events; } }
 
         //        public List<ScAddress> ScAddresses
         //        {
@@ -65,13 +46,6 @@ namespace Ostis.Sctp.Responses
         //        }
 
         /// <summary>
-        /// Количество событий.
-        /// </summary>
-#warning Удалить лишнее?
-        public UInt32 EventsCount
-        { get { return eventsCount; } }
-
-        /// <summary>
         /// ctor.
         /// </summary>
         /// <param name="bytes">массив байт</param>
@@ -79,7 +53,19 @@ namespace Ostis.Sctp.Responses
             : base(bytes)
         {
             events = new List<ScEvent>();
-            eventsCount = Header.ReturnCode == ReturnCode.Successfull ? BitConverter.ToUInt32(Bytes, Header.Length) : 0;
+            if (Header.ReturnCode == ReturnCode.Successfull)
+            {
+                uint eventsCount = BitConverter.ToUInt32(bytes, Header.Length);
+                if (eventsCount > 0)
+                {
+                    int beginIndex = sizeof(UInt32) + Header.Length;
+                    for (int e = 0; e < eventsCount; e++)
+                    {
+                        events.Add(ScEvent.GetFromBytes(bytes, beginIndex));
+                        beginIndex += SctpProtocol.ScEventLength;
+                    }
+                }
+            }
         }
     }
 }

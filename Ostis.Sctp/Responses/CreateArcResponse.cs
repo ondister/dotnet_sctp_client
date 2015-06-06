@@ -10,24 +10,13 @@ namespace Ostis.Sctp.Responses
     /// </summary>
     public class CreateArcResponse : Response
     {
-#warning Это поле - явно лишнее.
-        private ScAddress address;
+        private readonly ScAddress createdArcAddress;
 
         /// <summary>
         /// Адрес созданной дуги.
         /// </summary>
         public ScAddress CreatedArcAddress
-        {
-            get
-            {
-                if (Header.ReturnCode == ReturnCode.Successfull)
-                {
-                    address.Offset = BitConverter.ToUInt16(Bytes, Header.Length + 2);
-                    address.Segment = BitConverter.ToUInt16(Bytes, Header.Length);
-                }
-                return address;
-            }
-        }
+        { get { return createdArcAddress; } }
 
         /// <summary>
         /// ctor.
@@ -35,6 +24,12 @@ namespace Ostis.Sctp.Responses
         /// <param name="bytes">массив байт</param>
         public CreateArcResponse(byte[] bytes)
             : base(bytes)
-        { }
+        {
+            if (Header.ReturnCode == ReturnCode.Successfull)
+            {
+                createdArcAddress.Offset = BitConverter.ToUInt16(bytes, Header.Length + 2);
+                createdArcAddress.Segment = BitConverter.ToUInt16(bytes, Header.Length);
+            }
+        }
     }
 }

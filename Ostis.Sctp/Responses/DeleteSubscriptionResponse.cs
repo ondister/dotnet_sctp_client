@@ -10,22 +10,13 @@ namespace Ostis.Sctp.Responses
     /// </summary>
     public class DeleteSubscriptionResponse : Response
     {
-        private SubscriptionId subscriptionId;
+        private readonly SubscriptionId subscriptionId;
 
         /// <summary>
         /// Идентификатор подписки.
         /// </summary>
         public SubscriptionId SubscriptionId
-        {
-            get
-            {
-                if (Header.ReturnCode == ReturnCode.Successfull)
-                {
-					subscriptionId.ID=BitConverter.ToInt32(Bytes, Header.Length);
-				}
-                return subscriptionId;
-            }
-        }
+        { get { return subscriptionId; } }
 
         /// <summary>
         /// ctor.
@@ -33,6 +24,11 @@ namespace Ostis.Sctp.Responses
         /// <param name="bytes">массив байт</param>
         public DeleteSubscriptionResponse(byte[] bytes)
             : base(bytes)
-        { }
+        {
+            if (Header.ReturnCode == ReturnCode.Successfull)
+            {
+                subscriptionId.ID = BitConverter.ToInt32(bytes, Header.Length);
+            }
+        }
     }
 }

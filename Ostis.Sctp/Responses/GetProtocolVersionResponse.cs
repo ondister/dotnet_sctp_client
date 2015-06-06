@@ -9,22 +9,13 @@ namespace Ostis.Sctp.Responses
     /// </summary>
     public class GetProtocolVersionResponse : Response
     {
-		Int32 protocolVersion;
+		private readonly Int32 protocolVersion;
 
         /// <summary>
         /// Версия протокола сервера.
         /// </summary>
 		public Int32 ProtocolVersion
-		{
-			get
-			{
-				if (Header.ReturnCode == ReturnCode.Successfull)
-				{
-					protocolVersion = BitConverter.ToInt32(Bytes, Header.Length);
-				}
-				return protocolVersion;
-			}
-		}
+		{ get { return protocolVersion; } }
 
         /// <summary>
         /// ctor.
@@ -32,6 +23,11 @@ namespace Ostis.Sctp.Responses
         /// <param name="bytes">массив байт</param>
         public GetProtocolVersionResponse(byte[] bytes)
             : base(bytes)
-        { }
+        {
+            if (Header.ReturnCode == ReturnCode.Successfull)
+            {
+                protocolVersion = BitConverter.ToInt32(bytes, Header.Length);
+            }
+        }
     }
 }

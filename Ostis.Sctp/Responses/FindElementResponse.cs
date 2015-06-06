@@ -10,37 +10,21 @@ namespace Ostis.Sctp.Responses
     /// </summary>
     public class FindElementResponse : Response
     {
-        private ScAddress address;
-        private bool isFound;
+        private readonly ScAddress address;
+        private readonly bool isFound;
 
         /// <summary>
         /// Элемент найден.
         /// </summary>
         public bool IsFound
-        {
-            get
-            {
-                isFound = Header.ReturnSize != 0;
-                return isFound;
-            }
-        }
+        { get { return isFound; } }
 
         /// <summary>
         /// Адрес.
         /// </summary>
 #warning Вероятно, предыдущее свойство не имеет смысла.
         public ScAddress FoundAddress
-        {
-            get
-            {
-                if (Header.ReturnCode == ReturnCode.Successfull)
-                {
-                    address.Offset = BitConverter.ToUInt16(Bytes, Header.Length + 2);
-                    address.Segment = BitConverter.ToUInt16(Bytes, Header.Length);
-                }
-                return address;
-            }
-        }
+        { get { return address; } }
 
         /// <summary>
         /// ctor.
@@ -48,6 +32,13 @@ namespace Ostis.Sctp.Responses
         /// <param name="bytes">массив байт</param>
         public FindElementResponse(byte[] bytes)
             : base(bytes)
-        { }
+        {
+            isFound = Header.ReturnSize != 0;
+            if (Header.ReturnCode == ReturnCode.Successfull)
+            {
+                address.Offset = BitConverter.ToUInt16(bytes, Header.Length + 2);
+                address.Segment = BitConverter.ToUInt16(bytes, Header.Length);
+            }
+        }
     }
 }

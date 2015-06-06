@@ -25,7 +25,7 @@ namespace Ostis.Sctp.Responses
             if (Header.ReturnSize != 0)
             {
                 linkContent = new byte[Header.ReturnSize];
-                Array.Copy(Bytes, Header.Length, linkContent, 0, linkContent.Length);
+                Array.Copy(bytes, Header.Length, linkContent, 0, linkContent.Length);
             }
             else
             {

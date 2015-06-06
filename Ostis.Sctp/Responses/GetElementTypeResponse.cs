@@ -10,22 +10,13 @@ namespace Ostis.Sctp.Responses
     /// </summary>
     public class GetElementTypeResponse : Response
     {
-        private ElementType elementType = ElementType.unknown;
+        private readonly ElementType elementType;
 
         /// <summary>
         /// Тип элемента.
         /// </summary>
         public ElementType ElementType
-        {
-            get 
-            {
-                if (Header.ReturnCode == ReturnCode.Successfull)
-                {
-                    elementType = (ElementType) BitConverter.ToUInt16(Bytes, Header.Length);
-                }
-                return elementType; 
-            }
-        }
+        { get { return elementType; } }
 
         /// <summary>
         /// ctor.
@@ -33,6 +24,10 @@ namespace Ostis.Sctp.Responses
         /// <param name="bytes">массив байт</param>
         public GetElementTypeResponse(byte[] bytes)
             : base(bytes)
-        { }
+        {
+            elementType = Header.ReturnCode == ReturnCode.Successfull
+                ? (ElementType) BitConverter.ToUInt16(bytes, Header.Length)
+                : ElementType.unknown;
+        }
     }
 }

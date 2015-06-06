@@ -11,22 +11,28 @@ namespace Ostis.Sctp.Responses
     /// </summary>
     public class IterateElementsResponse : Response
     {
-        private readonly UInt32 constructionsCount;
-        private List<ScAddress> addresses;
-        private List<Construction> constructions;
+        private readonly List<Construction> constructions;
 
         /// <summary>
-        /// Получение списка конструкций.
+        /// Список конструкций.
         /// </summary>
-        /// <returns>список</returns>
-        public List<Construction> GetConstructions()
+        public List<Construction> Constructions
+        { get { return constructions; } }
+
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="bytes">массив байт</param>
+        public IterateElementsResponse(byte[] bytes)
+            : base(bytes)
         {
             constructions = new List<Construction>();
             if (Header.ReturnCode == ReturnCode.Successfull)
             {
-                int addressesCount = (Bytes.Length - Header.Length - 4) / 4;
+                uint constructionsCount = BitConverter.ToUInt32(Bytes, Header.Length);
+                int addressesCount = (bytes.Length - Header.Length - 4) / 4;
 #warning Правильно ли записано выражение после расстановки скобок согласно правилам приоритета операторов C#???
-                int addressesInConstruction = ((int) constructionsCount == 0 ? 0 : addressesCount) / (int) constructionsCount;
+                int addressesInConstruction = ((int)constructionsCount == 0 ? 0 : addressesCount) / (int)constructionsCount;
                 int offset = sizeof(UInt32) + Header.Length;
                 for (uint c = 0; c < constructionsCount; c++)
                 {
@@ -40,25 +46,6 @@ namespace Ostis.Sctp.Responses
                     constructions.Add(construction);
                 }
             }
-            return constructions;
-        }
-
-        /// <summary>
-        /// Количество конструкций в списке.
-        /// </summary>
-#warning Не нужно.
-        public UInt32 ConstructionsCount
-        { get { return constructionsCount; } }
-
-        /// <summary>
-        /// ctor.
-        /// </summary>
-        /// <param name="bytes">массив байт</param>
-        public IterateElementsResponse(byte[] bytes)
-            : base(bytes)
-        {
-            addresses = new List<ScAddress>();
-            constructionsCount = Header.ReturnCode == ReturnCode.Successfull ? BitConverter.ToUInt32(Bytes, Header.Length) : 0;
         }
     }
 }
