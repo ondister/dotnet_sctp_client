@@ -87,7 +87,7 @@ namespace Ostis.SctpDemo
         // Иначе адрес нулевой, то есть недействительный (сегмент и смещение (offset) равны нулю).
 		public void CreateNode()
 		{
-            var command = new CreateNodeCommand(ElementType.sc_type_node_const);
+            var command = new CreateNodeCommand(ElementType.ConstantNode);
 			commandPool.Send(command);
             var response = (CreateNodeResponse) command.Response;
             Console.WriteLine(response.CreatedNodeAddress.ToString());
@@ -118,7 +118,7 @@ namespace Ostis.SctpDemo
         // Иначе адрес нулевой, то есть недействительный (сегмент и смещение (offset) равны нулю).
 		public void CreateArc()
 		{
-            var command = new CreateArcCommand(ElementType.sc_type_arc_const_comm, new ScAddress(0, 1), new ScAddress(0, 2));
+            var command = new CreateArcCommand(ElementType.ConstantCommonArc, new ScAddress(0, 1), new ScAddress(0, 2));
 			commandPool.Send(command);
             var response = (CreateArcResponse) command.Response;
             Console.WriteLine(response.CreatedArcAddress.ToString());
@@ -197,7 +197,7 @@ namespace Ostis.SctpDemo
         // Результат: Если выполнение команды успешно, то в качестве результата возвращается коллекция конструкций, соответствующих шаблону.
 		public void Iterator()
 		{
-			ConstructionTemplate template = new ConstructionTemplate(new ScAddress(0, 1), ElementType.sc_type_arc_access, ElementType.sc_type_node);
+			ConstructionTemplate template = new ConstructionTemplate(new ScAddress(0, 1), ElementType.AccessArg, ElementType.Node);
             var command = new IterateElementsCommand(template);
 			commandPool.Send(command);
             var response = (IterateElementsResponse) command.Response;

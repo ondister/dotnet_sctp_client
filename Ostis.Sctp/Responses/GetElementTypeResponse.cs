@@ -27,7 +27,7 @@ namespace Ostis.Sctp.Responses
         {
             elementType = Header.ReturnCode == ReturnCode.Successfull
                 ? (ElementType) BitConverter.ToUInt16(bytes, Header.Length)
-                : ElementType.unknown;
+                : ElementType.Unknown;
         }
     }
 }
