@@ -8,8 +8,7 @@ using Ostis.Sctp.CallBacks;
 
 namespace Ostis.Sctp.SyncClient
 {
-    internal class SynchronousClient : IClient, IDisposable
-#warning Сделать этот класс IDisposable
+    internal class SynchronousClient : IClient
     {
         private readonly Socket client;
         private readonly ReceiveEventArgs receiveArguments;

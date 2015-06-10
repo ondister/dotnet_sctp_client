@@ -9,7 +9,7 @@
         /// ctor.
         /// </summary>
 		public GetProtocolVersionCommand()
-            : base(0xa3, 0)
+            : base(CommandCode.GetProtocolVersion, 0)
         {
             Header.ArgumentsSize = 0;
         }

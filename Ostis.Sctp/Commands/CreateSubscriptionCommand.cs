@@ -1,6 +1,4 @@
-﻿using System;
-
-using Ostis.Sctp.Arguments;
+﻿using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
@@ -15,7 +13,7 @@ namespace Ostis.Sctp.Commands
         /// <param name="type">тип события</param>
         /// <param name="address">SC-адрес</param>
 		public CreateSubscriptionCommand(EventsType type, ScAddress address)
-            : base(0x0e ,0)
+            : base(CommandCode.CreateSubscription, 0)
         {
             uint argumentsSize = 0; 
             Arguments.Add (new Argument<EventsType>(type));

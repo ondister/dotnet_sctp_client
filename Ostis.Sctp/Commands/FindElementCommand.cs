@@ -1,6 +1,4 @@
-﻿using System;
-
-using Ostis.Sctp.Arguments;
+﻿using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
@@ -14,7 +12,7 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="identifier">идентификатор</param>
         public FindElementCommand(Identifier identifier)
-            : base(0xa0, 0)
+            : base(CommandCode.FindElement, 0)
         {
             uint argumentsSize = 0;
             Arguments.Add(new Argument<uint>((uint) identifier.BytesStream.Length));

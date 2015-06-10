@@ -1,6 +1,4 @@
-﻿using System;
-
-using Ostis.Sctp.Arguments;
+﻿using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
@@ -14,7 +12,7 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="arcAddress">SC-адрес дуги у которой необходимо получить начальный элемент</param>
         public GetArcCommand(ScAddress arcAddress)
-            : base(0x07, 0)
+            : base(CommandCode.GetArc, 0)
         {
             uint argumentsSize = 0;
             Arguments.Add(new Argument<ScAddress>(arcAddress));

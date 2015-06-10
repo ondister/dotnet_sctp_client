@@ -1,6 +1,4 @@
-﻿using System;
-
-using Ostis.Sctp.Arguments;
+﻿using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
@@ -15,7 +13,7 @@ namespace Ostis.Sctp.Commands
         /// <param name="linkAddress">SC-адрес ссылки</param>
         /// <param name="content">данные устанавливаемого содержимого</param>
         public SetLinkContentCommand(ScAddress linkAddress, LinkContent content)
-            : base(0x0b, 0)
+            : base(CommandCode.SetLinkContent, 0)
         {
             uint argumentsSize = 0;
             Arguments.Add(new Argument<ScAddress>(linkAddress));

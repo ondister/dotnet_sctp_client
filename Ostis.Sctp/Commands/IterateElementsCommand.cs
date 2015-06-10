@@ -1,6 +1,4 @@
-﻿using System;
-
-using Ostis.Sctp.Arguments;
+﻿using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
@@ -14,7 +12,7 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="template">шаблон для поиска</param>
         public IterateElementsCommand(ConstructionTemplate template)
-            : base(0x0c, 0)
+            : base(CommandCode.IterateElements, 0)
         {
             uint argumentsSize = 0;
             Arguments.Add(new Argument<ConstructionTemplate>(template));

@@ -1,6 +1,4 @@
-﻿using System;
-
-using Ostis.Sctp.Arguments;
+﻿using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
@@ -17,7 +15,7 @@ namespace Ostis.Sctp.Commands
         /// <param name="beginAddress">SC-адрес начального элемента SC-дуги</param>
         /// <param name="endAddress">SC-адрес конечного элемента SC-дуги</param>
         public CreateArcCommand(ElementType arcType, ScAddress beginAddress, ScAddress endAddress)
-            : base(0x06, 0)
+            : base(CommandCode.CreateArc, 0)
         {
             uint argumentsSize = 0;
             Arguments.Add(new Argument<ElementType>(arcType));

@@ -43,8 +43,8 @@ namespace Ostis.Sctp
         /// <summary>
         /// Код.
         /// </summary>
-		public uint Code
-		{ get { return Header.Code; } }
+		public CommandCode Code
+        { get { return (CommandCode) Header.Code; } }
 
 		/// <summary>
         /// Уникальный идентификатор.
@@ -60,11 +60,12 @@ namespace Ostis.Sctp
         /// </summary>
         /// <param name="code">код</param>
         /// <param name="flags">флаги</param>
-        protected Command(byte code, byte flags)
+        protected Command(CommandCode code, byte flags)
         {
             Header = new CommandHeader
             {
-                Code = code,
+                Code = (byte) code,
+#warning Можно ли преобразовать этот байт во флаговый enum?
                 Flags = flags,
             };
             Arguments = new List<IArgument>();

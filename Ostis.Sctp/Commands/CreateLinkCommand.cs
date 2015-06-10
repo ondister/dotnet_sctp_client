@@ -9,7 +9,7 @@
         /// ctor.
         /// </summary>
         public CreateLinkCommand()
-            : base(0x05, 0)
+            : base(CommandCode.CreateLink, 0)
         {
             Header.ArgumentsSize = 0;
 #warning Значение размера аргументов должно устанавливаться в абстрактном виртуальном методе.

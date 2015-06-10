@@ -1,6 +1,4 @@
-﻿using System;
-
-using Ostis.Sctp.Arguments;
+﻿using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
@@ -14,7 +12,7 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="address">SC-адрес проверяемого SC-элемента</param>
         public CheckElementCommand(ScAddress address)
-            : base(0x01, 0)
+            : base(CommandCode.CheckElement, 0)
         {
             uint argumentsSize = 0;
             Arguments.Add(new Argument<ScAddress>(address));

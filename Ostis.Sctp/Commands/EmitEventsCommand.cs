@@ -9,7 +9,7 @@
         /// ctor.
         /// </summary>
         public EmitEventsCommand()
-            : base(0x10, 0)
+            : base(CommandCode.EmitEvents, 0)
         {
             Header.ArgumentsSize = 0;
         }

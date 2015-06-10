@@ -1,6 +1,4 @@
-﻿using System;
-
-using Ostis.Sctp.Arguments;
+﻿using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
@@ -14,7 +12,7 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="address">SC-адрес удаляемого sc-элемента</param>
         public DeleteElementCommand(ScAddress address)
-            : base(0x03, 0)
+            : base(CommandCode.DeleteElement, 0)
         {
             uint argumentsSize = 0;
             Arguments.Add(new Argument<ScAddress>(address));

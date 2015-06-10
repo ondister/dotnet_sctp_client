@@ -1,6 +1,4 @@
-﻿using System;
-
-using Ostis.Sctp.Arguments;
+﻿using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
@@ -14,7 +12,7 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="id">событие</param>
 		public DeleteSubscriptionCommand(SubscriptionId id)
-			: base(0x0f, 0)
+			: base(CommandCode.DeleteSubscription, 0)
         {
             uint argumentsSize = 0;
             Arguments.Add(new Argument<SubscriptionId>(id));

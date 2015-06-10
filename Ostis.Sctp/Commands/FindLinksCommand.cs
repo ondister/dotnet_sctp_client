@@ -1,6 +1,4 @@
-﻿using System;
-
-using Ostis.Sctp.Arguments;
+﻿using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
@@ -14,7 +12,7 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="content">содержимое для поиска</param>
         public FindLinksCommand(LinkContent content)
-            : base(0x0a, 0)
+            : base(CommandCode.FindLinks, 0)
         {
             uint argumentsSize = 0;
             Arguments.Add(new Argument<uint>((uint)content.Bytes.Length));

@@ -1,12 +1,10 @@
-﻿using System;
-
-using Ostis.Sctp.Arguments;
+﻿using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
 #warning На эту команду нет класса ответа!
     /// <summary>
-    /// Команда: .
+    /// Команда: Итерирование конструкций.
     /// </summary>
     public class IterateConstructionsCommand : Command
     {
@@ -15,7 +13,7 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="template">шаблон поиска</param>
 		public IterateConstructionsCommand(ConstructionTemplate template)
-			: base(0x0d, 0)
+            : base(CommandCode.IterateConstructions, 0)
         {
             uint argumentsSize = 0;
             Arguments.Add(new Argument<ConstructionTemplate>(template));

@@ -1,6 +1,4 @@
-﻿using System;
-
-using Ostis.Sctp.Arguments;
+﻿using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
@@ -14,7 +12,7 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="address">SC-адрес элемента для получения типа</param>
         public GetElementTypeCommand(ScAddress address)
-            : base(0x02, 0)
+            : base(CommandCode.GetElementType, 0)
         {
             uint argumentsSize = 0;
             Arguments.Add(new Argument<ScAddress>(address));

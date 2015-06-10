@@ -1,6 +1,4 @@
-﻿using System;
-
-using Ostis.Sctp.Arguments;
+﻿using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
@@ -14,7 +12,7 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="nodeType">тип создаваемого SC-узла</param>
         public CreateNodeCommand(ElementType nodeType)
-            : base(0x04, 0)
+            : base(CommandCode.CreateNode, 0)
         {
             uint argumentsSize = 0;
             Arguments.Add(new Argument<ElementType>(nodeType));

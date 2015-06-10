@@ -1,6 +1,4 @@
-﻿using System;
-
-using Ostis.Sctp.Arguments;
+﻿using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Commands
 {
@@ -15,7 +13,7 @@ namespace Ostis.Sctp.Commands
         /// <param name="address">адрес SC-эелемента</param>
         /// <param name="identifier">идентификатор</param>
         public SetSystemIdCommand(ScAddress address, Identifier identifier)
-            : base(0xa1, 0)
+            : base(CommandCode.SetSystemId, 0)
         {
             uint argumentsSize = 0;
             Arguments.Add(new Argument<ScAddress>(address));
