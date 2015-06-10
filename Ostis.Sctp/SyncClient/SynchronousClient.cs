@@ -8,7 +8,7 @@ using Ostis.Sctp.CallBacks;
 
 namespace Ostis.Sctp.SyncClient
 {
-    internal class SynchronousClient : IClient
+    internal class SynchronousClient : IClient, IDisposable
 #warning Сделать этот класс IDisposable
     {
         private readonly Socket client;
@@ -48,21 +48,40 @@ namespace Ostis.Sctp.SyncClient
             }
         }
 
-        public void Disconnect()
+        #region Implementation of IDisposable
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <filterpriority>2</filterpriority>
+        public void Dispose()
         {
-            try
+            disconnect();
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// dtor.
+        /// </summary>
+        ~SynchronousClient()
+        {
+            disconnect();
+        }
+
+        bool disposed;
+
+        private void disconnect()
+        {
+            if (!disposed)
             {
-                if (client.Connected)
-                {
-                    client.Disconnect(true);
-                    client.Close();
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
+                client.Disconnect(true);
+                //client.Close();
+                client.Dispose();
+                disposed = true;
             }
         }
+
+        #endregion
 
         public void Send(byte[] bytes)
         {

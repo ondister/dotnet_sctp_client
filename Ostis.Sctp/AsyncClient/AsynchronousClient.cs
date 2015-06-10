@@ -68,8 +68,9 @@ namespace Ostis.Sctp.AsyncClient
             }
         }
 
-        public void Disconnect()
+        public void Dispose()
         {
+#warning Кривая реализация Dispose оставлена умышленно ввиду скорой смерти этого класса.
             try
             {
                 client.BeginDisconnect(true, disconnectCallback, client);

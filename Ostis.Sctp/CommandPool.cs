@@ -6,7 +6,7 @@ namespace Ostis.Sctp
     /// <summary>
     /// Пулл команд для сервера (авто-соединение с сервером).
     /// </summary>
-#warning Реализовать интерфейс IDisposable как рекомендовано в MSDN
+#warning Удалить этот класс - вся функциональность должна быть реализована в клиенте.
     public class CommandPool : IDisposable
     {
         private readonly List<Command> commands;
@@ -69,13 +69,37 @@ namespace Ostis.Sctp
             counter++;
         }
 
+        #region Implementation of IDisposable
+
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
         /// <filterpriority>2</filterpriority>
         public void Dispose()
         {
-            client.Disconnect();
+            disconnect();
+            GC.SuppressFinalize(this);
         }
+
+        /// <summary>
+        /// dtor.
+        /// </summary>
+        ~CommandPool()
+        {
+            disconnect();
+        }
+
+        bool disposed;
+
+        private void disconnect()
+        {
+            if (!disposed)
+            {
+                client.Dispose();
+                disposed = true;
+            }
+        }
+
+        #endregion
     }
 }

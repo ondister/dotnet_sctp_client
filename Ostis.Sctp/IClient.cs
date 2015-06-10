@@ -1,14 +1,14 @@
-﻿using Ostis.Sctp.CallBacks;
+﻿using System;
+
+using Ostis.Sctp.CallBacks;
 
 namespace Ostis.Sctp
 {
-    internal interface IClient
+    internal interface IClient : IDisposable
     {
         event ReceiveEventHandler Received;
 
         void Connect(string address, int port);
-
-        void Disconnect();
 
         void Send(byte[] bytes);
 
