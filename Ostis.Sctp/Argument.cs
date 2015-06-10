@@ -16,12 +16,12 @@ namespace Ostis.Sctp
         public Argument(T value)
         { this.value = value; }
 
-        public UInt32 Length
+        public uint Length
         {
             get
             {
 #warning Заменить эту цепочку IF-ов нормальным наследованием с полиморфизмом
-                UInt32 length;
+                uint length;
                 if (value is ElementType)
                 {
                     byte[] bytes = BitConverter.GetBytes(Convert.ToUInt16(value));

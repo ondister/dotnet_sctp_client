@@ -32,7 +32,7 @@ namespace Ostis.Sctp.Responses
                 uint linksCount = BitConverter.ToUInt32(Bytes, Header.Length);
                 if (linksCount != 0)
                 {
-                    int beginIndex = sizeof(UInt32) + Header.Length;
+                    int beginIndex = sizeof(uint) + Header.Length;
                     for (int a = 0; a < linksCount; a++)
                     {
                         addresses.Add(ScAddress.GetFromBytes(bytes, beginIndex));

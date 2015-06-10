@@ -19,7 +19,7 @@ namespace Ostis.Sctp.Commands
         public CreateArcCommand(ElementType arcType, ScAddress beginAddress, ScAddress endAddress)
             : base(0x06, 0)
         {
-            UInt32 argumentsSize = 0;
+            uint argumentsSize = 0;
             Arguments.Add(new Argument<ElementType>(arcType));
             Arguments.Add(new Argument<ScAddress>(beginAddress));
             Arguments.Add(new Argument<ScAddress>(endAddress));

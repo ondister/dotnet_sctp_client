@@ -37,7 +37,7 @@ namespace Ostis.Sctp.Arguments
         /// ctor.
         /// </summary>
         /// <param name="value">значение</param>
-        public LinkContent(String value)
+        public LinkContent(string value)
         {
             contentType = LinkContentType.Text;
             bytes = SctpProtocol.TextEncoding.GetBytes(value);
@@ -68,7 +68,7 @@ namespace Ostis.Sctp.Arguments
         /// </summary>
         /// <param name="value">строковое значение</param>
         /// <returns>соднржимое ссылки+</returns>
-        public static implicit operator LinkContent(String value)
+        public static implicit operator LinkContent(string value)
         {
             return new LinkContent
             {

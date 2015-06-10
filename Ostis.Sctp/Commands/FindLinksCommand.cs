@@ -16,8 +16,8 @@ namespace Ostis.Sctp.Commands
         public FindLinksCommand(LinkContent content)
             : base(0x0a, 0)
         {
-            UInt32 argumentsSize = 0;
-            Arguments.Add(new Argument<UInt32>((uint)content.Bytes.Length));
+            uint argumentsSize = 0;
+            Arguments.Add(new Argument<uint>((uint)content.Bytes.Length));
             Arguments.Add(new Argument<LinkContent>(content));
             foreach (var argument in Arguments)
             {

@@ -16,7 +16,7 @@ namespace Ostis.Sctp.Commands
         public GetElementTypeCommand(ScAddress address)
             : base(0x02, 0)
         {
-            UInt32 argumentsSize = 0;
+            uint argumentsSize = 0;
             Arguments.Add(new Argument<ScAddress>(address));
             foreach (var argument in Arguments)
             {

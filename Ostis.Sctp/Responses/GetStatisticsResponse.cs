@@ -11,7 +11,7 @@ namespace Ostis.Sctp.Responses
     /// </summary>
     public class GetStatisticsResponse : Response
     {
-        private readonly UInt32 timeChecksCount;
+        private readonly uint timeChecksCount;
         private readonly List<StatisticsData> statisticsDataList;
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Ostis.Sctp.Responses
             }
             if (TimeChecksCount != 0)
             {
-                int beginIndex = sizeof(UInt32) + Header.Length;
+                int beginIndex = sizeof(uint) + Header.Length;
                 for (int statscount = 0; statscount < TimeChecksCount; statscount++)
                 {
                     statisticsDataList.Add(new StatisticsData(bytes, beginIndex));

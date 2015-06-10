@@ -19,8 +19,8 @@ namespace Ostis.Sctp
         public uint ArgumentsSize
         { get; set; }
 
-        public UInt32 Length
-        { get { return (UInt32)(Marshal.SizeOf(Code) + Marshal.SizeOf(Flags) + Marshal.SizeOf(Id) + Marshal.SizeOf(ArgumentsSize)); } }
+        public uint Length
+        { get { return (uint)(Marshal.SizeOf(Code) + Marshal.SizeOf(Flags) + Marshal.SizeOf(Id) + Marshal.SizeOf(ArgumentsSize)); } }
 
         public byte[] BytesStream
         {

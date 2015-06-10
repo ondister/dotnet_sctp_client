@@ -75,11 +75,11 @@ namespace Ostis.Sctp.Arguments
 		/// <returns></returns>
 		public static ScEvent GetFromBytes(byte[] bytesstream, int offset)
 	    {
-	        return bytesstream.Length >= sizeof(Int32) * 3 + offset
+	        return bytesstream.Length >= sizeof(int) * 3 + offset
                 ? new ScEvent(
-                    new SubscriptionId(BitConverter.ToInt32(bytesstream, sizeof(UInt32) * 0 + offset)),
-                    ScAddress.GetFromBytes(bytesstream, sizeof(UInt32) * 1 + offset),
-                    ScAddress.GetFromBytes(bytesstream, sizeof(UInt32) * 2 + offset))
+                    new SubscriptionId(BitConverter.ToInt32(bytesstream, sizeof(uint) * 0 + offset)),
+                    ScAddress.GetFromBytes(bytesstream, sizeof(uint) * 1 + offset),
+                    ScAddress.GetFromBytes(bytesstream, sizeof(uint) * 2 + offset))
                 : new ScEvent(new SubscriptionId(), new ScAddress(), new ScAddress());
 		}
 	}

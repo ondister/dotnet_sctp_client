@@ -10,9 +10,9 @@ namespace Ostis.Sctp
     public class ResponseHeader
     {
         private readonly byte code;
-        private readonly UInt32 id;
+        private readonly uint id;
         private readonly ReturnCode returnCode;
-        private readonly UInt32 returnSize;
+        private readonly uint returnSize;
         private readonly int length;
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Ostis.Sctp
         /// <summary>
         /// Уникальный идентификатор команды в потоке команд.
         /// </summary>
-        public UInt32 Id
+        public uint Id
         { get { return id; } }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Ostis.Sctp
         /// <summary>
         /// Размер содержимого ответа.
         /// </summary>
-        public UInt32 ReturnSize
+        public uint ReturnSize
         { get { return returnSize; } }
 
         /// <summary>

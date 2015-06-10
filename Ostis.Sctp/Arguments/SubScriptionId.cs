@@ -7,7 +7,7 @@ namespace Ostis.Sctp.Arguments
 	/// </summary>
 	public struct SubscriptionId : IArgument
 	{
-		private Int32 id;
+		private int id;
 		private readonly byte[] bytes;
 
 #warning Удалить это свойство - оно лишнее.
@@ -34,7 +34,7 @@ namespace Ostis.Sctp.Arguments
         /// <summary>
 		/// Идентификатор.
 		/// </summary>
-		public Int32 ID
+		public int ID
 		{
 			get { return id; }
 			set { id = value; }
@@ -44,7 +44,7 @@ namespace Ostis.Sctp.Arguments
 		/// ctor.
 		/// </summary>
 		/// <param name="id">идентификатор.</param>
-		public SubscriptionId(Int32 id)
+		public SubscriptionId(int id)
 		{
 			this.id = id;
             bytes = new byte[4];
@@ -55,9 +55,9 @@ namespace Ostis.Sctp.Arguments
 		/// </summary>
         /// <param name="bytes">массив байт</param>
         /// <returns>число</returns>
-		public static Int32 GetFromBytes(byte[] bytes)
+		public static int GetFromBytes(byte[] bytes)
 		{
-			return bytes.Length >= sizeof(Int32) ? BitConverter.ToInt32(bytes, sizeof(Int32)) : 0;
+			return bytes.Length >= sizeof(int) ? BitConverter.ToInt32(bytes, sizeof(int)) : 0;
 		}
 	}
 }

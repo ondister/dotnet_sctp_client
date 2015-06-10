@@ -33,7 +33,7 @@ namespace Ostis.Sctp.Responses
                 int addressesCount = (bytes.Length - Header.Length - 4) / 4;
 #warning Правильно ли записано выражение после расстановки скобок согласно правилам приоритета операторов C#???
                 int addressesInConstruction = ((int)constructionsCount == 0 ? 0 : addressesCount) / (int)constructionsCount;
-                int offset = sizeof(UInt32) + Header.Length;
+                int offset = sizeof(uint) + Header.Length;
                 for (uint c = 0; c < constructionsCount; c++)
                 {
                     var construction = new Construction();

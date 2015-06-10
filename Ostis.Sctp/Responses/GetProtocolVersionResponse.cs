@@ -9,12 +9,12 @@ namespace Ostis.Sctp.Responses
     /// </summary>
     public class GetProtocolVersionResponse : Response
     {
-		private readonly Int32 protocolVersion;
+		private readonly int protocolVersion;
 
         /// <summary>
         /// Версия протокола сервера.
         /// </summary>
-		public Int32 ProtocolVersion
+		public int ProtocolVersion
 		{ get { return protocolVersion; } }
 
         /// <summary>

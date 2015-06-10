@@ -16,7 +16,7 @@ namespace Ostis.Sctp.Commands
         public CreateNodeCommand(ElementType nodeType)
             : base(0x04, 0)
         {
-            UInt32 argumentsSize = 0;
+            uint argumentsSize = 0;
             Arguments.Add(new Argument<ElementType>(nodeType));
             foreach (var argument in Arguments)
             {

@@ -10,7 +10,7 @@ namespace Ostis.Sctp
         /// <summary>
         /// Длина массива байт.
         /// </summary>
-        UInt32 Length
+        uint Length
         { get; }
 #warning Удалить это свойство - оно лишнее.
 

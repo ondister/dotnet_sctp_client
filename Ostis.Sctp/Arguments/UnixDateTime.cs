@@ -9,7 +9,7 @@ namespace Ostis.Sctp.Arguments
     {
         private readonly byte[] bytes;
         private readonly uint length;
-        private readonly Int64 value;
+        private readonly long value;
 
         /// <summary>
         /// Длина массива байт.
@@ -32,7 +32,7 @@ namespace Ostis.Sctp.Arguments
             length = 0;
             bytes = new byte[0];
             TimeSpan diff = dateTime - Origin;
-            value = (Int64) diff.TotalMilliseconds;
+            value = (long) diff.TotalMilliseconds;
             bytes = BitConverter.GetBytes(value);
             length = (uint) bytes.Length;
         }
@@ -52,7 +52,7 @@ namespace Ostis.Sctp.Arguments
         /// </summary>
         /// <param name="milliseconds">Время в миллисекундах</param>
         /// <returns></returns>
-        public static DateTime ToDateTime(UInt64 milliseconds)
+        public static DateTime ToDateTime(ulong milliseconds)
         {
             return Origin.AddMilliseconds(milliseconds);
         }

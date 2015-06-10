@@ -27,7 +27,7 @@ namespace Ostis.Sctp.Responses
         //                {
         //                    if (this.LinksCount!= 0)
         //                    {
-        //                       int beginindex = sizeof(UInt32) + base.Header.Leight;
+        //                       int beginindex = sizeof(uint) + base.Header.Leight;
         //                        int scaddresslength = 4;
         //                        for (int addrcount = 0; addrcount < this.LinksCount; addrcount++)
         //                        {
@@ -58,7 +58,7 @@ namespace Ostis.Sctp.Responses
                 uint eventsCount = BitConverter.ToUInt32(bytes, Header.Length);
                 if (eventsCount > 0)
                 {
-                    int beginIndex = sizeof(UInt32) + Header.Length;
+                    int beginIndex = sizeof(uint) + Header.Length;
                     for (int e = 0; e < eventsCount; e++)
                     {
                         events.Add(ScEvent.GetFromBytes(bytes, beginIndex));

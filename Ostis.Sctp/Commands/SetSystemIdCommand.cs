@@ -17,9 +17,9 @@ namespace Ostis.Sctp.Commands
         public SetSystemIdCommand(ScAddress address, Identifier identifier)
             : base(0xa1, 0)
         {
-            UInt32 argumentsSize = 0;
+            uint argumentsSize = 0;
             Arguments.Add(new Argument<ScAddress>(address));
-            Arguments.Add(new Argument<UInt32>((uint) identifier.BytesStream.Length));
+            Arguments.Add(new Argument<uint>((uint) identifier.BytesStream.Length));
             Arguments.Add(new Argument<Identifier>(identifier));
             foreach (var argument in Arguments)
             {

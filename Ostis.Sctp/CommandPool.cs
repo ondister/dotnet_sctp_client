@@ -7,7 +7,6 @@ namespace Ostis.Sctp
     /// Пулл команд для сервера (авто-соединение с сервером).
     /// </summary>
 #warning Реализовать интерфейс IDisposable как рекомендовано в MSDN
-#warning Привести к единообразию используемые типы данных - UInt32 к uint
     public class CommandPool : IDisposable
     {
         private readonly List<Command> commands;

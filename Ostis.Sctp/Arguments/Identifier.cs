@@ -26,7 +26,7 @@ namespace Ostis.Sctp.Arguments
         /// ctor.
         /// </summary>
         /// <param name="value">значение</param>
-        public Identifier(String value)
+        public Identifier(string value)
         {
             bytes = SctpProtocol.TextEncoding.GetBytes(value);
         }
@@ -36,7 +36,7 @@ namespace Ostis.Sctp.Arguments
         /// </summary>
         /// <param name="value">строковое значение</param>
         /// <returns>SC-идентификатор</returns>
-        public static implicit operator Identifier(String value)
+        public static implicit operator Identifier(string value)
         {
             return new Identifier(value);
         }
@@ -48,7 +48,7 @@ namespace Ostis.Sctp.Arguments
         /// A <see cref="T:System.String"/> containing a fully qualified type name.
         /// </returns>
         /// <filterpriority>2</filterpriority>
-        public override String ToString()
+        public override string ToString()
         {
             return SctpProtocol.TextEncoding.GetString(bytes);
         }
