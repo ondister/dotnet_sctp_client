@@ -103,7 +103,6 @@
     <Compile Include="CommandPool.cs" />
     <Compile Include="IArgument.cs" />
     <Compile Include="IClient.cs" />
-    <Compile Include="ResponseFactory.cs" />
     <Compile Include="ResponseHeader.cs" />
     <Compile Include="Commands\EmitEventsCommand.cs" />
     <Compile Include="Arguments\ScEvent.cs" />

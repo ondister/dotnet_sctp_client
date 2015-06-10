@@ -12,7 +12,6 @@ namespace Ostis.Sctp
         private readonly List<Command> commands;
         private uint counter;
         private readonly IClient client;
-        private readonly ResponseFactory responseFactory;
 
         /// <summary>
         /// Подключен ли клиент к серверу.
@@ -33,7 +32,6 @@ namespace Ostis.Sctp
             client.Received += client_Received;
             client.Connect(address, port);
             commands = new List<Command>();
-            responseFactory = new ResponseFactory();
             counter = 1;
         }
 
@@ -42,14 +40,14 @@ namespace Ostis.Sctp
 #warning Что означает магическое число 10?
             if (arg.ReceivedBytes.Length >= 10)
             {
-                var response = responseFactory.GetResponse(arg.ReceivedBytes);
+                var response = Response.GetResponse(arg.ReceivedBytes);
                 commands.Find(cmd => cmd.Id == response.Header.Id).Response = response;
                 commands.Remove(commands.Find(cmd => cmd.Id == response.Header.Id));
             }
             else
             {
 #warning Куда идёт это значение?
-                Response response = responseFactory.GetResponse(arg.ReceivedBytes);
+                Response response = Response.GetResponse(arg.ReceivedBytes);
             }
             if (commands.Count == 0)
             {
