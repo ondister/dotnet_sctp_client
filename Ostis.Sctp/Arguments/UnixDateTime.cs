@@ -24,8 +24,7 @@ namespace Ostis.Sctp.Arguments
         /// <returns>System.DateTime</returns>
         public DateTime ToDateTime()
         {
-#warning Разобраться с Long/ULong.
-            return ToDateTime((ulong) value);
+            return ToDateTime(value);
         }
 
         /// <summary>
@@ -33,7 +32,7 @@ namespace Ostis.Sctp.Arguments
         /// </summary>
         /// <param name="milliseconds">Время в миллисекундах</param>
         /// <returns></returns>
-        public static DateTime ToDateTime(ulong milliseconds)
+        public static DateTime ToDateTime(long milliseconds)
         {
             return Origin.AddMilliseconds(milliseconds);
         }
