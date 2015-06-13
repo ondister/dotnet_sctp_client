@@ -7,18 +7,16 @@ namespace Ostis.Sctp
     /// </summary>
     public class ResponseHeader
     {
-        private readonly byte code;
+        private readonly CommandCode commandCode;
         private readonly uint id;
         private readonly ReturnCode returnCode;
         private readonly uint returnSize;
-        private readonly int length;
 
         /// <summary>
         /// Код команды, на которую получен ответ.
         /// </summary>
-        public byte Code
-        { get { return code; } }
-#warning А это не enum разве?
+        public CommandCode CommandCode
+        { get { return commandCode; } }
 
         /// <summary>
         /// Уникальный идентификатор команды в потоке команд.
@@ -39,12 +37,6 @@ namespace Ostis.Sctp
         { get { return returnSize; } }
 
         /// <summary>
-        /// Длина.
-        /// </summary>
-        public int Length
-        { get { return length; } }
-
-        /// <summary>
         /// ctor.
         /// </summary>
         /// <param name="bytes">массив байт заголовка</param>
@@ -52,11 +44,17 @@ namespace Ostis.Sctp
         {
             if (bytes.Length >= SctpProtocol.HeaderLength)
             {
-                code = bytes[0];
-                id = BitConverter.ToUInt32(bytes, 1);
-                returnCode = (ReturnCode) bytes[5];
-                returnSize = BitConverter.ToUInt32(bytes, 6);
-                length = bytes.Length;
+                commandCode = (CommandCode) bytes[0];
+                id = BitConverter.ToUInt32(bytes, sizeof(CommandCode));
+                returnCode = (ReturnCode) bytes[sizeof(CommandCode) + sizeof(uint)];
+                returnSize = BitConverter.ToUInt32(bytes, sizeof(CommandCode) + sizeof(uint) + sizeof(ReturnCode));
+            }
+            else
+            {
+                commandCode = CommandCode.Unknown;
+                id = default(uint);
+                returnCode = default(ReturnCode);
+                returnSize = default(uint);
             }
         }
     }

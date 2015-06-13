@@ -1,7 +1,5 @@
 ﻿using System;
 
-using Ostis.Sctp.CallBacks;
-
 namespace Ostis.Sctp.Responses
 {
     /// <summary>
@@ -26,7 +24,7 @@ namespace Ostis.Sctp.Responses
         {
             if (Header.ReturnCode == ReturnCode.Successfull)
             {
-                protocolVersion = BitConverter.ToInt32(bytes, Header.Length);
+                protocolVersion = BitConverter.ToInt32(bytes, SctpProtocol.HeaderLength);
             }
         }
     }

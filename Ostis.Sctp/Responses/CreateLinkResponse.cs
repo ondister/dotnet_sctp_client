@@ -1,7 +1,6 @@
 ﻿using System;
 
 using Ostis.Sctp.Arguments;
-using Ostis.Sctp.CallBacks;
 
 namespace Ostis.Sctp.Responses
 {
@@ -27,8 +26,9 @@ namespace Ostis.Sctp.Responses
         {
             if (Header.ReturnCode == ReturnCode.Successfull)
             {
-                createdLinkAddress.Offset = BitConverter.ToUInt16(bytes, Header.Length + 2);
-                createdLinkAddress.Segment = BitConverter.ToUInt16(bytes, Header.Length);
+#warning Использовать метод Parse
+                createdLinkAddress.Offset = BitConverter.ToUInt16(bytes, SctpProtocol.HeaderLength + 2);
+                createdLinkAddress.Segment = BitConverter.ToUInt16(bytes, SctpProtocol.HeaderLength);
             }
         }
     }

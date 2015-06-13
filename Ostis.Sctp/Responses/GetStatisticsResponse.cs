@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 
 using Ostis.Sctp.Arguments;
-using Ostis.Sctp.CallBacks;
 
 namespace Ostis.Sctp.Responses
 {
@@ -36,11 +35,11 @@ namespace Ostis.Sctp.Responses
             statisticsDataList = new List<StatisticsData>();
             if (Header.ReturnCode == ReturnCode.Successfull)
             {
-                timeChecksCount = BitConverter.ToUInt32(Bytes, Header.Length);
+                timeChecksCount = BitConverter.ToUInt32(Bytes, SctpProtocol.HeaderLength);
             }
             if (TimeChecksCount != 0)
             {
-                int beginIndex = sizeof(uint) + Header.Length;
+                int beginIndex = sizeof(uint) + SctpProtocol.HeaderLength;
                 for (int statscount = 0; statscount < TimeChecksCount; statscount++)
                 {
                     statisticsDataList.Add(new StatisticsData(bytes, beginIndex));

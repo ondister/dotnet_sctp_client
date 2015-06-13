@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 
 using Ostis.Sctp.Arguments;
-using Ostis.Sctp.CallBacks;
 
 namespace Ostis.Sctp.Responses
 {
@@ -29,11 +28,11 @@ namespace Ostis.Sctp.Responses
             constructions = new List<List<ScAddress>>();
             if (Header.ReturnCode == ReturnCode.Successfull)
             {
-                uint constructionsCount = BitConverter.ToUInt32(Bytes, Header.Length);
-                int addressesCount = (bytes.Length - Header.Length - 4) / 4;
+                uint constructionsCount = BitConverter.ToUInt32(Bytes, SctpProtocol.HeaderLength);
+                int addressesCount = (bytes.Length - SctpProtocol.HeaderLength - sizeof(uint)) / SctpProtocol.ScAddressLength;
 #warning Правильно ли записано выражение после расстановки скобок согласно правилам приоритета операторов C#???
                 int addressesInConstruction = ((int)constructionsCount == 0 ? 0 : addressesCount) / (int)constructionsCount;
-                int offset = sizeof(uint) + Header.Length;
+                int offset = sizeof(uint) + SctpProtocol.HeaderLength;
                 for (uint c = 0; c < constructionsCount; c++)
                 {
                     var construction = new List<ScAddress>();

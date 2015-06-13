@@ -10,15 +10,6 @@ namespace Ostis.Sctp
     /// </summary>
     public abstract class Response
     {
-        private readonly byte[] bytes;
-        private readonly ResponseHeader header;
-
-        /// <summary>
-        /// Массив байт.
-        /// </summary>
-        public byte[] Bytes
-        { get { return bytes; } }
-
         /// <summary>
         /// Заголовок.
         /// </summary>
@@ -26,24 +17,28 @@ namespace Ostis.Sctp
         { get { return header; } }
 
         /// <summary>
+        /// Массив байт.
+        /// </summary>
+        public byte[] Bytes
+        { get { return bytes; } }
+
+        private readonly ResponseHeader header;
+        private readonly byte[] bytes;
+        
+        /// <summary>
         /// ctor.
         /// </summary>
         /// <param name="bytes">массив байт ответа</param>
         protected Response(byte[] bytes)
         {
             this.bytes = bytes;
-            var headerBytes = new byte[SctpProtocol.HeaderLength];
-            if (bytes.Length >= SctpProtocol.HeaderLength)
-            {
-                Array.Copy(bytes, headerBytes, SctpProtocol.HeaderLength);
-            }
-            header = new ResponseHeader(headerBytes);
+            header = new ResponseHeader(bytes);
         }
 
         internal static Response GetResponse(byte[] bytes)
         {
             CommandCode code = CommandCode.Unknown;
-            if (bytes.Length != 0)
+            if (bytes.Length > 0)
             {
                 code = (CommandCode) bytes[0];
             }

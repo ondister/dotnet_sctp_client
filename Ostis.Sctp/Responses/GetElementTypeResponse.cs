@@ -1,8 +1,5 @@
 ﻿using System;
 
-using Ostis.Sctp.Arguments;
-using Ostis.Sctp.CallBacks;
-
 namespace Ostis.Sctp.Responses
 {
     /// <summary>
@@ -26,7 +23,7 @@ namespace Ostis.Sctp.Responses
             : base(bytes)
         {
             elementType = Header.ReturnCode == ReturnCode.Successfull
-                ? (ElementType) BitConverter.ToUInt16(bytes, Header.Length)
+                ? (ElementType) BitConverter.ToUInt16(bytes, SctpProtocol.HeaderLength)
                 : ElementType.Unknown;
         }
     }

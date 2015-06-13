@@ -1,7 +1,6 @@
 ﻿using System;
 
 using Ostis.Sctp.Arguments;
-using Ostis.Sctp.CallBacks;
 
 namespace Ostis.Sctp.Responses
 {
@@ -27,7 +26,8 @@ namespace Ostis.Sctp.Responses
         {
             if (Header.ReturnCode == ReturnCode.Successfull)
             {
-                subscriptionId.Id = BitConverter.ToInt32(bytes, Header.Length);
+#warning Parse
+                subscriptionId.Id = BitConverter.ToInt32(bytes, SctpProtocol.HeaderLength);
             }
         }
     }

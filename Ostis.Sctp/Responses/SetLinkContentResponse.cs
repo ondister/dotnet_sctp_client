@@ -1,6 +1,4 @@
-﻿using Ostis.Sctp.CallBacks;
-
-namespace Ostis.Sctp.Responses
+﻿namespace Ostis.Sctp.Responses
 {
     /// <summary>
     /// Ответ на команду: Установка содержимого SC-ссылки.

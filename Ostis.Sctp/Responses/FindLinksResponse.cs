@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 
 using Ostis.Sctp.Arguments;
-using Ostis.Sctp.CallBacks;
 
 namespace Ostis.Sctp.Responses
 {
@@ -29,11 +28,11 @@ namespace Ostis.Sctp.Responses
             addresses = new List<ScAddress>();
             if (Header.ReturnCode == ReturnCode.Successfull)
             {
-                uint linksCount = BitConverter.ToUInt32(Bytes, Header.Length);
+                uint linksCount = BitConverter.ToUInt32(Bytes, SctpProtocol.HeaderLength);
                 if (linksCount != 0)
                 {
-                    int beginIndex = sizeof(uint) + Header.Length;
-                    for (int a = 0; a < linksCount; a++)
+                    int beginIndex = sizeof(uint) + SctpProtocol.HeaderLength;
+                    for (uint i = 0; i < linksCount; i++)
                     {
                         addresses.Add(ScAddress.Parse(bytes, beginIndex));
                         beginIndex += SctpProtocol.ScAddressLength;

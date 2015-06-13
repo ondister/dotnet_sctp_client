@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 
 using Ostis.Sctp.Arguments;
-using Ostis.Sctp.CallBacks;
 
 namespace Ostis.Sctp.Responses
 {
@@ -19,32 +18,6 @@ namespace Ostis.Sctp.Responses
         public List<ScEvent> ScEvents
         { get { return events; } }
 
-        //        public List<ScAddress> ScAddresses
-        //        {
-        //            get 
-        //            {
-        //                if (base.Header.ReturnCode == enumReturnCode.Successfull)
-        //                {
-        //                    if (this.LinksCount!= 0)
-        //                    {
-        //                       int beginindex = sizeof(uint) + base.Header.Leight;
-        //                        int scaddresslength = 4;
-        //                        for (int addrcount = 0; addrcount < this.LinksCount; addrcount++)
-        //                        {
-        //                            ScAddress tmpadr = ScAddress.GetFromBytes(base.BytesStream, beginindex);
-        //                            _scaddresses.Add(tmpadr);
-        //                            beginindex += scaddresslength;
-        //
-        //                        }
-        //                    }
-        //
-        //                    return _scaddresses;
-        //                }
-        //
-        //                return _scaddresses; 
-        //            }
-        //        }
-
         /// <summary>
         /// ctor.
         /// </summary>
@@ -55,11 +28,11 @@ namespace Ostis.Sctp.Responses
             events = new List<ScEvent>();
             if (Header.ReturnCode == ReturnCode.Successfull)
             {
-                uint eventsCount = BitConverter.ToUInt32(bytes, Header.Length);
+                uint eventsCount = BitConverter.ToUInt32(bytes, SctpProtocol.HeaderLength);
                 if (eventsCount > 0)
                 {
-                    int beginIndex = sizeof(uint) + Header.Length;
-                    for (int e = 0; e < eventsCount; e++)
+                    int beginIndex = sizeof(uint) + SctpProtocol.HeaderLength;
+                    for (uint i = 0; i < eventsCount; i++)
                     {
                         events.Add(ScEvent.Parse(bytes, beginIndex));
                         beginIndex += SctpProtocol.ScEventLength;
