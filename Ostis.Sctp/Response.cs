@@ -48,7 +48,7 @@ namespace Ostis.Sctp
             CommandCode code = CommandCode.Unknown;
             if (bytes.Length != 0)
             {
-                code = (CommandCode)bytes[0];
+                code = (CommandCode) bytes[0];
             }
 
             Func<byte[], Response> constructor;

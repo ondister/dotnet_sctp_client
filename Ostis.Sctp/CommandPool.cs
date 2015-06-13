@@ -37,20 +37,13 @@ namespace Ostis.Sctp
 
         private void client_Received(IClient sender, CallBacks.ReceiveEventArgs arg)
         {
-#warning Что означает магическое число 10?
-            if (arg.ReceivedBytes.Length >= 10)
-            {
-                var response = Response.GetResponse(arg.ReceivedBytes);
-                commands.Find(cmd => cmd.Id == response.Header.Id).Response = response;
-                commands.Remove(commands.Find(cmd => cmd.Id == response.Header.Id));
-            }
-            else
-            {
-#warning Куда идёт это значение?
-                Response response = Response.GetResponse(arg.ReceivedBytes);
-            }
+            var response = Response.GetResponse(arg.ReceivedBytes);
+            commands.Find(cmd => cmd.Id == response.Header.Id).Response = response;
+            commands.Remove(commands.Find(cmd => cmd.Id == response.Header.Id));
+#warning здесь часом не должно было вызываться событие прихода ответа на команду?
             if (commands.Count == 0)
             {
+#warning Очень, очень скользкое место - обнуление счётчика команд.
                 counter = 1;
             }
         }
