@@ -9,7 +9,7 @@
         /// ctor.
         /// </summary>
         public CreateLinkCommand()
-            : base(CommandCode.CreateLink, 0)
+            : base(CommandCode.CreateLink)
         { }
     }
 }

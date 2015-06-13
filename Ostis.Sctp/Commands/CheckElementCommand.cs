@@ -12,7 +12,7 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="address">SC-адрес проверяемого SC-элемента</param>
         public CheckElementCommand(ScAddress address)
-            : base(CommandCode.CheckElement, 0)
+            : base(CommandCode.CheckElement)
         {
             Arguments.Add(address);
         }

@@ -12,7 +12,7 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="template">шаблон для поиска</param>
         public IterateElementsCommand(ConstructionTemplate template)
-            : base(CommandCode.IterateElements, 0)
+            : base(CommandCode.IterateElements)
         {
             Arguments.Add(template);
         }

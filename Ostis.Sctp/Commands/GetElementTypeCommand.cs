@@ -12,7 +12,7 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="address">SC-адрес элемента для получения типа</param>
         public GetElementTypeCommand(ScAddress address)
-            : base(CommandCode.GetElementType, 0)
+            : base(CommandCode.GetElementType)
         {
             Arguments.Add(address);
         }

@@ -9,7 +9,7 @@
         /// ctor.
         /// </summary>
         public EmitEventsCommand()
-            : base(CommandCode.EmitEvents, 0)
+            : base(CommandCode.EmitEvents)
         { }
     }
 }

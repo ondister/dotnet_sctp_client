@@ -13,7 +13,7 @@ namespace Ostis.Sctp.Commands
         /// <param name="linkAddress">SC-адрес ссылки</param>
         /// <param name="content">данные устанавливаемого содержимого</param>
         public SetLinkContentCommand(ScAddress linkAddress, LinkContent content)
-            : base(CommandCode.SetLinkContent, 0)
+            : base(CommandCode.SetLinkContent)
         {
             Arguments.Add(linkAddress);
             Arguments.Add(content);

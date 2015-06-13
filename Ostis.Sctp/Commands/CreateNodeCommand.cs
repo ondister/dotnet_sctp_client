@@ -12,7 +12,7 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="nodeType">тип создаваемого SC-узла</param>
         public CreateNodeCommand(ElementType nodeType)
-            : base(CommandCode.CreateNode, 0)
+            : base(CommandCode.CreateNode)
         {
             Arguments.Add(new ElementTypeArgument(nodeType));
         }

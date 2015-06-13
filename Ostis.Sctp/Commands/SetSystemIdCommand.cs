@@ -13,7 +13,7 @@ namespace Ostis.Sctp.Commands
         /// <param name="address">адрес SC-эелемента</param>
         /// <param name="identifier">идентификатор</param>
         public SetSystemIdCommand(ScAddress address, Identifier identifier)
-            : base(CommandCode.SetSystemId, 0)
+            : base(CommandCode.SetSystemId)
         {
             Arguments.Add(address);
             Arguments.Add(identifier);

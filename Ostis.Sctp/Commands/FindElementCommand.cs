@@ -12,7 +12,7 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="identifier">идентификатор</param>
         public FindElementCommand(Identifier identifier)
-            : base(CommandCode.FindElement, 0)
+            : base(CommandCode.FindElement)
         {
             Arguments.Add(identifier);
         }

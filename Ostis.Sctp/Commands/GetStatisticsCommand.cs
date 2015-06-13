@@ -13,7 +13,7 @@ namespace Ostis.Sctp.Commands
         /// <param name="startTime">нижняя временная граница</param>
         /// <param name="endTime">верхняя временная граница</param>
         public GetStatisticsCommand(UnixDateTime startTime, UnixDateTime endTime)
-            : base(CommandCode.GetStatistics, 0)
+            : base(CommandCode.GetStatistics)
         {
             Arguments.Add(startTime);
             Arguments.Add(endTime);

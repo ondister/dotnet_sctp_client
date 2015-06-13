@@ -9,7 +9,7 @@
         /// ctor.
         /// </summary>
 		public GetProtocolVersionCommand()
-            : base(CommandCode.GetProtocolVersion, 0)
+            : base(CommandCode.GetProtocolVersion)
         { }
     }
 }

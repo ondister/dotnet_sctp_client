@@ -12,7 +12,7 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="content">содержимое для поиска</param>
         public FindLinksCommand(LinkContent content)
-            : base(CommandCode.FindLinks, 0)
+            : base(CommandCode.FindLinks)
         {
             Arguments.Add(content);
         }

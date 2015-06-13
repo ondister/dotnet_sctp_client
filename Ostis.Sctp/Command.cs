@@ -22,9 +22,8 @@ namespace Ostis.Sctp
         { get; set; }
 
         /// <summary>
-        /// Параметры.
+        /// Байт параметров (флагов) команды.
         /// </summary>
-#warning Можно ли преобразовать этот байт во флаговый enum?
         public byte Flags
         { get; set; }
 
@@ -84,11 +83,9 @@ namespace Ostis.Sctp
         /// ctor.
         /// </summary>
         /// <param name="code">код</param>
-        /// <param name="flags">флаги</param>
-        protected Command(CommandCode code, byte flags)
+        protected Command(CommandCode code)
         {
             Code = code;
-            Flags = flags;
             Arguments = new List<IArgument>();
             commandDoneArgument = new CommandDoneEventArgs();
         }

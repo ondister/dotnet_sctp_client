@@ -12,7 +12,7 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="id">событие</param>
 		public DeleteSubscriptionCommand(SubscriptionId id)
-			: base(CommandCode.DeleteSubscription, 0)
+			: base(CommandCode.DeleteSubscription)
         {
             Arguments.Add(id);
         }

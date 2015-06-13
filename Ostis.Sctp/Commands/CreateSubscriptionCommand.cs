@@ -13,7 +13,7 @@ namespace Ostis.Sctp.Commands
         /// <param name="type">тип события</param>
         /// <param name="address">SC-адрес</param>
 		public CreateSubscriptionCommand(EventsType type, ScAddress address)
-            : base(CommandCode.CreateSubscription, 0)
+            : base(CommandCode.CreateSubscription)
         {
             Arguments.Add (new EventsTypeArgument(type));
 			Arguments.Add(address);

@@ -15,7 +15,7 @@ namespace Ostis.Sctp.Commands
         /// <param name="beginAddress">SC-адрес начального элемента SC-дуги</param>
         /// <param name="endAddress">SC-адрес конечного элемента SC-дуги</param>
         public CreateArcCommand(ElementType arcType, ScAddress beginAddress, ScAddress endAddress)
-            : base(CommandCode.CreateArc, 0)
+            : base(CommandCode.CreateArc)
         {
             Arguments.Add(new ElementTypeArgument(arcType));
             Arguments.Add(beginAddress);

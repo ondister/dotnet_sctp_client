@@ -12,7 +12,7 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="address">SC-адрес ссылки для получения содержимого</param>
         public GetLinkContentCommand(ScAddress address)
-            : base(CommandCode.GetLinkContent, 0)
+            : base(CommandCode.GetLinkContent)
         {
             Arguments.Add(address);
         }
