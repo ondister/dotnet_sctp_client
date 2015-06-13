@@ -48,7 +48,7 @@
     <Compile Include="Enums\ConstructionTemplateType.cs" />
     <Compile Include="Arguments\UnixDateTime.cs" />
     <Compile Include="Enums\ElementType.cs" />
-    <Compile Include="Arguments\EventsType.cs" />
+    <Compile Include="Enums\EventsType.cs" />
     <Compile Include="Arguments\Identifier.cs" />
     <Compile Include="Arguments\LinkContent.cs" />
     <Compile Include="Enums\LinkContentType.cs" />
