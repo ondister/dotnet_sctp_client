@@ -1,4 +1,4 @@
-namespace Ostis.Sctp.Arguments
+namespace Ostis.Sctp
 {
     /// <summary>
     /// Тип события.

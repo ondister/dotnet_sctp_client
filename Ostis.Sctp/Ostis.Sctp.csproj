@@ -108,5 +108,8 @@
     <Compile Include="Responses\EmitEventsResponse.cs" />
     <Compile Include="Commands\IterateConstructionsCommand.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Enums\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

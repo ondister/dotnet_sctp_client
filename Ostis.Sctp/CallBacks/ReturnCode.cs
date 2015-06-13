@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ostis.Sctp.CallBacks
+namespace Ostis.Sctp
 {
     /// <summary>
     /// Код выполнения команды.
