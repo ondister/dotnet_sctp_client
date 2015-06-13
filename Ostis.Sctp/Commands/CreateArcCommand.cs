@@ -7,7 +7,6 @@ namespace Ostis.Sctp.Commands
     /// </summary>
     public class CreateArcCommand : Command
     {
-#warning Во всех командах в базовый конструктор должен передаваться enum, а не числовой код!
         /// <summary>
         /// ctor.
         /// </summary>
