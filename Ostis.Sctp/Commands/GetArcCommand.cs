@@ -14,13 +14,7 @@ namespace Ostis.Sctp.Commands
         public GetArcCommand(ScAddress arcAddress)
             : base(CommandCode.GetArc, 0)
         {
-            uint argumentsSize = 0;
             Arguments.Add(new Argument<ScAddress>(arcAddress));
-            foreach (var argument in Arguments)
-            {
-                argumentsSize += argument.Length;
-            }
-            Header.ArgumentsSize = argumentsSize;
         }
     }
 }

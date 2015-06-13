@@ -99,7 +99,6 @@
     <Compile Include="Command.cs" />
     <Compile Include="Response.cs" />
     <Compile Include="Argument.cs" />
-    <Compile Include="CommandHeader.cs" />
     <Compile Include="CommandPool.cs" />
     <Compile Include="IArgument.cs" />
     <Compile Include="IClient.cs" />

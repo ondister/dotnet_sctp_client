@@ -15,14 +15,8 @@ namespace Ostis.Sctp.Commands
         public GetStatisticsCommand(UnixDateTime startTime, UnixDateTime endTime)
             : base(CommandCode.GetStatistics, 0)
         {
-            uint argumentsSize = 0;
             Arguments.Add(new Argument<UnixDateTime>(startTime));
             Arguments.Add(new Argument<UnixDateTime>(endTime));
-            foreach (var argument in Arguments)
-            {
-                argumentsSize += argument.Length;
-            }
-            Header.ArgumentsSize = argumentsSize;
         }
     }
 }

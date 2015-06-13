@@ -14,13 +14,7 @@ namespace Ostis.Sctp.Commands
         public IterateElementsCommand(ConstructionTemplate template)
             : base(CommandCode.IterateElements, 0)
         {
-            uint argumentsSize = 0;
             Arguments.Add(new Argument<ConstructionTemplate>(template));
-            foreach (var argument in Arguments)
-            {
-                argumentsSize += argument.Length;
-            }
-            Header.ArgumentsSize = argumentsSize;
         }
     }
 }

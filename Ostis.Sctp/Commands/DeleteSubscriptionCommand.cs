@@ -14,13 +14,7 @@ namespace Ostis.Sctp.Commands
 		public DeleteSubscriptionCommand(SubscriptionId id)
 			: base(CommandCode.DeleteSubscription, 0)
         {
-            uint argumentsSize = 0;
             Arguments.Add(new Argument<SubscriptionId>(id));
-            foreach (var argument in Arguments)
-            {
-                argumentsSize += argument.Length;
-            }
-            Header.ArgumentsSize = argumentsSize;
         }
     }
 }

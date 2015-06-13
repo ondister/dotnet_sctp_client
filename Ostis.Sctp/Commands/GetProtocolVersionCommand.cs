@@ -10,8 +10,6 @@
         /// </summary>
 		public GetProtocolVersionCommand()
             : base(CommandCode.GetProtocolVersion, 0)
-        {
-            Header.ArgumentsSize = 0;
-        }
+        { }
     }
 }

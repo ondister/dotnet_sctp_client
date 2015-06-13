@@ -14,13 +14,7 @@ namespace Ostis.Sctp.Commands
         public DeleteElementCommand(ScAddress address)
             : base(CommandCode.DeleteElement, 0)
         {
-            uint argumentsSize = 0;
             Arguments.Add(new Argument<ScAddress>(address));
-            foreach (var argument in Arguments)
-            {
-                argumentsSize += argument.Length;
-            }
-            Header.ArgumentsSize = argumentsSize;
         }
     }
 }

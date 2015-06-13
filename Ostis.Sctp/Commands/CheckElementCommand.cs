@@ -14,13 +14,7 @@ namespace Ostis.Sctp.Commands
         public CheckElementCommand(ScAddress address)
             : base(CommandCode.CheckElement, 0)
         {
-            uint argumentsSize = 0;
             Arguments.Add(new Argument<ScAddress>(address));
-            foreach (var argument in Arguments)
-            {
-                argumentsSize += argument.Length;
-            }
-            Header.ArgumentsSize = argumentsSize;
         }
     }
 }

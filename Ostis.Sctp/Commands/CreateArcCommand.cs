@@ -17,15 +17,9 @@ namespace Ostis.Sctp.Commands
         public CreateArcCommand(ElementType arcType, ScAddress beginAddress, ScAddress endAddress)
             : base(CommandCode.CreateArc, 0)
         {
-            uint argumentsSize = 0;
             Arguments.Add(new Argument<ElementType>(arcType));
             Arguments.Add(new Argument<ScAddress>(beginAddress));
             Arguments.Add(new Argument<ScAddress>(endAddress));
-            foreach (var argument in Arguments)
-            {
-                argumentsSize += argument.Length;
-            }
-            Header.ArgumentsSize = argumentsSize;
         }
     }
 }

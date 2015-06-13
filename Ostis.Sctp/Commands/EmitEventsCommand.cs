@@ -10,8 +10,6 @@
         /// </summary>
         public EmitEventsCommand()
             : base(CommandCode.EmitEvents, 0)
-        {
-            Header.ArgumentsSize = 0;
-        }
+        { }
     }
 }
