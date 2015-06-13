@@ -101,8 +101,7 @@ namespace Ostis.Sctp.Arguments
         /// <param name="offset">смещение в массиве</param>
         public StatisticsData(byte[] bytes, int offset)
         {
-#warning Magic number. SctpProtocol.StatisticsDataLength?
-            if (bytes.Length >= sizeof(ulong) * 11 + 1 + offset)
+            if (bytes.Length >= SctpProtocol.StatisticsDataLength + offset)
             {
                 time = UnixDateTime.ToDateTime(BitConverter.ToInt64(bytes, sizeof(ulong) * 0 + offset));
                 nodeCount = BitConverter.ToUInt64(bytes, sizeof(ulong) * 1 + offset);

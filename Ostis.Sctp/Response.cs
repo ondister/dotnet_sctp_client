@@ -35,10 +35,7 @@ namespace Ostis.Sctp
             var headerBytes = new byte[SctpProtocol.HeaderLength];
             if (bytes.Length >= SctpProtocol.HeaderLength)
             {
-                for (int i = 0; i < SctpProtocol.HeaderLength; i++)
-                {
-                    headerBytes[i] = bytes[i];
-                }
+                Array.Copy(bytes, headerBytes, SctpProtocol.HeaderLength);
             }
             header = new ResponseHeader(headerBytes);
         }

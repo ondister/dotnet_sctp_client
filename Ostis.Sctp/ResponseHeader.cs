@@ -1,7 +1,5 @@
 ﻿using System;
 
-using Ostis.Sctp.CallBacks;
-
 namespace Ostis.Sctp
 {
     /// <summary>
@@ -16,16 +14,11 @@ namespace Ostis.Sctp
         private readonly int length;
 
         /// <summary>
-        /// Длина.
-        /// </summary>
-        public int Length
-        { get { return length; } }
-
-        /// <summary>
         /// Код команды, на которую получен ответ.
         /// </summary>
         public byte Code
         { get { return code; } }
+#warning А это не enum разве?
 
         /// <summary>
         /// Уникальный идентификатор команды в потоке команд.
@@ -46,12 +39,18 @@ namespace Ostis.Sctp
         { get { return returnSize; } }
 
         /// <summary>
+        /// Длина.
+        /// </summary>
+        public int Length
+        { get { return length; } }
+
+        /// <summary>
         /// ctor.
         /// </summary>
         /// <param name="bytes">массив байт заголовка</param>
         public ResponseHeader(byte[] bytes)
         {
-            if (bytes.Length >= 10)
+            if (bytes.Length >= SctpProtocol.HeaderLength)
             {
                 code = bytes[0];
                 id = BitConverter.ToUInt32(bytes, 1);

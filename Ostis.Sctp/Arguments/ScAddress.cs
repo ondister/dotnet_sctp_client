@@ -30,8 +30,7 @@ namespace Ostis.Sctp.Arguments
         public static ScAddress Parse(byte[] bytes, int offset)
         {
             var address = new ScAddress();
-#warning Что за константа должна быть в этом условии?
-            if (bytes.Length >= sizeof(ushort) * 2 + offset)
+            if (bytes.Length >= SctpProtocol.ScAddressLength + offset)
             {
                 address.segment = BitConverter.ToUInt16(bytes, sizeof(ushort) * 0 + offset);
                 address.offset = BitConverter.ToUInt16(bytes, sizeof(ushort) * 1 + offset);

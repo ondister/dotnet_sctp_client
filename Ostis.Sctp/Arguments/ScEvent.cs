@@ -15,7 +15,7 @@ namespace Ostis.Sctp.Arguments
 	    /// <summary>
 	    /// ID подписки.
 	    /// </summary>
-	    public SubscriptionId ID
+	    public SubscriptionId Id
 	    { get { return subscriptionId; } }
 
 	    /// <summary>
@@ -53,7 +53,7 @@ namespace Ostis.Sctp.Arguments
 		/// <returns></returns>
 		public static ScEvent Parse(byte[] bytes, int offset)
 	    {
-	        return bytes.Length >= sizeof(int) * 3 + offset
+	        return bytes.Length >= SctpProtocol.ScEventLength + offset
                 ? new ScEvent(
                     SubscriptionId.Parse(bytes, sizeof(uint) * 0 + offset),
                     ScAddress.Parse(bytes, sizeof(uint) * 1 + offset),

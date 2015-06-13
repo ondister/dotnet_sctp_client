@@ -27,7 +27,7 @@ namespace Ostis.Sctp.Responses
         {
             if (Header.ReturnCode == ReturnCode.Successfull)
             {
-                subscriptionId.ID = BitConverter.ToInt32(bytes, Header.Length);
+                subscriptionId.Id = BitConverter.ToInt32(bytes, Header.Length);
             }
         }
     }

@@ -9,11 +9,11 @@ namespace Ostis.Sctp.Arguments
 	{
 		private int id;
 
-#warning Что за загадочная хрень соструктурами мешает сконвертировать эти 2 свойства в авто-свойства?
+#warning Что за загадочная хрень со структурами мешает сконвертировать эти 2 свойства в авто-свойства?
         /// <summary>
 		/// Идентификатор.
 		/// </summary>
-		public int ID
+		public int Id
 		{
 			get { return id; }
 			set { id = value; }
@@ -36,7 +36,7 @@ namespace Ostis.Sctp.Arguments
         /// <returns>число</returns>
         public static SubscriptionId Parse(byte[] bytes, int offset)
 		{
-            return new SubscriptionId(bytes.Length >= sizeof(int) ? BitConverter.ToInt32(bytes, sizeof(int) + offset) : 0);
+            return new SubscriptionId(bytes.Length >= SctpProtocol.SubscriptionIdLength ? BitConverter.ToInt32(bytes, sizeof(int) + offset) : 0);
 		}
 
         #region Реализация интерфеса IArgument

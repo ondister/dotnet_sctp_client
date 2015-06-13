@@ -20,22 +20,31 @@ namespace Ostis.Sctp
         /// <summary>
         /// Длина SCTP-заголовка.
         /// </summary>
-        public const int HeaderLength = 10;
+        public const int HeaderLength = sizeof(byte) + sizeof(uint) + sizeof(byte) + sizeof(uint); // Result Code, ID, Return Code, Return Size
+
+        #region Длины передаваемых данных
 
         /// <summary>
         /// Размер данных SC-адреса.
         /// </summary>
-        public const int ScAddressLength = 4;
+        public const int ScAddressLength = sizeof(ushort) * 2; // Segment : Offset
+
+        /// <summary>
+        /// Размер данных ID подписки.
+        /// </summary>
+        public const int SubscriptionIdLength = sizeof(int); // ID
 
         /// <summary>
         /// Размер данных SC-события.
         /// </summary>
-        public const int ScEventLength = 12;
+        public const int ScEventLength = SubscriptionIdLength + ScAddressLength*2; // Subscription ID + Element + Arc
 
         /// <summary>
         /// Размер данных структуры статистики.
         /// </summary>
-        public const int StatisticsDataLength = 89;
+        public const int StatisticsDataLength = sizeof(ulong) * 11 + sizeof(byte); // 1 UnixDate (ulong) + 10 x raw ulong + 1 bool (byte)
+
+        #endregion
 
         /// <summary>
         /// Кодировка текста по умолчанию.
