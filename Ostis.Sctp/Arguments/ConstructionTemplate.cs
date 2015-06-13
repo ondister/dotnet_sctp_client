@@ -14,7 +14,14 @@ namespace Ostis.Sctp.Arguments
         internal ConstructionTemplateType Type
         { get { return templateType; } }
 
-#warning Конструкторы не вызывают друг друга!
+        #region Конструкторы
+
+        private ConstructionTemplate(ConstructionTemplateType type)
+        {
+            arguments = new List<IArgument>();
+            templateType = type;
+        }
+
         /// <summary>
         /// ctor.
         /// </summary>
@@ -22,10 +29,8 @@ namespace Ostis.Sctp.Arguments
         /// <param name="a1">тип исходящей дуги дуги</param>
         /// <param name="a2">тип конечного sc-элемента (дуги или узла)</param>
         public ConstructionTemplate(ScAddress f, ElementType a1, ElementType a2)
+            : this(ConstructionTemplateType.t_3F_A_A)
         {
-            arguments = new List<IArgument>();
-
-            templateType = ConstructionTemplateType.t_3F_A_A;
             arguments.Add(f);
             arguments.Add(new ElementTypeArgument(a1));
             arguments.Add(new ElementTypeArgument(a2));
@@ -38,10 +43,8 @@ namespace Ostis.Sctp.Arguments
         /// <param name="a2">тип входящей дуги</param>
         /// <param name="f">адрес конечного sc-элемента</param>
         public ConstructionTemplate(ElementType a1, ElementType a2, ScAddress f)
+            : this(ConstructionTemplateType.t_3A_A_F)
         {
-            arguments = new List<IArgument>();
-
-            templateType = ConstructionTemplateType.t_3A_A_F;
             arguments.Add(new ElementTypeArgument(a1));
             arguments.Add(new ElementTypeArgument(a2));
             arguments.Add(f);
@@ -54,10 +57,8 @@ namespace Ostis.Sctp.Arguments
         /// <param name="a1">тип искомой дуги</param>
         /// <param name="f2">адрес конечного sc-элемента</param>
         public ConstructionTemplate(ScAddress f1, ElementType a1, ScAddress f2)
+            : this(ConstructionTemplateType.t_3F_A_F)
         {
-            arguments = new List<IArgument>();
-
-            templateType = ConstructionTemplateType.t_3F_A_F;
             arguments.Add(f1);
             arguments.Add(new ElementTypeArgument(a1));
             arguments.Add(f2);
@@ -72,10 +73,8 @@ namespace Ostis.Sctp.Arguments
         /// <param name="a3">тип четвертого sc-элемента конструкции</param>
         /// <param name="a4">тип пятого sc-элемента конструкции</param>
         public ConstructionTemplate(ElementType a1, ElementType a2, ScAddress f, ElementType a3, ElementType a4)
+            : this(ConstructionTemplateType.t_5A_A_F_A_A)
         {
-            arguments = new List<IArgument>();
-
-            templateType = ConstructionTemplateType.t_5A_A_F_A_A;
             arguments.Add(new ElementTypeArgument(a1));
             arguments.Add(new ElementTypeArgument(a2));
             arguments.Add(f);
@@ -92,10 +91,8 @@ namespace Ostis.Sctp.Arguments
         /// <param name="a3">тип четвертого sc-элемента конструкции</param>
         /// <param name="f2">адрес пятого sc-элемента</param>
         public ConstructionTemplate(ElementType a1, ElementType a2, ScAddress f1, ElementType a3, ScAddress f2)
+            : this(ConstructionTemplateType.t_5A_A_F_A_F)
         {
-            arguments = new List<IArgument>();
-
-            templateType = ConstructionTemplateType.t_5A_A_F_A_F;
             arguments.Add(new ElementTypeArgument(a1));
             arguments.Add(new ElementTypeArgument(a2));
             arguments.Add(f1);
@@ -112,10 +109,8 @@ namespace Ostis.Sctp.Arguments
         /// <param name="a3">тип четвертого sc-элемента конструкции</param>
         /// <param name="a4">тип пятого sc-элемента конструкции</param>
         public ConstructionTemplate(ScAddress f, ElementType a1, ElementType a2, ElementType a3, ElementType a4)
+            : this(ConstructionTemplateType.t_5F_A_A_A_A)
         {
-            arguments = new List<IArgument>();
-
-            templateType = ConstructionTemplateType.t_5F_A_A_A_A;
             arguments.Add(f);
             arguments.Add(new ElementTypeArgument(a1));
             arguments.Add(new ElementTypeArgument(a2));
@@ -132,10 +127,8 @@ namespace Ostis.Sctp.Arguments
         /// <param name="a3">тип четвертого sc-элемента конструкции</param>
         /// <param name="f2">адрес пятого sc-элемента</param>
         public ConstructionTemplate(ScAddress f1, ElementType a1, ElementType a2, ElementType a3, ScAddress f2)
+            : this(ConstructionTemplateType.t_5F_A_A_A_F)
         {
-            arguments = new List<IArgument>();
-
-            templateType = ConstructionTemplateType.t_5F_A_A_A_F;
             arguments.Add(f1);
             arguments.Add(new ElementTypeArgument(a1));
             arguments.Add(new ElementTypeArgument(a2));
@@ -152,10 +145,8 @@ namespace Ostis.Sctp.Arguments
         /// <param name="a2">тип четвертого sc-элемента конструкции</param>
         /// <param name="a3">тип пятого sc-элемента конструкции</param>
         public ConstructionTemplate(ScAddress f1, ElementType a1, ScAddress f2, ElementType a2, ElementType a3)
+            : this(ConstructionTemplateType.t_5F_A_F_A_A)
         {
-            arguments = new List<IArgument>();
-
-            templateType = ConstructionTemplateType.t_5F_A_F_A_A;
             arguments.Add(f1);
             arguments.Add(new ElementTypeArgument(a1));
             arguments.Add(f2);
@@ -172,16 +163,16 @@ namespace Ostis.Sctp.Arguments
         /// <param name="a2">тип четвертого sc-элемента конструкции</param>
         /// <param name="f3">адрес пятого sc-элемента</param>
         public ConstructionTemplate(ScAddress f1, ElementType a1, ScAddress f2, ElementType a2, ScAddress f3)
+            : this(ConstructionTemplateType.t_5F_A_F_A_F)
         {
-            arguments = new List<IArgument>();
-
-            templateType = ConstructionTemplateType.t_5F_A_F_A_F;
             arguments.Add(f1);
             arguments.Add(new ElementTypeArgument(a1));
             arguments.Add(f2);
             arguments.Add(new ElementTypeArgument(a2));
             arguments.Add(f3);
         }
+
+        #endregion
 
         #region Реализация интерфеса IArgument
 
