@@ -2,7 +2,6 @@
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Threading;
 
 namespace Ostis.Sctp
 {
@@ -78,26 +77,24 @@ namespace Ostis.Sctp
         /// <param name="command">команда</param>
         public Response Send(Command command)
         {
+            // установка ID команды
             command.Id = nextCommandId;
             nextCommandId++;
 #warning Заменить на Interlocked во имя высшей потокобезопасности!
             
+            // отправка запроса
             var bytes = command.GetBytes();
             socket.Send(bytes, bytes.Length, 0);
             
+            // приём ответа
             var buffer = new byte[SctpProtocol.DefaultBufferSize];
             using (var stream = new MemoryStream())
             {
-                int receivedBytes = socket.Receive(buffer, 0, buffer.Length, SocketFlags.None);
-                stream.Write(buffer, 0, receivedBytes);
-                while (socket.Available > 0)
+                do
                 {
-                    receivedBytes = socket.Receive(buffer, 0, buffer.Length, SocketFlags.None);
+                    int receivedBytes = socket.Receive(buffer, 0, buffer.Length, SocketFlags.None);
                     stream.Write(buffer, 0, receivedBytes);
-                    Thread.Sleep(0);
-#warning receivedBytes = socket.Receive(buffer, 0, buffer.Length, SocketFlags.None); вызывается два раза
-#warning Thread.Sleep(0); убить нафиг!
-                }
+                } while (socket.Available > 0);
                 return Response.GetResponse(stream.ToArray());
             }
         }
