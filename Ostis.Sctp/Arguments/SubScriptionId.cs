@@ -46,10 +46,7 @@ namespace Ostis.Sctp.Arguments
         /// </summary>
         public byte[] GetBytes()
         {
-            var bytes = new byte[4];
-#warning Убрать лишние массивы
-            Array.Copy(BitConverter.GetBytes(id), bytes, 4);
-            return bytes;
+            return BitConverter.GetBytes(id);
         }
 
         #endregion

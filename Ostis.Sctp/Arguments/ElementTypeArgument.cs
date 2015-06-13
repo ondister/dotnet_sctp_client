@@ -35,9 +35,7 @@ namespace Ostis.Sctp.Arguments
         /// </summary>
         public byte[] GetBytes()
         {
-            var bytes = new byte[2];
-            Array.Copy(BitConverter.GetBytes((ushort)elementType), bytes, 2);
-            return bytes;
+            return BitConverter.GetBytes((ushort) elementType);
         }
 
         #endregion
