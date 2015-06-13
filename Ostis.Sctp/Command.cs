@@ -103,11 +103,15 @@ namespace Ostis.Sctp
                     writer.Write((byte) Code);
                     writer.Write(Flags);
                     writer.Write(Id);
-#warning Оптимизировать, чтобы не вызывать вычислимый a.BytesStream каждый раз!
-                    writer.Write((uint) Arguments.Sum(a => a.GetBytes().Length));
+                    var argumentsBytes = new List<byte[]>();
                     foreach (var argument in Arguments)
                     {
-                        writer.Write(argument.GetBytes());
+                        argumentsBytes.Add(argument.GetBytes());
+                    }
+                    writer.Write((uint) argumentsBytes.Sum(a => a.Length));
+                    foreach (var argument in argumentsBytes)
+                    {
+                        writer.Write(argument);
                     }
                 }
             }

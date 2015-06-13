@@ -195,8 +195,8 @@ namespace Ostis.Sctp.Arguments
                 stream.Write(new[] { (byte) templateType }, 0, 1);
                 foreach (var argument in arguments)
                 {
-#warning оптимизировать, чтобы не вызывать дважды.
-                    stream.Write(argument.GetBytes(), 0, argument.GetBytes().Length);
+                    var bytes = argument.GetBytes();
+                    stream.Write(bytes, 0, bytes.Length);
                 }
                 return stream.ToArray();
             }
