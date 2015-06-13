@@ -7,6 +7,32 @@ namespace Ostis.Sctp.Commands
     /// </summary>
     public class CreateArcCommand : Command
     {
+        #region Параметры команды
+
+        /// <summary>
+        /// Тип создаваемой SC-дуги.
+        /// </summary>
+        public ElementType ArcType
+        { get { return arcType; } }
+
+        /// <summary>
+        /// SC-адрес начального элемента SC-дуги.
+        /// </summary>
+        public ScAddress BeginAddress
+        { get { return beginAddress; } }
+
+        /// <summary>
+        /// SC-адрес конечного элемента SC-дуги.
+        /// </summary>
+        public ScAddress EndAddress
+        { get { return endAddress; } }
+
+        private readonly ElementType arcType;
+        private readonly ScAddress beginAddress;
+        private readonly ScAddress endAddress;
+
+        #endregion
+
         /// <summary>
         /// ctor.
         /// </summary>
@@ -16,9 +42,9 @@ namespace Ostis.Sctp.Commands
         public CreateArcCommand(ElementType arcType, ScAddress beginAddress, ScAddress endAddress)
             : base(CommandCode.CreateArc)
         {
-            Arguments.Add(new ElementTypeArgument(arcType));
-            Arguments.Add(beginAddress);
-            Arguments.Add(endAddress);
+            Arguments.Add(new ElementTypeArgument(this.arcType = arcType));
+            Arguments.Add(this.beginAddress = beginAddress);
+            Arguments.Add(this.endAddress = endAddress);
         }
     }
 }

@@ -7,6 +7,18 @@ namespace Ostis.Sctp.Commands
     /// </summary>
     public class GetLinkContentCommand : Command
     {
+        #region Параметры команды
+
+        /// <summary>
+        /// SC-адрес ссылки для получения содержимого.
+        /// </summary>
+        public ScAddress Address
+        { get { return address; } }
+
+        private readonly ScAddress address;
+
+        #endregion
+        
         /// <summary>
         /// ctor.
         /// </summary>
@@ -14,7 +26,7 @@ namespace Ostis.Sctp.Commands
         public GetLinkContentCommand(ScAddress address)
             : base(CommandCode.GetLinkContent)
         {
-            Arguments.Add(address);
+            Arguments.Add(this.address = address);
         }
     }
 }

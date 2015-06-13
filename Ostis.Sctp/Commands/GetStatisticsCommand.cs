@@ -7,6 +7,25 @@ namespace Ostis.Sctp.Commands
     /// </summary>
     public class GetStatisticsCommand : Command
     {
+        #region Параметры команды
+
+        /// <summary>
+        /// Нижняя временная граница.
+        /// </summary>
+        public UnixDateTime StartTime
+        { get { return startTime; } }
+
+        /// <summary>
+        /// Верхняя временная граница.
+        /// </summary>
+        public UnixDateTime EndTime
+        { get { return endTime; } }
+
+        private readonly UnixDateTime startTime;
+        private readonly UnixDateTime endTime;
+
+        #endregion
+        
         /// <summary>
         /// ctor.
         /// </summary>
@@ -15,8 +34,8 @@ namespace Ostis.Sctp.Commands
         public GetStatisticsCommand(UnixDateTime startTime, UnixDateTime endTime)
             : base(CommandCode.GetStatistics)
         {
-            Arguments.Add(startTime);
-            Arguments.Add(endTime);
+            Arguments.Add(this.startTime = startTime);
+            Arguments.Add(this.endTime = endTime);
         }
     }
 }

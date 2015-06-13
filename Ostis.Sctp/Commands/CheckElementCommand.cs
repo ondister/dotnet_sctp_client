@@ -7,6 +7,18 @@ namespace Ostis.Sctp.Commands
     /// </summary>
     public class CheckElementCommand : Command
     {
+        #region Параметры команды
+
+        /// <summary>
+        /// SC-адрес проверяемого SC-элемента.
+        /// </summary>
+        public ScAddress Address
+        { get { return address; } }
+
+        private readonly ScAddress address;
+
+        #endregion
+
         /// <summary>
         /// ctor.
         /// </summary>
@@ -14,7 +26,7 @@ namespace Ostis.Sctp.Commands
         public CheckElementCommand(ScAddress address)
             : base(CommandCode.CheckElement)
         {
-            Arguments.Add(address);
+            Arguments.Add(this.address = address);
         }
     }
 }

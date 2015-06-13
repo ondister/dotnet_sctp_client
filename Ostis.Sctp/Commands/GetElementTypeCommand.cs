@@ -7,6 +7,18 @@ namespace Ostis.Sctp.Commands
     /// </summary>
     public class GetElementTypeCommand : Command
     {
+        #region Параметры команды
+
+        /// <summary>
+        /// SC-адрес элемента для получения типа.
+        /// </summary>
+        public ScAddress Address
+        { get { return address; } }
+
+        private readonly ScAddress address;
+
+        #endregion
+        
         /// <summary>
         /// ctor.
         /// </summary>
@@ -14,7 +26,7 @@ namespace Ostis.Sctp.Commands
         public GetElementTypeCommand(ScAddress address)
             : base(CommandCode.GetElementType)
         {
-            Arguments.Add(address);
+            Arguments.Add(this.address = address);
         }
     }
 }

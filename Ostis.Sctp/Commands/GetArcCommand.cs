@@ -7,6 +7,18 @@ namespace Ostis.Sctp.Commands
     /// </summary>
     public class GetArcCommand : Command
     {
+        #region Параметры команды
+
+        /// <summary>
+        /// SC-адрес дуги у которой необходимо получить начальный элемент.
+        /// </summary>
+        public ScAddress ArcAddress
+        { get { return arcAddress; } }
+
+        private readonly ScAddress arcAddress;
+
+        #endregion
+        
         /// <summary>
         /// ctor.
         /// </summary>
@@ -14,7 +26,7 @@ namespace Ostis.Sctp.Commands
         public GetArcCommand(ScAddress arcAddress)
             : base(CommandCode.GetArc)
         {
-            Arguments.Add(arcAddress);
+            Arguments.Add(this.arcAddress = arcAddress);
         }
     }
 }

@@ -7,6 +7,18 @@ namespace Ostis.Sctp.Commands
     /// </summary>
     public class FindLinksCommand : Command
     {
+        #region Параметры команды
+
+        /// <summary>
+        /// Содержимое для поиска.
+        /// </summary>
+        public LinkContent Content
+        { get { return content; } }
+
+        private readonly LinkContent content;
+
+        #endregion
+        
         /// <summary>
         /// ctor.
         /// </summary>
@@ -14,7 +26,7 @@ namespace Ostis.Sctp.Commands
         public FindLinksCommand(LinkContent content)
             : base(CommandCode.FindLinks)
         {
-            Arguments.Add(content);
+            Arguments.Add(this.content = content);
         }
     }
 }

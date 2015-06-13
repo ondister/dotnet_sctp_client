@@ -7,6 +7,18 @@ namespace Ostis.Sctp.Commands
     /// </summary>
     public class FindElementCommand : Command
     {
+        #region Параметры команды
+
+        /// <summary>
+        /// Идентификатор.
+        /// </summary>
+        public Identifier Identifier
+        { get { return identifier; } }
+
+        private readonly Identifier identifier;
+
+        #endregion
+        
         /// <summary>
         /// ctor.
         /// </summary>
@@ -14,7 +26,7 @@ namespace Ostis.Sctp.Commands
         public FindElementCommand(Identifier identifier)
             : base(CommandCode.FindElement)
         {
-            Arguments.Add(identifier);
+            Arguments.Add(this.identifier = identifier);
         }
     }
 }

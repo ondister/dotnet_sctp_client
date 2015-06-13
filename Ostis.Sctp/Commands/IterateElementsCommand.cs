@@ -7,6 +7,18 @@ namespace Ostis.Sctp.Commands
     /// </summary>
     public class IterateElementsCommand : Command
     {
+        #region Параметры команды
+
+        /// <summary>
+        /// Шаблон для поиска.
+        /// </summary>
+        public ConstructionTemplate Template
+        { get { return template; } }
+
+        private readonly ConstructionTemplate template;
+
+        #endregion
+        
         /// <summary>
         /// ctor.
         /// </summary>
@@ -14,7 +26,7 @@ namespace Ostis.Sctp.Commands
         public IterateElementsCommand(ConstructionTemplate template)
             : base(CommandCode.IterateElements)
         {
-            Arguments.Add(template);
+            Arguments.Add(this.template = template);
         }
     }
 }

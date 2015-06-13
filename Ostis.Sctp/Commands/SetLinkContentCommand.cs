@@ -7,6 +7,25 @@ namespace Ostis.Sctp.Commands
     /// </summary>
     public class SetLinkContentCommand : Command
     {
+        #region Параметры команды
+
+        /// <summary>
+        /// SC-адрес ссылки.
+        /// </summary>
+        public ScAddress LinkAddress
+        { get { return linkAddress; } }
+
+        /// <summary>
+        /// Данные устанавливаемого содержимого.
+        /// </summary>
+        public LinkContent Content
+        { get { return content; } }
+
+        private readonly ScAddress linkAddress;
+        private readonly LinkContent content;
+
+        #endregion
+        
         /// <summary>
         /// ctor.
         /// </summary>
@@ -15,8 +34,8 @@ namespace Ostis.Sctp.Commands
         public SetLinkContentCommand(ScAddress linkAddress, LinkContent content)
             : base(CommandCode.SetLinkContent)
         {
-            Arguments.Add(linkAddress);
-            Arguments.Add(content);
+            Arguments.Add(this.linkAddress = linkAddress);
+            Arguments.Add(this.content = content);
         }
     }
 }

@@ -7,6 +7,18 @@ namespace Ostis.Sctp.Commands
     /// </summary>
     public class CreateNodeCommand : Command
     {
+        #region Параметры команды
+
+        /// <summary>
+        /// Тип создаваемого SC-узла.
+        /// </summary>
+        public ElementType NodeType
+        { get { return nodeType; } }
+
+        private readonly ElementType nodeType;
+
+        #endregion
+        
         /// <summary>
         /// ctor.
         /// </summary>
@@ -14,8 +26,7 @@ namespace Ostis.Sctp.Commands
         public CreateNodeCommand(ElementType nodeType)
             : base(CommandCode.CreateNode)
         {
-            Arguments.Add(new ElementTypeArgument(nodeType));
+            Arguments.Add(new ElementTypeArgument(this.nodeType = nodeType));
         }
-#warning Классы комманд содержат только конструктор. Надо с этим что-то делать!
     }
 }
