@@ -5,14 +5,25 @@ using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp
 {
-    internal class Argument<T> : IArgument
+    /// <summary>
+    /// Аргумент со значением.
+    /// </summary>
+    /// <typeparam name="T">тип значения</typeparam>
+    public class Argument<T> : IArgument
         where T : struct
     {
         private readonly T value;
 
+        /// <summary>
+        /// Значение.
+        /// </summary>
         public T Value
         { get { return value; } }
 
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="value">значение</param>
         public Argument(T value)
         { this.value = value; }
 

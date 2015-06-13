@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Ostis.Sctp.Arguments
+﻿namespace Ostis.Sctp.Arguments
 {
     /// <summary>
     /// Идентификатор SC-элемента.
