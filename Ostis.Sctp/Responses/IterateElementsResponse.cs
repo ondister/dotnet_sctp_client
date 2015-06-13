@@ -39,7 +39,7 @@ namespace Ostis.Sctp.Responses
                     var construction = new List<ScAddress>();
                     for (int a = 0; a < addressesInConstruction; a++)
                     {
-                        var address = ScAddress.GetFromBytes(Bytes, offset);
+                        var address = ScAddress.Parse(Bytes, offset);
                         construction.Add(address);
                         offset += SctpProtocol.ScAddressLength;
                     }

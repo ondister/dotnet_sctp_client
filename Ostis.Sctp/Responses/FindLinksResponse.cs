@@ -35,7 +35,7 @@ namespace Ostis.Sctp.Responses
                     int beginIndex = sizeof(uint) + Header.Length;
                     for (int a = 0; a < linksCount; a++)
                     {
-                        addresses.Add(ScAddress.GetFromBytes(bytes, beginIndex));
+                        addresses.Add(ScAddress.Parse(bytes, beginIndex));
                         beginIndex += SctpProtocol.ScAddressLength;
                     }
                 }

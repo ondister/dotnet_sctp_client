@@ -154,9 +154,7 @@ namespace Ostis.SctpDemo
 			commandPool.Send(command);
             var response = (GetLinkContentResponse) command.Response;
 
-            Console.WriteLine(System.Text.Encoding.UTF8.GetString(response.LinkContent));
-		    // или так
-            LinkContent.ConvertToString(response.LinkContent);
+            Console.WriteLine(SctpProtocol.TextEncoding.GetString(response.LinkContent));
 		    // Так вот, если с установкой контента все достаточно просто, то с принятием контента немного сложности есть. 
 		    // Дело в том, что в базе хранится массив байт, и только. А вот что там в этом массива, это вам указывать в виде каких-то конструкций.
 	        // Потом эти конструкции читайте и преобразуйте байты в то, что вам нужно.

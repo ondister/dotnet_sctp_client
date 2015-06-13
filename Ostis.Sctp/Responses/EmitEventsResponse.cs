@@ -61,7 +61,7 @@ namespace Ostis.Sctp.Responses
                     int beginIndex = sizeof(uint) + Header.Length;
                     for (int e = 0; e < eventsCount; e++)
                     {
-                        events.Add(ScEvent.GetFromBytes(bytes, beginIndex));
+                        events.Add(ScEvent.Parse(bytes, beginIndex));
                         beginIndex += SctpProtocol.ScEventLength;
                     }
                 }

@@ -27,7 +27,7 @@ namespace Ostis.Sctp.Arguments
         /// <param name="bytes">массив байт</param>
         /// <param name="offset">смещение в массиве</param>
         /// <returns>SC-адрес</returns>
-        public static ScAddress GetFromBytes(byte[] bytes, int offset)
+        public static ScAddress Parse(byte[] bytes, int offset)
         {
             var address = new ScAddress();
 #warning Что за константа должна быть в этом условии?

@@ -32,10 +32,11 @@ namespace Ostis.Sctp.Arguments
 		/// Получение числа из массива байт.
 		/// </summary>
         /// <param name="bytes">массив байт</param>
+        /// <param name="offset">смещение в массиве</param>
         /// <returns>число</returns>
-		public static int GetFromBytes(byte[] bytes)
+        public static SubscriptionId Parse(byte[] bytes, int offset)
 		{
-			return bytes.Length >= sizeof(int) ? BitConverter.ToInt32(bytes, sizeof(int)) : 0;
+            return new SubscriptionId(bytes.Length >= sizeof(int) ? BitConverter.ToInt32(bytes, sizeof(int) + offset) : 0);
 		}
 
         #region Реализация интерфеса IArgument
@@ -46,6 +47,7 @@ namespace Ostis.Sctp.Arguments
         public byte[] GetBytes()
         {
             var bytes = new byte[4];
+#warning Убрать лишние массивы
             Array.Copy(BitConverter.GetBytes(id), bytes, 4);
             return bytes;
         }

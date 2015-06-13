@@ -48,17 +48,16 @@ namespace Ostis.Sctp.Arguments
 	    /// <summary>
 		/// Получает значение события из массива байт.
 		/// </summary>
-		/// <param name="bytesstream">массив байт</param>
+		/// <param name="bytes">массив байт</param>
 		/// <param name="offset">смещение в массиве</param>
 		/// <returns></returns>
-		public static ScEvent GetFromBytes(byte[] bytesstream, int offset)
+		public static ScEvent Parse(byte[] bytes, int offset)
 	    {
-	        return bytesstream.Length >= sizeof(int) * 3 + offset
+	        return bytes.Length >= sizeof(int) * 3 + offset
                 ? new ScEvent(
-#warning SubscriptionId.GetFromBytes и переименовать GetFromBytes в Parse
-                    new SubscriptionId(BitConverter.ToInt32(bytesstream, sizeof(uint) * 0 + offset)),
-                    ScAddress.GetFromBytes(bytesstream, sizeof(uint) * 1 + offset),
-                    ScAddress.GetFromBytes(bytesstream, sizeof(uint) * 2 + offset))
+                    SubscriptionId.Parse(bytes, sizeof(uint) * 0 + offset),
+                    ScAddress.Parse(bytes, sizeof(uint) * 1 + offset),
+                    ScAddress.Parse(bytes, sizeof(uint) * 2 + offset))
                 : new ScEvent(new SubscriptionId(), new ScAddress(), new ScAddress());
 		}
 
