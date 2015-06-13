@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Ostis.Sctp.Arguments
 {
@@ -10,7 +11,6 @@ namespace Ostis.Sctp.Arguments
         private SubscriptionId subscriptionId;
 		private ScAddress elementAddress;
 		private ScAddress arcAddress;
-		private byte[] bytes;
 
 	    /// <summary>
 	    /// ID подписки.
@@ -42,24 +42,8 @@ namespace Ostis.Sctp.Arguments
             this.elementAddress = elementAddress;
             this.arcAddress = arcAddress;
 #warning Magic number 12
-            this.bytes = new byte[12];
+            //this.bytes = new byte[12];
 		}
-
-	    /// <summary>
-	    /// Массив байт.
-	    /// </summary>
-	    public byte[] BytesStream
-	    {
-	        get
-            {
-#warning Magic number 12
-	            bytes = new byte[12];
-	            Array.Copy(subscriptionId.BytesStream, bytes, 4);
-	            Array.Copy(elementAddress.BytesStream, 0, bytes, 4, 4);
-	            Array.Copy(arcAddress.BytesStream, 0, bytes, 8, 4);
-	            return bytes;
-	        }
-	    }
 
 	    /// <summary>
 		/// Получает значение события из массива байт.
@@ -71,11 +55,28 @@ namespace Ostis.Sctp.Arguments
 	    {
 	        return bytesstream.Length >= sizeof(int) * 3 + offset
                 ? new ScEvent(
+#warning SubscriptionId.GetFromBytes и переименовать GetFromBytes в Parse
                     new SubscriptionId(BitConverter.ToInt32(bytesstream, sizeof(uint) * 0 + offset)),
                     ScAddress.GetFromBytes(bytesstream, sizeof(uint) * 1 + offset),
                     ScAddress.GetFromBytes(bytesstream, sizeof(uint) * 2 + offset))
                 : new ScEvent(new SubscriptionId(), new ScAddress(), new ScAddress());
 		}
+
+        #region Реализация интерфеса IArgument
+
+        /// <summary>
+        /// Получить массив байт для передачи.
+        /// </summary>
+        public byte[] GetBytes()
+        {
+            var bytes = new List<byte>();
+            bytes.AddRange(subscriptionId.GetBytes());
+            bytes.AddRange(elementAddress.GetBytes());
+            bytes.AddRange(arcAddress.GetBytes());
+            return bytes.ToArray();
+        }
+
+        #endregion
 	}
 }
 

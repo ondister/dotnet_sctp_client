@@ -7,25 +7,15 @@ namespace Ostis.Sctp.Arguments
     /// </summary>
     public struct UnixDateTime : IArgument
     {
-        private readonly byte[] bytes;
         private readonly long value;
         
-        /// <summary>
-        /// Массив байт.
-        /// </summary>
-        public byte[] BytesStream
-        { get { return bytes; } }
-
         /// <summary>
         /// ctor.
         /// </summary>
         /// <param name="dateTime">дата и время</param>
         public UnixDateTime(DateTime dateTime)
         {
-            bytes = new byte[0];
-            TimeSpan diff = dateTime - Origin;
-            value = (long) diff.TotalMilliseconds;
-            bytes = BitConverter.GetBytes(value);
+            value = (long)(dateTime - Origin).TotalMilliseconds;
         }
 
         /// <summary>
@@ -52,5 +42,17 @@ namespace Ostis.Sctp.Arguments
         /// Начальная дата Unix.
         /// </summary>
         public static readonly DateTime Origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+
+        #region Реализация интерфеса IArgument
+
+        /// <summary>
+        /// Получить массив байт для передачи.
+        /// </summary>
+        public byte[] GetBytes()
+        {
+            return BitConverter.GetBytes(value);
+        }
+
+        #endregion
     }
 }

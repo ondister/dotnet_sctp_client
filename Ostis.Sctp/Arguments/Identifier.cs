@@ -8,13 +8,13 @@ namespace Ostis.Sctp.Arguments
     /// </summary>
     public struct Identifier : IArgument
     {
-        private readonly byte[] bytes;
-
         /// <summary>
-        /// Массив байт идентификатора.
+        /// Значение.
         /// </summary>
-        public byte[] BytesStream
-        { get { return bytes; } }
+        public string Value
+        { get { return value; } }
+
+        private readonly string value;
 
         /// <summary>
         /// ctor.
@@ -22,11 +22,7 @@ namespace Ostis.Sctp.Arguments
         /// <param name="value">значение</param>
         public Identifier(string value)
         {
-            var bytesWithoutLength = SctpProtocol.TextEncoding.GetBytes(value);
-            var bytesList = new List<byte>();
-            bytesList.AddRange(BitConverter.GetBytes(bytesWithoutLength.Length));
-            bytesList.AddRange(bytesWithoutLength);
-            bytes = bytesList.ToArray();
+            this.value = value;
         }
 
         /// <summary>
@@ -48,8 +44,23 @@ namespace Ostis.Sctp.Arguments
         /// <filterpriority>2</filterpriority>
         public override string ToString()
         {
-            int length = BitConverter.ToInt32(bytes, 0);
-            return SctpProtocol.TextEncoding.GetString(bytes, sizeof(int), length);
+            return value;
         }
+
+        #region Реализация интерфеса IArgument
+
+        /// <summary>
+        /// Получить массив байт для передачи.
+        /// </summary>
+        public byte[] GetBytes()
+        {
+            var bytesWithoutLength = SctpProtocol.TextEncoding.GetBytes(value);
+            var bytes = new List<byte>();
+            bytes.AddRange(BitConverter.GetBytes(bytesWithoutLength.Length));
+            bytes.AddRange(bytesWithoutLength);
+            return bytes.ToArray();
+        }
+
+        #endregion
     }
 }

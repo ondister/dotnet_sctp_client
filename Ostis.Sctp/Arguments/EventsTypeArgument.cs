@@ -8,19 +8,6 @@ namespace Ostis.Sctp.Arguments
     public class EventsTypeArgument : IArgument
     {
         private EventsType eventsType;
-		private readonly byte[] bytes;
-
-	    /// <summary>
-	    /// Массив байт.
-	    /// </summary>
-	    public byte[] BytesStream
-	    {
-	        get
-	        {
-                Array.Copy(BitConverter.GetBytes((byte) eventsType), bytes, 1);
-	            return bytes;
-	        }
-	    }
 
         /// <summary>
 		/// Тип события.
@@ -38,7 +25,20 @@ namespace Ostis.Sctp.Arguments
         public EventsTypeArgument(EventsType eventsType)
 		{
             this.eventsType = eventsType;
-            bytes = new byte[1];
 		}
+
+        #region Реализация интерфеса IArgument
+
+        /// <summary>
+        /// Получить массив байт для передачи.
+        /// </summary>
+        public byte[] GetBytes()
+        {
+            var bytes = new byte[1];
+            Array.Copy(BitConverter.GetBytes((byte) eventsType), bytes, 1);
+            return bytes;
+        }
+
+        #endregion
     }
 }

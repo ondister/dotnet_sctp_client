@@ -6,10 +6,8 @@
     public interface IArgument
     {
         /// <summary>
-        /// Массив байт.
+        /// Получить массив байт для передачи.
         /// </summary>
-#warning Переименовать в Bytes или (лучше) преобразовать в метод GetBytes().
-        byte[] BytesStream
-        { get; }
+        byte[] GetBytes();
     }
 }

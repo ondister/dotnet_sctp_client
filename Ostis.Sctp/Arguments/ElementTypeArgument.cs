@@ -8,19 +8,6 @@ namespace Ostis.Sctp.Arguments
     public class ElementTypeArgument : IArgument
     {
         private ElementType elementType;
-		private readonly byte[] bytes;
-
-	    /// <summary>
-	    /// Массив байт.
-	    /// </summary>
-	    public byte[] BytesStream
-	    {
-	        get
-	        {
-                Array.Copy(BitConverter.GetBytes((ushort)elementType), bytes, 2);
-	            return bytes;
-	        }
-	    }
 
         /// <summary>
 		/// Тип элемента.
@@ -38,7 +25,21 @@ namespace Ostis.Sctp.Arguments
         public ElementTypeArgument(ElementType elementType)
 		{
             this.elementType = elementType;
-            bytes = new byte[2];
+            
 		}
+
+        #region Реализация интерфеса IArgument
+
+        /// <summary>
+        /// Получить массив байт для передачи.
+        /// </summary>
+        public byte[] GetBytes()
+        {
+            var bytes = new byte[2];
+            Array.Copy(BitConverter.GetBytes((ushort)elementType), bytes, 2);
+            return bytes;
+        }
+
+        #endregion
     }
 }

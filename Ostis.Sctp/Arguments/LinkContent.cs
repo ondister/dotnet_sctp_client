@@ -8,14 +8,8 @@ namespace Ostis.Sctp.Arguments
     /// </summary>
     public struct LinkContent : IArgument
     {
-        private byte[] bytes;
+        private byte[] data;
         private LinkContentType contentType;
-
-        /// <summary>
-        /// Массив байт.
-        /// </summary>
-        public byte[] Bytes
-        { get { return bytes; } }
 
         /// <summary>
         /// OSTIS-тип содержимого ссылки.
@@ -24,14 +18,10 @@ namespace Ostis.Sctp.Arguments
         { get { return contentType; } }
 
         /// <summary>
-        /// Преобразование байтового представления содержимого ссылки в строковое.
+        /// Содержимое.
         /// </summary>
-        /// <param name="byteContent">массив байт ссылки</param>
-        /// <returns>строка</returns>
-        public static string ConvertToString(byte[] byteContent)
-        {
-            return SctpProtocol.TextEncoding.GetString(byteContent);
-        }
+        public byte[] Data
+        { get { return data; } }
 
 #warning Конструкторы не вызывают один другой.
         /// <summary>
@@ -41,7 +31,7 @@ namespace Ostis.Sctp.Arguments
         public LinkContent(string value)
         {
             contentType = LinkContentType.Text;
-            bytes = SctpProtocol.TextEncoding.GetBytes(value);
+            data = SctpProtocol.TextEncoding.GetBytes(value);
         }
 
         /// <summary>
@@ -51,7 +41,7 @@ namespace Ostis.Sctp.Arguments
         public LinkContent(byte[] bytes)
 		{
 			contentType = LinkContentType.Unknown;	
-			this.bytes = bytes;
+			data = bytes;
 		}
 
         /// <summary>
@@ -61,7 +51,7 @@ namespace Ostis.Sctp.Arguments
         public LinkContent(double value)
 		{
 			contentType = LinkContentType.Numeric;	
-			bytes = BitConverter.GetBytes(value);
+			data = BitConverter.GetBytes(value);
 		}
 
         /// <summary>
@@ -74,22 +64,23 @@ namespace Ostis.Sctp.Arguments
             return new LinkContent
             {
                 contentType = LinkContentType.Text,
-                bytes = SctpProtocol.TextEncoding.GetBytes(value),
+                data = SctpProtocol.TextEncoding.GetBytes(value),
             };
         }
 
+        #region Реализация интерфеса IArgument
+
         /// <summary>
-        /// Массив байт.
+        /// Получить массив байт для передачи.
         /// </summary>
-        public byte[] BytesStream
+        public byte[] GetBytes()
         {
-            get
-            {
-                var bytesList = new List<byte>();
-                bytesList.AddRange(BitConverter.GetBytes(bytes.Length));
-                bytesList.AddRange(bytes);
-                return bytesList.ToArray();
-            }
+            var bytes = new List<byte>();
+            bytes.AddRange(BitConverter.GetBytes(data.Length));
+            bytes.AddRange(data);
+            return bytes.ToArray();
         }
+
+        #endregion
     }
 }

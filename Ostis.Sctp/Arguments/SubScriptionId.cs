@@ -8,19 +8,6 @@ namespace Ostis.Sctp.Arguments
 	public struct SubscriptionId : IArgument
 	{
 		private int id;
-		private readonly byte[] bytes;
-
-	    /// <summary>
-	    /// Массив байт.
-	    /// </summary>
-	    public byte[] BytesStream
-	    {
-	        get
-	        {
-	            Array.Copy(BitConverter.GetBytes(id), bytes, 4);
-	            return bytes;
-	        }
-	    }
 
 #warning Что за загадочная хрень соструктурами мешает сконвертировать эти 2 свойства в авто-свойства?
         /// <summary>
@@ -39,7 +26,6 @@ namespace Ostis.Sctp.Arguments
 		public SubscriptionId(int id)
 		{
 			this.id = id;
-            bytes = new byte[4];
 		}
 
 		/// <summary>
@@ -51,6 +37,20 @@ namespace Ostis.Sctp.Arguments
 		{
 			return bytes.Length >= sizeof(int) ? BitConverter.ToInt32(bytes, sizeof(int)) : 0;
 		}
+
+        #region Реализация интерфеса IArgument
+
+        /// <summary>
+        /// Получить массив байт для передачи.
+        /// </summary>
+        public byte[] GetBytes()
+        {
+            var bytes = new byte[4];
+            Array.Copy(BitConverter.GetBytes(id), bytes, 4);
+            return bytes;
+        }
+
+        #endregion
 	}
 }
 

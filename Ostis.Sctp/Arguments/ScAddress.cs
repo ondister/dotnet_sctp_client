@@ -9,21 +9,6 @@ namespace Ostis.Sctp.Arguments
     {
         private ushort segment;
         private ushort offset;
-        private byte[] bytes;
-
-        /// <summary>
-        /// Массив байт.
-        /// </summary>
-        public byte[] BytesStream
-        {
-            get
-            {
-                bytes = new byte[4];
-                Array.Copy(BitConverter.GetBytes(segment), bytes, 2);
-                Array.Copy(BitConverter.GetBytes(offset), 0, bytes, 2, 2);
-                return bytes;
-            }
-        }
 
         /// <summary>
         /// ctor.
@@ -34,7 +19,6 @@ namespace Ostis.Sctp.Arguments
         {
             this.segment = segment;
             this.offset = offset;
-            bytes = new byte[4];
         }
 
         /// <summary>
@@ -90,5 +74,21 @@ namespace Ostis.Sctp.Arguments
 		{
 		    return string.Format("segment: {0}, offset: {1}", segment, offset);
 		}
+
+        #region Реализация интерфеса IArgument
+
+        /// <summary>
+        /// Получить массив байт для передачи.
+        /// </summary>
+        public byte[] GetBytes()
+        {
+            var bytes = new byte[4];
+            Array.Copy(BitConverter.GetBytes(segment), bytes, 2);
+            Array.Copy(BitConverter.GetBytes(offset), 0, bytes, 2, 2);
+            return bytes;
+
+        }
+
+        #endregion
     }
 }

@@ -91,7 +91,7 @@ namespace Ostis.Sctp
         }
 
         /// <summary>
-        /// Получение массива байт.
+        /// Получение массива байт для передачи.
         /// </summary>
         public byte[] GetBytes()
         {
@@ -104,10 +104,10 @@ namespace Ostis.Sctp
                     writer.Write(Flags);
                     writer.Write(Id);
 #warning Оптимизировать, чтобы не вызывать вычислимый a.BytesStream каждый раз!
-                    writer.Write((uint) Arguments.Sum(a => a.BytesStream.Length));
+                    writer.Write((uint) Arguments.Sum(a => a.GetBytes().Length));
                     foreach (var argument in Arguments)
                     {
-                        writer.Write(argument.BytesStream);
+                        writer.Write(argument.GetBytes());
                     }
                 }
             }
