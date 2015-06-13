@@ -11,12 +11,12 @@ namespace Ostis.Sctp.Responses
     /// </summary>
     public class IterateElementsResponse : Response
     {
-        private readonly List<Construction> constructions;
+        private readonly List<List<ScAddress>> constructions;
 
         /// <summary>
         /// Список конструкций.
         /// </summary>
-        public List<Construction> Constructions
+        public List<List<ScAddress>> Constructions
         { get { return constructions; } }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Ostis.Sctp.Responses
         public IterateElementsResponse(byte[] bytes)
             : base(bytes)
         {
-            constructions = new List<Construction>();
+            constructions = new List<List<ScAddress>>();
             if (Header.ReturnCode == ReturnCode.Successfull)
             {
                 uint constructionsCount = BitConverter.ToUInt32(Bytes, Header.Length);
@@ -36,11 +36,11 @@ namespace Ostis.Sctp.Responses
                 int offset = sizeof(uint) + Header.Length;
                 for (uint c = 0; c < constructionsCount; c++)
                 {
-                    var construction = new Construction();
+                    var construction = new List<ScAddress>();
                     for (int a = 0; a < addressesInConstruction; a++)
                     {
                         var address = ScAddress.GetFromBytes(Bytes, offset);
-                        construction.AddAddress(address);
+                        construction.Add(address);
                         offset += SctpProtocol.ScAddressLength;
                     }
                     constructions.Add(construction);

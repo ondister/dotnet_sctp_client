@@ -46,7 +46,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Arguments\ConstructionTemplate.cs" />
     <Compile Include="Arguments\ConstructionTemplateType.cs" />
-    <Compile Include="Arguments\Construction.cs" />
     <Compile Include="Arguments\UnixDateTime.cs" />
     <Compile Include="Arguments\ElementType.cs" />
     <Compile Include="Arguments\EventsType.cs" />
