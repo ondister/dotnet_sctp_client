@@ -46,12 +46,6 @@ namespace Ostis.Sctp.Arguments
 		}
 
 	    /// <summary>
-	    /// Длина массива байт.
-	    /// </summary>
-	    public uint Length
-	    { get { return (uint) bytes.Length; } }
-
-	    /// <summary>
 	    /// Массив байт.
 	    /// </summary>
 	    public byte[] BytesStream

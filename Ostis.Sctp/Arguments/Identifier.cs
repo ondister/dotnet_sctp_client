@@ -13,13 +13,6 @@
         public byte[] BytesStream
         { get { return bytes; } }
 
-#warning Удалить это свойство - оно лишнее.
-        /// <summary>
-        /// Длина массива байт идентификатора.
-        /// </summary>
-        public uint Length
-        { get { return (uint) bytes.Length; } }
-
         /// <summary>
         /// ctor.
         /// </summary>

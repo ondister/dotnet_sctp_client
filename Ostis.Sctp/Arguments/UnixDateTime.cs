@@ -8,15 +8,8 @@ namespace Ostis.Sctp.Arguments
     public struct UnixDateTime : IArgument
     {
         private readonly byte[] bytes;
-        private readonly uint length;
         private readonly long value;
-
-        /// <summary>
-        /// Длина массива байт.
-        /// </summary>
-        public uint Length
-        { get { return length; } }
-
+        
         /// <summary>
         /// Массив байт.
         /// </summary>
@@ -29,12 +22,10 @@ namespace Ostis.Sctp.Arguments
         /// <param name="dateTime">дата и время</param>
         public UnixDateTime(DateTime dateTime)
         {
-            length = 0;
             bytes = new byte[0];
             TimeSpan diff = dateTime - Origin;
             value = (long) diff.TotalMilliseconds;
             bytes = BitConverter.GetBytes(value);
-            length = (uint) bytes.Length;
         }
 
         /// <summary>

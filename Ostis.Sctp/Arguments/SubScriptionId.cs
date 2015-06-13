@@ -10,13 +10,6 @@ namespace Ostis.Sctp.Arguments
 		private int id;
 		private readonly byte[] bytes;
 
-#warning Удалить это свойство - оно лишнее.
-        /// <summary>
-	    /// Длина массива байт.
-	    /// </summary>
-	    public uint Length
-	    { get { return (uint) bytes.Length; } }
-
 	    /// <summary>
 	    /// Массив байт.
 	    /// </summary>

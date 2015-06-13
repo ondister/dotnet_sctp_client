@@ -1,19 +1,10 @@
-﻿using System;
-
-namespace Ostis.Sctp
+﻿namespace Ostis.Sctp
 {
     /// <summary>
     /// Аргумент команды.
     /// </summary>
     public interface IArgument
     {
-        /// <summary>
-        /// Длина массива байт.
-        /// </summary>
-        uint Length
-        { get; }
-#warning Удалить это свойство - оно лишнее.
-
         /// <summary>
         /// Массив байт.
         /// </summary>

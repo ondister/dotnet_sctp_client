@@ -27,55 +27,6 @@ namespace Ostis.Sctp
         public Argument(T value)
         { this.value = value; }
 
-        public uint Length
-        {
-            get
-            {
-#warning Заменить эту цепочку IF-ов нормальным наследованием с полиморфизмом
-                uint length;
-                if (value is ElementType)
-                {
-                    byte[] bytes = BitConverter.GetBytes(Convert.ToUInt16(value));
-                    length = (uint) bytes.Length;
-                }
-                else if (value is EventsType)
-                {
-                    byte[] bytes = { Convert.ToByte(value) };
-                    length = (uint) bytes.Length;
-                }
-                else if (value is LinkContent)
-                {
-                    var linkContent = (LinkContent) (object) value;
-                    length = (uint) linkContent.Bytes.Length;
-                }
-                else if (value is Identifier)
-                {
-                    var identifier = (Identifier) (object) value;
-                    length = (uint) identifier.BytesStream.Length;
-                }
-                else if (value is ConstructionTemplate)
-                {
-                    var constructorTemplate = (ConstructionTemplate) (object) value;
-                    length = (uint) constructorTemplate.BytesStream.Length;
-                }
-                else if (value is UnixDateTime)
-                {
-                    var dateTimeUnix = (UnixDateTime) (object) value;
-                    length = (uint) dateTimeUnix.BytesStream.Length;
-                }
-                else if (value is ScAddress)
-                {
-                    var scAddress = (ScAddress) (object) value;
-                    length = (uint) scAddress.BytesStream.Length;
-                }
-                else
-                {
-                    length = Convert.ToUInt32(Marshal.SizeOf(value));
-                }
-                return length;
-            }
-        }
-
         public byte[] BytesStream
         { get { return getBytes(value); } }
 

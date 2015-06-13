@@ -11,13 +11,6 @@ namespace Ostis.Sctp.Arguments
         private ushort offset;
         private byte[] bytes;
 
-#warning Удалить это свойство - оно лишнее.
-        /// <summary>
-        /// Длина массива байт.
-        /// </summary>
-        public uint Length
-        { get { return (uint) bytes.Length; } }
-
         /// <summary>
         /// Массив байт.
         /// </summary>

@@ -10,18 +10,10 @@ namespace Ostis.Sctp.Arguments
     {
         private readonly List<IArgument> arguments;
         private byte[] bytes;
-        private uint length;
         private readonly ConstructionTemplateType templateType;
 
         internal ConstructionTemplateType Type
         { get { return templateType; } }
-
-        /// <summary>
-        /// Длина массива байт шаблона.
-        /// </summary>
-#warning Поле и свойство явно лишние.
-        public uint Length
-        { get { return length; } }
 
         /// <summary>
         /// Массив байт шаблона.
@@ -38,7 +30,6 @@ namespace Ostis.Sctp.Arguments
         /// <param name="a2">тип конечного sc-элемента (дуги или узла)</param>
         public ConstructionTemplate(ScAddress f, ElementType a1, ElementType a2)
         {
-            length = 0;
             bytes = new byte[0];
             arguments = new List<IArgument>();
 
@@ -58,7 +49,6 @@ namespace Ostis.Sctp.Arguments
         /// <param name="f">адрес конечного sc-элемента</param>
         public ConstructionTemplate(ElementType a1, ElementType a2, ScAddress f)
         {
-            length = 0;
             bytes = new byte[0];
             arguments = new List<IArgument>();
 
@@ -78,7 +68,6 @@ namespace Ostis.Sctp.Arguments
         /// <param name="f2">адрес конечного sc-элемента</param>
         public ConstructionTemplate(ScAddress f1, ElementType a1, ScAddress f2)
         {
-            length = 0;
             bytes = new byte[0];
             arguments = new List<IArgument>();
 
@@ -100,7 +89,6 @@ namespace Ostis.Sctp.Arguments
         /// <param name="a4">тип пятого sc-элемента конструкции</param>
         public ConstructionTemplate(ElementType a1, ElementType a2, ScAddress f, ElementType a3, ElementType a4)
         {
-            length = 0;
             bytes = new byte[0];
             arguments = new List<IArgument>();
 
@@ -124,7 +112,6 @@ namespace Ostis.Sctp.Arguments
         /// <param name="f2">адрес пятого sc-элемента</param>
         public ConstructionTemplate(ElementType a1, ElementType a2, ScAddress f1, ElementType a3, ScAddress f2)
         {
-            length = 0;
             bytes = new byte[0];
             arguments = new List<IArgument>();
 
@@ -148,7 +135,6 @@ namespace Ostis.Sctp.Arguments
         /// <param name="a4">тип пятого sc-элемента конструкции</param>
         public ConstructionTemplate(ScAddress f, ElementType a1, ElementType a2, ElementType a3, ElementType a4)
         {
-            length = 0;
             bytes = new byte[0];
             arguments = new List<IArgument>();
 
@@ -172,7 +158,6 @@ namespace Ostis.Sctp.Arguments
         /// <param name="f2">адрес пятого sc-элемента</param>
         public ConstructionTemplate(ScAddress f1, ElementType a1, ElementType a2, ElementType a3, ScAddress f2)
         {
-            length = 0;
             bytes = new byte[0];
             arguments = new List<IArgument>();
 
@@ -196,7 +181,6 @@ namespace Ostis.Sctp.Arguments
         /// <param name="a3">тип пятого sc-элемента конструкции</param>
         public ConstructionTemplate(ScAddress f1, ElementType a1, ScAddress f2, ElementType a2, ElementType a3)
         {
-            length = 0;
             bytes = new byte[0];
             arguments = new List<IArgument>();
 
@@ -220,7 +204,6 @@ namespace Ostis.Sctp.Arguments
         /// <param name="f3">адрес пятого sc-элемента</param>
         public ConstructionTemplate(ScAddress f1, ElementType a1, ScAddress f2, ElementType a2, ScAddress f3)
         {
-            length = 0;
             bytes = new byte[0];
             arguments = new List<IArgument>();
 
@@ -236,14 +219,14 @@ namespace Ostis.Sctp.Arguments
 
         private void createByteStream()
         {
+#warning using
             MemoryStream mstream = new MemoryStream();
             mstream.Write(new[] { (byte)templateType }, 0, 1);
             foreach (var argument in arguments)
             {
-                mstream.Write(argument.BytesStream, 0, (int)argument.Length);
+                mstream.Write(argument.BytesStream, 0, argument.BytesStream.Length);
             }
             bytes = mstream.ToArray();
-            length = (uint)bytes.Length;
         }
     }
 }
