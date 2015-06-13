@@ -5,7 +5,7 @@ namespace Ostis.Sctp.Arguments
     /// <summary>
     /// Дата и время в форме Unix (http://en.wikipedia.org/wiki/Unix_time).
     /// </summary>
-    public struct UnixDateTime : IArgument
+    public class UnixDateTime : IArgument
     {
         private readonly long value;
         

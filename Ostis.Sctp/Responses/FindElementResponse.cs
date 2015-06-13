@@ -7,21 +7,13 @@ namespace Ostis.Sctp.Responses
     /// </summary>
     public class FindElementResponse : Response
     {
-        private readonly ScAddress address;
-        private readonly bool isFound;
-
-        /// <summary>
-        /// Элемент найден.
-        /// </summary>
-        public bool IsFound
-        { get { return isFound; } }
-
         /// <summary>
         /// Адрес.
         /// </summary>
-#warning Вероятно, предыдущее свойство не имеет смысла.
         public ScAddress FoundAddress
         { get { return address; } }
+
+        private readonly ScAddress address;
 
         /// <summary>
         /// ctor.
@@ -30,7 +22,6 @@ namespace Ostis.Sctp.Responses
         public FindElementResponse(byte[] bytes)
             : base(bytes)
         {
-            isFound = Header.ReturnSize != 0;
             if (Header.ReturnCode == ReturnCode.Successfull)
             {
                 address = ScAddress.Parse(bytes, SctpProtocol.HeaderLength);

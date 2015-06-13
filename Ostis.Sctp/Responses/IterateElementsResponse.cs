@@ -30,16 +30,18 @@ namespace Ostis.Sctp.Responses
             {
                 int constructionsCount = BitConverter.ToInt32(Bytes, SctpProtocol.HeaderLength);
                 int addressesCount = (bytes.Length - SctpProtocol.HeaderLength - sizeof(uint)) / SctpProtocol.ScAddressLength;
-#warning Правильно ли записано выражение после расстановки скобок согласно правилам приоритета операторов C# и что произойдёт в случае если constructionsCount == 0?
-                int addressesInConstruction = (constructionsCount == 0 ? 0 : addressesCount) / constructionsCount;
-                int offset = sizeof(uint) + SctpProtocol.HeaderLength;
+                int addressesInConstruction = constructionsCount == 0 ? 0 : (addressesCount / constructionsCount);
+                int offset = SctpProtocol.HeaderLength + sizeof(uint);
                 for (uint c = 0; c < constructionsCount; c++)
                 {
                     var construction = new List<ScAddress>();
                     for (int a = 0; a < addressesInConstruction; a++)
                     {
                         var address = ScAddress.Parse(Bytes, offset);
-                        construction.Add(address);
+                        if (address != null)
+                        {
+                            construction.Add(address);
+                        }
                         offset += SctpProtocol.ScAddressLength;
                     }
                     constructions.Add(construction);

@@ -195,7 +195,7 @@ namespace Ostis.SctpDemo
         // Результат: Если выполнение команды успешно, то в качестве результата возвращается коллекция конструкций, соответствующих шаблону.
 		public void Iterator()
 		{
-			ConstructionTemplate template = new ConstructionTemplate(new ScAddress(0, 1), ElementType.AccessArg, ElementType.Node);
+			var template = new ConstructionTemplate(new ScAddress(0, 1), ElementType.AccessArg, ElementType.Node);
             var command = new IterateElementsCommand(template);
 			commandPool.Send(command);
             var response = (IterateElementsResponse) command.Response;

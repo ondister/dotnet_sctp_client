@@ -6,7 +6,7 @@ namespace Ostis.Sctp.Arguments
     /// <summary>
     /// Шаблон поиска конструкции для команды CmdGetIterateElements.
     /// </summary>
-    public struct ConstructionTemplate : IArgument
+    public class ConstructionTemplate : IArgument
     {
         private readonly List<IArgument> arguments;
         private readonly ConstructionTemplateType templateType;

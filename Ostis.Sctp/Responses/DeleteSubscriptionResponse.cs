@@ -26,7 +26,6 @@ namespace Ostis.Sctp.Responses
             {
                 subscriptionId = SubscriptionId.Parse(bytes, SctpProtocol.HeaderLength);
             }
-#warning При приобразовании структур в классы проверить ссылки на них и доступность get/set их свойств.
         }
     }
 }

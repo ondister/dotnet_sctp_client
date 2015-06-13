@@ -6,7 +6,7 @@ namespace Ostis.Sctp.Arguments
     /// <summary>
     /// Идентификатор SC-элемента.
     /// </summary>
-    public struct Identifier : IArgument
+    public class Identifier : IArgument
     {
         /// <summary>
         /// Значение.

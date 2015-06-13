@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace Ostis.Sctp.Arguments
@@ -6,11 +5,11 @@ namespace Ostis.Sctp.Arguments
 	/// <summary>
 	/// Событие в SC-памяти.
 	/// </summary>
-	public struct ScEvent : IArgument
+	public class ScEvent : IArgument
 	{
-        private SubscriptionId subscriptionId;
-		private ScAddress elementAddress;
-		private ScAddress arcAddress;
+        private readonly SubscriptionId subscriptionId;
+		private readonly ScAddress elementAddress;
+		private readonly ScAddress arcAddress;
 
 	    /// <summary>
 	    /// ID подписки.
@@ -41,8 +40,6 @@ namespace Ostis.Sctp.Arguments
             this.subscriptionId = subscriptionId;
             this.elementAddress = elementAddress;
             this.arcAddress = arcAddress;
-#warning Magic number 12
-            //this.bytes = new byte[12];
 		}
 
 	    /// <summary>
@@ -55,10 +52,10 @@ namespace Ostis.Sctp.Arguments
 	    {
 	        return bytes.Length >= SctpProtocol.ScEventLength + offset
                 ? new ScEvent(
-                    SubscriptionId.Parse(bytes, sizeof(uint) * 0 + offset),
-                    ScAddress.Parse(bytes, sizeof(uint) * 1 + offset),
-                    ScAddress.Parse(bytes, sizeof(uint) * 2 + offset))
-                : new ScEvent(new SubscriptionId(), new ScAddress(), new ScAddress());
+                    SubscriptionId.Parse(bytes, offset),
+                    ScAddress.Parse(bytes, offset + SctpProtocol.SubscriptionIdLength),
+                    ScAddress.Parse(bytes, offset + SctpProtocol.SubscriptionIdLength + SctpProtocol.ScAddressLength))
+                : null;
 		}
 
         #region Реализация интерфеса IArgument

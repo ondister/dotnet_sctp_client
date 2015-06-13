@@ -6,7 +6,7 @@ namespace Ostis.Sctp.Arguments
     /// <summary>
     /// Содержимое SC-ссылки (пока поддерживаются только строки).
     /// </summary>
-    public struct LinkContent : IArgument
+    public class LinkContent : IArgument
     {
         /// <summary>
         /// OSTIS-тип содержимого ссылки.

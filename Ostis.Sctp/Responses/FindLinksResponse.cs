@@ -34,7 +34,11 @@ namespace Ostis.Sctp.Responses
                     int offset = sizeof(uint) + SctpProtocol.HeaderLength;
                     for (uint i = 0; i < linksCount; i++)
                     {
-                        addresses.Add(ScAddress.Parse(bytes, offset));
+                        var address = ScAddress.Parse(bytes, offset);
+                        if (address != null)
+                        {
+                            addresses.Add(address);
+                        }
                         offset += SctpProtocol.ScAddressLength;
                     }
                 }

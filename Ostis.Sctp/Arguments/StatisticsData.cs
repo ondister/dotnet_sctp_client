@@ -5,7 +5,7 @@ namespace Ostis.Sctp.Arguments
     /// <summary>
     /// Статистика сервера для временной метки.
     /// </summary>
-    public struct StatisticsData
+    public class StatisticsData
     {
         private readonly DateTime time;
         private readonly ulong nodeCount;

@@ -5,10 +5,22 @@ namespace Ostis.Sctp.Arguments
     /// <summary>
     /// Адрес SC-элемента в памяти.
     /// </summary>
-    public struct ScAddress : IArgument
+    public class ScAddress : IArgument
     {
-        private ushort segment;
-        private ushort offset;
+        /// <summary>
+        /// Сегмент.
+        /// </summary>
+        public ushort Segment
+        { get { return segment; } }
+
+        /// <summary>
+        /// Смещение.
+        /// </summary>
+        public ushort Offset
+        { get { return offset; } }
+
+        private readonly ushort segment;
+        private readonly ushort offset;
 
         /// <summary>
         /// ctor.
@@ -29,37 +41,11 @@ namespace Ostis.Sctp.Arguments
         /// <returns>SC-адрес</returns>
         public static ScAddress Parse(byte[] bytes, int offset)
         {
-            var address = new ScAddress();
-            if (bytes.Length >= SctpProtocol.ScAddressLength + offset)
-            {
-                address.segment = BitConverter.ToUInt16(bytes, sizeof(ushort) * 0 + offset);
-                address.offset = BitConverter.ToUInt16(bytes, sizeof(ushort) * 1 + offset);
-            }
-            else
-            {
-                address.segment = 0;
-                address.offset = 0;
-            }
-            return address;
-        }
-
-#warning Что за загадочная хрень со структурами мешает сконвертировать эти 2 свойства в авто-свойства?
-        /// <summary>
-        /// Сегмент.
-        /// </summary>
-        public ushort Segment
-        {
-            get { return segment; }
-            set { segment = value; }
-        }
-
-        /// <summary>
-        /// Смещение.
-        /// </summary>
-        public ushort Offset
-        {
-            get { return offset; }
-            set { offset = value; }
+            return bytes.Length >= SctpProtocol.ScAddressLength + offset
+                ? new ScAddress(
+                    BitConverter.ToUInt16(bytes, sizeof(ushort) * 0 + offset),
+                    BitConverter.ToUInt16(bytes, sizeof(ushort) * 1 + offset))
+                : null;
         }
 
         /// <summary>
@@ -85,7 +71,6 @@ namespace Ostis.Sctp.Arguments
             Array.Copy(BitConverter.GetBytes(segment), bytes, 2);
             Array.Copy(BitConverter.GetBytes(offset), 0, bytes, 2, 2);
             return bytes;
-
         }
 
         #endregion

@@ -5,19 +5,15 @@ namespace Ostis.Sctp.Arguments
 	/// <summary>
 	/// Sub scription identifier.
 	/// </summary>
-	public struct SubscriptionId : IArgument
+	public class SubscriptionId : IArgument
 	{
-		private int id;
+		private readonly int id;
 
-#warning Что за загадочная хрень со структурами мешает сконвертировать эти 2 свойства в авто-свойства?
         /// <summary>
 		/// Идентификатор.
 		/// </summary>
 		public int Id
-		{
-			get { return id; }
-			set { id = value; }
-		}
+		{ get { return id; } }
 
 		/// <summary>
 		/// ctor.
