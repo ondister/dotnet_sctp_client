@@ -28,10 +28,10 @@ namespace Ostis.Sctp.Responses
             constructions = new List<List<ScAddress>>();
             if (Header.ReturnCode == ReturnCode.Successfull)
             {
-                uint constructionsCount = BitConverter.ToUInt32(Bytes, SctpProtocol.HeaderLength);
+                int constructionsCount = BitConverter.ToInt32(Bytes, SctpProtocol.HeaderLength);
                 int addressesCount = (bytes.Length - SctpProtocol.HeaderLength - sizeof(uint)) / SctpProtocol.ScAddressLength;
-#warning Правильно ли записано выражение после расстановки скобок согласно правилам приоритета операторов C#???
-                int addressesInConstruction = ((int)constructionsCount == 0 ? 0 : addressesCount) / (int)constructionsCount;
+#warning Правильно ли записано выражение после расстановки скобок согласно правилам приоритета операторов C# и что произойдёт в случае если constructionsCount == 0?
+                int addressesInConstruction = (constructionsCount == 0 ? 0 : addressesCount) / constructionsCount;
                 int offset = sizeof(uint) + SctpProtocol.HeaderLength;
                 for (uint c = 0; c < constructionsCount; c++)
                 {
