@@ -14,8 +14,7 @@ namespace Ostis.Sctp.Commands
         public FindElementCommand(Identifier identifier)
             : base(CommandCode.FindElement, 0)
         {
-            Arguments.Add(new Argument<uint>((uint) identifier.BytesStream.Length));
-            Arguments.Add(new Argument<Identifier>(identifier));
+            Arguments.Add(identifier);
         }
     }
 }

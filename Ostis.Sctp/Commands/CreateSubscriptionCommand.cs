@@ -15,8 +15,8 @@ namespace Ostis.Sctp.Commands
 		public CreateSubscriptionCommand(EventsType type, ScAddress address)
             : base(CommandCode.CreateSubscription, 0)
         {
-            Arguments.Add (new Argument<EventsType>(type));
-			Arguments.Add(new Argument<ScAddress>(address));
+            Arguments.Add (new EventsTypeArgument(type));
+			Arguments.Add(address);
         }
     }
 }

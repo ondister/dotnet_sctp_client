@@ -13,7 +13,6 @@ namespace Ostis.Sctp.Arguments
 	    /// <summary>
 	    /// Массив байт.
 	    /// </summary>
-	    /// <value>The bytes stream.</value>
 	    public byte[] BytesStream
 	    {
 	        get
@@ -36,7 +35,7 @@ namespace Ostis.Sctp.Arguments
 		/// <summary>
 		/// ctor.
 		/// </summary>
-		/// <param name="id">идентификатор.</param>
+		/// <param name="id">идентификатор</param>
 		public SubscriptionId(int id)
 		{
 			this.id = id;

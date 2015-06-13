@@ -14,7 +14,7 @@ namespace Ostis.Sctp.Commands
         public GetArcCommand(ScAddress arcAddress)
             : base(CommandCode.GetArc, 0)
         {
-            Arguments.Add(new Argument<ScAddress>(arcAddress));
+            Arguments.Add(arcAddress);
         }
     }
 }

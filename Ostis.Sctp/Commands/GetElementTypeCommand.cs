@@ -14,7 +14,7 @@ namespace Ostis.Sctp.Commands
         public GetElementTypeCommand(ScAddress address)
             : base(CommandCode.GetElementType, 0)
         {
-            Arguments.Add(new Argument<ScAddress>(address));
+            Arguments.Add(address);
         }
     }
 }

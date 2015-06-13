@@ -14,7 +14,8 @@ namespace Ostis.Sctp.Commands
         public CreateNodeCommand(ElementType nodeType)
             : base(CommandCode.CreateNode, 0)
         {
-            Arguments.Add(new Argument<ElementType>(nodeType));
+            Arguments.Add(new ElementTypeArgument(nodeType));
         }
+#warning Классы комманд содержат только конструктор. Надо с этим что-то делать!
     }
 }

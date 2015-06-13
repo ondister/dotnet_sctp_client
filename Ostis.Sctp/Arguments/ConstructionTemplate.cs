@@ -34,9 +34,9 @@ namespace Ostis.Sctp.Arguments
             arguments = new List<IArgument>();
 
             templateType = ConstructionTemplateType.t_3F_A_A;
-            arguments.Add(new Argument<ScAddress>(f));
-            arguments.Add(new Argument<ElementType>(a1));
-            arguments.Add(new Argument<ElementType>(a2));
+            arguments.Add(f);
+            arguments.Add(new ElementTypeArgument(a1));
+            arguments.Add(new ElementTypeArgument(a2));
 
             createByteStream();
         }
@@ -53,9 +53,9 @@ namespace Ostis.Sctp.Arguments
             arguments = new List<IArgument>();
 
             templateType = ConstructionTemplateType.t_3A_A_F;
-            arguments.Add(new Argument<ElementType>(a1));
-            arguments.Add(new Argument<ElementType>(a2));
-            arguments.Add(new Argument<ScAddress>(f));
+            arguments.Add(new ElementTypeArgument(a1));
+            arguments.Add(new ElementTypeArgument(a2));
+            arguments.Add(f);
 
             createByteStream();
         }
@@ -72,9 +72,9 @@ namespace Ostis.Sctp.Arguments
             arguments = new List<IArgument>();
 
             templateType = ConstructionTemplateType.t_3F_A_F;
-            arguments.Add(new Argument<ScAddress>(f1));
-            arguments.Add(new Argument<ElementType>(a1));
-            arguments.Add(new Argument<ScAddress>(f2));
+            arguments.Add(f1);
+            arguments.Add(new ElementTypeArgument(a1));
+            arguments.Add(f2);
 
             createByteStream();
         }
@@ -93,11 +93,11 @@ namespace Ostis.Sctp.Arguments
             arguments = new List<IArgument>();
 
             templateType = ConstructionTemplateType.t_5A_A_F_A_A;
-            arguments.Add(new Argument<ElementType>(a1));
-            arguments.Add(new Argument<ElementType>(a2));
-            arguments.Add(new Argument<ScAddress>(f));
-            arguments.Add(new Argument<ElementType>(a3));
-            arguments.Add(new Argument<ElementType>(a4));
+            arguments.Add(new ElementTypeArgument(a1));
+            arguments.Add(new ElementTypeArgument(a2));
+            arguments.Add(f);
+            arguments.Add(new ElementTypeArgument(a3));
+            arguments.Add(new ElementTypeArgument(a4));
 
             createByteStream();
         }
@@ -116,11 +116,11 @@ namespace Ostis.Sctp.Arguments
             arguments = new List<IArgument>();
 
             templateType = ConstructionTemplateType.t_5A_A_F_A_F;
-            arguments.Add(new Argument<ElementType>(a1));
-            arguments.Add(new Argument<ElementType>(a2));
-            arguments.Add(new Argument<ScAddress>(f1));
-            arguments.Add(new Argument<ElementType>(a3));
-            arguments.Add(new Argument<ScAddress>(f2));
+            arguments.Add(new ElementTypeArgument(a1));
+            arguments.Add(new ElementTypeArgument(a2));
+            arguments.Add(f1);
+            arguments.Add(new ElementTypeArgument(a3));
+            arguments.Add(f2);
 
             createByteStream();
         }
@@ -139,11 +139,11 @@ namespace Ostis.Sctp.Arguments
             arguments = new List<IArgument>();
 
             templateType = ConstructionTemplateType.t_5F_A_A_A_A;
-            arguments.Add(new Argument<ScAddress>(f));
-            arguments.Add(new Argument<ElementType>(a1));
-            arguments.Add(new Argument<ElementType>(a2));
-            arguments.Add(new Argument<ElementType>(a3));
-            arguments.Add(new Argument<ElementType>(a4));
+            arguments.Add(f);
+            arguments.Add(new ElementTypeArgument(a1));
+            arguments.Add(new ElementTypeArgument(a2));
+            arguments.Add(new ElementTypeArgument(a3));
+            arguments.Add(new ElementTypeArgument(a4));
 
             createByteStream();
         }
@@ -162,11 +162,11 @@ namespace Ostis.Sctp.Arguments
             arguments = new List<IArgument>();
 
             templateType = ConstructionTemplateType.t_5F_A_A_A_F;
-            arguments.Add(new Argument<ScAddress>(f1));
-            arguments.Add(new Argument<ElementType>(a1));
-            arguments.Add(new Argument<ElementType>(a2));
-            arguments.Add(new Argument<ElementType>(a3));
-            arguments.Add(new Argument<ScAddress>(f2));
+            arguments.Add(f1);
+            arguments.Add(new ElementTypeArgument(a1));
+            arguments.Add(new ElementTypeArgument(a2));
+            arguments.Add(new ElementTypeArgument(a3));
+            arguments.Add(f2);
 
             createByteStream();
         }
@@ -185,11 +185,11 @@ namespace Ostis.Sctp.Arguments
             arguments = new List<IArgument>();
 
             templateType = ConstructionTemplateType.t_5F_A_F_A_A;
-            arguments.Add(new Argument<ScAddress>(f1));
-            arguments.Add(new Argument<ElementType>(a1));
-            arguments.Add(new Argument<ScAddress>(f2));
-            arguments.Add(new Argument<ElementType>(a2));
-            arguments.Add(new Argument<ElementType>(a3));
+            arguments.Add(f1);
+            arguments.Add(new ElementTypeArgument(a1));
+            arguments.Add(f2);
+            arguments.Add(new ElementTypeArgument(a2));
+            arguments.Add(new ElementTypeArgument(a3));
 
             createByteStream();
         }
@@ -208,11 +208,11 @@ namespace Ostis.Sctp.Arguments
             arguments = new List<IArgument>();
 
             templateType = ConstructionTemplateType.t_5F_A_F_A_F;
-            arguments.Add(new Argument<ScAddress>(f1));
-            arguments.Add(new Argument<ElementType>(a1));
-            arguments.Add(new Argument<ScAddress>(f2));
-            arguments.Add(new Argument<ElementType>(a2));
-            arguments.Add(new Argument<ScAddress>(f3));
+            arguments.Add(f1);
+            arguments.Add(new ElementTypeArgument(a1));
+            arguments.Add(f2);
+            arguments.Add(new ElementTypeArgument(a2));
+            arguments.Add(f3);
 
             createByteStream();
         }

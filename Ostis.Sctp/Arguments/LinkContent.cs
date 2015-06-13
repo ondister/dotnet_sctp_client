@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Ostis.Sctp.Arguments
 {
     /// <summary>
     /// Содержимое SC-ссылки (пока поддерживаются только строки).
     /// </summary>
-    public struct LinkContent
+    public struct LinkContent : IArgument
     {
         private byte[] bytes;
         private LinkContentType contentType;
@@ -75,6 +76,20 @@ namespace Ostis.Sctp.Arguments
                 contentType = LinkContentType.Text,
                 bytes = SctpProtocol.TextEncoding.GetBytes(value),
             };
+        }
+
+        /// <summary>
+        /// Массив байт.
+        /// </summary>
+        public byte[] BytesStream
+        {
+            get
+            {
+                var bytesList = new List<byte>();
+                bytesList.AddRange(BitConverter.GetBytes(bytes.Length));
+                bytesList.AddRange(bytes);
+                return bytesList.ToArray();
+            }
         }
     }
 }

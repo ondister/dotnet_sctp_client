@@ -15,9 +15,8 @@ namespace Ostis.Sctp.Commands
         public SetLinkContentCommand(ScAddress linkAddress, LinkContent content)
             : base(CommandCode.SetLinkContent, 0)
         {
-            Arguments.Add(new Argument<ScAddress>(linkAddress));
-            Arguments.Add(new Argument<uint>((uint) content.Bytes.Length));
-            Arguments.Add(new Argument<LinkContent>(content));
+            Arguments.Add(linkAddress);
+            Arguments.Add(content);
         }
     }
 }

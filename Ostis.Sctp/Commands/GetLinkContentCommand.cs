@@ -14,7 +14,7 @@ namespace Ostis.Sctp.Commands
         public GetLinkContentCommand(ScAddress address)
             : base(CommandCode.GetLinkContent, 0)
         {
-            Arguments.Add(new Argument<ScAddress>(address));
+            Arguments.Add(address);
         }
     }
 }

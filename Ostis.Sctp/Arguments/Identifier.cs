@@ -1,4 +1,7 @@
-﻿namespace Ostis.Sctp.Arguments
+﻿using System;
+using System.Collections.Generic;
+
+namespace Ostis.Sctp.Arguments
 {
     /// <summary>
     /// Идентификатор SC-элемента.
@@ -19,7 +22,11 @@
         /// <param name="value">значение</param>
         public Identifier(string value)
         {
-            bytes = SctpProtocol.TextEncoding.GetBytes(value);
+            var bytesWithoutLength = SctpProtocol.TextEncoding.GetBytes(value);
+            var bytesList = new List<byte>();
+            bytesList.AddRange(BitConverter.GetBytes(bytesWithoutLength.Length));
+            bytesList.AddRange(bytesWithoutLength);
+            bytes = bytesList.ToArray();
         }
 
         /// <summary>
@@ -41,7 +48,8 @@
         /// <filterpriority>2</filterpriority>
         public override string ToString()
         {
-            return SctpProtocol.TextEncoding.GetString(bytes);
+            int length = BitConverter.ToInt32(bytes, 0);
+            return SctpProtocol.TextEncoding.GetString(bytes, sizeof(int), length);
         }
     }
 }

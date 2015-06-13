@@ -14,7 +14,7 @@ namespace Ostis.Sctp.Commands
 		public DeleteSubscriptionCommand(SubscriptionId id)
 			: base(CommandCode.DeleteSubscription, 0)
         {
-            Arguments.Add(new Argument<SubscriptionId>(id));
+            Arguments.Add(id);
         }
     }
 }

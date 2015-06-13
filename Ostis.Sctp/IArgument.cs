@@ -8,7 +8,7 @@
         /// <summary>
         /// Массив байт.
         /// </summary>
-#warning Переименовать в Bytes.
+#warning Переименовать в Bytes или (лучше) преобразовать в метод GetBytes().
         byte[] BytesStream
         { get; }
     }

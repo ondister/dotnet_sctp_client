@@ -14,7 +14,7 @@ namespace Ostis.Sctp.Commands
         public IterateElementsCommand(ConstructionTemplate template)
             : base(CommandCode.IterateElements, 0)
         {
-            Arguments.Add(new Argument<ConstructionTemplate>(template));
+            Arguments.Add(template);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Ostis.Sctp.Commands
         public CheckElementCommand(ScAddress address)
             : base(CommandCode.CheckElement, 0)
         {
-            Arguments.Add(new Argument<ScAddress>(address));
+            Arguments.Add(address);
         }
     }
 }
