@@ -31,11 +31,11 @@ namespace Ostis.Sctp.Responses
                 uint linksCount = BitConverter.ToUInt32(Bytes, SctpProtocol.HeaderLength);
                 if (linksCount != 0)
                 {
-                    int beginIndex = sizeof(uint) + SctpProtocol.HeaderLength;
+                    int offset = sizeof(uint) + SctpProtocol.HeaderLength;
                     for (uint i = 0; i < linksCount; i++)
                     {
-                        addresses.Add(ScAddress.Parse(bytes, beginIndex));
-                        beginIndex += SctpProtocol.ScAddressLength;
+                        addresses.Add(ScAddress.Parse(bytes, offset));
+                        offset += SctpProtocol.ScAddressLength;
                     }
                 }
             }

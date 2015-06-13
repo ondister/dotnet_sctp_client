@@ -1,6 +1,4 @@
-﻿using System;
-
-using Ostis.Sctp.Arguments;
+﻿using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Responses
 {
@@ -35,9 +33,7 @@ namespace Ostis.Sctp.Responses
             isFound = Header.ReturnSize != 0;
             if (Header.ReturnCode == ReturnCode.Successfull)
             {
-#warning Parse
-                address.Offset = BitConverter.ToUInt16(bytes, SctpProtocol.HeaderLength + 2);
-                address.Segment = BitConverter.ToUInt16(bytes, SctpProtocol.HeaderLength);
+                address = ScAddress.Parse(bytes, SctpProtocol.HeaderLength);
             }
         }
     }
