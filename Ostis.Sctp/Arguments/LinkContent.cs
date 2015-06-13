@@ -8,9 +8,6 @@ namespace Ostis.Sctp.Arguments
     /// </summary>
     public struct LinkContent : IArgument
     {
-        private byte[] data;
-        private LinkContentType contentType;
-
         /// <summary>
         /// OSTIS-тип содержимого ссылки.
         /// </summary>
@@ -23,15 +20,15 @@ namespace Ostis.Sctp.Arguments
         public byte[] Data
         { get { return data; } }
 
-#warning Конструкторы не вызывают один другой.
-        /// <summary>
-        /// ctor.
-        /// </summary>
-        /// <param name="value">значение</param>
-        public LinkContent(string value)
+        private readonly LinkContentType contentType;
+        private readonly byte[] data;
+
+        #region Конструкторы
+
+        private LinkContent(LinkContentType contentType, byte[] data)
         {
-            contentType = LinkContentType.Text;
-            data = SctpProtocol.TextEncoding.GetBytes(value);
+            this.contentType = contentType;
+            this.data = data;
         }
 
         /// <summary>
@@ -39,34 +36,26 @@ namespace Ostis.Sctp.Arguments
         /// </summary>
         /// <param name="bytes">массив байт</param>
         public LinkContent(byte[] bytes)
-		{
-			contentType = LinkContentType.Unknown;	
-			data = bytes;
-		}
+            : this(LinkContentType.Unknown, bytes)
+        { }
+
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="value">значение</param>
+        public LinkContent(string value)
+            : this(LinkContentType.Text, SctpProtocol.TextEncoding.GetBytes(value))
+        { }
 
         /// <summary>
         /// ctor.
         /// </summary>
         /// <param name="value">значение</param>
         public LinkContent(double value)
-		{
-			contentType = LinkContentType.Numeric;	
-			data = BitConverter.GetBytes(value);
-		}
+            : this(LinkContentType.Numeric, BitConverter.GetBytes(value))
+		{ }
 
-        /// <summary>
-        /// Преобразование из строки.
-        /// </summary>
-        /// <param name="value">строковое значение</param>
-        /// <returns>соднржимое ссылки+</returns>
-        public static implicit operator LinkContent(string value)
-        {
-            return new LinkContent
-            {
-                contentType = LinkContentType.Text,
-                data = SctpProtocol.TextEncoding.GetBytes(value),
-            };
-        }
+        #endregion
 
         #region Реализация интерфеса IArgument
 
