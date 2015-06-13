@@ -55,11 +55,7 @@
     <Compile Include="Arguments\ScAddress.cs" />
     <Compile Include="Arguments\StatisticsData.cs" />
     <Compile Include="Arguments\SubscriptionId.cs" />
-    <Compile Include="AsyncClient\AsynchronousClient.cs" />
-    <Compile Include="AsyncClient\StageObject.cs" />
-    <Compile Include="CallBacks\CommandDoneEventArgs.cs" />
     <Compile Include="Enums\ReturnCode.cs" />
-    <Compile Include="CallBacks\ReceiveEventArgs.cs" />
     <Compile Include="Commands\CheckElementCommand.cs" />
     <Compile Include="Commands\CreateArcCommand.cs" />
     <Compile Include="Commands\CreateLinkCommand.cs" />
@@ -99,17 +95,13 @@
     <Compile Include="SctpClient.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="Response.cs" />
-    <Compile Include="CommandPool.cs" />
     <Compile Include="IArgument.cs" />
-    <Compile Include="IClient.cs" />
     <Compile Include="ResponseHeader.cs" />
     <Compile Include="Commands\EmitEventsCommand.cs" />
     <Compile Include="Arguments\ScEvent.cs" />
     <Compile Include="Responses\EmitEventsResponse.cs" />
     <Compile Include="Commands\IterateConstructionsCommand.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Enums\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

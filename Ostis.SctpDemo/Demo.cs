@@ -13,7 +13,7 @@ namespace Ostis.SctpDemo
 	// Сообщите, если хотите внести в этот код исправления или дополнения.
 	internal class Demo
 	{
-		private readonly CommandPool commandPool;
+        private readonly SctpClient sctpClient;
 
 		public Demo()
 		{
@@ -35,7 +35,16 @@ namespace Ostis.SctpDemo
                 serverPort = SctpProtocol.DefaultPortNumber;
             }
 
-            commandPool = new CommandPool(serverAddress, serverPort, false);
+            sctpClient = new SctpClient(serverAddress, serverPort);
+		    try
+		    {
+                sctpClient.Connect();
+                Console.WriteLine("Socket connected to " + sctpClient.ServerEndPoint);
+		    }
+		    catch (Exception error)
+		    {
+                Console.WriteLine(error.ToString());
+		    }
 		}
 
         // Код: 0x01 
@@ -47,11 +56,10 @@ namespace Ostis.SctpDemo
 			// выбираем команду из пространства имен Ostis.Sctp.Commands
 			var command = new CheckElementCommand(new ScAddress(0, 1));
 			// отправка команды на сервер
-			commandPool.Send(command);
+            var response = (CheckElementResponse) sctpClient.Send(command);
 			// Так как для каждой команды есть свой тип ответа, то нетипизированный ответ сервера нужно преобразовать к требуемому типу.
 			// Это, конечно, не очень безопасно, зато точно получим то, что надо.
-            var response = (CheckElementResponse) command.Response;
-			Console.WriteLine(response.ElementExists);
+            Console.WriteLine(response.ElementExists);
 			// Дополнительно обратите внимание, что в ответе есть свойства Header и BytesStream.
 			// Это тот самый нижний уровень ответа, который можно не приводить к типу, и который описан на wiki товарища Корончика.
 		}
@@ -63,8 +71,7 @@ namespace Ostis.SctpDemo
 		public void GetElementType()
 		{
             var command = new GetElementTypeCommand(new ScAddress(0, 0));
-			commandPool.Send(command);
-            var response = (GetElementTypeResponse) command.Response;
+            var response = (GetElementTypeResponse) sctpClient.Send(command);
             Console.WriteLine(response.ElementType.ToString());
 		}
 
@@ -75,8 +82,7 @@ namespace Ostis.SctpDemo
 		public void DeleteElement()
 		{
             var command = new DeleteElementCommand(new ScAddress(0, 0));
-			commandPool.Send(command);
-            var response = (DeleteElementResponse) command.Response;
+		    var response = (DeleteElementResponse) sctpClient.Send(command);
             Console.WriteLine(response.IsDeleted);
 		}
 
@@ -88,8 +94,7 @@ namespace Ostis.SctpDemo
 		public void CreateNode()
 		{
             var command = new CreateNodeCommand(ElementType.ConstantNode);
-			commandPool.Send(command);
-            var response = (CreateNodeResponse) command.Response;
+            var response = (CreateNodeResponse) sctpClient.Send(command);
             Console.WriteLine(response.CreatedNodeAddress.ToString());
 		}
 
@@ -103,8 +108,7 @@ namespace Ostis.SctpDemo
 			// Есть нюанс в создании ссылки. Сначала создается ссылка, а затем ей можно задать контент.
 			// Вы можете сделать команду более высокого уровня, объединив две в одну для удобства.
             var command = new CreateLinkCommand();
-			commandPool.Send(command);
-            var response = (CreateLinkResponse) command.Response;
+            var response = (CreateLinkResponse) sctpClient.Send(command);
             Console.WriteLine(response.CreatedLinkAddress.ToString());
 		}
 
@@ -119,8 +123,7 @@ namespace Ostis.SctpDemo
 		public void CreateArc()
 		{
             var command = new CreateArcCommand(ElementType.ConstantCommonArc, new ScAddress(0, 1), new ScAddress(0, 2));
-			commandPool.Send(command);
-            var response = (CreateArcResponse) command.Response;
+			var response = (CreateArcResponse) sctpClient.Send(command);
             Console.WriteLine(response.CreatedArcAddress.ToString());
 		}
 
@@ -132,8 +135,7 @@ namespace Ostis.SctpDemo
 		public void GetArc()
 		{
             var command = new GetArcCommand(new ScAddress(0, 1));
-			commandPool.Send(command);
-            var response = (GetArcResponse) command.Response;
+            var response = (GetArcResponse) sctpClient.Send(command);
             Console.WriteLine(response.ToString());
             Console.WriteLine(response.EndElementAddress.ToString());
 		}
@@ -151,9 +153,7 @@ namespace Ostis.SctpDemo
 		public void GetLinkContent()
 		{
             var command = new GetLinkContentCommand(new ScAddress(0, 1));
-			commandPool.Send(command);
-            var response = (GetLinkContentResponse) command.Response;
-
+            var response = (GetLinkContentResponse) sctpClient.Send(command);
             Console.WriteLine(SctpProtocol.TextEncoding.GetString(response.LinkContent));
 		    // Так вот, если с установкой контента все достаточно просто, то с принятием контента немного сложности есть. 
 		    // Дело в том, что в базе хранится массив байт, и только. А вот что там в этом массива, это вам указывать в виде каких-то конструкций.
@@ -167,8 +167,7 @@ namespace Ostis.SctpDemo
 		public void FindLinks()
 		{
             var command = new FindLinksCommand(new LinkContent("aaaaa"));
-			commandPool.Send(command);
-            var response = (FindLinksResponse) command.Response;
+			var response = (FindLinksResponse) sctpClient.Send(command);
             Console.WriteLine(response.Addresses.Count);
             /*foreach (var address in response.ScAddresses)
 		    {
@@ -184,8 +183,7 @@ namespace Ostis.SctpDemo
 		public void SetLinkContent()
 		{
             var command = new SetLinkContentCommand(new ScAddress(0, 1), new LinkContent("aaa"));
-			commandPool.Send(command);
-            var response = (SetLinkContentResponse) command.Response;
+            var response = (SetLinkContentResponse) sctpClient.Send(command);
 			Console.WriteLine(response.ContentIsSet);
 		}
 
@@ -197,8 +195,7 @@ namespace Ostis.SctpDemo
 		{
 			var template = new ConstructionTemplate(new ScAddress(0, 1), ElementType.AccessArg, ElementType.Node);
             var command = new IterateElementsCommand(template);
-			commandPool.Send(command);
-            var response = (IterateElementsResponse) command.Response;
+            var response = (IterateElementsResponse) sctpClient.Send(command);
             Console.WriteLine(response.Constructions.Count);
             /*foreach (var construction in response.GetConstructions())
 		    {
