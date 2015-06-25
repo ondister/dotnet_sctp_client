@@ -6,7 +6,7 @@ namespace Ostis.Sctp
     /// Код выполнения команды.
     /// </summary>
     [Flags]
-    public enum ReturnCode : ushort
+    public enum ReturnCode : byte
     {
         /// <summary>
         /// Успешно.

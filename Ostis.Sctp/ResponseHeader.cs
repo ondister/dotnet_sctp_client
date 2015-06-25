@@ -46,7 +46,7 @@ namespace Ostis.Sctp
             {
                 commandCode = (CommandCode) bytes[0];
                 id = BitConverter.ToUInt32(bytes, sizeof(CommandCode));
-                returnCode = (ReturnCode) bytes[sizeof(CommandCode) + sizeof(uint)];
+				returnCode = (ReturnCode) bytes[sizeof(CommandCode) + sizeof(uint)];
                 returnSize = BitConverter.ToUInt32(bytes, sizeof(CommandCode) + sizeof(uint) + sizeof(ReturnCode));
             }
             else
