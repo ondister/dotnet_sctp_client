@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 
 using Ostis.Sctp;           // общее пространство имен, обязательно для подключения
 using Ostis.Sctp.Arguments; // пространство имен аргументов команд
@@ -11,22 +12,22 @@ namespace Ostis.SctpDemo
     // Если у вас нет элементов по указанным адресам - выйдут ошибки.
 	// Все консультации и справки по скайпу ondister.
 	// Сообщите, если хотите внести в этот код исправления или дополнения.
-	internal class Demo
-	{
+    internal class Demo
+    {
         private readonly SctpClient sctpClient;
 
-		public Demo()
-		{
-			// Создание пула команд, который будет отправлять запросы на сервер.
+        public Demo()
+        {
+            // Создание пула команд, который будет отправлять запросы на сервер.
             // Обратите внимание на IP-адрес сервера! При работе с сервером на удалённой или виртуальной машине, нужно выставить здесь правильный IP-адрес.
             // Номер порта, к которому нужно подключаться, можно посмотреть в конфигурации OSTIS в файле .../config/scweb.ini (параметр Port в секции Network).
-		    const string defaultAddress = "127.0.0.1";
+            const string defaultAddress = "127.0.0.1";
             Console.WriteLine("Введите адрес сервера (ввод для {0}):", defaultAddress);
-		    string serverAddress = Console.ReadLine();
-		    if (string.IsNullOrEmpty(serverAddress))
-		    {
-		        serverAddress = defaultAddress;
-		    }
+            string serverAddress = Console.ReadLine();
+            if (string.IsNullOrEmpty(serverAddress))
+            {
+                serverAddress = defaultAddress;
+            }
 
             Console.WriteLine("Введите номер порта сервера (ввод для {0}):", SctpProtocol.DefaultPortNumber);
             int serverPort;
@@ -36,25 +37,28 @@ namespace Ostis.SctpDemo
             }
 
             sctpClient = new SctpClient(serverAddress, serverPort);
-		    try
-		    {
+            sctpClient.ResponseReceived += asyncHandler;
+            try
+            {
                 sctpClient.Connect();
                 Console.WriteLine("Socket connected to " + sctpClient.ServerEndPoint);
-		    }
-		    catch (Exception error)
-		    {
+            }
+            catch (Exception error)
+            {
                 Console.WriteLine(error.ToString());
-		    }
-		}
+            }
+        }
+
+        #region Synchronous tests
 
         // Код: 0x01 
         // Команда: Проверка существования элемента с указанным sc-адресом 
         // Аргументы: ScAddress
         // Результат: True или False.
-		public void CheckElement()
+        public void CheckElement(ScAddress address = null)
 		{
 			// выбираем команду из пространства имен Ostis.Sctp.Commands
-			var command = new CheckElementCommand(new ScAddress(0, 1));
+            var command = new CheckElementCommand(address ?? new ScAddress(0, 1));
 			// отправка команды на сервер
             var response = (CheckElementResponse) sctpClient.Send(command);
 			// Так как для каждой команды есть свой тип ответа, то нетипизированный ответ сервера нужно преобразовать к требуемому типу.
@@ -68,7 +72,7 @@ namespace Ostis.SctpDemo
         // Команда: Получение типа sc-элемента по sc-адресу
         // Аргументы: ScAddress
         // Результат: ElementType (подробнее тут Ostis.Sctp.Arguments файл ElementType.cs
-		public void GetElementType()
+		public void GetElementType(ScAddress address)
 		{
             var command = new GetElementTypeCommand(new ScAddress(0, 0));
             var response = (GetElementTypeResponse) sctpClient.Send(command);
@@ -91,11 +95,12 @@ namespace Ostis.SctpDemo
         // Аргументы: ElementType
 		// Результат: Если выполнение команды успешно, то в качестве результата возвращается адрес созданного sc-узла.
         // Иначе адрес нулевой, то есть недействительный (сегмент и смещение (offset) равны нулю).
-		public void CreateNode()
+		public ScAddress CreateNode()
 		{
             var command = new CreateNodeCommand(ElementType.ConstantNode);
             var response = (CreateNodeResponse) sctpClient.Send(command);
             Console.WriteLine(response.CreatedNodeAddress.ToString());
+		    return response.CreatedNodeAddress;
 		}
 
         // Код: 0x05
@@ -201,7 +206,45 @@ namespace Ostis.SctpDemo
 		    {
 		        Console.WriteLine(".. " + construction.);
 		    }*/
-		}
+        }
+
+        #endregion
+
+        #region Asynchronous tests
+
+        public ScAddress CreateNodeAsync()
+        {
+            runAsyncTest(new CreateNodeCommand(ElementType.ConstantNode));
+            var response = (CreateNodeResponse) lastAsyncResponse;
+            Console.WriteLine(response.CreatedNodeAddress.ToString());
+            return response.CreatedNodeAddress;
+        }
+
+        public void CheckElementAsync(ScAddress address = null)
+        {
+            runAsyncTest(new CheckElementCommand(address ?? new ScAddress(0, 1)));
+            var response = (CheckElementResponse) lastAsyncResponse;
+            Console.WriteLine(response.ElementExists);
+        }
+
+        private void runAsyncTest(Command command)
+        {
+            lastAsyncResponse = null;
+            synchronizer.Reset();
+            sctpClient.SendAsync(command);
+            synchronizer.WaitOne();
+        }
+
+        private void asyncHandler(Command command, Response response)
+        {
+            lastAsyncResponse = response;
+            synchronizer.Set();
+        }
+
+        private readonly ManualResetEvent synchronizer = new ManualResetEvent(false);
+        private Response lastAsyncResponse;
+
+        #endregion
 
 // Код: 0x0d
 // Команда: Итерирование сложных конструкций (улучшить описание)
@@ -262,6 +305,6 @@ namespace Ostis.SctpDemo
 // Команда: Получение версии протокола
 // Аргументы: нет
 // Результат: Если команда выполнена успешно, то в качестве результата возвращается 4 байта, которые обозначают версию используемого сервером sctp протокола. (способ кодирования версии необходимо уточнить)
-	}
+    }
 }
 
