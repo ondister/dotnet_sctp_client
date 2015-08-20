@@ -34,7 +34,7 @@ namespace Ostis.Sctp.Commands
         #endregion
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новую команду.
         /// </summary>
         /// <param name="arcType">тип создаваемой SC-дуги</param>
         /// <param name="beginAddress">SC-адрес начального элемента SC-дуги</param>

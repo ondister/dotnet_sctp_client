@@ -6,7 +6,7 @@
     public class CreateLinkCommand : Command
     {
         /// <summary>
-        /// ctor.
+        /// Инициализирует новую команду.
         /// </summary>
         public CreateLinkCommand()
             : base(CommandCode.CreateLink)

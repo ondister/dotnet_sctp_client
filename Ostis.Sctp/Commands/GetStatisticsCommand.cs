@@ -27,7 +27,7 @@ namespace Ostis.Sctp.Commands
         #endregion
         
         /// <summary>
-        /// ctor.
+        /// Инициализирует новую команду.
         /// </summary>
         /// <param name="startTime">нижняя временная граница</param>
         /// <param name="endTime">верхняя временная граница</param>

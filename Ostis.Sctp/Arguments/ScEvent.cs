@@ -30,7 +30,7 @@ namespace Ostis.Sctp.Arguments
 	    { get { return arcAddress; } }
 
 	    /// <summary>
-		/// ctor.
+		/// Инициализирует новое событие.
 		/// </summary>
         /// <param name="subscriptionId">id подписки</param>
         /// <param name="elementAddress">адрес элемента</param>

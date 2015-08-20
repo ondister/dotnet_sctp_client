@@ -6,7 +6,7 @@
     public class GetProtocolVersionCommand : Command
     {
         /// <summary>
-        /// ctor.
+        /// Инициализирует новую команду.
         /// </summary>
 		public GetProtocolVersionCommand()
             : base(CommandCode.GetProtocolVersion)

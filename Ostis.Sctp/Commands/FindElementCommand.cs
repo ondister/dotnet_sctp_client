@@ -20,7 +20,7 @@ namespace Ostis.Sctp.Commands
         #endregion
         
         /// <summary>
-        /// ctor.
+        /// Инициализирует новую команду.
         /// </summary>
         /// <param name="identifier">идентификатор</param>
         public FindElementCommand(Identifier identifier)

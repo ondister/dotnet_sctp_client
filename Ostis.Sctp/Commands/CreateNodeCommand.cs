@@ -20,7 +20,7 @@ namespace Ostis.Sctp.Commands
         #endregion
         
         /// <summary>
-        /// ctor.
+        /// Инициализирует новую команду.
         /// </summary>
         /// <param name="nodeType">тип создаваемого SC-узла</param>
         public CreateNodeCommand(ElementType nodeType)

@@ -23,7 +23,7 @@ namespace Ostis.Sctp.Arguments
         private readonly ushort offset;
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новый sc-адрес, используя смещение и сегмент.
         /// </summary>
         /// <param name="segment">сегмент</param>
         /// <param name="offset">смещение</param>

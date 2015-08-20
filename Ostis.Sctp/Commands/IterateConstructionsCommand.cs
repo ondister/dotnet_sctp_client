@@ -2,7 +2,7 @@
 
 namespace Ostis.Sctp.Commands
 {
-#warning На эту команду нет класса ответа!
+#warning Эта команда не реализована, ибо не понятны чаяния Корончика
     /// <summary>
     /// Команда: Итерирование конструкций.
     /// </summary>
@@ -21,7 +21,7 @@ namespace Ostis.Sctp.Commands
         #endregion
         
         /// <summary>
-        /// ctor.
+        /// Инициализирует новую команду.
         /// </summary>
         /// <param name="template">шаблон поиска</param>
 		public IterateConstructionsCommand(ConstructionTemplate template)

@@ -19,7 +19,7 @@ namespace Ostis.Sctp.Arguments
 		}
 
 		/// <summary>
-		/// ctor.
+		/// Инициализирует новое событие указанного типа.
 		/// </summary>
         /// <param name="eventsType">тип события</param>
         public EventsTypeArgument(EventsType eventsType)

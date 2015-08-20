@@ -20,7 +20,7 @@ namespace Ostis.Sctp.Commands
         #endregion
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новую команду.
         /// </summary>
         /// <param name="address">SC-адрес проверяемого SC-элемента</param>
         public CheckElementCommand(ScAddress address)

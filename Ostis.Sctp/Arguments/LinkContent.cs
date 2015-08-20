@@ -32,7 +32,7 @@ namespace Ostis.Sctp.Arguments
         }
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новое содержимое ссылки из массива байт.
         /// </summary>
         /// <param name="bytes">массив байт</param>
         public LinkContent(byte[] bytes)
@@ -40,7 +40,7 @@ namespace Ostis.Sctp.Arguments
         { }
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новое содержимое ссылки из строки.
         /// </summary>
         /// <param name="value">значение</param>
         public LinkContent(string value)
@@ -48,7 +48,7 @@ namespace Ostis.Sctp.Arguments
         { }
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новое содержимое ссылки из типа Double.
         /// </summary>
         /// <param name="value">значение</param>
         public LinkContent(double value)

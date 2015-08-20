@@ -10,7 +10,7 @@ namespace Ostis.Sctp.Arguments
         private readonly long value;
         
         /// <summary>
-        /// ctor.
+        /// Инициализирует новое время в формате UNIX.
         /// </summary>
         /// <param name="dateTime">дата и время</param>
         public UnixDateTime(DateTime dateTime)

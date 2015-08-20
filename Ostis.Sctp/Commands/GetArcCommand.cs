@@ -20,7 +20,7 @@ namespace Ostis.Sctp.Commands
         #endregion
         
         /// <summary>
-        /// ctor.
+        /// Инициализирует новую команду.
         /// </summary>
         /// <param name="arcAddress">SC-адрес дуги у которой необходимо получить начальный элемент</param>
         public GetArcCommand(ScAddress arcAddress)

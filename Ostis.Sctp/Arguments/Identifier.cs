@@ -17,7 +17,7 @@ namespace Ostis.Sctp.Arguments
         private readonly string value;
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новый идентификатор SC-элемента.
         /// </summary>
         /// <param name="value">значение</param>
         public Identifier(string value)
@@ -26,7 +26,7 @@ namespace Ostis.Sctp.Arguments
         }
 
         /// <summary>
-        /// Преобразование из строки.
+        /// Преобразование Идентификатора из строки.
         /// </summary>
         /// <param name="value">строковое значение</param>
         /// <returns>SC-идентификатор</returns>

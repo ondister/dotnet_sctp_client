@@ -27,7 +27,7 @@ namespace Ostis.Sctp.Commands
         #endregion
         
         /// <summary>
-        /// ctor.
+        /// Инициализирует новую команду.
         /// </summary>
         /// <param name="type">тип события</param>
         /// <param name="address">SC-адрес</param>

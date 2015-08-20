@@ -27,7 +27,7 @@ namespace Ostis.Sctp.Commands
         #endregion
         
         /// <summary>
-        /// ctor.
+        /// Инициализирует новую команду.
         /// </summary>
         /// <param name="linkAddress">SC-адрес ссылки</param>
         /// <param name="content">данные устанавливаемого содержимого</param>

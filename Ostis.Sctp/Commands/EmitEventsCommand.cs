@@ -6,7 +6,7 @@
     public class EmitEventsCommand : Command
     {
         /// <summary>
-        /// ctor.
+        /// Инициализирует новую команду.
         /// </summary>
         public EmitEventsCommand()
             : base(CommandCode.EmitEvents)

@@ -3,7 +3,7 @@ using System;
 namespace Ostis.Sctp.Arguments
 {
 	/// <summary>
-	/// Sub scription identifier.
+	/// Идентификатор подписки на событие.
 	/// </summary>
 	public class SubscriptionId : IArgument
 	{
@@ -16,7 +16,7 @@ namespace Ostis.Sctp.Arguments
 		{ get { return id; } }
 
 		/// <summary>
-		/// ctor.
+		/// Инициализирует новый идентификатор подписки на событие.
 		/// </summary>
 		/// <param name="id">идентификатор</param>
 		public SubscriptionId(int id)

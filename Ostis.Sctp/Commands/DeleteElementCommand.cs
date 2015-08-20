@@ -20,7 +20,7 @@ namespace Ostis.Sctp.Commands
         #endregion
         
         /// <summary>
-        /// ctor.
+        /// Инициализирует новую команду.
         /// </summary>
         /// <param name="address">SC-адрес удаляемого sc-элемента</param>
         public DeleteElementCommand(ScAddress address)

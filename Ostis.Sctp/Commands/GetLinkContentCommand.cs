@@ -20,7 +20,7 @@ namespace Ostis.Sctp.Commands
         #endregion
         
         /// <summary>
-        /// ctor.
+        /// Инициализирует новую команду.
         /// </summary>
         /// <param name="address">SC-адрес ссылки для получения содержимого</param>
         public GetLinkContentCommand(ScAddress address)

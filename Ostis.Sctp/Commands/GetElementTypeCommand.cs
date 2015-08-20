@@ -20,7 +20,7 @@ namespace Ostis.Sctp.Commands
         #endregion
         
         /// <summary>
-        /// ctor.
+        /// Инициализирует новую команду.
         /// </summary>
         /// <param name="address">SC-адрес элемента для получения типа</param>
         public GetElementTypeCommand(ScAddress address)

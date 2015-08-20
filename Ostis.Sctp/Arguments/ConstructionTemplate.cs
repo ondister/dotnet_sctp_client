@@ -6,6 +6,7 @@ namespace Ostis.Sctp.Arguments
     /// <summary>
     /// Шаблон поиска конструкции для команды CmdGetIterateElements.
     /// </summary>
+  
     public class ConstructionTemplate : IArgument
     {
         private readonly List<IArgument> arguments;
@@ -23,10 +24,10 @@ namespace Ostis.Sctp.Arguments
         }
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новый шаблон конструкции типа f_a_a
         /// </summary>
         /// <param name="f">адрес начального sc-элемента</param>
-        /// <param name="a1">тип исходящей дуги дуги</param>
+        /// <param name="a1">тип исходящей дуги</param>
         /// <param name="a2">тип конечного sc-элемента (дуги или узла)</param>
         public ConstructionTemplate(ScAddress f, ElementType a1, ElementType a2)
             : this(ConstructionTemplateType.t_3F_A_A)
@@ -37,7 +38,7 @@ namespace Ostis.Sctp.Arguments
         }
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новый шаблон конструкции типа a_a_f
         /// </summary>
         /// <param name="a1">тип начального sc-элемента</param>
         /// <param name="a2">тип входящей дуги</param>
@@ -51,7 +52,7 @@ namespace Ostis.Sctp.Arguments
         }
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новый шаблон конструкции типа f_a_f
         /// </summary>
         /// <param name="f1">адрес начального sc-элемента</param>
         /// <param name="a1">тип искомой дуги</param>
@@ -65,7 +66,7 @@ namespace Ostis.Sctp.Arguments
         }
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новый шаблон конструкции типа a_a_f_a_a
         /// </summary>
         /// <param name="a1">тип первого sc-элемента конструкции</param>
         /// <param name="a2">тип второго sc-элемента конструкции</param>
@@ -83,7 +84,7 @@ namespace Ostis.Sctp.Arguments
         }
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новый шаблон конструкции типа a_a_f_a_f
         /// </summary>
         /// <param name="a1">тип первого sc-элемента конструкции</param>
         /// <param name="a2">тип второго sc-элемента конструкции</param>
@@ -101,7 +102,7 @@ namespace Ostis.Sctp.Arguments
         }
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новый шаблон конструкции типа f_a_a_a_a
         /// </summary>
         /// <param name="f">адрес первого sc-элемента</param>
         /// <param name="a1">тип второго sc-элемента конструкции</param>
@@ -119,7 +120,7 @@ namespace Ostis.Sctp.Arguments
         }
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новый шаблон конструкции типа f_a_a_a_f
         /// </summary>
         /// <param name="f1">адрес первого sc-элемента</param>
         /// <param name="a1">тип второго sc-элемента конструкции</param>
@@ -137,7 +138,7 @@ namespace Ostis.Sctp.Arguments
         }
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новый шаблон конструкции типа f_a_f_a_a
         /// </summary>
         /// <param name="f1">адрес первого sc-элемента</param>
         /// <param name="a1">тип второго sc-элемента конструкции</param>
@@ -155,7 +156,7 @@ namespace Ostis.Sctp.Arguments
         }
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новый шаблон конструкции типа f_a_f_a_f
         /// </summary>
         /// <param name="f1">адрес первого sc-элемента</param>
         /// <param name="a1">тип второго sc-элемента конструкции</param>

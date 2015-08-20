@@ -5,7 +5,7 @@ namespace Ostis.Sctp.Arguments
     /// <summary>
     /// Статистика сервера для временной метки.
     /// </summary>
-    public class StatisticsData
+   public class StatisticsData
     {
         private readonly DateTime time;
         private readonly ulong nodeCount;
@@ -95,7 +95,7 @@ namespace Ostis.Sctp.Arguments
         { get { return isInitStat; } }
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новые данные статистики для временной метки
         /// </summary>
         /// <param name="bytes">массив байт</param>
         /// <param name="offset">смещение в массиве</param>

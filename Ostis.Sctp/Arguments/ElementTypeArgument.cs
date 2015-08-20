@@ -19,7 +19,7 @@ namespace Ostis.Sctp.Arguments
 		}
 
 		/// <summary>
-		/// ctor.
+		/// Инициализирует новый аргумент указанного типа.
 		/// </summary>
         /// <param name="elementType">тип элемента</param>
         public ElementTypeArgument(ElementType elementType)
