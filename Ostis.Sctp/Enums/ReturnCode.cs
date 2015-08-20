@@ -22,5 +22,10 @@ namespace Ostis.Sctp
         /// Указанный sc-элемент не найден (неверный sc-адрес).
         /// </summary>
         AddressError = 0x02,
+
+        /// <summary>
+        /// Не достаточно прав доступа для выполнения команды.
+        /// </summary>
+        NotAccess = 0x03
     }
 }
