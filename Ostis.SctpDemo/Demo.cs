@@ -139,8 +139,8 @@ namespace Ostis.SctpDemo
         // sc-адрес конечного элементе дуги 
 		public void GetArc()
 		{
-            var command = new GetArcCommand(new ScAddress(0, 1));
-            var response = (GetArcResponse) sctpClient.Send(command);
+            var command = new GetArcElementsCommand(new ScAddress(0, 1));
+            var response = (GetArcElementsResponse) sctpClient.Send(command);
             Console.WriteLine(response.ToString());
             Console.WriteLine(response.EndElementAddress.ToString());
 		}
@@ -198,7 +198,7 @@ namespace Ostis.SctpDemo
         // Результат: Если выполнение команды успешно, то в качестве результата возвращается коллекция конструкций, соответствующих шаблону.
 		public void Iterator()
 		{
-			var template = new ConstructionTemplate(new ScAddress(0, 1), ElementType.AccessArg, ElementType.Node);
+			var template = new ConstructionTemplate(new ScAddress(0, 1), ElementType.AccessArc, ElementType.Node);
             var command = new IterateElementsCommand(template);
             var response = (IterateElementsResponse) sctpClient.Send(command);
             Console.WriteLine(response.Constructions.Count);

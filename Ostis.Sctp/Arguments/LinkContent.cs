@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Drawing;
 namespace Ostis.Sctp.Arguments
 {
     /// <summary>
@@ -68,6 +68,41 @@ namespace Ostis.Sctp.Arguments
             bytes.AddRange(BitConverter.GetBytes(data.Length));
             bytes.AddRange(data);
             return bytes.ToArray();
+        }
+
+        #endregion
+
+        #region Статические члены
+        /// <summary>
+        /// Возвращает <see cref="System.String" /> из массива байт
+        /// </summary>
+        /// <param name="data">Массив байт</param>
+        /// <returns>
+        /// A <see cref="System.String" /> Строка содержимого ссылки
+        /// </returns>
+        public static string ToString(byte[] data)
+        {
+            return SctpProtocol.TextEncoding.GetString(data);
+        }
+
+        /// <summary>
+        /// To the int32.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <returns></returns>
+        public static int ToInt32(byte[] data)
+        {
+            return Convert.ToInt32(data);
+        }
+
+        /// <summary>
+        /// To the double.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <returns></returns>
+        public static double ToDouble(byte[] data)
+        {
+            return Convert.ToDouble(data);
         }
 
         #endregion

@@ -57,7 +57,7 @@ namespace Ostis.Sctp
             { CommandCode.CreateNode, bytes => new CreateNodeResponse(bytes) },
             { CommandCode.CreateLink, bytes => new CreateLinkResponse(bytes) },
             { CommandCode.CreateArc, bytes => new CreateArcResponse(bytes) },
-            { CommandCode.GetArc, bytes => new GetArcResponse(bytes) },
+            { CommandCode.GetArc, bytes => new GetArcElementsResponse(bytes) },
             { CommandCode.GetLinkContent, bytes => new GetLinkContentResponse(bytes) },
             { CommandCode.FindLinks, bytes => new FindLinksResponse(bytes) },
             { CommandCode.SetLinkContent, bytes => new SetLinkContentResponse(bytes) },

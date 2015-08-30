@@ -236,10 +236,13 @@ namespace Ostis.Sctp
 
         private void disconnect()
         {
-            if (!disposed)
+            if (IsConnected)
             {
-                socket.Shutdown(SocketShutdown.Both);
-                socket.Close();
+                if (!disposed)
+                {
+                    socket.Shutdown(SocketShutdown.Both);
+                    socket.Close();
+                }
                 disposed = true;
             }
         }

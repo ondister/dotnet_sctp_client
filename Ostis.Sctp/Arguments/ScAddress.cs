@@ -41,6 +41,7 @@ namespace Ostis.Sctp.Arguments
         /// <returns>SC-адрес</returns>
         public static ScAddress Parse(byte[] bytes, int offset)
         {
+
             return bytes.Length >= SctpProtocol.ScAddressLength + offset
                 ? new ScAddress(
                     BitConverter.ToUInt16(bytes, sizeof(ushort) * 0 + offset),

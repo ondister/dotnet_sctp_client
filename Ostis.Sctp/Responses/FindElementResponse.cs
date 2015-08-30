@@ -8,12 +8,12 @@ namespace Ostis.Sctp.Responses
     public class FindElementResponse : Response
     {
         /// <summary>
-        /// Адрес.
+        /// Найденный адрес.
         /// </summary>
         public ScAddress FoundAddress
         { get { return address; } }
 
-        private readonly ScAddress address;
+               private readonly ScAddress address;
 
         /// <summary>
         /// ctor.

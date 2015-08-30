@@ -36,7 +36,7 @@ namespace Ostis.Sctp
         /// <summary>
         /// SC-дуга принадлежности.
         /// </summary>
-        AccessArg = 0x10,
+        AccessArc = 0x10,
 
         /// <summary>
         /// Константный тип SC-элемента.
@@ -116,7 +116,7 @@ namespace Ostis.Sctp
         /// <summary>
         /// Позитивная константная стационарная SC-дуга принадлежности.
         /// </summary>
-        PositiveConstantPermanetAccessArc = (AccessArg | Constant | PositiveArc | PermanetArc),
+        PositiveConstantPermanetAccessArc = (AccessArc | Constant | PositiveArc | PermanetArc),
 
         /// <summary>
         /// Позитивная константная стационарная SC-дуга общего вида.
@@ -126,7 +126,7 @@ namespace Ostis.Sctp
         /// <summary>
         /// Маска, означающая все SC-элементы.
         /// </summary>
-        AnyElementMask = (Node | Link | CommonEdge | CommonArc | AccessArg),
+        AnyElementMask = (Node | Link | CommonEdge | CommonArc | AccessArc),
 
         /// <summary>
         /// Маска константности/переменности.
@@ -151,6 +151,6 @@ namespace Ostis.Sctp
         /// <summary>
         /// Маска типов SC-коннекторов.
         /// </summary>
-        ArcMask = (AccessArg | CommonArc | CommonEdge),
+        ArcMask = (AccessArc | CommonArc | CommonEdge),
     }
 }
