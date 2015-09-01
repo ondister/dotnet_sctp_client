@@ -10,8 +10,8 @@ namespace Ostis.Tools
         static void Main(string[] args)
         {
             OstisBase ostisBase = new OstisBase();
-           ostisBase.CheckMainIdtf();
-            ostisBase.FindUpperNodes();
+            //ostisBase.FindUpperNodes();
+            ostisBase.CheckMainIdtf();
             Console.ReadKey();
         }
     }

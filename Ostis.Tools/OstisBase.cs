@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 using Ostis.Sctp;           // общее пространство имен, обязательно для подключения
 using Ostis.Sctp.Arguments; // пространство имен аргументов команд
 using Ostis.Sctp.Commands;  // пространство имен команд, отправляемых серверу
-using Ostis.Sctp.Responses; // пространство имен ответов сервера
+using Ostis.Sctp.Responses;
+using System.Threading; // пространство имен ответов сервера
 
 namespace Ostis.Tools
 {
@@ -23,6 +24,7 @@ namespace Ostis.Tools
                try
             {
                 sctpClient.Connect();
+
                 Console.WriteLine("Socket connected to " + sctpClient.ServerEndPoint);
             }
             catch (Exception error)
@@ -76,7 +78,7 @@ namespace Ostis.Tools
                    }
                }
            }
-      
+           Console.WriteLine("Найдены все узлы, не имеющие основного идентификатора");
        }
 
    /// <summary>
@@ -99,8 +101,9 @@ namespace Ostis.Tools
                    var commandIterate = new IterateElementsCommand(template);
                    var responseIterate = (IterateElementsResponse)sctpClient.Send(commandIterate);
                    Console.WriteLine(responseIterate.Constructions.Count);
+                   var constr = responseIterate.Constructions;
 
-                   foreach (var construction in responseIterate.Constructions)
+                   foreach (var construction in constr)
                    {
                        int cnt = construction.Count;
                        //ищем узел, из которого отходит дуга
@@ -129,7 +132,12 @@ namespace Ostis.Tools
        
        
        }
+       Console.WriteLine("Найдены все узлы, не имеющие входящих дуг");
    }
+
+
+
    
+
    }
 }

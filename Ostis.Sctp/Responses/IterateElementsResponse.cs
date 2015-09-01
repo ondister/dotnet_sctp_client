@@ -37,7 +37,6 @@ namespace Ostis.Sctp.Responses
                     var construction = new List<ScAddress>();
                     for (int a = 0; a < addressesInConstruction; a++)
                     {
-#warning здесь возможен источник ошибки, когда число конструкций есть, а адресов в этих конструкциях нету
                         var address = ScAddress.Parse(Bytes, offset);
                         if (address != null)
                         {

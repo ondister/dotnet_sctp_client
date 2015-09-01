@@ -58,7 +58,7 @@ namespace Ostis.SctpDemo
         public void CheckElement(ScAddress address = null)
 		{
 			// выбираем команду из пространства имен Ostis.Sctp.Commands
-            var command = new CheckElementCommand(address ?? new ScAddress(0, 1));
+            var command = new CheckElementCommand(address ?? new ScAddress(0, 0));
 			// отправка команды на сервер
             var response = (CheckElementResponse) sctpClient.Send(command);
 			// Так как для каждой команды есть свой тип ответа, то нетипизированный ответ сервера нужно преобразовать к требуемому типу.
