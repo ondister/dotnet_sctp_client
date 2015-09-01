@@ -1,0 +1,1659 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ostis.Sctp</name>
+    </assembly>
+    <members>
+        <member name="T:Ostis.Sctp.Arguments.ElementTypeArgument">
+            <summary>
+            Аргумент типа элемента.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.IArgument">
+            <summary>
+            Аргумент команды.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.IArgument.GetBytes">
+            <summary>
+            Получить массив байт для передачи.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.ElementTypeArgument.#ctor(Ostis.Sctp.ElementType)">
+            <summary>
+            Инициализирует новый аргумент указанного типа.
+            </summary>
+            <param name="elementType">тип элемента</param>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.ElementTypeArgument.GetBytes">
+            <summary>
+            Получить массив байт для передачи.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.ElementTypeArgument.ElementType">
+            <summary>
+            Тип элемента.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Arguments.EventsTypeArgument">
+            <summary>
+            Аргумент типа события.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.EventsTypeArgument.#ctor(Ostis.Sctp.EventsType)">
+            <summary>
+            Инициализирует новое событие указанного типа.
+            </summary>
+            <param name="eventsType">тип события</param>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.EventsTypeArgument.GetBytes">
+            <summary>
+            Получить массив байт для передачи.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.EventsTypeArgument.EventsType">
+            <summary>
+            Тип события.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.CommandCode">
+            <summary>
+            Код (тип) команды.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.CommandCode.Unknown">
+            <summary>
+            Тип команды неизвестен.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.CommandCode.CheckElement">
+            <summary>
+            Проверка существования элемента с указанным SC-адресом.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.CommandCode.GetElementType">
+            <summary>
+            Получение типа SC-элемента по SC-адресу.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.CommandCode.DeleteElement">
+            <summary>
+            Удаление SC-элемента с указанным SC-адресом.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.CommandCode.CreateNode">
+            <summary>
+            Создание нового SC-узла указанного типа.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.CommandCode.CreateLink">
+            <summary>
+            Создание новой SC-ссылки.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.CommandCode.CreateArc">
+            <summary>
+            Создание новой SC-дуги указанного типа, с указнным начальным и конечным элементами.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.CommandCode.GetArc">
+            <summary>
+            Получение начального и конечного элемента sc-дуги
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.CommandCode.Reserved">
+            <summary>
+            Значение зарезервировано.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.CommandCode.GetLinkContent">
+            <summary>
+            Получение содержимого SC-ссылки.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.CommandCode.FindLinks">
+            <summary>
+            Поиск всех SC-ссылок с указанным содержимым.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.CommandCode.SetLinkContent">
+            <summary>
+            Установка содержимого SC-ссылки.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.CommandCode.IterateElements">
+            <summary>
+            Поиск конструкции по указанному 3-х или 5-ти элементному шаблону.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.CommandCode.IterateConstructions">
+            <summary>
+            Итерирование конструкций.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.CommandCode.CreateSubscription">
+            <summary>
+            Создание подписки на события.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.CommandCode.DeleteSubscription">
+            <summary>
+            Удаление подписки на события.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.CommandCode.EmitEvents">
+            <summary>
+            Запрос всех произошедших событий.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.CommandCode.FindElement">
+            <summary>
+            Поиск SC-элемента по его системному идентификатору.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.CommandCode.SetSystemId">
+            <summary>
+            Установка системного идентификатора SC-элемента.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.CommandCode.GetStatistics">
+            <summary>
+            Получение статистики с сервера, во временных границах.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.CommandCode.GetProtocolVersion">
+            <summary>
+            Получение версии протокола.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.CommandCode.UnknownReserved">
+            <summary>
+            Ещё одно зарегистрированное/неизвестное значение.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Arguments.ConstructionTemplate">
+            <summary>
+            Шаблон поиска конструкции для команды CmdGetIterateElements.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.ConstructionTemplate.#ctor(Ostis.Sctp.Arguments.ScAddress,Ostis.Sctp.ElementType,Ostis.Sctp.ElementType)">
+            <summary>
+            Инициализирует новый шаблон конструкции типа f_a_a
+            </summary>
+            <param name="f">адрес начального sc-элемента</param>
+            <param name="a1">тип исходящей дуги</param>
+            <param name="a2">тип конечного sc-элемента (дуги или узла)</param>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.ConstructionTemplate.#ctor(Ostis.Sctp.ElementType,Ostis.Sctp.ElementType,Ostis.Sctp.Arguments.ScAddress)">
+            <summary>
+            Инициализирует новый шаблон конструкции типа a_a_f
+            </summary>
+            <param name="a1">тип начального sc-элемента</param>
+            <param name="a2">тип входящей дуги</param>
+            <param name="f">адрес конечного sc-элемента</param>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.ConstructionTemplate.#ctor(Ostis.Sctp.Arguments.ScAddress,Ostis.Sctp.ElementType,Ostis.Sctp.Arguments.ScAddress)">
+            <summary>
+            Инициализирует новый шаблон конструкции типа f_a_f
+            </summary>
+            <param name="f1">адрес начального sc-элемента</param>
+            <param name="a1">тип искомой дуги</param>
+            <param name="f2">адрес конечного sc-элемента</param>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.ConstructionTemplate.#ctor(Ostis.Sctp.ElementType,Ostis.Sctp.ElementType,Ostis.Sctp.Arguments.ScAddress,Ostis.Sctp.ElementType,Ostis.Sctp.ElementType)">
+            <summary>
+            Инициализирует новый шаблон конструкции типа a_a_f_a_a
+            </summary>
+            <param name="a1">тип первого sc-элемента конструкции</param>
+            <param name="a2">тип второго sc-элемента конструкции</param>
+            <param name="f">адрес третьего sc-элемента</param>
+            <param name="a3">тип четвертого sc-элемента конструкции</param>
+            <param name="a4">тип пятого sc-элемента конструкции</param>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.ConstructionTemplate.#ctor(Ostis.Sctp.ElementType,Ostis.Sctp.ElementType,Ostis.Sctp.Arguments.ScAddress,Ostis.Sctp.ElementType,Ostis.Sctp.Arguments.ScAddress)">
+            <summary>
+            Инициализирует новый шаблон конструкции типа a_a_f_a_f
+            </summary>
+            <param name="a1">тип первого sc-элемента конструкции</param>
+            <param name="a2">тип второго sc-элемента конструкции</param>
+            <param name="f1">адрес третьего sc-элемента</param>
+            <param name="a3">тип четвертого sc-элемента конструкции</param>
+            <param name="f2">адрес пятого sc-элемента</param>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.ConstructionTemplate.#ctor(Ostis.Sctp.Arguments.ScAddress,Ostis.Sctp.ElementType,Ostis.Sctp.ElementType,Ostis.Sctp.ElementType,Ostis.Sctp.ElementType)">
+            <summary>
+            Инициализирует новый шаблон конструкции типа f_a_a_a_a
+            </summary>
+            <param name="f">адрес первого sc-элемента</param>
+            <param name="a1">тип второго sc-элемента конструкции</param>
+            <param name="a2">тип третьего sc-элемента конструкции</param>
+            <param name="a3">тип четвертого sc-элемента конструкции</param>
+            <param name="a4">тип пятого sc-элемента конструкции</param>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.ConstructionTemplate.#ctor(Ostis.Sctp.Arguments.ScAddress,Ostis.Sctp.ElementType,Ostis.Sctp.ElementType,Ostis.Sctp.ElementType,Ostis.Sctp.Arguments.ScAddress)">
+            <summary>
+            Инициализирует новый шаблон конструкции типа f_a_a_a_f
+            </summary>
+            <param name="f1">адрес первого sc-элемента</param>
+            <param name="a1">тип второго sc-элемента конструкции</param>
+            <param name="a2">тип третьего sc-элемента конструкции</param>
+            <param name="a3">тип четвертого sc-элемента конструкции</param>
+            <param name="f2">адрес пятого sc-элемента</param>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.ConstructionTemplate.#ctor(Ostis.Sctp.Arguments.ScAddress,Ostis.Sctp.ElementType,Ostis.Sctp.Arguments.ScAddress,Ostis.Sctp.ElementType,Ostis.Sctp.ElementType)">
+            <summary>
+            Инициализирует новый шаблон конструкции типа f_a_f_a_a
+            </summary>
+            <param name="f1">адрес первого sc-элемента</param>
+            <param name="a1">тип второго sc-элемента конструкции</param>
+            <param name="f2">адрес третьего sc-элемента</param>
+            <param name="a2">тип четвертого sc-элемента конструкции</param>
+            <param name="a3">тип пятого sc-элемента конструкции</param>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.ConstructionTemplate.#ctor(Ostis.Sctp.Arguments.ScAddress,Ostis.Sctp.ElementType,Ostis.Sctp.Arguments.ScAddress,Ostis.Sctp.ElementType,Ostis.Sctp.Arguments.ScAddress)">
+            <summary>
+            Инициализирует новый шаблон конструкции типа f_a_f_a_f
+            </summary>
+            <param name="f1">адрес первого sc-элемента</param>
+            <param name="a1">тип второго sc-элемента конструкции</param>
+            <param name="f2">адрес третьего sc-элемента</param>
+            <param name="a2">тип четвертого sc-элемента конструкции</param>
+            <param name="f3">адрес пятого sc-элемента</param>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.ConstructionTemplate.GetBytes">
+            <summary>
+            Получить массив байт для передачи.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Arguments.UnixDateTime">
+            <summary>
+            Дата и время в форме Unix (http://en.wikipedia.org/wiki/Unix_time).
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.UnixDateTime.#ctor(System.DateTime)">
+            <summary>
+            Инициализирует новое время в формате UNIX.
+            </summary>
+            <param name="dateTime">дата и время</param>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.UnixDateTime.ToDateTime">
+            <summary>
+            Конвертирует дату и время Unix в дату и время.
+            </summary>
+            <returns>System.DateTime</returns>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.UnixDateTime.ToDateTime(System.Int64)">
+            <summary>
+            Конвертирует дату и время Unix в дату и время <see cref="T:System.DateTime"/>
+            </summary>
+            <param name="milliseconds">Время в миллисекундах</param>
+            <returns></returns>
+        </member>
+        <member name="F:Ostis.Sctp.Arguments.UnixDateTime.Origin">
+            <summary>
+            Начальная дата Unix.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.UnixDateTime.GetBytes">
+            <summary>
+            Получить массив байт для передачи.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.ElementType">
+            <summary>
+            Тип элемента.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.Unknown">
+            <summary>
+            Неизвестный или не указан.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.Node">
+            <summary>
+            SC-узел общего вида.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.Link">
+            <summary>
+            SC-ссылка общего вида.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.CommonEdge">
+            <summary>
+            SC-ребро общего вида.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.CommonArc">
+            <summary>
+            SC-дуга общего вида.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.AccessArc">
+            <summary>
+            SC-дуга принадлежности.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.Constant">
+            <summary>
+            Константный тип SC-элемента.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.Variable">
+            <summary>
+            Переменный тип SC-элемента.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.PositiveArc">
+            <summary>
+            Позитивная SC-дуга.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.NegativeArc">
+            <summary>
+            Негативная SC-дуга.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.FuzzyArc">
+            <summary>
+            Нечеткая SC-дуга.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.TemporaryArc">
+            <summary>
+            Нестационарная SC-дуга.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.PermanetArc">
+            <summary>
+            Стационарная SC-дуга.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.TupleNode">
+            <summary>
+            SC-узел, обозначающий небинарную связку.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.StructureNode">
+            <summary>
+            SC-узел, обозначающий структуру.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.RoleNode">
+            <summary>
+            SC-узел, обозначающий ролевое отношение.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.NonRoleNode">
+            <summary>
+            SC-узел, обозначающий неролевое отношение.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.ClassNode">
+            <summary>
+            SC-узел, не являющейся отношением.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.AbstractNode">
+            <summary>
+            SC-узел, обозначающий абстрактный объект, не являющийся множеством.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.MaterialNode">
+            <summary>
+            SC-узел, обозначающий материальный объект.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.ConstantNode">
+            <summary>
+            Константный SC-узел.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.PositiveConstantPermanetAccessArc">
+            <summary>
+            Позитивная константная стационарная SC-дуга принадлежности.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.ConstantCommonArc">
+            <summary>
+            Позитивная константная стационарная SC-дуга общего вида.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.AnyElementMask">
+            <summary>
+            Маска, означающая все SC-элементы.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.ConstantOrVariableMask">
+            <summary>
+            Маска константности/переменности.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.PositivityMask">
+            <summary>
+            Маска позитивности/негативности/нечеткости.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.PermanencyMask">
+            <summary>
+            Маска стационарности/нестационарности,
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.NodeOrStructureMask">
+            <summary>
+            Маска типов узлов.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ElementType.ArcMask">
+            <summary>
+            Маска типов SC-коннекторов.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.EventsType">
+            <summary>
+            Тип события.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.EventsType.AddOutArc">
+            <summary>
+            Добавление исходящей дуги (ребра).
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.EventsType.AddInArc">
+            <summary>
+            Добавление входящей дуги (ребра).
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.EventsType.DeleteOutArc">
+            <summary>
+            Удаление исходящей дуги (ребра).
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.EventsType.DeleteInArc">
+            <summary>
+            Удаление входящей дуги (ребра).
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.EventsType.DeleteElement">
+            <summary>
+            Удаление sc-элемента.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Arguments.Identifier">
+            <summary>
+            Идентификатор SC-элемента.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.Identifier.#ctor(System.String)">
+            <summary>
+            Инициализирует новый идентификатор SC-элемента.
+            </summary>
+            <param name="value">значение</param>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.Identifier.op_Implicit(System.String)~Ostis.Sctp.Arguments.Identifier">
+            <summary>
+            Преобразование Идентификатора из строки.
+            </summary>
+            <param name="value">строковое значение</param>
+            <returns>SC-идентификатор</returns>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.Identifier.ToString">
+            <summary>
+            Returns the fully qualified type name of this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> containing a fully qualified type name.
+            </returns>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.Identifier.GetBytes">
+            <summary>
+            Получить массив байт для передачи.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.Identifier.Value">
+            <summary>
+            Значение.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Arguments.LinkContent">
+            <summary>
+            Содержимое SC-ссылки (пока поддерживаются только строки).
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.LinkContent.#ctor(System.Byte[])">
+            <summary>
+            Инициализирует новое содержимое ссылки из массива байт.
+            </summary>
+            <param name="bytes">массив байт</param>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.LinkContent.#ctor(System.String)">
+            <summary>
+            Инициализирует новое содержимое ссылки из строки.
+            </summary>
+            <param name="value">значение</param>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.LinkContent.#ctor(System.Double)">
+            <summary>
+            Инициализирует новое содержимое ссылки из типа Double.
+            </summary>
+            <param name="value">значение</param>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.LinkContent.GetBytes">
+            <summary>
+            Получить массив байт для передачи.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.LinkContent.ToString(System.Byte[])">
+            <summary>
+            Возвращает <see cref="T:System.String"/> из массива байт
+            </summary>
+            <param name="data">Массив байт</param>
+            <returns>
+            A <see cref="T:System.String"/> Строка содержимого ссылки
+            </returns>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.LinkContent.ToInt32(System.Byte[])">
+            <summary>
+            To the int32.
+            </summary>
+            <param name="data">The data.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.LinkContent.ToDouble(System.Byte[])">
+            <summary>
+            To the double.
+            </summary>
+            <param name="data">The data.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.LinkContent.ContentType">
+            <summary>
+            OSTIS-тип содержимого ссылки.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.LinkContent.Data">
+            <summary>
+            Содержимое.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.LinkContentType">
+            <summary>
+            Тип содержимого ссылки (не используется в связи с непонятками в сервере).
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.LinkContentType.Unknown">
+            <summary>
+            Тип неизвестен или не указан.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.LinkContentType.Numeric">
+            <summary>
+            Число.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.LinkContentType.Text">
+            <summary>
+            Текст.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.LinkContentType.Image">
+            <summary>
+            Изображение.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Arguments.ScAddress">
+            <summary>
+            Адрес SC-элемента в памяти.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.ScAddress.#ctor(System.UInt16,System.UInt16)">
+            <summary>
+            Инициализирует новый sc-адрес, используя смещение и сегмент.
+            </summary>
+            <param name="segment">сегмент</param>
+            <param name="offset">смещение</param>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.ScAddress.Parse(System.Byte[],System.Int32)">
+            <summary>
+            Получает значение адреса из массива байт.
+            </summary>
+            <param name="bytes">массив байт</param>
+            <param name="offset">смещение в массиве</param>
+            <returns>SC-адрес</returns>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.ScAddress.ToString">
+            <summary>
+            Returns the fully qualified type name of this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> containing a fully qualified type name.
+            </returns>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.ScAddress.GetBytes">
+            <summary>
+            Получить массив байт для передачи.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.ScAddress.Segment">
+            <summary>
+            Сегмент.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.ScAddress.Offset">
+            <summary>
+            Смещение.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Arguments.StatisticsData">
+            <summary>
+            Статистика сервера для временной метки.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.StatisticsData.#ctor(System.Byte[],System.Int32)">
+            <summary>
+            Инициализирует новые данные статистики для временной метки
+            </summary>
+            <param name="bytes">массив байт</param>
+            <param name="offset">смещение в массиве</param>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.StatisticsData.Time">
+            <summary>
+            Время временной метки.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.StatisticsData.NodeCount">
+            <summary>
+            Общее количество SC-узлов, которые есть в SC-памяти (включая помеченные на удаление).
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.StatisticsData.ArcCount">
+            <summary>
+            Общее количество SC-дуг, которые есть в SC-памяти (включая помеченные на удаление).
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.StatisticsData.LinksCount">
+            <summary>
+            Общее количество SC-ссылок, которые есть в sc-памяти (включаея помеченные на удаление).
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.StatisticsData.LiveNodeCount">
+            <summary>
+            Количество SC-узлов, которые не помечены на удаление.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.StatisticsData.LiveArcCount">
+            <summary>
+            Количество SC-дуг, которые не помечены на удаление.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.StatisticsData.LiveLinkCount">
+            <summary>
+            Количество SC-ссылок, которые не помечены на удаление.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.StatisticsData.EmptyCount">
+            <summary>
+             Количество пустых ячеек в SC-памяти.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.StatisticsData.ConnectionsCount">
+            <summary>
+            Общее количество подключений клиентов к SCTP-серверу (не активных, а общее число включая и завершенные).
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.StatisticsData.CommandsCount">
+            <summary>
+            Количество обработанных SCTP-команд (включая обработанные с ошибками).
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.StatisticsData.CommandErrorsCount">
+            <summary>
+            Количество обработанных с ошибками SCTP-команд.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.StatisticsData.IsInitStat">
+            <summary>
+            Флаг начального сбора статистики.
+            Другими словами, если это значение равно <b>true</b>, то статистика была собрана при запуске SCTP-сервера.
+            Если значение равно <b>false</b>, то статистика собрана уже во время работы сервера.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Arguments.SubscriptionId">
+            <summary>
+            Идентификатор подписки на событие.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.SubscriptionId.#ctor(System.Int32)">
+            <summary>
+            Инициализирует новый идентификатор подписки на событие.
+            </summary>
+            <param name="id">идентификатор</param>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.SubscriptionId.Parse(System.Byte[],System.Int32)">
+            <summary>
+            Получение числа из массива байт.
+            </summary>
+            <param name="bytes">массив байт</param>
+            <param name="offset">смещение в массиве</param>
+            <returns>число</returns>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.SubscriptionId.GetBytes">
+            <summary>
+            Получить массив байт для передачи.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.SubscriptionId.Id">
+            <summary>
+            Идентификатор.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.ReturnCode">
+            <summary>
+            Код выполнения команды.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ReturnCode.Successfull">
+            <summary>
+            Успешно.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ReturnCode.Failure">
+            <summary>
+            Не успешно.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ReturnCode.AddressError">
+            <summary>
+            Указанный sc-элемент не найден (неверный sc-адрес).
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.ReturnCode.NotAccess">
+            <summary>
+            Не достаточно прав доступа для выполнения команды.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Commands.CheckElementCommand">
+            <summary>
+            Команда: Проверка существования элемента с указанным SC-адресом.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Command">
+            <summary>
+            Команда.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Command.#ctor(Ostis.Sctp.CommandCode)">
+            <summary>
+            ctor.
+            </summary>
+            <param name="code">код</param>
+        </member>
+        <member name="M:Ostis.Sctp.Command.GetBytes">
+            <summary>
+            Получение массива байт для передачи.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Command.Code">
+            <summary>
+            Код.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Command.Flags">
+            <summary>
+            Байт параметров (флагов) команды.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Command.Id">
+            <summary>
+            Уникальный идентификатор.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Command.Arguments">
+            <summary>
+            Аргументы.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Commands.CheckElementCommand.#ctor(Ostis.Sctp.Arguments.ScAddress)">
+            <summary>
+            Инициализирует новую команду.
+            </summary>
+            <param name="address">SC-адрес проверяемого SC-элемента</param>
+        </member>
+        <member name="P:Ostis.Sctp.Commands.CheckElementCommand.Address">
+            <summary>
+            SC-адрес проверяемого SC-элемента.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Commands.CreateArcCommand">
+            <summary>
+            Команда: Создание новой SC-дуги указанного типа, с указнным начальным и конечным элементами.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Commands.CreateArcCommand.#ctor(Ostis.Sctp.ElementType,Ostis.Sctp.Arguments.ScAddress,Ostis.Sctp.Arguments.ScAddress)">
+            <summary>
+            Инициализирует новую команду.
+            </summary>
+            <param name="arcType">тип создаваемой SC-дуги</param>
+            <param name="beginAddress">SC-адрес начального элемента SC-дуги</param>
+            <param name="endAddress">SC-адрес конечного элемента SC-дуги</param>
+        </member>
+        <member name="P:Ostis.Sctp.Commands.CreateArcCommand.ArcType">
+            <summary>
+            Тип создаваемой SC-дуги.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Commands.CreateArcCommand.BeginAddress">
+            <summary>
+            SC-адрес начального элемента SC-дуги.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Commands.CreateArcCommand.EndAddress">
+            <summary>
+            SC-адрес конечного элемента SC-дуги.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Commands.CreateLinkCommand">
+            <summary>
+            Команда: Создание новой SC-ссылки.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Commands.CreateLinkCommand.#ctor">
+            <summary>
+            Инициализирует новую команду.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Commands.CreateNodeCommand">
+            <summary>
+            Команда: Создание нового SC-узла указанного типа.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Commands.CreateNodeCommand.#ctor(Ostis.Sctp.ElementType)">
+            <summary>
+            Инициализирует новую команду.
+            </summary>
+            <param name="nodeType">тип создаваемого SC-узла</param>
+        </member>
+        <member name="P:Ostis.Sctp.Commands.CreateNodeCommand.NodeType">
+            <summary>
+            Тип создаваемого SC-узла.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Commands.CreateSubscriptionCommand">
+            <summary>
+            Команда: Создание подписки на события.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Commands.CreateSubscriptionCommand.#ctor(Ostis.Sctp.EventsType,Ostis.Sctp.Arguments.ScAddress)">
+            <summary>
+            Инициализирует новую команду.
+            </summary>
+            <param name="type">тип события</param>
+            <param name="address">SC-адрес</param>
+        </member>
+        <member name="P:Ostis.Sctp.Commands.CreateSubscriptionCommand.Type">
+            <summary>
+            Тип события.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Commands.CreateSubscriptionCommand.Address">
+            <summary>
+            SC-адрес.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Commands.DeleteElementCommand">
+            <summary>
+            Команда: Удаление SC-элемента с указанным SC-адресом.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Commands.DeleteElementCommand.#ctor(Ostis.Sctp.Arguments.ScAddress)">
+            <summary>
+            Инициализирует новую команду.
+            </summary>
+            <param name="address">SC-адрес удаляемого sc-элемента</param>
+        </member>
+        <member name="P:Ostis.Sctp.Commands.DeleteElementCommand.Address">
+            <summary>
+            SC-адрес удаляемого sc-элемента.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Commands.DeleteSubscriptionCommand">
+            <summary>
+            Команда: Удаление подписки на события.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Commands.DeleteSubscriptionCommand.#ctor(Ostis.Sctp.Arguments.SubscriptionId)">
+            <summary>
+            Инициализирует новую команду.
+            </summary>
+            <param name="id">событие</param>
+        </member>
+        <member name="P:Ostis.Sctp.Commands.DeleteSubscriptionCommand.SubscriptionId">
+            <summary>
+            Событие.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Commands.FindElementCommand">
+            <summary>
+            Команда: Поиск SC-элемента по его системному идентификатору.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Commands.FindElementCommand.#ctor(Ostis.Sctp.Arguments.Identifier)">
+            <summary>
+            Инициализирует новую команду.
+            </summary>
+            <param name="identifier">идентификатор</param>
+        </member>
+        <member name="P:Ostis.Sctp.Commands.FindElementCommand.Identifier">
+            <summary>
+            Идентификатор.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Commands.FindLinksCommand">
+            <summary>
+            Команда: Поиск всех SC-ссылок с указанным содержимым.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Commands.FindLinksCommand.#ctor(Ostis.Sctp.Arguments.LinkContent)">
+            <summary>
+            Инициализирует новую команду.
+            </summary>
+            <param name="content">содержимое для поиска</param>
+        </member>
+        <member name="P:Ostis.Sctp.Commands.FindLinksCommand.Content">
+            <summary>
+            Содержимое для поиска.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Commands.GetArcElementsCommand">
+            <summary>
+            Команда: Получение начального элемента SC-дуги.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Commands.GetArcElementsCommand.#ctor(Ostis.Sctp.Arguments.ScAddress)">
+            <summary>
+            Инициализирует новую команду.
+            </summary>
+            <param name="arcAddress">SC-адрес дуги у которой необходимо получить начальный элемент</param>
+        </member>
+        <member name="P:Ostis.Sctp.Commands.GetArcElementsCommand.ArcAddress">
+            <summary>
+            SC-адрес дуги у которой необходимо получить начальный элемент.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Commands.GetElementTypeCommand">
+            <summary>
+            Команда: Получение типа SC-элемента по SC-адресу.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Commands.GetElementTypeCommand.#ctor(Ostis.Sctp.Arguments.ScAddress)">
+            <summary>
+            Инициализирует новую команду.
+            </summary>
+            <param name="address">SC-адрес элемента для получения типа</param>
+        </member>
+        <member name="P:Ostis.Sctp.Commands.GetElementTypeCommand.Address">
+            <summary>
+            SC-адрес элемента для получения типа.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Commands.GetLinkContentCommand">
+            <summary>
+            Команда: Получение содержимого SC-ссылки.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Commands.GetLinkContentCommand.#ctor(Ostis.Sctp.Arguments.ScAddress)">
+            <summary>
+            Инициализирует новую команду.
+            </summary>
+            <param name="address">SC-адрес ссылки для получения содержимого</param>
+        </member>
+        <member name="P:Ostis.Sctp.Commands.GetLinkContentCommand.Address">
+            <summary>
+            SC-адрес ссылки для получения содержимого.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Commands.GetProtocolVersionCommand">
+            <summary>
+            Команда: Получение версии протокола.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Commands.GetProtocolVersionCommand.#ctor">
+            <summary>
+            Инициализирует новую команду.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Commands.GetStatisticsCommand">
+            <summary>
+            Команда: Получение статистики с сервера, во временных границах.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Commands.GetStatisticsCommand.#ctor(Ostis.Sctp.Arguments.UnixDateTime,Ostis.Sctp.Arguments.UnixDateTime)">
+            <summary>
+            Инициализирует новую команду.
+            </summary>
+            <param name="startTime">нижняя временная граница</param>
+            <param name="endTime">верхняя временная граница</param>
+        </member>
+        <member name="P:Ostis.Sctp.Commands.GetStatisticsCommand.StartTime">
+            <summary>
+            Нижняя временная граница.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Commands.GetStatisticsCommand.EndTime">
+            <summary>
+            Верхняя временная граница.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Commands.IterateElementsCommand">
+            <summary>
+            Команда: Поиск конструкции по указанному 3-х или 5-ти элементному шаблону.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Commands.IterateElementsCommand.#ctor(Ostis.Sctp.Arguments.ConstructionTemplate)">
+            <summary>
+            Инициализирует новую команду.
+            </summary>
+            <param name="template">шаблон для поиска</param>
+        </member>
+        <member name="P:Ostis.Sctp.Commands.IterateElementsCommand.Template">
+            <summary>
+            Шаблон для поиска.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Commands.SetLinkContentCommand">
+            <summary>
+            Команда: Установка содержимого SC-ссылки.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Commands.SetLinkContentCommand.#ctor(Ostis.Sctp.Arguments.ScAddress,Ostis.Sctp.Arguments.LinkContent)">
+            <summary>
+            Инициализирует новую команду.
+            </summary>
+            <param name="linkAddress">SC-адрес ссылки</param>
+            <param name="content">данные устанавливаемого содержимого</param>
+        </member>
+        <member name="P:Ostis.Sctp.Commands.SetLinkContentCommand.LinkAddress">
+            <summary>
+            SC-адрес ссылки.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Commands.SetLinkContentCommand.Content">
+            <summary>
+            Данные устанавливаемого содержимого.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Commands.SetSystemIdCommand">
+            <summary>
+            Команда: Установка системного идентификатора SC-элемента.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Commands.SetSystemIdCommand.#ctor(Ostis.Sctp.Arguments.ScAddress,Ostis.Sctp.Arguments.Identifier)">
+            <summary>
+            Инициализирует новую команду.
+            </summary>
+            <param name="address">адрес SC-эелемента</param>
+            <param name="identifier">идентификатор</param>
+        </member>
+        <member name="P:Ostis.Sctp.Commands.SetSystemIdCommand.Address">
+            <summary>
+            Тип создаваемой SC-дуги.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Commands.SetSystemIdCommand.Identifier">
+            <summary>
+            Тип создаваемой SC-дуги.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Responses.CheckElementResponse">
+            <summary>
+            Ответ на команду: Проверка существования элемента с указанным SC-адресом.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Response">
+            <summary>
+            Базовый класс ответа.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Response.#ctor(System.Byte[])">
+            <summary>
+            ctor.
+            </summary>
+            <param name="bytes">массив байт ответа</param>
+        </member>
+        <member name="P:Ostis.Sctp.Response.Header">
+            <summary>
+            Заголовок.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Response.Bytes">
+            <summary>
+            Массив байт.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Responses.CheckElementResponse.#ctor(System.Byte[])">
+            <summary>
+            ctor.
+            </summary>
+            <param name="bytes">массив байт</param>
+        </member>
+        <member name="P:Ostis.Sctp.Responses.CheckElementResponse.ElementExists">
+            <summary>
+            Элемент существует.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Responses.CreateArcResponse">
+            <summary>
+            Ответ на команду: Создание новой SC-дуги указанного типа, с указнным начальным и конечным элементами..
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Responses.CreateArcResponse.#ctor(System.Byte[])">
+            <summary>
+            ctor.
+            </summary>
+            <param name="bytes">массив байт</param>
+        </member>
+        <member name="P:Ostis.Sctp.Responses.CreateArcResponse.CreatedArcAddress">
+            <summary>
+            Адрес созданной дуги.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Responses.CreateSubscriptionResponse">
+            <summary>
+            Ответ на команду: Создание подписки на события.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Responses.CreateSubscriptionResponse.#ctor(System.Byte[])">
+            <summary>
+            ctor.
+            </summary>
+            <param name="bytes">массив байт</param>
+        </member>
+        <member name="P:Ostis.Sctp.Responses.CreateSubscriptionResponse.SubscriptionId">
+            <summary>
+            Идентификатор подписки.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Responses.CreateLinkResponse">
+            <summary>
+            Ответ на команду: Создание новой SC-ссылки.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Responses.CreateLinkResponse.#ctor(System.Byte[])">
+            <summary>
+            ctor.
+            </summary>
+            <param name="bytes">массив байт</param>
+        </member>
+        <member name="P:Ostis.Sctp.Responses.CreateLinkResponse.CreatedLinkAddress">
+            <summary>
+            Адрес созданной ссылки.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Responses.CreateNodeResponse">
+            <summary>
+            Ответ на команду: Создание нового SC-узла указанного типа.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Responses.CreateNodeResponse.#ctor(System.Byte[])">
+            <summary>
+            ctor.
+            </summary>
+            <param name="bytes">массив байт</param>
+        </member>
+        <member name="P:Ostis.Sctp.Responses.CreateNodeResponse.CreatedNodeAddress">
+            <summary>
+            Адрес созданного узла.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Responses.DeleteElementResponse">
+            <summary>
+            Ответ на команду: Удаление SC-элемента с указанным SC-адресом.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Responses.DeleteElementResponse.#ctor(System.Byte[])">
+            <summary>
+            ctor.
+            </summary>
+            <param name="bytes">массив байт</param>
+        </member>
+        <member name="P:Ostis.Sctp.Responses.DeleteElementResponse.IsDeleted">
+            <summary>
+            Было ли удалено.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Responses.DeleteSubscriptionResponse">
+            <summary>
+            Ответ на команду: Удаление подписки на события.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Responses.DeleteSubscriptionResponse.#ctor(System.Byte[])">
+            <summary>
+            ctor.
+            </summary>
+            <param name="bytes">массив байт</param>
+        </member>
+        <member name="P:Ostis.Sctp.Responses.DeleteSubscriptionResponse.SubscriptionId">
+            <summary>
+            Идентификатор подписки.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Responses.FindElementResponse">
+            <summary>
+            Ответ на команду: Поиск SC-элемента по его системному идентификатору.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Responses.FindElementResponse.#ctor(System.Byte[])">
+            <summary>
+            ctor.
+            </summary>
+            <param name="bytes">массив байт</param>
+        </member>
+        <member name="P:Ostis.Sctp.Responses.FindElementResponse.FoundAddress">
+            <summary>
+            Найденный адрес.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Responses.FindLinksResponse">
+            <summary>
+            Ответ на команду: Поиск всех SC-ссылок с указанным содержимым.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Responses.FindLinksResponse.#ctor(System.Byte[])">
+            <summary>
+            ctor.
+            </summary>
+            <param name="bytes">массив байт</param>
+        </member>
+        <member name="P:Ostis.Sctp.Responses.FindLinksResponse.Addresses">
+            <summary>
+            Адреса.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Responses.GetArcElementsResponse">
+            <summary>
+            Ответ на команду: Получение начального элемента SC-дуги.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Responses.GetArcElementsResponse.#ctor(System.Byte[])">
+            <summary>
+            ctor.
+            </summary>
+            <param name="bytes">массив байт</param>
+        </member>
+        <member name="P:Ostis.Sctp.Responses.GetArcElementsResponse.BeginElementAddress">
+            <summary>
+            Адрес начального элемента.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Responses.GetArcElementsResponse.EndElementAddress">
+            <summary>
+            Адрес конечного элемента.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Responses.GetElementTypeResponse">
+            <summary>
+            Ответ на команду: Получение типа SC-элемента по SC-адресу.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Responses.GetElementTypeResponse.#ctor(System.Byte[])">
+            <summary>
+            ctor.
+            </summary>
+            <param name="bytes">массив байт</param>
+        </member>
+        <member name="P:Ostis.Sctp.Responses.GetElementTypeResponse.ElementType">
+            <summary>
+            Тип элемента.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Responses.GetLinkContentResponse">
+            <summary>
+            Ответ на команду: Получение содержимого SC-ссылки.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Responses.GetLinkContentResponse.#ctor(System.Byte[])">
+            <summary>
+            ctor.
+            </summary>
+            <param name="bytes">массив байт</param>
+        </member>
+        <member name="P:Ostis.Sctp.Responses.GetLinkContentResponse.LinkContent">
+            <summary>
+            Содержимое ссылки.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Responses.GetProtocolVersionResponse">
+            <summary>
+            Ответ на команду: Получение версии протокола.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Responses.GetProtocolVersionResponse.#ctor(System.Byte[])">
+            <summary>
+            ctor.
+            </summary>
+            <param name="bytes">массив байт</param>
+        </member>
+        <member name="P:Ostis.Sctp.Responses.GetProtocolVersionResponse.ProtocolVersion">
+            <summary>
+            Версия протокола сервера.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Responses.GetStatisticsResponse">
+            <summary>
+            Ответ на команду: Получение статистики с сервера, во временных границах.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Responses.GetStatisticsResponse.#ctor(System.Byte[])">
+            <summary>
+            ctor.
+            </summary>
+            <param name="bytes">массив байт</param>
+        </member>
+        <member name="P:Ostis.Sctp.Responses.GetStatisticsResponse.StatisticsDataList">
+            <summary>
+            Статистическая информация.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Responses.GetStatisticsResponse.TimeChecksCount">
+            <summary>
+            Количество проверок времени.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Responses.IterateElementsResponse">
+            <summary>
+            Ответ на команду: Поиск конструкции по указанному 3-х или 5-ти элементному шаблону.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Responses.IterateElementsResponse.#ctor(System.Byte[])">
+            <summary>
+            ctor.
+            </summary>
+            <param name="bytes">массив байт</param>
+        </member>
+        <member name="P:Ostis.Sctp.Responses.IterateElementsResponse.Constructions">
+            <summary>
+            Список конструкций.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Responses.SetLinkContentResponse">
+            <summary>
+            Ответ на команду: Установка содержимого SC-ссылки.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Responses.SetLinkContentResponse.#ctor(System.Byte[])">
+            <summary>
+            ctor.
+            </summary>
+            <param name="bytes">массив байт</param>
+        </member>
+        <member name="P:Ostis.Sctp.Responses.SetLinkContentResponse.ContentIsSet">
+            <summary>
+            Признак того, что содержимое было корректно установлено.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Responses.SetSystemIdResponse">
+            <summary>
+            Ответ на команду: Установка системного идентификатора SC-элемента.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Responses.SetSystemIdResponse.#ctor(System.Byte[])">
+            <summary>
+            ctor.
+            </summary>
+            <param name="bytes">массив байт</param>
+        </member>
+        <member name="P:Ostis.Sctp.Responses.SetSystemIdResponse.IsSuccesfull">
+            <summary>
+            Успешно.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Responses.UnknownResponse">
+            <summary>
+            Ответ на команду неизвестен.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Responses.UnknownResponse.#ctor(System.Byte[])">
+            <summary>
+            ctor.
+            </summary>
+            <param name="bytes">массив байт</param>
+        </member>
+        <member name="T:Ostis.Sctp.SctpProtocol">
+            <summary>
+            Настойки соединения по протоколу SCTP.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.SctpProtocol.DefaultBufferSize">
+            <summary>
+            Размер буфера по умолчанию.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.SctpProtocol.DefaultPortNumber">
+            <summary>
+            Номер порта по умолчанию.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.SctpProtocol.HeaderLength">
+            <summary>
+            Длина SCTP-заголовка.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.SctpProtocol.ScAddressLength">
+            <summary>
+            Размер данных SC-адреса.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.SctpProtocol.SubscriptionIdLength">
+            <summary>
+            Размер данных ID подписки.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.SctpProtocol.ScEventLength">
+            <summary>
+            Размер данных SC-события.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.SctpProtocol.StatisticsDataLength">
+            <summary>
+            Размер данных структуры статистики.
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.SctpProtocol.TextEncoding">
+            <summary>
+            Кодировка текста по умолчанию.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.SctpClient">
+            <summary>
+            OSTIS-клиент, работающий по протоколу SCTP.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.SctpClient.#ctor(System.String,System.Int32)">
+            <summary>
+            ctor.
+            </summary>
+            <param name="address">IP-адрес сервера</param>
+            <param name="port">номер порта</param>
+        </member>
+        <member name="M:Ostis.Sctp.SctpClient.#ctor(System.Net.IPAddress,System.Int32)">
+            <summary>
+            ctor.
+            </summary>
+            <param name="address">IP-адрес сервера</param>
+            <param name="port">номер порта</param>
+        </member>
+        <member name="M:Ostis.Sctp.SctpClient.#ctor(System.Net.IPEndPoint)">
+            <summary>
+            ctor.
+            </summary>
+            <param name="endPoint">конечная точка подключения на сервере</param>
+        </member>
+        <member name="M:Ostis.Sctp.SctpClient.Connect">
+            <summary>
+            Подключение к серверу.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.SctpClient.Send(Ostis.Sctp.Command)">
+            <summary>
+            Отправка команды на сервер синхронно.
+            </summary>
+            <param name="command">команда</param>
+            <returns>ответ сервера</returns>
+        </member>
+        <member name="M:Ostis.Sctp.SctpClient.SendAsync(Ostis.Sctp.Command)">
+            <summary>
+            Отправка команды на сервер асинхронно.
+            </summary>
+            <param name="command">команда</param>
+        </member>
+        <member name="M:Ostis.Sctp.SctpClient.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="M:Ostis.Sctp.SctpClient.Finalize">
+            <summary>
+            dtor.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.SctpClient.ServerEndPoint">
+            <summary>
+            Адрес сервера.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.SctpClient.IsConnected">
+            <summary>
+            Клиент подключён.
+            </summary>
+        </member>
+        <member name="E:Ostis.Sctp.SctpClient.ResponseReceived">
+            <summary>
+            Получен ответ на асинхронную команду.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.SctpClient.SctpResponseHandler">
+            <summary>
+            Обработчик получения ответа на команду.
+            </summary>
+            <param name="command">отправленная команда</param>
+            <param name="response">полученный</param>
+        </member>
+        <member name="T:Ostis.Sctp.ResponseHeader">
+            <summary>
+            Заголовок ответа сервера.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.ResponseHeader.#ctor(System.Byte[])">
+            <summary>
+            ctor.
+            </summary>
+            <param name="bytes">массив байт заголовка</param>
+        </member>
+        <member name="P:Ostis.Sctp.ResponseHeader.CommandCode">
+            <summary>
+            Код команды, на которую получен ответ.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.ResponseHeader.Id">
+            <summary>
+            Уникальный идентификатор команды в потоке команд.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.ResponseHeader.ReturnCode">
+            <summary>
+            Код результата выполнения команды.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.ResponseHeader.ReturnSize">
+            <summary>
+            Размер содержимого ответа.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Commands.EmitEventsCommand">
+            <summary>
+            Команда: Запрос всех произошедших событий.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Commands.EmitEventsCommand.#ctor">
+            <summary>
+            Инициализирует новую команду.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Arguments.ScEvent">
+            <summary>
+            Событие в SC-памяти.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.ScEvent.#ctor(Ostis.Sctp.Arguments.SubscriptionId,Ostis.Sctp.Arguments.ScAddress,Ostis.Sctp.Arguments.ScAddress)">
+            <summary>
+            Инициализирует новое событие.
+            </summary>
+            <param name="subscriptionId">id подписки</param>
+            <param name="elementAddress">адрес элемента</param>
+            <param name="arcAddress">адрес дуги</param>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.ScEvent.Parse(System.Byte[],System.Int32)">
+            <summary>
+            Получает значение события из массива байт.
+            </summary>
+            <param name="bytes">массив байт</param>
+            <param name="offset">смещение в массиве</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.ScEvent.GetBytes">
+            <summary>
+            Получить массив байт для передачи.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.ScEvent.Id">
+            <summary>
+            ID подписки.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.ScEvent.ElementAddress">
+            <summary>
+            Адрес элемента.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.ScEvent.ArcAddress">
+            <summary>
+            Адрес дуги.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Responses.EmitEventsResponse">
+            <summary>
+            Ответ на команду: Запрос всех произошедших событий.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Responses.EmitEventsResponse.#ctor(System.Byte[])">
+            <summary>
+            ctor.
+            </summary>
+            <param name="bytes">массив байт</param>
+        </member>
+        <member name="P:Ostis.Sctp.Responses.EmitEventsResponse.ScEvents">
+            <summary>
+            События.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Commands.IterateConstructionsCommand">
+            <summary>
+            Команда: Итерирование конструкций.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Commands.IterateConstructionsCommand.#ctor(Ostis.Sctp.Arguments.ConstructionTemplate)">
+            <summary>
+            Инициализирует новую команду.
+            </summary>
+            <param name="template">шаблон поиска</param>
+        </member>
+        <member name="P:Ostis.Sctp.Commands.IterateConstructionsCommand.Template">
+            <summary>
+            Шаблон поиска.
+            </summary>
+        </member>
+    </members>
+</doc>

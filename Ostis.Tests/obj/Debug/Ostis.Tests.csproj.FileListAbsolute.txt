@@ -1,0 +1,8 @@
+D:\OSTIS\OSTIS_MED_PROJECT\Ostis_Sctp_Client\Ostis.Tests\bin\Debug\Ostis.Tests.dll
+D:\OSTIS\OSTIS_MED_PROJECT\Ostis_Sctp_Client\Ostis.Tests\bin\Debug\Ostis.Tests.pdb
+D:\OSTIS\OSTIS_MED_PROJECT\Ostis_Sctp_Client\Ostis.Tests\bin\Debug\Ostis.Sctp.dll
+D:\OSTIS\OSTIS_MED_PROJECT\Ostis_Sctp_Client\Ostis.Tests\bin\Debug\Ostis.Sctp.pdb
+D:\OSTIS\OSTIS_MED_PROJECT\Ostis_Sctp_Client\Ostis.Tests\bin\Debug\Ostis.Sctp.xml
+D:\OSTIS\OSTIS_MED_PROJECT\Ostis_Sctp_Client\Ostis.Tests\obj\Debug\Ostis.Tests.csprojResolveAssemblyReference.cache
+D:\OSTIS\OSTIS_MED_PROJECT\Ostis_Sctp_Client\Ostis.Tests\obj\Debug\Ostis.Tests.dll
+D:\OSTIS\OSTIS_MED_PROJECT\Ostis_Sctp_Client\Ostis.Tests\obj\Debug\Ostis.Tests.pdb

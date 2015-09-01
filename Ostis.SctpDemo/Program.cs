@@ -9,7 +9,7 @@ namespace Ostis.SctpDemo
             // Подробности работы приведённого примера смотри в классе Demo.
             var demo = new Demo();
 
-		    Console.WriteLine(string.Empty);
+            Console.WriteLine(string.Empty);
             Console.WriteLine("Проверка синхронной отправки:");
             var address = demo.CreateNode();
 

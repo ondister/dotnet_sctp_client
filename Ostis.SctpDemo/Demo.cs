@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 
+
 using Ostis.Sctp;           // общее пространство имен, обязательно для подключения
 using Ostis.Sctp.Arguments; // пространство имен аргументов команд
 using Ostis.Sctp.Commands;  // пространство имен команд, отправляемых серверу
@@ -51,6 +52,8 @@ namespace Ostis.SctpDemo
 
         #region Synchronous tests
 
+
+
         // Код: 0x01 
         // Команда: Проверка существования элемента с указанным sc-адресом 
         // Аргументы: ScAddress
@@ -74,7 +77,7 @@ namespace Ostis.SctpDemo
         // Результат: ElementType (подробнее тут Ostis.Sctp.Arguments файл ElementType.cs
 		public void GetElementType(ScAddress address)
 		{
-            var command = new GetElementTypeCommand(new ScAddress(0, 0));
+            var command = new GetElementTypeCommand(new ScAddress(0, 1));
             var response = (GetElementTypeResponse) sctpClient.Send(command);
             Console.WriteLine(response.ElementType.ToString());
 		}
@@ -216,6 +219,7 @@ namespace Ostis.SctpDemo
         {
             runAsyncTest(new CreateNodeCommand(ElementType.ConstantNode));
             var response = (CreateNodeResponse) lastAsyncResponse;
+
             Console.WriteLine(response.CreatedNodeAddress.ToString());
             return response.CreatedNodeAddress;
         }
