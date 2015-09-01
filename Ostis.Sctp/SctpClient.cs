@@ -81,6 +81,7 @@ namespace Ostis.Sctp
         /// <returns>ответ сервера</returns>
         public Response Send(Command command)
         {
+             
             // установка ID команды
 #warning Здесь кроется потенциальная ошибка с приведением типов и переполнением.
             command.Id = (uint) Interlocked.Increment(ref nextCommandId);
@@ -88,18 +89,49 @@ namespace Ostis.Sctp
             // отправка запроса
             var bytes = command.GetBytes();
             socket.Send(bytes, bytes.Length, 0);
-            
             // приём ответа
-            var buffer = new byte[SctpProtocol.DefaultBufferSize];
+          // var buffer = new byte[SctpProtocol.DefaultBufferSize];
             using (var stream = new MemoryStream())
             {
-                do
+//#warning Здесь ошибка, приводящая к обрезке данных если буфер меньше передаваемых данных при синхронной передаче
+//                do
+//                {
+//                    int receivedBytes = socket.Receive(buffer, 0, buffer.Length, SocketFlags.None);
+
+//                    stream.Write(buffer, 0, receivedBytes);
+//#warning Костыль для ошибки
+//                    // Thread.Sleep(TimeSpan.FromMilliseconds(0.6));
+//                } while (socket.Available > 0);
+                
+                //принимаем заголовок
+                var headerBuffer = new byte[SctpProtocol.HeaderLength];
+                int receivedBytes = socket.Receive(headerBuffer, 0, headerBuffer.Length, SocketFlags.None);
+                int i = socket.Available;
+                stream.Write(headerBuffer, 0, receivedBytes);
+                //читаем заголовок
+                ResponseHeader header = new ResponseHeader(headerBuffer);
+                //принимаем остальное
+                if (header.ReturnCode == ReturnCode.Successfull)
                 {
-                    int receivedBytes = socket.Receive(buffer, 0, buffer.Length, SocketFlags.None);
-                    stream.Write(buffer, 0, receivedBytes);
-                } while (socket.Available > 0);
-                return Response.GetResponse(stream.ToArray());
+                    var BodyBuffer = new byte[header.ReturnSize];
+
+                    int offset = 0; // Сдвиг для массива с получаемым файлом
+                    int bytesCount = 0; // Количество байт прочитанных из сокета
+                    do
+                    {
+                        // Читаем сколько-то байт из сокета
+                        bytesCount = socket.Receive(BodyBuffer);
+                        // Копируем полученные байты в конец массива с файлом
+                        stream.Write(BodyBuffer, offset, bytesCount);
+                        // Сдвигаем конец массива
+                        offset += bytesCount;
+                    }
+                    while (offset < header.ReturnSize);
+                }
+                
+                  return Response.GetResponse(stream.ToArray());
             }
+            
         }
 
         #region Асинхронная отправка
