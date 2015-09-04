@@ -34,7 +34,9 @@ namespace Ostis.Sctp.Arguments
         /// </summary>
         public byte[] GetBytes()
         {
-            return BitConverter.GetBytes((byte) eventsType);
+            byte[] bytes = new byte[1];
+            bytes[0] = (byte)eventsType;
+            return bytes;
         }
 
         #endregion
