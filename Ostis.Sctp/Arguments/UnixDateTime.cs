@@ -15,8 +15,10 @@ namespace Ostis.Sctp.Arguments
         /// <param name="dateTime">дата и время</param>
         public UnixDateTime(DateTime dateTime)
         {
-            value = (long)(dateTime - Origin).TotalMilliseconds;
+            value = (long)(dateTime - Origin).TotalSeconds;
         }
+
+       
 
         /// <summary>
         /// Конвертирует дату и время Unix в дату и время.
@@ -30,15 +32,21 @@ namespace Ostis.Sctp.Arguments
         /// <summary>
         /// Конвертирует дату и время Unix в дату и время <see cref="System.DateTime"/>
         /// </summary>
-        /// <param name="milliseconds">Время в миллисекундах</param>
+        /// <param name="Seconds">Время в секундах</param>
         /// <returns></returns>
         public static DateTime ToDateTime(long milliseconds)
         {
-            return Origin.AddMilliseconds(milliseconds);
+            return Origin.AddSeconds(milliseconds);
+        }
+
+        public static UnixDateTime FromDateTime(DateTime dateTime)
+        {
+            var unixDateTime = new UnixDateTime(dateTime);
+            return unixDateTime;
         }
 
         /// <summary>
-        /// Начальная дата Unix.
+        /// Начальная дата Unix в DateTime.
         /// </summary>
         public static readonly DateTime Origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
 
