@@ -54,7 +54,7 @@ namespace Ostis.Sctp
         public byte[] GetBytes()
         {
             var stream = new MemoryStream();
-            if (Id != 0)
+          if (Id != 0)
             {
                 using (var writer = new BinaryWriter(stream, Encoding.UTF8))
                 {

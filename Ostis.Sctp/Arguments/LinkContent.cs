@@ -92,7 +92,7 @@ namespace Ostis.Sctp.Arguments
         /// <returns></returns>
         public static int ToInt32(byte[] data)
         {
-            return Convert.ToInt32(data);
+            return BitConverter.ToInt32(data,0);
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Ostis.Sctp.Arguments
         /// <returns></returns>
         public static double ToDouble(byte[] data)
         {
-            return Convert.ToDouble(data);
+            return BitConverter.ToDouble(data,0);
         }
 
         #endregion

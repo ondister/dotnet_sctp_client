@@ -14,7 +14,7 @@ namespace Ostis.Tools
             OstisBase ostisBase = new OstisBase();
             //ostisBase.FindUpperNodes();
             ostisBase.CheckMainIdtf();
-
+         //   ostisBase.Test();
             Console.ReadKey();
         }
     }

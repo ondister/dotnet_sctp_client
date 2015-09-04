@@ -10,13 +10,13 @@ namespace Ostis.Sctp.Commands
         #region Параметры команды
 
         /// <summary>
-        /// Тип создаваемой SC-дуги.
+        /// SC Адрес узла для которого создается идентификатор.
         /// </summary>
         public ScAddress Address
         { get { return address; } }
 
         /// <summary>
-        /// Тип создаваемой SC-дуги.
+        /// Идентификатор для узла.
         /// </summary>
         public Identifier Identifier
         { get { return identifier; } }

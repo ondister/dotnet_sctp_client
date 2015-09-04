@@ -135,7 +135,14 @@ namespace Ostis.Tools
        Console.WriteLine("Найдены все узлы, не имеющие входящих дуг");
    }
 
-
+   public void Test()
+   {
+       var cmd1 = new CreateSubscriptionCommand(EventsType.DeleteInArc, new ScAddress(2, 3));
+       var bytes1= cmd1.GetBytes();
+       var cmd2 = new CheckElementCommand(new ScAddress(2, 3));
+       var bytes2 = cmd2.GetBytes();
+      
+   }
 
    
 

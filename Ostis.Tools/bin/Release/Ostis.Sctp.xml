@@ -286,12 +286,12 @@
             <summary>
             Конвертирует дату и время Unix в дату и время <see cref="T:System.DateTime"/>
             </summary>
-            <param name="milliseconds">Время в миллисекундах</param>
+            <param name="Seconds">Время в секундах</param>
             <returns></returns>
         </member>
         <member name="F:Ostis.Sctp.Arguments.UnixDateTime.Origin">
             <summary>
-            Начальная дата Unix.
+            Начальная дата Unix в DateTime.
             </summary>
         </member>
         <member name="M:Ostis.Sctp.Arguments.UnixDateTime.GetBytes">
@@ -1098,12 +1098,12 @@
         </member>
         <member name="P:Ostis.Sctp.Commands.SetSystemIdCommand.Address">
             <summary>
-            Тип создаваемой SC-дуги.
+            SC Адрес узла для которого создается идентификатор.
             </summary>
         </member>
         <member name="P:Ostis.Sctp.Commands.SetSystemIdCommand.Identifier">
             <summary>
-            Тип создаваемой SC-дуги.
+            Идентификатор для узла.
             </summary>
         </member>
         <member name="T:Ostis.Sctp.Responses.CheckElementResponse">
