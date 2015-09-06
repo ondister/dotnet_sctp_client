@@ -20,6 +20,7 @@ namespace Ostis.Tests
         #region CreateNode
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Синхронный")]
         public void TestCreateNodeSync()
         {
             this.Connect();
@@ -35,6 +36,7 @@ namespace Ostis.Tests
 
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Асинхронный")]
         public void TestCreateNodeASync()
         {
             this.Connect();
@@ -54,6 +56,7 @@ namespace Ostis.Tests
         #region CreateArc
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Синхронный")]
         public void TestCreateArcSync()
         {
             //create the node1
@@ -76,6 +79,7 @@ namespace Ostis.Tests
 
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Асинхронный")]
         public void TestCreateArcASync()
         {
             //create the node1
@@ -105,6 +109,7 @@ namespace Ostis.Tests
         #region CreateLink
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Синхронный")]
         public void TestCreateLinkSync()
         {
             this.Connect();
@@ -120,6 +125,7 @@ namespace Ostis.Tests
 
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Асинхронный")]
         public void TestCreateLinkASync()
         {
             this.Connect();
@@ -139,6 +145,7 @@ namespace Ostis.Tests
         #region DeleteNode
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Синхронный")]
         public void TestDeleteNodeSync()
         {
             //create the node
@@ -155,6 +162,7 @@ namespace Ostis.Tests
         }
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Асинхронный")]
         public void TestDeleteNodeASync()
         {
             //create the node
@@ -177,6 +185,7 @@ namespace Ostis.Tests
         #region CheckElement
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Синхронный")]
         public void TestCheckElementSync()
         {
             //create the node
@@ -193,6 +202,7 @@ namespace Ostis.Tests
         }
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Асинхронный")]
         public void TestCheckElementASync()
         {
             //create the node
@@ -218,6 +228,7 @@ namespace Ostis.Tests
         #region FindElement
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Синхронный")]
         public void TestFindElementSync()
         {
             this.Connect();
@@ -233,6 +244,7 @@ namespace Ostis.Tests
 
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Асинхронный")]
         public void TestFindElementASync()
         {
             this.Connect();
@@ -253,6 +265,7 @@ namespace Ostis.Tests
         #region FindLinks
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Синхронный")]
         public void TestFindLinksSync()
         {
             this.Connect();
@@ -268,6 +281,7 @@ namespace Ostis.Tests
 
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Асинхронный")]
         public void TestFindLinksASync()
         {
             this.Connect();
@@ -288,6 +302,7 @@ namespace Ostis.Tests
         #region GetArcElements
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Синхронный")]
         public void TestGetArcElementsSync()
         {
             //create the node1
@@ -315,6 +330,7 @@ namespace Ostis.Tests
 
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Асинхронный")]
         public void TestGetArcElementsASync()
         {
             //create the node1
@@ -351,6 +367,7 @@ namespace Ostis.Tests
         #region GetElementType
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Синхронный")]
         public void TestGetElementTypeSync()
         {
             this.Connect();
@@ -369,6 +386,7 @@ namespace Ostis.Tests
 
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Асинхронный")]
         public void TestGetElementTypeASync()
         {
             this.Connect();
@@ -392,6 +410,7 @@ namespace Ostis.Tests
         #region SetLinkContent
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Синхронный")]
         public void TestSetLinkContentSync()
         {
             this.Connect();
@@ -411,6 +430,7 @@ namespace Ostis.Tests
 
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Асинхронный")]
         public void TestSetLinkContentASync()
         {
             this.Connect();
@@ -436,6 +456,7 @@ namespace Ostis.Tests
         #region GetLinkContent
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Синхронный")]
         public void TestGetLinkContentSync()
         {
             this.Connect();
@@ -457,6 +478,7 @@ namespace Ostis.Tests
 
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Асинхронный")]
         public void TestGetLinkContentASync()
         {
             this.Connect();
@@ -485,6 +507,7 @@ namespace Ostis.Tests
         #region SetSystemID
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Синхронный")]
         public void TestSetSystemIDSync()
         {
             //create the node
@@ -506,6 +529,7 @@ namespace Ostis.Tests
 
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Асинхронный")]
         public void TestSetSystemIDASync()
         {
             //create the node
@@ -534,6 +558,7 @@ namespace Ostis.Tests
         #region GetProtocolVersion
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Синхронный")]
         public void TestGetProtocolVersionSync()
         {
             this.Connect();
@@ -549,6 +574,7 @@ namespace Ostis.Tests
 
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Асинхронный")]
         public void TestGetProtocolVersionASync()
         {
             this.Connect();
@@ -567,6 +593,7 @@ namespace Ostis.Tests
         #region GetStatistics
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Синхронный")]
         public void TestGetStatisticsSync()
         {
             this.Connect();
@@ -596,6 +623,7 @@ namespace Ostis.Tests
 
         [TestMethod]
         [Timeout(3000)]
+        [TestProperty("Синхронность", "Асинхронный")]
         public void TestGetStatisticsASync()
         {
             this.Connect();
@@ -633,6 +661,7 @@ namespace Ostis.Tests
 
         [TestMethod]
         [Timeout(10000)]
+        [TestProperty("Синхронность", "Синхронный")]
         public void TestIterateElementsSync()
         {
             this.Connect();
@@ -675,6 +704,7 @@ namespace Ostis.Tests
 
         [TestMethod]
         [Timeout(10000)]
+        [TestProperty("Синхронность", "Асинхронный")]
         public void TestIterateElementsASync()
         {
             this.Connect();
@@ -725,26 +755,27 @@ namespace Ostis.Tests
         #region SubScriptions
         [TestMethod]
         [Timeout(3000)]
+       // [TestProperty("Синхронность", "Синхронный")]
+        [TestProperty("Выполнение", "Не выполнять")]
         public void TestSubscriptionsSync()
         {
             this.Connect();
             Assert.IsTrue(sctpClient.IsConnected);
             //create the node1
-            this.Connect();
+
             Assert.AreEqual(true, sctpClient.IsConnected);
             var commandCreateNode1 = new CreateNodeCommand(ElementType.ConstantNode);
             var responseCreateNode1 = (CreateNodeResponse)sctpClient.Send(commandCreateNode1);
             //create the node2
-            this.Connect();
+
             Assert.AreEqual(true, sctpClient.IsConnected);
             var commandCreateNode2 = new CreateNodeCommand(ElementType.ConstantNode);
             var responseCreateNode2 = (CreateNodeResponse)sctpClient.Send(commandCreateNode2);
 
             //subscriptionsNode1
             var commandCreateSubscriptionCreate1 = new CreateSubscriptionCommand(EventsType.AddOutArc, responseCreateNode1.CreatedNodeAddress);
-          var bytes=  commandCreateSubscriptionCreate1.GetBytes();
             var responseCreateSubscriptionCreate1 = (CreateSubscriptionResponse)sctpClient.Send(commandCreateSubscriptionCreate1);
-            //subscriptionsNode2
+           // subscriptionsNode2
             var commandCreateSubscriptionCreate2 = new CreateSubscriptionCommand(EventsType.AddInArc, responseCreateNode2.CreatedNodeAddress);
             var responseCreateSubscriptionCreate2 = (CreateSubscriptionResponse)sctpClient.Send(commandCreateSubscriptionCreate2);
 
@@ -774,18 +805,18 @@ namespace Ostis.Tests
 
         [TestMethod]
         [Timeout(3000)]
+      //  [TestProperty("Синхронность", "Асинхронный")]
+        [TestProperty("Выполнение", "Не выполнять")]
         public void TestSubscriptionsASync()
         {
             this.Connect();
             Assert.IsTrue(sctpClient.IsConnected);
             //create the node1
-            this.Connect();
-            Assert.AreEqual(true, sctpClient.IsConnected);
+
             var commandCreateNode1 = new CreateNodeCommand(ElementType.ConstantNode);
             runAsyncTest(commandCreateNode1);
             var responseCreateNode1 = (CreateNodeResponse)lastAsyncResponse;
             //create the node2
-            this.Connect();
             Assert.AreEqual(true, sctpClient.IsConnected);
             var commandCreateNode2 = new CreateNodeCommand(ElementType.ConstantNode);
             runAsyncTest(commandCreateNode2);
