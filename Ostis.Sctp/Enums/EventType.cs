@@ -3,12 +3,9 @@ namespace Ostis.Sctp
     /// <summary>
     /// Тип события.
     /// </summary>
-    public enum EventType : sbyte
+    public enum EventType : byte
     {
-        /// <summary>
-        /// Тип события неизвестен
-        /// </summary>
-        UnKnown = -1,
+       
         /// <summary>
         /// Добавление исходящей дуги (ребра).
         /// </summary>
