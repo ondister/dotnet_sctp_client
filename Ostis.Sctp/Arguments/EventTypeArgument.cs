@@ -5,26 +5,26 @@ namespace Ostis.Sctp.Arguments
     /// <summary>
     /// Аргумент типа события.
     /// </summary>
-    public class EventsTypeArgument : IArgument
+    public class EventTypeArgument : IArgument
     {
-        private EventsType eventsType;
+        private EventType eventType;
 
         /// <summary>
 		/// Тип события.
 		/// </summary>
-		public EventsType EventsType
+		public EventType EventType
 		{
-			get { return eventsType; }
-			set { eventsType = value; }
+			get { return eventType; }
+			set { eventType = value; }
 		}
 
 		/// <summary>
 		/// Инициализирует новое событие указанного типа.
 		/// </summary>
-        /// <param name="eventsType">тип события</param>
-        public EventsTypeArgument(EventsType eventsType)
+        /// <param name="eventType">тип события</param>
+        public EventTypeArgument(EventType eventType)
 		{
-            this.eventsType = eventsType;
+            this.eventType = eventType;
 		}
 
         #region Реализация интерфеса IArgument
@@ -35,7 +35,7 @@ namespace Ostis.Sctp.Arguments
         public byte[] GetBytes()
         {
             byte[] bytes = new byte[1];
-            bytes[0] = (byte)eventsType;
+            bytes[0] = (byte)eventType;
             return bytes;
         }
 

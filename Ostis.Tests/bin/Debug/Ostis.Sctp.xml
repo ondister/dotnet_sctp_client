@@ -35,23 +35,23 @@
             Тип элемента.
             </summary>
         </member>
-        <member name="T:Ostis.Sctp.Arguments.EventsTypeArgument">
+        <member name="T:Ostis.Sctp.Arguments.EventTypeArgument">
             <summary>
             Аргумент типа события.
             </summary>
         </member>
-        <member name="M:Ostis.Sctp.Arguments.EventsTypeArgument.#ctor(Ostis.Sctp.EventsType)">
+        <member name="M:Ostis.Sctp.Arguments.EventTypeArgument.#ctor(Ostis.Sctp.EventType)">
             <summary>
             Инициализирует новое событие указанного типа.
             </summary>
-            <param name="eventsType">тип события</param>
+            <param name="eventType">тип события</param>
         </member>
-        <member name="M:Ostis.Sctp.Arguments.EventsTypeArgument.GetBytes">
+        <member name="M:Ostis.Sctp.Arguments.EventTypeArgument.GetBytes">
             <summary>
             Получить массив байт для передачи.
             </summary>
         </member>
-        <member name="P:Ostis.Sctp.Arguments.EventsTypeArgument.EventsType">
+        <member name="P:Ostis.Sctp.Arguments.EventTypeArgument.EventType">
             <summary>
             Тип события.
             </summary>
@@ -282,7 +282,7 @@
             </summary>
             <returns>System.DateTime</returns>
         </member>
-        <member name="M:Ostis.Sctp.Arguments.UnixDateTime.ToDateTime(System.Int64)">
+        <member name="M:Ostis.Sctp.Arguments.UnixDateTime.ToDateTime(System.UInt64)">
             <summary>
             Конвертирует дату и время Unix в дату и время <see cref="T:System.DateTime"/>
             </summary>
@@ -449,32 +449,37 @@
             Маска типов SC-коннекторов.
             </summary>
         </member>
-        <member name="T:Ostis.Sctp.EventsType">
+        <member name="T:Ostis.Sctp.EventType">
             <summary>
             Тип события.
             </summary>
         </member>
-        <member name="F:Ostis.Sctp.EventsType.AddOutArc">
+        <member name="F:Ostis.Sctp.EventType.UnKnown">
+            <summary>
+            Тип события неизвестен
+            </summary>
+        </member>
+        <member name="F:Ostis.Sctp.EventType.AddOutArc">
             <summary>
             Добавление исходящей дуги (ребра).
             </summary>
         </member>
-        <member name="F:Ostis.Sctp.EventsType.AddInArc">
+        <member name="F:Ostis.Sctp.EventType.AddInArc">
             <summary>
             Добавление входящей дуги (ребра).
             </summary>
         </member>
-        <member name="F:Ostis.Sctp.EventsType.DeleteOutArc">
+        <member name="F:Ostis.Sctp.EventType.DeleteOutArc">
             <summary>
             Удаление исходящей дуги (ребра).
             </summary>
         </member>
-        <member name="F:Ostis.Sctp.EventsType.DeleteInArc">
+        <member name="F:Ostis.Sctp.EventType.DeleteInArc">
             <summary>
             Удаление входящей дуги (ребра).
             </summary>
         </member>
-        <member name="F:Ostis.Sctp.EventsType.DeleteElement">
+        <member name="F:Ostis.Sctp.EventType.DeleteElement">
             <summary>
             Удаление sc-элемента.
             </summary>
@@ -725,7 +730,7 @@
             Идентификатор подписки на событие.
             </summary>
         </member>
-        <member name="M:Ostis.Sctp.Arguments.SubscriptionId.#ctor(System.Int32)">
+        <member name="M:Ostis.Sctp.Arguments.SubscriptionId.#ctor(System.UInt32)">
             <summary>
             Инициализирует новый идентификатор подписки на событие.
             </summary>
@@ -885,7 +890,7 @@
             Команда: Создание подписки на события.
             </summary>
         </member>
-        <member name="M:Ostis.Sctp.Commands.CreateSubscriptionCommand.#ctor(Ostis.Sctp.EventsType,Ostis.Sctp.Arguments.ScAddress)">
+        <member name="M:Ostis.Sctp.Commands.CreateSubscriptionCommand.#ctor(Ostis.Sctp.EventType,Ostis.Sctp.Arguments.ScAddress)">
             <summary>
             Инициализирует новую команду.
             </summary>
@@ -1576,11 +1581,13 @@
             <summary>
             Команда: Запрос всех произошедших событий.
             </summary>
+             /// <remarks>Стоит заметить, что команда может не вернуть события, произошедшие за 1 секунду до ее вызова. Поэтому, делайте таймаут перед вызовом этой команды в 1 секунду.</remarks>
         </member>
         <member name="M:Ostis.Sctp.Commands.EmitEventsCommand.#ctor">
             <summary>
             Инициализирует новую команду.
             </summary>
+                    /// <remarks>Стоит заметить, что команда может не вернуть события, произошедшие за 1 секунду до ее вызова. Поэтому, делайте таймаут перед вызовом этой команды в 1 секунду.</remarks>        
         </member>
         <member name="T:Ostis.Sctp.Arguments.ScEvent">
             <summary>

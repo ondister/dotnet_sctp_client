@@ -29,7 +29,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -42,14 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Arguments\ElementTypeArgument.cs" />
-    <Compile Include="Arguments\EventsTypeArgument.cs" />
+    <Compile Include="Arguments\EventTypeArgument.cs" />
     <Compile Include="Enums\CommandCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Arguments\ConstructionTemplate.cs" />
     <Compile Include="Enums\ConstructionTemplateType.cs" />
     <Compile Include="Arguments\UnixDateTime.cs" />
     <Compile Include="Enums\ElementType.cs" />
-    <Compile Include="Enums\EventsType.cs" />
+    <Compile Include="Enums\EventType.cs" />
     <Compile Include="Arguments\Identifier.cs" />
     <Compile Include="Arguments\LinkContent.cs" />
     <Compile Include="Enums\LinkContentType.cs" />

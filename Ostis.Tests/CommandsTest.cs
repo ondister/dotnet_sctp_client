@@ -15,8 +15,8 @@ namespace Ostis.Tests
     [TestClass]
     public class CommandsTest
     {
-        private  SctpClient sctpClient;
-       
+        private SctpClient sctpClient;
+
         #region CreateNode
         [TestMethod]
         [Timeout(3000)]
@@ -29,9 +29,9 @@ namespace Ostis.Tests
             var response = (CreateNodeResponse)sctpClient.Send(command);
 
             Assert.AreEqual(command.Code, response.Header.CommandCode);
-            Assert.AreEqual(response.Header.ReturnCode,ReturnCode.Successfull);
+            Assert.AreEqual(response.Header.ReturnCode, ReturnCode.Successfull);
             Assert.AreNotEqual(response.CreatedNodeAddress.Offset, 0);
-           
+
         }
 
         [TestMethod]
@@ -70,7 +70,7 @@ namespace Ostis.Tests
             var commandCreateNode2 = new CreateNodeCommand(ElementType.ConstantNode);
             var responseCreateNode2 = (CreateNodeResponse)sctpClient.Send(commandCreateNode2);
             //Create the Arc
-            var command = new CreateArcCommand(ElementType.ConstantCommonArc, responseCreateNode1.CreatedNodeAddress,responseCreateNode2.CreatedNodeAddress);
+            var command = new CreateArcCommand(ElementType.ConstantCommonArc, responseCreateNode1.CreatedNodeAddress, responseCreateNode2.CreatedNodeAddress);
             var response = (CreateArcResponse)sctpClient.Send(command);
             Assert.AreEqual(command.Code, response.Header.CommandCode);
             Assert.AreEqual(ReturnCode.Successfull, response.Header.ReturnCode);
@@ -95,7 +95,7 @@ namespace Ostis.Tests
             runAsyncTest(commandCreateNode2);
             var responseCreateNode2 = (CreateNodeResponse)lastAsyncResponse;
             //Create the Arc
-            var command = new CreateArcCommand(ElementType.ConstantCommonArc, responseCreateNode1.CreatedNodeAddress,responseCreateNode2.CreatedNodeAddress);
+            var command = new CreateArcCommand(ElementType.ConstantCommonArc, responseCreateNode1.CreatedNodeAddress, responseCreateNode2.CreatedNodeAddress);
             runAsyncTest(command);
             var response = (CreateArcResponse)lastAsyncResponse;
             Assert.AreEqual(command.Code, response.Header.CommandCode);
@@ -157,7 +157,7 @@ namespace Ostis.Tests
             var command = new DeleteElementCommand(responseCreate.CreatedNodeAddress);
             var response = (DeleteElementResponse)sctpClient.Send(command);
             Assert.AreEqual(command.Code, response.Header.CommandCode);
-            Assert.AreEqual(ReturnCode.Successfull,response.Header.ReturnCode);
+            Assert.AreEqual(ReturnCode.Successfull, response.Header.ReturnCode);
             Assert.AreEqual(true, response.IsDeleted);
         }
         [TestMethod]
@@ -174,7 +174,7 @@ namespace Ostis.Tests
             //delete the node
             var command = new DeleteElementCommand(responseCreate.CreatedNodeAddress);
             runAsyncTest(command);
-            var response= (DeleteElementResponse)lastAsyncResponse;
+            var response = (DeleteElementResponse)lastAsyncResponse;
             Assert.AreEqual(command.Code, response.Header.CommandCode);
             Assert.AreEqual(ReturnCode.Successfull, response.Header.ReturnCode);
             Assert.AreEqual(true, response.IsDeleted);
@@ -318,10 +318,10 @@ namespace Ostis.Tests
             //Create the Arc
             var commandCreateArc = new CreateArcCommand(ElementType.ConstantCommonArc, responseCreateNode1.CreatedNodeAddress, responseCreateNode2.CreatedNodeAddress);
             var responseCreateArc = (CreateArcResponse)sctpClient.Send(commandCreateArc);
-           //Get arc elements
+            //Get arc elements
             var command = new GetArcElementsCommand(responseCreateArc.CreatedArcAddress);
             var response = (GetArcElementsResponse)sctpClient.Send(command);
-            
+
             Assert.AreEqual(command.Code, response.Header.CommandCode);
             Assert.AreEqual(ReturnCode.Successfull, response.Header.ReturnCode);
             Assert.AreEqual(responseCreateNode1.CreatedNodeAddress.Offset, response.BeginElementAddress.Offset);
@@ -516,10 +516,10 @@ namespace Ostis.Tests
             var commandCreate = new CreateNodeCommand(ElementType.ConstantNode);
             var responseCreate = (CreateNodeResponse)sctpClient.Send(commandCreate);
             //Set the ID
-            var command = new SetSystemIdCommand(responseCreate.CreatedNodeAddress,new Identifier("new_sys_id"));
+            var command = new SetSystemIdCommand(responseCreate.CreatedNodeAddress, new Identifier("new_sys_id"));
             var response = (SetSystemIdResponse)sctpClient.Send(command);
             Assert.AreEqual(command.Code, response.Header.CommandCode);
-            Assert.AreEqual(ReturnCode.Successfull, response.Header.ReturnCode);
+            Assert.AreEqual(ReturnCode.Successfull, response.Header.ReturnCode,"Возможно тест запускается второй раз за сессию сервера и системный идентификатор дублируется");
             Assert.IsTrue(response.IsSuccesfull);
             //Get the id
             var commandFindElement = new FindElementCommand(new Identifier("new_sys_id"));
@@ -543,7 +543,7 @@ namespace Ostis.Tests
             runAsyncTest(command);
             var response = (SetSystemIdResponse)lastAsyncResponse;
             Assert.AreEqual(command.Code, response.Header.CommandCode);
-            Assert.AreEqual(ReturnCode.Successfull, response.Header.ReturnCode);
+            Assert.AreEqual(ReturnCode.Successfull, response.Header.ReturnCode, "Возможно тест запускается второй раз за сессию сервера и системный идентификатор дублируется");
             Assert.IsTrue(response.IsSuccesfull);
             //Get the id
             var commandFindElement = new FindElementCommand(new Identifier("new_sys_id_async"));
@@ -558,7 +558,8 @@ namespace Ostis.Tests
         #region GetProtocolVersion
         [TestMethod]
         [Timeout(3000)]
-        [TestProperty("Синхронность", "Синхронный")]
+     // [TestProperty("Синхронность", "Синхронный")]
+        [TestProperty("Реализация на сервере", "Не реализована")]
         public void TestGetProtocolVersionSync()
         {
             this.Connect();
@@ -568,13 +569,14 @@ namespace Ostis.Tests
 
             Assert.AreEqual(command.Code, response.Header.CommandCode);
             Assert.AreEqual(response.Header.ReturnCode, ReturnCode.Successfull);
-            Assert.IsInstanceOfType(response.ProtocolVersion,typeof(int));
+            Assert.IsInstanceOfType(response.ProtocolVersion, typeof(int));
 
         }
 
         [TestMethod]
         [Timeout(3000)]
-        [TestProperty("Синхронность", "Асинхронный")]
+       // [TestProperty("Синхронность", "Асинхронный")]
+        [TestProperty("Реализация на сервере", "Не реализована")]
         public void TestGetProtocolVersionASync()
         {
             this.Connect();
@@ -606,7 +608,7 @@ namespace Ostis.Tests
             Assert.AreEqual(command.Code, response.Header.CommandCode);
             Assert.AreEqual(response.Header.ReturnCode, ReturnCode.Successfull);
             Assert.AreNotEqual(response.TimeChecksCount, 0);
-            var statisticsData=response.StatisticsDataList[0];
+            var statisticsData = response.StatisticsDataList[0];
             Assert.IsNotNull(statisticsData.ArcCount);
             Assert.IsNotNull(statisticsData.CommandErrorsCount);
             Assert.IsNotNull(statisticsData.CommandsCount);
@@ -655,9 +657,9 @@ namespace Ostis.Tests
 
 
         #region IterateElements
-       
-      
-   
+
+
+
 
         [TestMethod]
         [Timeout(10000)]
@@ -696,7 +698,7 @@ namespace Ostis.Tests
                     var itertemplate = new ConstructionTemplate(responseGetNode.BeginElementAddress, ElementType.CommonArc, ElementType.Link, ElementType.AccessArc, rspFindById.FoundAddress);
                     var cmdIterate = new IterateElementsCommand(itertemplate);
                     var rspIterate = (IterateElementsResponse)sctpClient.Send(cmdIterate);
-                   
+
                 }
             }
         }
@@ -755,29 +757,29 @@ namespace Ostis.Tests
         #region SubScriptions
         [TestMethod]
         [Timeout(3000)]
-       // [TestProperty("Синхронность", "Синхронный")]
-        [TestProperty("Выполнение", "Не выполнять")]
+        [TestProperty("Синхронность", "Синхронный")]
         public void TestSubscriptionsSync()
         {
             this.Connect();
             Assert.IsTrue(sctpClient.IsConnected);
-            //create the node1
-
-            Assert.AreEqual(true, sctpClient.IsConnected);
+            //create the node1 
             var commandCreateNode1 = new CreateNodeCommand(ElementType.ConstantNode);
             var responseCreateNode1 = (CreateNodeResponse)sctpClient.Send(commandCreateNode1);
-            //create the node2
 
+            // create the node2
             Assert.AreEqual(true, sctpClient.IsConnected);
             var commandCreateNode2 = new CreateNodeCommand(ElementType.ConstantNode);
             var responseCreateNode2 = (CreateNodeResponse)sctpClient.Send(commandCreateNode2);
 
             //subscriptionsNode1
-            var commandCreateSubscriptionCreate1 = new CreateSubscriptionCommand(EventsType.AddOutArc, responseCreateNode1.CreatedNodeAddress);
+            var commandCreateSubscriptionCreate1 = new CreateSubscriptionCommand(EventType.AddOutArc, responseCreateNode1.CreatedNodeAddress);
             var responseCreateSubscriptionCreate1 = (CreateSubscriptionResponse)sctpClient.Send(commandCreateSubscriptionCreate1);
-           // subscriptionsNode2
-            var commandCreateSubscriptionCreate2 = new CreateSubscriptionCommand(EventsType.AddInArc, responseCreateNode2.CreatedNodeAddress);
+            SubscriptionId SubscriptionCreate1 = responseCreateSubscriptionCreate1.SubscriptionId;
+            // subscriptionsNode2
+            var commandCreateSubscriptionCreate2 = new CreateSubscriptionCommand(EventType.AddInArc, responseCreateNode2.CreatedNodeAddress);
             var responseCreateSubscriptionCreate2 = (CreateSubscriptionResponse)sctpClient.Send(commandCreateSubscriptionCreate2);
+            SubscriptionId SubscriptionCreate2 = responseCreateSubscriptionCreate2.SubscriptionId;
+
 
             //Create the Arc
             var commandCreateArc = new CreateArcCommand(ElementType.ConstantCommonArc, responseCreateNode1.CreatedNodeAddress, responseCreateNode2.CreatedNodeAddress);
@@ -785,37 +787,55 @@ namespace Ostis.Tests
             Assert.AreEqual(commandCreateArc.Code, responseCreateArc.Header.CommandCode);
             Assert.AreEqual(ReturnCode.Successfull, responseCreateArc.Header.ReturnCode);
             Assert.AreNotEqual(responseCreateArc.CreatedArcAddress.Offset, 0);
-                        
+
             //subscriptionsArc
-            var commandCreateSubscriptionDel = new CreateSubscriptionCommand(EventsType.DeleteElement, responseCreateArc.CreatedArcAddress);
+            var commandCreateSubscriptionDel = new CreateSubscriptionCommand(EventType.DeleteElement, responseCreateArc.CreatedArcAddress);
             var responseCreateSubscriptionDel = (CreateSubscriptionResponse)sctpClient.Send(commandCreateSubscriptionDel);
-            
+            SubscriptionId SubscriptionDel = responseCreateSubscriptionDel.SubscriptionId;
             //delete the arc
             var commandDelete = new DeleteElementCommand(responseCreateArc.CreatedArcAddress);
             var reaponseDelete = (DeleteElementResponse)sctpClient.Send(commandDelete);
 
+
             //emit any events
+            Thread.Sleep(1000);
             var commandEmit = new EmitEventsCommand();
             var responseEmit = (EmitEventsResponse)sctpClient.Send(commandEmit);
             List<ScEvent> eventList = responseEmit.ScEvents;
-            Assert.AreNotEqual(0, eventList.Count);
+            Assert.AreEqual(3, eventList.Count);
 
+            //find subscriptions
+            Assert.IsTrue(eventList.Exists(ev => ev.Id.Id == SubscriptionCreate1.Id));
+            Assert.IsTrue(eventList.Exists(ev => ev.Id.Id == SubscriptionCreate2.Id));
+            Assert.IsTrue(eventList.Exists(ev => ev.Id.Id == SubscriptionDel.Id));
+
+            Assert.IsTrue(eventList.Exists(ev => ev.ElementAddress.Offset == responseCreateNode1.CreatedNodeAddress.Offset));
+            Assert.IsTrue(eventList.Exists(ev => ev.ArcAddress.Offset == responseCreateArc.CreatedArcAddress.Offset));
+            Assert.IsTrue(eventList.Exists(ev => ev.ElementAddress.Offset == responseCreateNode2.CreatedNodeAddress.Offset));
+            Assert.IsTrue(eventList.Exists(ev => ev.ArcAddress.Offset == responseCreateArc.CreatedArcAddress.Offset));
+
+            //delete subscription
+            var commandDeleteSubscriptionDel = new DeleteSubscriptionCommand(SubscriptionDel);
+            var responseDeleteSubscriptionDel = (DeleteSubscriptionResponse)sctpClient.Send(commandDeleteSubscriptionDel);
+
+            Assert.AreEqual(ReturnCode.Successfull, responseDeleteSubscriptionDel.Header.ReturnCode);
+            Assert.AreEqual(responseCreateSubscriptionDel.SubscriptionId.Id, responseDeleteSubscriptionDel.SubscriptionId.Id);
 
         }
 
         [TestMethod]
         [Timeout(3000)]
-      //  [TestProperty("Синхронность", "Асинхронный")]
-        [TestProperty("Выполнение", "Не выполнять")]
+        [TestProperty("Синхронность", "Асинхронный")]
         public void TestSubscriptionsASync()
         {
             this.Connect();
             Assert.IsTrue(sctpClient.IsConnected);
-            //create the node1
 
+            //create the node1
             var commandCreateNode1 = new CreateNodeCommand(ElementType.ConstantNode);
             runAsyncTest(commandCreateNode1);
             var responseCreateNode1 = (CreateNodeResponse)lastAsyncResponse;
+
             //create the node2
             Assert.AreEqual(true, sctpClient.IsConnected);
             var commandCreateNode2 = new CreateNodeCommand(ElementType.ConstantNode);
@@ -823,13 +843,18 @@ namespace Ostis.Tests
             var responseCreateNode2 = (CreateNodeResponse)lastAsyncResponse;
 
             //subscriptionsNode1
-            var commandCreateSubscriptionCreate1 = new CreateSubscriptionCommand(EventsType.AddOutArc, responseCreateNode1.CreatedNodeAddress);
+            var commandCreateSubscriptionCreate1 = new CreateSubscriptionCommand(EventType.AddOutArc, responseCreateNode1.CreatedNodeAddress);
             runAsyncTest(commandCreateSubscriptionCreate1);
             var responseCreateSubscriptionCreate1 = (CreateSubscriptionResponse)lastAsyncResponse;
+            SubscriptionId SubscriptionCreate1 = responseCreateSubscriptionCreate1.SubscriptionId;
+            Assert.AreEqual(ReturnCode.Successfull, responseCreateSubscriptionCreate1.Header.ReturnCode);
+
             //subscriptionsNode2
-            var commandCreateSubscriptionCreate2 = new CreateSubscriptionCommand(EventsType.AddInArc, responseCreateNode2.CreatedNodeAddress);
+            var commandCreateSubscriptionCreate2 = new CreateSubscriptionCommand(EventType.AddInArc, responseCreateNode2.CreatedNodeAddress);
             runAsyncTest(commandCreateSubscriptionCreate2);
             var responseCreateSubscriptionCreate2 = (CreateSubscriptionResponse)lastAsyncResponse;
+            SubscriptionId SubscriptionCreate2 = responseCreateSubscriptionCreate2.SubscriptionId;
+            Assert.AreEqual(ReturnCode.Successfull, responseCreateSubscriptionCreate2.Header.ReturnCode);
 
             //Create the Arc
             var commandCreateArc = new CreateArcCommand(ElementType.ConstantCommonArc, responseCreateNode1.CreatedNodeAddress, responseCreateNode2.CreatedNodeAddress);
@@ -840,9 +865,11 @@ namespace Ostis.Tests
             Assert.AreNotEqual(responseCreateArc.CreatedArcAddress.Offset, 0);
 
             //subscriptionsArc
-            var commandCreateSubscriptionDel = new CreateSubscriptionCommand(EventsType.DeleteElement, responseCreateArc.CreatedArcAddress);
+            var commandCreateSubscriptionDel = new CreateSubscriptionCommand(EventType.DeleteElement, responseCreateArc.CreatedArcAddress);
             runAsyncTest(commandCreateSubscriptionDel);
             var responseCreateSubscriptionDel = (CreateSubscriptionResponse)lastAsyncResponse;
+            SubscriptionId SubscriptionDel = responseCreateSubscriptionDel.SubscriptionId;
+            Assert.AreEqual(ReturnCode.Successfull, responseCreateSubscriptionDel.Header.ReturnCode);
 
             //delete the arc
             var commandDelete = new DeleteElementCommand(responseCreateArc.CreatedArcAddress);
@@ -850,12 +877,28 @@ namespace Ostis.Tests
             var reaponseDelete = (DeleteElementResponse)lastAsyncResponse;
 
             //emit any events
+            Thread.Sleep(1000);
             var commandEmit = new EmitEventsCommand();
-            runAsyncTest(commandEmit);
-            var responseEmit = (EmitEventsResponse)lastAsyncResponse;
+            var responseEmit = (EmitEventsResponse)sctpClient.Send(commandEmit);
             List<ScEvent> eventList = responseEmit.ScEvents;
-            Assert.AreNotEqual(0, eventList.Count);
-          
+            Assert.AreEqual(3, eventList.Count);
+
+            //find subscriptions
+            Assert.IsTrue(eventList.Exists(ev => ev.Id.Id == SubscriptionCreate1.Id));
+            Assert.IsTrue(eventList.Exists(ev => ev.Id.Id == SubscriptionCreate2.Id));
+            Assert.IsTrue(eventList.Exists(ev => ev.Id.Id == SubscriptionDel.Id));
+
+            Assert.IsTrue(eventList.Exists(ev => ev.ElementAddress.Offset == responseCreateNode1.CreatedNodeAddress.Offset));
+            Assert.IsTrue(eventList.Exists(ev => ev.ArcAddress.Offset == responseCreateArc.CreatedArcAddress.Offset));
+            Assert.IsTrue(eventList.Exists(ev => ev.ElementAddress.Offset == responseCreateNode2.CreatedNodeAddress.Offset));
+            Assert.IsTrue(eventList.Exists(ev => ev.ArcAddress.Offset == responseCreateArc.CreatedArcAddress.Offset));
+           
+            //delete subscription
+            var commandDeleteSubscriptionDel = new DeleteSubscriptionCommand(SubscriptionDel);
+            var responseDeleteSubscriptionDel = (DeleteSubscriptionResponse)sctpClient.Send(commandDeleteSubscriptionDel);
+
+            Assert.AreEqual(ReturnCode.Successfull, responseDeleteSubscriptionDel.Header.ReturnCode);
+            Assert.AreEqual(responseCreateSubscriptionDel.SubscriptionId.Id, responseDeleteSubscriptionDel.SubscriptionId.Id);
 
         }
         #endregion
@@ -868,16 +911,16 @@ namespace Ostis.Tests
         private void Connect()
         {
             const string defaultAddress = "127.0.0.1";
-           
-            string serverAddress= defaultAddress;
-           
-            int serverPort= SctpProtocol.DefaultPortNumber;
-            
+
+            string serverAddress = defaultAddress;
+
+            int serverPort = SctpProtocol.DefaultPortNumber;
+
             sctpClient = new SctpClient(serverAddress, serverPort);
             sctpClient.ResponseReceived += asyncHandler;
-           
-                sctpClient.Connect();
-              
+
+            sctpClient.Connect();
+
         }
 
 

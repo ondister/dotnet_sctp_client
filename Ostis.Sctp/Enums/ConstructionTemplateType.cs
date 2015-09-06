@@ -11,6 +11,6 @@
         t_5F_A_F_A_F = 5,
         t_5F_A_F_A_A = 6,
         t_5F_A_A_A_A = 7,
-        t_5A_A_F_A_A = 8,
+        t_5A_A_F_A_A = 8
     }
 }

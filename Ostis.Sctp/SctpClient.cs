@@ -122,8 +122,6 @@ namespace Ostis.Sctp
             // установка ID команды
 #warning Аналогично про приведение типов и переполнение.
             command.Id = (uint)Interlocked.Increment(ref nextCommandId);
-
-            // отправка запроса
             var bytes = command.GetBytes();
             var state = new StateObject(socket);
             state.Done.Reset();

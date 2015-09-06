@@ -3,8 +3,12 @@ namespace Ostis.Sctp
     /// <summary>
     /// Тип события.
     /// </summary>
-    public enum EventsType : byte
+    public enum EventType : sbyte
     {
+        /// <summary>
+        /// Тип события неизвестен
+        /// </summary>
+        UnKnown = -1,
         /// <summary>
         /// Добавление исходящей дуги (ребра).
         /// </summary>
@@ -28,6 +32,6 @@ namespace Ostis.Sctp
         /// <summary>
         /// Удаление sc-элемента.
         /// </summary>
-        DeleteElement = 4,
+        DeleteElement = 4
     }
 }

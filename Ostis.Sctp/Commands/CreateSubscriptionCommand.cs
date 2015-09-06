@@ -12,7 +12,7 @@ namespace Ostis.Sctp.Commands
         /// <summary>
         /// Тип события.
         /// </summary>
-        public EventsType Type
+        public EventType Type
         { get { return type; } }
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace Ostis.Sctp.Commands
         public ScAddress Address
         { get { return address; } }
 
-        private readonly EventsType type;
+        private readonly EventType type;
         private readonly ScAddress address;
 
         #endregion
@@ -31,10 +31,10 @@ namespace Ostis.Sctp.Commands
         /// </summary>
         /// <param name="type">тип события</param>
         /// <param name="address">SC-адрес</param>
-		public CreateSubscriptionCommand(EventsType type, ScAddress address)
+		public CreateSubscriptionCommand(EventType type, ScAddress address)
             : base(CommandCode.CreateSubscription)
         {
-            Arguments.Add (new EventsTypeArgument(this.type = type));
+            Arguments.Add (new EventTypeArgument(this.type = type));
 			Arguments.Add(this.address = address);
         }
     }
