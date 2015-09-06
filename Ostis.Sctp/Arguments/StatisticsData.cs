@@ -103,7 +103,7 @@ namespace Ostis.Sctp.Arguments
         {
             if (bytes.Length >= SctpProtocol.StatisticsDataLength + offset)
             {
-                time = UnixDateTime.ToDateTime(BitConverter.ToInt64(bytes, sizeof(ulong) * 0 + offset));
+                time = UnixDateTime.ToDateTime(BitConverter.ToUInt64(bytes, sizeof(ulong) * 0 + offset));
                 nodeCount = BitConverter.ToUInt64(bytes, sizeof(ulong) * 1 + offset);
                 arcCount = BitConverter.ToUInt64(bytes, sizeof(ulong) * 2 + offset);
                 linksCount = BitConverter.ToUInt64(bytes, sizeof(ulong) * 3 + offset);
