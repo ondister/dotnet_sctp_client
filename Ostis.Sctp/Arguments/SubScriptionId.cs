@@ -7,19 +7,19 @@ namespace Ostis.Sctp.Arguments
 	/// </summary>
 	public class SubscriptionId : IArgument
 	{
-		private readonly int id;
+		private readonly uint id;
 
         /// <summary>
 		/// Идентификатор.
 		/// </summary>
-		public int Id
+		public uint Id
 		{ get { return id; } }
 
 		/// <summary>
 		/// Инициализирует новый идентификатор подписки на событие.
 		/// </summary>
 		/// <param name="id">идентификатор</param>
-		public SubscriptionId(int id)
+		public SubscriptionId(uint id)
 		{
 			this.id = id;
 		}
@@ -32,7 +32,7 @@ namespace Ostis.Sctp.Arguments
         /// <returns>число</returns>
         public static SubscriptionId Parse(byte[] bytes, int offset)
 		{
-            return new SubscriptionId(bytes.Length >= SctpProtocol.SubscriptionIdLength ? BitConverter.ToInt32(bytes, sizeof(int) + offset) : 0);
+            return new SubscriptionId(bytes.Length >= SctpProtocol.SubscriptionIdLength ? BitConverter.ToUInt32(bytes,  offset) : 0);
 		}
 
         #region Реализация интерфеса IArgument
