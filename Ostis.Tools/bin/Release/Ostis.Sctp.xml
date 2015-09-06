@@ -282,7 +282,7 @@
             </summary>
             <returns>System.DateTime</returns>
         </member>
-        <member name="M:Ostis.Sctp.Arguments.UnixDateTime.ToDateTime(System.Int64)">
+        <member name="M:Ostis.Sctp.Arguments.UnixDateTime.ToDateTime(System.UInt64)">
             <summary>
             Конвертирует дату и время Unix в дату и время <see cref="T:System.DateTime"/>
             </summary>
@@ -725,7 +725,7 @@
             Идентификатор подписки на событие.
             </summary>
         </member>
-        <member name="M:Ostis.Sctp.Arguments.SubscriptionId.#ctor(System.Int32)">
+        <member name="M:Ostis.Sctp.Arguments.SubscriptionId.#ctor(System.UInt32)">
             <summary>
             Инициализирует новый идентификатор подписки на событие.
             </summary>

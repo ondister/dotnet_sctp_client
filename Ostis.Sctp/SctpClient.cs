@@ -81,57 +81,31 @@ namespace Ostis.Sctp
         /// <returns>ответ сервера</returns>
         public Response Send(Command command)
         {
-             
+
             // установка ID команды
 #warning Здесь кроется потенциальная ошибка с приведением типов и переполнением.
-            command.Id = (uint) Interlocked.Increment(ref nextCommandId);
-            
+            command.Id = (uint)Interlocked.Increment(ref nextCommandId);
+
             // отправка запроса
             var bytes = command.GetBytes();
             socket.Send(bytes, bytes.Length, 0);
             // приём ответа
-          var buffer = new byte[SctpProtocol.DefaultBufferSize];
-          using (var stream = new MemoryStream())
-          {
+            var buffer = new byte[SctpProtocol.DefaultBufferSize];
+            using (var stream = new MemoryStream())
+            {
 #warning Здесь ошибка, приводящая к обрезке данных если буфер меньше передаваемых данных при синхронной передаче
-              do
-              {
-                  int receivedBytes = socket.Receive(buffer, 0, buffer.Length, SocketFlags.None);
+                do
+                {
+                    int receivedBytes = socket.Receive(buffer, 0, buffer.Length, SocketFlags.None);
 
-                  stream.Write(buffer, 0, receivedBytes);
+                    stream.Write(buffer, 0, receivedBytes);
 #warning Костыль для ошибки
-                //  Thread.Sleep(TimeSpan.FromMilliseconds(0.6));
-              } while (socket.Available > 0);
+                    if (socket.Available > 0) { Thread.Sleep(TimeSpan.FromMilliseconds(0.6)); }
+                } while (socket.Available > 0);
 
-              //принимаем заголовок
-              //var headerBuffer = new byte[SctpProtocol.HeaderLength];
-              //int receivedBytes = socket.Receive(headerBuffer, 0, headerBuffer.Length, SocketFlags.None);
-             
-              //stream.Write(headerBuffer, 0, receivedBytes);
-              ////читаем заголовок
-              //ResponseHeader header = new ResponseHeader(headerBuffer);
-              ////принимаем остальное
-              //if (header.ReturnCode == ReturnCode.Successfull)
-              //{
-              //    var BodyBuffer = new byte[header.ReturnSize];
+                return Response.GetResponse(stream.ToArray());
+            }
 
-              //    int offset = 0; // Сдвиг для массива с получаемым файлом
-              //    int bytesCount = 0; // Количество байт прочитанных из сокета
-              //    do
-              //    {
-              //        // Читаем сколько-то байт из сокета
-              //        bytesCount = socket.Receive(BodyBuffer,BodyBuffer.Length,SocketFlags.None);
-              //        // Копируем полученные байты в конец массива с файлом
-              //        stream.Write(BodyBuffer, offset, bytesCount);
-              //        // Сдвигаем конец массива
-              //        offset += bytesCount;
-              //    }
-              //    while (offset < header.ReturnSize);
-              //}
-
-              return Response.GetResponse(stream.ToArray());
-          }
-            
         }
 
         #region Асинхронная отправка
@@ -147,7 +121,7 @@ namespace Ostis.Sctp
         {
             // установка ID команды
 #warning Аналогично про приведение типов и переполнение.
-            command.Id = (uint) Interlocked.Increment(ref nextCommandId);
+            command.Id = (uint)Interlocked.Increment(ref nextCommandId);
 
             // отправка запроса
             var bytes = command.GetBytes();
@@ -189,14 +163,14 @@ namespace Ostis.Sctp
 
         private static void sendCallback(IAsyncResult asyncResult)
         {
-            var client = (StateObject) asyncResult.AsyncState;
+            var client = (StateObject)asyncResult.AsyncState;
             client.Socket.EndSend(asyncResult);
             client.Done.Set();
         }
 
         private static void receiveCallback(IAsyncResult asyncResult)
         {
-            var state = (StateObject) asyncResult.AsyncState;
+            var state = (StateObject)asyncResult.AsyncState;
             int bytesRead = state.Socket.EndReceive(asyncResult);
             if (bytesRead > 0)
             {

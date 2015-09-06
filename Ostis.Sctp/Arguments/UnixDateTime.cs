@@ -7,7 +7,7 @@ namespace Ostis.Sctp.Arguments
     /// </summary>
     public class UnixDateTime : IArgument
     {
-        private readonly long value;
+        private readonly ulong value;
         
         /// <summary>
         /// Инициализирует новое время в формате UNIX.
@@ -15,7 +15,7 @@ namespace Ostis.Sctp.Arguments
         /// <param name="dateTime">дата и время</param>
         public UnixDateTime(DateTime dateTime)
         {
-            value = (long)(dateTime - Origin).TotalSeconds;
+            value = (ulong)(dateTime - Origin).TotalSeconds;
         }
 
        
@@ -34,7 +34,7 @@ namespace Ostis.Sctp.Arguments
         /// </summary>
         /// <param name="Seconds">Время в секундах</param>
         /// <returns></returns>
-        public static DateTime ToDateTime(long milliseconds)
+        public static DateTime ToDateTime(ulong milliseconds)
         {
             return Origin.AddSeconds(milliseconds);
         }

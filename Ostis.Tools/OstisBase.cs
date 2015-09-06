@@ -13,15 +13,15 @@ using System.Threading; // пространство имен ответов се
 
 namespace Ostis.Tools
 {
-   internal sealed class OstisBase
+    internal sealed class OstisBase
     {
-       private readonly SctpClient sctpClient;
-       public OstisBase()
-       {
-        string serverAddress=   ConfigurationManager.AppSettings["ServerIP"];
-        int serverPort = Int32.Parse( ConfigurationManager.AppSettings["ServerPort"]);
-        sctpClient = new SctpClient(serverAddress, serverPort);
-               try
+        private readonly SctpClient sctpClient;
+        public OstisBase()
+        {
+            string serverAddress = ConfigurationManager.AppSettings["ServerIP"];
+            int serverPort = Int32.Parse(ConfigurationManager.AppSettings["ServerPort"]);
+            sctpClient = new SctpClient(serverAddress, serverPort);
+            try
             {
                 sctpClient.Connect();
 
@@ -31,120 +31,128 @@ namespace Ostis.Tools
             {
                 Console.WriteLine(error.ToString());
             }
-       }
+        }
 
-       /// <summary>
-       /// Проверяет узлы в базе знаний на наличие хотя бы одного основного идентификатора. 
-       /// Как правило, при разработке баз знаний всем узлам назначают основные идентификаторы и их отсутствие позволяет выявить ошибки.
-       /// </summary>
-   public void CheckMainIdtf()
-       {
-           if (sctpClient.IsConnected)
-           {
-               //ищем адрес идентификатора узел
-               var commandFindByID = new FindElementCommand(new Identifier("nrel_system_identifier"));
-               var responseFindByID = (FindElementResponse)sctpClient.Send(commandFindByID);
-               Console.WriteLine(responseFindByID.Header.ReturnCode);
-               if (responseFindByID.Header.ReturnCode==ReturnCode.Successfull)
-               {
-                
-                   //ищем адреса всех дуг, в которые входит идентификатор
-                   var template = new ConstructionTemplate(responseFindByID.FoundAddress, ElementType.AccessArc, ElementType.CommonArc);
-                   var commandIterate = new IterateElementsCommand(template);
-                   var responseIterate = (IterateElementsResponse)sctpClient.Send(commandIterate);
-                   Console.WriteLine(responseIterate.Constructions.Count);
+        /// <summary>
+        /// Проверяет узлы в базе знаний на наличие хотя бы одного основного идентификатора. 
+        /// Как правило, при разработке баз знаний всем узлам назначают основные идентификаторы и их отсутствие позволяет выявить ошибки.
+        /// </summary>
+        public void CheckMainIdtf()
+        {
+            if (sctpClient.IsConnected)
+            {
+                //ищем адрес идентификатора узел
+                var commandFindByID = new FindElementCommand(new Identifier("nrel_system_identifier"));
+                var responseFindByID = (FindElementResponse)sctpClient.Send(commandFindByID);
+                Console.WriteLine(responseFindByID.Header.ReturnCode);
+                if (responseFindByID.Header.ReturnCode == ReturnCode.Successfull)
+                {
 
-                   foreach (var construction in responseIterate.Constructions)
-                   {
-                       //ищем узел, из которого отходит дуга
-                       var commandGetNode = new GetArcElementsCommand(construction[2]);
-                       var responseGetNode = (GetArcElementsResponse)sctpClient.Send(commandGetNode);
-                       //искомый узел будет responseGetNode.BeginElementAddress, а ссылка  responseGetNode.EndElementAddress
-                       var commandGetLinkContent = new GetLinkContentCommand(responseGetNode.EndElementAddress);
-                       var respondeGetLinkContent = (GetLinkContentResponse) sctpClient.Send(commandGetLinkContent);
-                       //теперь смотрим, есть ли у него хотя бы один основной идентификатор 
-                       //для этого смотрим адрес идентификатора
-                       var cmdFindBydId = new  FindElementCommand(new Identifier("nrel_main_idtf"));                       
-                       var rspFindById= (FindElementResponse)sctpClient.Send(cmdFindBydId);
-           
-                       //и итерируем 
-                       var itertemplate=new ConstructionTemplate(responseGetNode.BeginElementAddress,ElementType.CommonArc,ElementType.Link,ElementType.AccessArc,rspFindById.FoundAddress);
-                       var cmdIterate=new IterateElementsCommand(itertemplate);
-                       var rspIterate= (IterateElementsResponse)sctpClient.Send(cmdIterate);
-                       if (rspIterate.Constructions.Count==0)
-                       {
-                       Console.WriteLine(LinkContent.ToString(respondeGetLinkContent.LinkContent));
-                       }
-                   }
-               }
-           }
-           Console.WriteLine("Найдены все узлы, не имеющие основного идентификатора");
-       }
+                    //ищем адреса всех дуг, в которые входит идентификатор
+                    var template = new ConstructionTemplate(responseFindByID.FoundAddress, ElementType.AccessArc, ElementType.CommonArc);
+                    var commandIterate = new IterateElementsCommand(template);
+                    var responseIterate = (IterateElementsResponse)sctpClient.Send(commandIterate);
+                    Console.WriteLine(responseIterate.Constructions.Count);
 
-   /// <summary>
-   /// Позволяет искать узлы к которым нет входящих дуг.
-   /// Это позволяет искать ошибки из-за неправильного написания системных идентификаторов.
-   /// </summary>
-   public void FindUpperNodes()
-   {
-       if (sctpClient.IsConnected)
-       {
-          //ищем адрес идентификатора узел
-               var commandFindByID = new FindElementCommand(new Identifier("nrel_system_identifier"));
-               var responseFindByID = (FindElementResponse)sctpClient.Send(commandFindByID);
-               Console.WriteLine(responseFindByID.Header.ReturnCode);
-               if (responseFindByID.Header.ReturnCode == ReturnCode.Successfull)
-               {
+                    foreach (var construction in responseIterate.Constructions)
+                    {
+                        //ищем узел, из которого отходит дуга
+                        var commandGetNode = new GetArcElementsCommand(construction[2]);
+                        var responseGetNode = (GetArcElementsResponse)sctpClient.Send(commandGetNode);
+                        //искомый узел будет responseGetNode.BeginElementAddress, а ссылка  responseGetNode.EndElementAddress
+                        var commandGetLinkContent = new GetLinkContentCommand(responseGetNode.EndElementAddress);
+                        var respondeGetLinkContent = (GetLinkContentResponse)sctpClient.Send(commandGetLinkContent);
+                        //теперь смотрим, есть ли у него хотя бы один основной идентификатор 
+                        //для этого смотрим адрес идентификатора
+                        var cmdFindBydId = new FindElementCommand(new Identifier("nrel_main_idtf"));
+                        var rspFindById = (FindElementResponse)sctpClient.Send(cmdFindBydId);
 
-                   //ищем адреса всех дуг, в которые входит идентификатор
-                   var template = new ConstructionTemplate(responseFindByID.FoundAddress, ElementType.AccessArc, ElementType.CommonArc);
-                   var commandIterate = new IterateElementsCommand(template);
-                   var responseIterate = (IterateElementsResponse)sctpClient.Send(commandIterate);
-                   Console.WriteLine(responseIterate.Constructions.Count);
-                   var constr = responseIterate.Constructions;
+                        //и итерируем 
+                        var itertemplate = new ConstructionTemplate(responseGetNode.BeginElementAddress, ElementType.CommonArc, ElementType.Link, ElementType.AccessArc, rspFindById.FoundAddress);
+                        var cmdIterate = new IterateElementsCommand(itertemplate);
+                        var rspIterate = (IterateElementsResponse)sctpClient.Send(cmdIterate);
+                        if (rspIterate.Constructions.Count == 0)
+                        {
+                            Console.WriteLine(LinkContent.ToString(respondeGetLinkContent.LinkContent));
+                        }
+                    }
+                }
+            }
+            Console.WriteLine("Найдены все узлы, не имеющие основного идентификатора");
+        }
 
-                   foreach (var construction in constr)
-                   {
-                       int cnt = construction.Count;
-                       //ищем узел, из которого отходит дуга
-                       var commandGetNode = new GetArcElementsCommand(construction[2]);
-                       var responseGetNode = (GetArcElementsResponse)sctpClient.Send(commandGetNode);
-                       //искомый узел будет responseGetNode.BeginElementAddress, а ссылка  responseGetNode.EndElementAddress
-                       var commandGetLinkContent = new GetLinkContentCommand(responseGetNode.EndElementAddress);
-                       var respondeGetLinkContent = (GetLinkContentResponse)sctpClient.Send(commandGetLinkContent);
-                       //и итерируем по дугам общего вида
-                       var itertemplateComm = new ConstructionTemplate(ElementType.Node,ElementType.CommonArc,responseGetNode.BeginElementAddress);
-                       var cmdIterateComm = new IterateElementsCommand(itertemplateComm);
-                       var rspIterateComm = (IterateElementsResponse)sctpClient.Send(cmdIterateComm);
+        /// <summary>
+        /// Позволяет искать узлы к которым нет входящих дуг.
+        /// Это позволяет искать ошибки из-за неправильного написания системных идентификаторов.
+        /// </summary>
+        public void FindUpperNodes()
+        {
+            if (sctpClient.IsConnected)
+            {
+                //ищем адрес идентификатора узел
+                var commandFindByID = new FindElementCommand(new Identifier("nrel_system_identifier"));
+                var responseFindByID = (FindElementResponse)sctpClient.Send(commandFindByID);
+                Console.WriteLine(responseFindByID.Header.ReturnCode);
+                if (responseFindByID.Header.ReturnCode == ReturnCode.Successfull)
+                {
 
-                       //и итерируем по дугам принадлежности
-                       var itertemplateAcc= new ConstructionTemplate(ElementType.Node, ElementType.AccessArc, responseGetNode.BeginElementAddress);
-                       var cmdIterateAcc = new IterateElementsCommand(itertemplateAcc);
-                       var rspIterateAcc = (IterateElementsResponse)sctpClient.Send(cmdIterateAcc);
+                    //ищем адреса всех дуг, в которые входит идентификатор
+                    var template = new ConstructionTemplate(responseFindByID.FoundAddress, ElementType.AccessArc, ElementType.CommonArc);
+                    var commandIterate = new IterateElementsCommand(template);
+                    var responseIterate = (IterateElementsResponse)sctpClient.Send(commandIterate);
+                    Console.WriteLine(responseIterate.Constructions.Count);
+                    var constr = responseIterate.Constructions;
 
-                       if (rspIterateComm.Constructions.Count + rspIterateAcc.Constructions.Count == 0 )
-                       {
-                           Console.WriteLine(LinkContent.ToString(respondeGetLinkContent.LinkContent));
-                       }
-                   }
-               }
-       
-       
-       
-       }
-       Console.WriteLine("Найдены все узлы, не имеющие входящих дуг");
-   }
+                    foreach (var construction in constr)
+                    {
+                        int cnt = construction.Count;
+                        //ищем узел, из которого отходит дуга
+                        var commandGetNode = new GetArcElementsCommand(construction[2]);
+                        var responseGetNode = (GetArcElementsResponse)sctpClient.Send(commandGetNode);
+                        //искомый узел будет responseGetNode.BeginElementAddress, а ссылка  responseGetNode.EndElementAddress
+                        var commandGetLinkContent = new GetLinkContentCommand(responseGetNode.EndElementAddress);
+                        var respondeGetLinkContent = (GetLinkContentResponse)sctpClient.Send(commandGetLinkContent);
+                        //и итерируем по дугам общего вида
+                        var itertemplateComm = new ConstructionTemplate(ElementType.Node, ElementType.CommonArc, responseGetNode.BeginElementAddress);
+                        var cmdIterateComm = new IterateElementsCommand(itertemplateComm);
+                        var rspIterateComm = (IterateElementsResponse)sctpClient.Send(cmdIterateComm);
 
-   public void Test()
-   {
-       var cmd1 = new CreateSubscriptionCommand(EventsType.DeleteInArc, new ScAddress(2, 3));
-       var bytes1= cmd1.GetBytes();
-       var cmd2 = new CheckElementCommand(new ScAddress(2, 3));
-       var bytes2 = cmd2.GetBytes();
-      
-   }
+                        //и итерируем по дугам принадлежности
+                        var itertemplateAcc = new ConstructionTemplate(ElementType.Node, ElementType.AccessArc, responseGetNode.BeginElementAddress);
+                        var cmdIterateAcc = new IterateElementsCommand(itertemplateAcc);
+                        var rspIterateAcc = (IterateElementsResponse)sctpClient.Send(cmdIterateAcc);
 
-   
+                        if (rspIterateComm.Constructions.Count + rspIterateAcc.Constructions.Count == 0)
+                        {
+                            Console.WriteLine(LinkContent.ToString(respondeGetLinkContent.LinkContent));
+                        }
+                    }
+                }
 
-   }
+
+
+            }
+            Console.WriteLine("Найдены все узлы, не имеющие входящих дуг");
+        }
+
+
+
+
+        private void runAsyncTest(Command command)
+        {
+            lastAsyncResponse = null;
+            synchronizer.Reset();
+            sctpClient.SendAsync(command);
+            synchronizer.WaitOne();
+        }
+
+        private void asyncHandler(Command command, Response response)
+        {
+            lastAsyncResponse = response;
+            synchronizer.Set();
+        }
+
+        private readonly ManualResetEvent synchronizer = new ManualResetEvent(false);
+        private Response lastAsyncResponse;
+    }
 }
