@@ -5,6 +5,10 @@ namespace Ostis.Sctp.Commands
     /// <summary>
     /// Команда: Установка содержимого SC-ссылки.
     /// </summary>
+    /// <example>
+    /// Следующий пример демонстрирует использование класса <see cref="SetLinkContentCommand"/>
+    /// <code source="..\Ostis.Tests\CommandsTest.cs" region="SetLinkContent" lang="C#" />
+    /// </example>
     public class SetLinkContentCommand : Command
     {
         #region Параметры команды

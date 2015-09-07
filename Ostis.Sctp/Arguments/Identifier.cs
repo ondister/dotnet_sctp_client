@@ -6,6 +6,10 @@ namespace Ostis.Sctp.Arguments
     /// <summary>
     /// Идентификатор SC-элемента.
     /// </summary>
+    /// <example>
+    /// Следующий пример демонстрирует использование класса: <see cref="Identifier"/>
+    /// <code source="..\Ostis.Tests\ArgumentsTest.cs" region="Identifier" lang="C#" />
+    /// </example>
     public class Identifier : IArgument
     {
         /// <summary>

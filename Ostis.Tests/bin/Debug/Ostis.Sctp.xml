@@ -11,7 +11,7 @@
         </member>
         <member name="T:Ostis.Sctp.IArgument">
             <summary>
-            Аргумент команды.
+            Интерфейс аргумента команды.
             </summary>
         </member>
         <member name="M:Ostis.Sctp.IArgument.GetBytes">
@@ -54,6 +54,39 @@
         <member name="P:Ostis.Sctp.Arguments.EventTypeArgument.EventType">
             <summary>
             Тип события.
+            </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Arguments.SubscriptionId">
+            <summary>
+            Идентификатор подписки на событие.
+            </summary>
+            /// <example>
+            Следующий пример демонстрирует использование класса: <see cref="T:Ostis.Sctp.Arguments.SubscriptionId"/>
+            <code source="..\Ostis.Tests\ArgumentsTest.cs" region="SubscriptionId" lang="C#"/>
+            </example>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.SubscriptionId.#ctor(System.UInt32)">
+            <summary>
+            Инициализирует новый идентификатор подписки на событие.
+            </summary>
+            <param name="id">идентификатор</param>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.SubscriptionId.Parse(System.Byte[],System.Int32)">
+            <summary>
+            Получение числа из массива байт.
+            </summary>
+            <param name="bytes">массив байт</param>
+            <param name="offset">смещение в массиве</param>
+            <returns>число</returns>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.SubscriptionId.GetBytes">
+            <summary>
+            Получить массив байт для передачи.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.SubscriptionId.Id">
+            <summary>
+            Идентификатор.
             </summary>
         </member>
         <member name="T:Ostis.Sctp.CommandCode">
@@ -171,11 +204,7 @@
             Ещё одно зарегистрированное/неизвестное значение.
             </summary>
         </member>
-        <member name="T:Ostis.Sctp.Arguments.ConstructionTemplate">
-            <summary>
-            Шаблон поиска конструкции для команды CmdGetIterateElements.
-            </summary>
-        </member>
+        <!-- Некорректный комментарий в формате XML для члена "T:Ostis.Sctp.Arguments.ConstructionTemplate" проигнорирован -->
         <member name="M:Ostis.Sctp.Arguments.ConstructionTemplate.#ctor(Ostis.Sctp.Arguments.ScAddress,Ostis.Sctp.ElementType,Ostis.Sctp.ElementType)">
             <summary>
             Инициализирует новый шаблон конструкции типа f_a_a
@@ -267,8 +296,13 @@
         </member>
         <member name="T:Ostis.Sctp.Arguments.UnixDateTime">
             <summary>
-            Дата и время в форме Unix (http://en.wikipedia.org/wiki/Unix_time).
+            Дата и время в форме Unix.
+             Дополнительная информация о формате Unixdate <a href="https://en.wikipedia.org/wiki/Unix_time"> здесь</a>
             </summary>
+            <example>
+            Следующий пример демонстрирует использование класса: <see cref="T:Ostis.Sctp.Arguments.ConstructionTemplate"/>
+            <code source="..\Ostis.Tests\ArgumentsTest.cs" region="UnixDateTime" lang="C#"/>
+            </example>
         </member>
         <member name="M:Ostis.Sctp.Arguments.UnixDateTime.#ctor(System.DateTime)">
             <summary>
@@ -286,7 +320,7 @@
             <summary>
             Конвертирует дату и время Unix в дату и время <see cref="T:System.DateTime"/>
             </summary>
-            <param name="Seconds">Время в секундах</param>
+            <param name="seconds">Время в секундах</param>
             <returns></returns>
         </member>
         <member name="F:Ostis.Sctp.Arguments.UnixDateTime.Origin">
@@ -409,7 +443,7 @@
             Константный SC-узел.
             </summary>
         </member>
-        <member name="F:Ostis.Sctp.ElementType.PositiveConstantPermanetAccessArc">
+        <member name="F:Ostis.Sctp.ElementType.PositiveConstantPermanentAccessArc">
             <summary>
             Позитивная константная стационарная SC-дуга принадлежности.
             </summary>
@@ -454,11 +488,6 @@
             Тип события.
             </summary>
         </member>
-        <member name="F:Ostis.Sctp.EventType.UnKnown">
-            <summary>
-            Тип события неизвестен
-            </summary>
-        </member>
         <member name="F:Ostis.Sctp.EventType.AddOutArc">
             <summary>
             Добавление исходящей дуги (ребра).
@@ -488,6 +517,10 @@
             <summary>
             Идентификатор SC-элемента.
             </summary>
+            <example>
+            Следующий пример демонстрирует использование класса: <see cref="T:Ostis.Sctp.Arguments.Identifier"/>
+            <code source="..\Ostis.Tests\ArgumentsTest.cs" region="Identifier" lang="C#"/>
+            </example>
         </member>
         <member name="M:Ostis.Sctp.Arguments.Identifier.#ctor(System.String)">
             <summary>
@@ -525,6 +558,10 @@
             <summary>
             Содержимое SC-ссылки (пока поддерживаются только строки).
             </summary>
+              /// <example>
+            Следующий пример демонстрирует использование класса: <see cref="T:Ostis.Sctp.Arguments.LinkContent"/>
+            <code source="..\Ostis.Tests\ArgumentsTest.cs" region="LinkContent" lang="C#"/>
+            </example>
         </member>
         <member name="M:Ostis.Sctp.Arguments.LinkContent.#ctor(System.Byte[])">
             <summary>
@@ -575,6 +612,7 @@
         <member name="P:Ostis.Sctp.Arguments.LinkContent.ContentType">
             <summary>
             OSTIS-тип содержимого ссылки.
+            Принимает значения <see cref="T:Ostis.Sctp.LinkContentType"/>
             </summary>
         </member>
         <member name="P:Ostis.Sctp.Arguments.LinkContent.Data">
@@ -582,11 +620,7 @@
             Содержимое.
             </summary>
         </member>
-        <member name="T:Ostis.Sctp.LinkContentType">
-            <summary>
-            Тип содержимого ссылки (не используется в связи с непонятками в сервере).
-            </summary>
-        </member>
+        <!-- Некорректный комментарий в формате XML для члена "T:Ostis.Sctp.LinkContentType" проигнорирован -->
         <member name="F:Ostis.Sctp.LinkContentType.Unknown">
             <summary>
             Тип неизвестен или не указан.
@@ -611,6 +645,10 @@
             <summary>
             Адрес SC-элемента в памяти.
             </summary>
+            /// <example>
+            Следующий пример демонстрирует использование класса: <see cref="T:Ostis.Sctp.Arguments.ScAddress"/>
+            <code source="..\Ostis.Tests\ArgumentsTest.cs" region="ScAddress" lang="C#"/>
+            </example>
         </member>
         <member name="M:Ostis.Sctp.Arguments.ScAddress.#ctor(System.UInt16,System.UInt16)">
             <summary>
@@ -655,6 +693,10 @@
             <summary>
             Статистика сервера для временной метки.
             </summary>
+            /// <example>
+            Следующий пример демонстрирует использование класса: <see cref="T:Ostis.Sctp.Arguments.StatisticsData"/>
+            <code source="..\Ostis.Tests\CommandsTest.cs" region="GetStatistics" lang="C#"/>
+            </example>
         </member>
         <member name="M:Ostis.Sctp.Arguments.StatisticsData.#ctor(System.Byte[],System.Int32)">
             <summary>
@@ -725,35 +767,6 @@
             Если значение равно <b>false</b>, то статистика собрана уже во время работы сервера.
             </summary>
         </member>
-        <member name="T:Ostis.Sctp.Arguments.SubscriptionId">
-            <summary>
-            Идентификатор подписки на событие.
-            </summary>
-        </member>
-        <member name="M:Ostis.Sctp.Arguments.SubscriptionId.#ctor(System.UInt32)">
-            <summary>
-            Инициализирует новый идентификатор подписки на событие.
-            </summary>
-            <param name="id">идентификатор</param>
-        </member>
-        <member name="M:Ostis.Sctp.Arguments.SubscriptionId.Parse(System.Byte[],System.Int32)">
-            <summary>
-            Получение числа из массива байт.
-            </summary>
-            <param name="bytes">массив байт</param>
-            <param name="offset">смещение в массиве</param>
-            <returns>число</returns>
-        </member>
-        <member name="M:Ostis.Sctp.Arguments.SubscriptionId.GetBytes">
-            <summary>
-            Получить массив байт для передачи.
-            </summary>
-        </member>
-        <member name="P:Ostis.Sctp.Arguments.SubscriptionId.Id">
-            <summary>
-            Идентификатор.
-            </summary>
-        </member>
         <member name="T:Ostis.Sctp.ReturnCode">
             <summary>
             Код выполнения команды.
@@ -783,10 +796,14 @@
             <summary>
             Команда: Проверка существования элемента с указанным SC-адресом.
             </summary>
+            <example>
+            Следующий пример демонстрирует использование класса: <see cref="T:Ostis.Sctp.Commands.CheckElementCommand"/>
+            <code source="..\Ostis.Tests\CommandsTest.cs" region="CheckElement" lang="C#"/>
+            </example>
         </member>
         <member name="T:Ostis.Sctp.Command">
             <summary>
-            Команда.
+            Абстрактный класс команды
             </summary>
         </member>
         <member name="M:Ostis.Sctp.Command.#ctor(Ostis.Sctp.CommandCode)">
@@ -835,6 +852,10 @@
             <summary>
             Команда: Создание новой SC-дуги указанного типа, с указнным начальным и конечным элементами.
             </summary>
+            <example>
+            Следующий пример демонстрирует использование класса <see cref="T:Ostis.Sctp.Commands.CreateArcCommand"/>
+            <code source="..\Ostis.Tests\CommandsTest.cs" region="CreateArc" lang="C#"/>
+            </example>
         </member>
         <member name="M:Ostis.Sctp.Commands.CreateArcCommand.#ctor(Ostis.Sctp.ElementType,Ostis.Sctp.Arguments.ScAddress,Ostis.Sctp.Arguments.ScAddress)">
             <summary>
@@ -868,11 +889,19 @@
             <summary>
             Инициализирует новую команду.
             </summary>
+            <example>
+            Следующий пример демонстрирует использование класса <see cref="T:Ostis.Sctp.Commands.CreateLinkCommand"/>
+            <code source="..\Ostis.Tests\CommandsTest.cs" region="CreateLink" lang="C#"/>
+            </example>
         </member>
         <member name="T:Ostis.Sctp.Commands.CreateNodeCommand">
             <summary>
             Команда: Создание нового SC-узла указанного типа.
             </summary>
+            <example>
+            Следующий пример демонстрирует использование класса <see cref="T:Ostis.Sctp.Commands.CreateNodeCommand"/>
+            <code source="..\Ostis.Tests\CommandsTest.cs" region="CreateNode" lang="C#"/>
+            </example>
         </member>
         <member name="M:Ostis.Sctp.Commands.CreateNodeCommand.#ctor(Ostis.Sctp.ElementType)">
             <summary>
@@ -889,6 +918,10 @@
             <summary>
             Команда: Создание подписки на события.
             </summary>
+            <example>
+            Следующий пример демонстрирует использование класса <see cref="T:Ostis.Sctp.Commands.CreateSubscriptionCommand"/>
+            <code source="..\Ostis.Tests\CommandsTest.cs" region="SubScriptions" lang="C#"/>
+            </example>
         </member>
         <member name="M:Ostis.Sctp.Commands.CreateSubscriptionCommand.#ctor(Ostis.Sctp.EventType,Ostis.Sctp.Arguments.ScAddress)">
             <summary>
@@ -911,6 +944,10 @@
             <summary>
             Команда: Удаление SC-элемента с указанным SC-адресом.
             </summary>
+            <example>
+            Следующий пример демонстрирует использование класса <see cref="T:Ostis.Sctp.Commands.DeleteElementCommand"/>
+            <code source="..\Ostis.Tests\CommandsTest.cs" region="DeleteNode" lang="C#"/>
+            </example>
         </member>
         <member name="M:Ostis.Sctp.Commands.DeleteElementCommand.#ctor(Ostis.Sctp.Arguments.ScAddress)">
             <summary>
@@ -927,6 +964,10 @@
             <summary>
             Команда: Удаление подписки на события.
             </summary>
+            <example>
+            Следующий пример демонстрирует использование класса <see cref="T:Ostis.Sctp.Commands.DeleteSubscriptionCommand"/>
+            <code source="..\Ostis.Tests\CommandsTest.cs" region="SubScriptions" lang="C#"/>
+            </example>
         </member>
         <member name="M:Ostis.Sctp.Commands.DeleteSubscriptionCommand.#ctor(Ostis.Sctp.Arguments.SubscriptionId)">
             <summary>
@@ -943,6 +984,10 @@
             <summary>
             Команда: Поиск SC-элемента по его системному идентификатору.
             </summary>
+            <example>
+            Следующий пример демонстрирует использование класса <see cref="T:Ostis.Sctp.Commands.FindElementCommand"/>
+            <code source="..\Ostis.Tests\CommandsTest.cs" region="FindElement" lang="C#"/>
+            </example>
         </member>
         <member name="M:Ostis.Sctp.Commands.FindElementCommand.#ctor(Ostis.Sctp.Arguments.Identifier)">
             <summary>
@@ -959,6 +1004,10 @@
             <summary>
             Команда: Поиск всех SC-ссылок с указанным содержимым.
             </summary>
+            <example>
+            Следующий пример демонстрирует использование класса <see cref="T:Ostis.Sctp.Commands.FindLinksCommand"/>
+            <code source="..\Ostis.Tests\CommandsTest.cs" region="FindLinks" lang="C#"/>
+            </example>
         </member>
         <member name="M:Ostis.Sctp.Commands.FindLinksCommand.#ctor(Ostis.Sctp.Arguments.LinkContent)">
             <summary>
@@ -975,6 +1024,10 @@
             <summary>
             Команда: Получение начального элемента SC-дуги.
             </summary>
+            <example>
+            Следующий пример демонстрирует использование класса <see cref="T:Ostis.Sctp.Commands.GetArcElementsCommand"/>
+            <code source="..\Ostis.Tests\CommandsTest.cs" region="GetArcElements" lang="C#"/>
+            </example>
         </member>
         <member name="M:Ostis.Sctp.Commands.GetArcElementsCommand.#ctor(Ostis.Sctp.Arguments.ScAddress)">
             <summary>
@@ -991,6 +1044,10 @@
             <summary>
             Команда: Получение типа SC-элемента по SC-адресу.
             </summary>
+            <example>
+            Следующий пример демонстрирует использование класса <see cref="T:Ostis.Sctp.Commands.GetElementTypeCommand"/>
+            <code source="..\Ostis.Tests\CommandsTest.cs" region="GetElementType" lang="C#"/>
+            </example>
         </member>
         <member name="M:Ostis.Sctp.Commands.GetElementTypeCommand.#ctor(Ostis.Sctp.Arguments.ScAddress)">
             <summary>
@@ -1007,6 +1064,10 @@
             <summary>
             Команда: Получение содержимого SC-ссылки.
             </summary>
+            <example>
+            Следующий пример демонстрирует использование класса <see cref="T:Ostis.Sctp.Commands.GetLinkContentCommand"/>
+            <code source="..\Ostis.Tests\CommandsTest.cs" region="GetLinkContent" lang="C#"/>
+            </example>
         </member>
         <member name="M:Ostis.Sctp.Commands.GetLinkContentCommand.#ctor(Ostis.Sctp.Arguments.ScAddress)">
             <summary>
@@ -1021,8 +1082,13 @@
         </member>
         <member name="T:Ostis.Sctp.Commands.GetProtocolVersionCommand">
             <summary>
-            Команда: Получение версии протокола.
+            Команда: Получение версии протокола. <b>Команда не реализована на сервере, но заявлена в документации!!!</b>
             </summary>
+            <remarks> <b>Команда не реализована на сервере, но заявлена в документации</b></remarks>
+            <example>
+            Следующий пример демонстрирует использование класса <see cref="T:Ostis.Sctp.Commands.GetProtocolVersionCommand"/>
+            <code source="..\Ostis.Tests\CommandsTest.cs" region="GetProtocolVersion" lang="C#"/>
+            </example>
         </member>
         <member name="M:Ostis.Sctp.Commands.GetProtocolVersionCommand.#ctor">
             <summary>
@@ -1033,6 +1099,11 @@
             <summary>
             Команда: Получение статистики с сервера, во временных границах.
             </summary>
+            <remarks>Не существует подтвержденной информации правильности реализации на сервере, ибо не существует теста в других реализация клиента на других языках</remarks>
+            <example>
+            Следующий пример демонстрирует использование класса <see cref="T:Ostis.Sctp.Commands.GetStatisticsCommand"/>
+            <code source="..\Ostis.Tests\CommandsTest.cs" region="GetStatistics" lang="C#"/>
+            </example>
         </member>
         <member name="M:Ostis.Sctp.Commands.GetStatisticsCommand.#ctor(Ostis.Sctp.Arguments.UnixDateTime,Ostis.Sctp.Arguments.UnixDateTime)">
             <summary>
@@ -1052,9 +1123,10 @@
             </summary>
         </member>
         <member name="T:Ostis.Sctp.Commands.IterateElementsCommand">
-            <summary>
-            Команда: Поиск конструкции по указанному 3-х или 5-ти элементному шаблону.
-            </summary>
+            <example>
+            Следующий пример демонстрирует использование класса <see cref="T:Ostis.Sctp.Commands.IterateElementsCommand"/>
+            <code source="..\Ostis.Tests\CommandsTest.cs" region="IterateElements" lang="C#"/>
+            </example>
         </member>
         <member name="M:Ostis.Sctp.Commands.IterateElementsCommand.#ctor(Ostis.Sctp.Arguments.ConstructionTemplate)">
             <summary>
@@ -1071,6 +1143,10 @@
             <summary>
             Команда: Установка содержимого SC-ссылки.
             </summary>
+            <example>
+            Следующий пример демонстрирует использование класса <see cref="T:Ostis.Sctp.Commands.SetLinkContentCommand"/>
+            <code source="..\Ostis.Tests\CommandsTest.cs" region="SetLinkContent" lang="C#"/>
+            </example>
         </member>
         <member name="M:Ostis.Sctp.Commands.SetLinkContentCommand.#ctor(Ostis.Sctp.Arguments.ScAddress,Ostis.Sctp.Arguments.LinkContent)">
             <summary>
@@ -1093,6 +1169,10 @@
             <summary>
             Команда: Установка системного идентификатора SC-элемента.
             </summary>
+            <example>
+            Следующий пример демонстрирует использование класса <see cref="T:Ostis.Sctp.Commands.SetSystemIdCommand"/>
+            <code source="..\Ostis.Tests\CommandsTest.cs" region="SetSystemID" lang="C#"/>
+            </example>
         </member>
         <member name="M:Ostis.Sctp.Commands.SetSystemIdCommand.#ctor(Ostis.Sctp.Arguments.ScAddress,Ostis.Sctp.Arguments.Identifier)">
             <summary>
@@ -1118,7 +1198,7 @@
         </member>
         <member name="T:Ostis.Sctp.Response">
             <summary>
-            Базовый класс ответа.
+            Абстрактный класс ответа сервера.
             </summary>
         </member>
         <member name="M:Ostis.Sctp.Response.#ctor(System.Byte[])">
@@ -1471,9 +1551,23 @@
             </summary>
         </member>
         <member name="T:Ostis.Sctp.SctpClient">
-            <summary>
-            OSTIS-клиент, работающий по протоколу SCTP.
-            </summary>
+             <summary>
+             OSTIS-клиент, работающий по протоколу SCTP.
+             </summary>
+             <remarks>
+             Клиент реализован по описанию, которое взято <a href="https://github.com/deniskoronchik/sc-machine/wiki/sctp"> в вики репозитория sc-memory</a>
+            <para>
+            Клиент работает как в синхронном, так и в асинхронном режиме. Несмотря на то, что сервер работает только в синхронном режиме, рекомендуется использовать асинхронный клиент. Он тупо быстрее в реальных приложениях из-за отсутствия блокировки при ожидании ответа от сервера.
+            </para>
+             <example>
+             Следующий пример демонстрирует использование класса для подключения к серверу:
+             <code source="..\Ostis.Tests\CommandsTest.cs" region="Connect" lang="C#" />
+             </example>
+             <example>
+             Следующий пример содержит необходимую часть кода, если планируется использовать асинхронный клиент
+             <code source="..\Ostis.Tests\CommandsTest.cs" region="AsyncHandlers" lang="C#" />
+             </example>
+             </remarks>
         </member>
         <member name="M:Ostis.Sctp.SctpClient.#ctor(System.String,System.Int32)">
             <summary>
@@ -1581,7 +1675,13 @@
             <summary>
             Команда: Запрос всех произошедших событий.
             </summary>
-             /// <remarks>Стоит заметить, что команда может не вернуть события, произошедшие за 1 секунду до ее вызова. Поэтому, делайте таймаут перед вызовом этой команды в 1 секунду.</remarks>
+            <remarks>
+            <b>Стоит заметить, что команда может не вернуть события, произошедшие за 1 секунду до ее вызова. Поэтому, делайте таймаут перед вызовом этой команды в 1 секунду.</b>
+            </remarks>
+            <example>
+            Следующий пример демонстрирует использование класса <see cref="T:Ostis.Sctp.Commands.EmitEventsCommand"/>
+            <code source="..\Ostis.Tests\CommandsTest.cs" region="SubScriptions" lang="C#"/>
+            </example>
         </member>
         <member name="M:Ostis.Sctp.Commands.EmitEventsCommand.#ctor">
             <summary>
@@ -1593,6 +1693,10 @@
             <summary>
             Событие в SC-памяти.
             </summary>
+            /// <example>
+            Следующий пример демонстрирует использование класса: <see cref="T:Ostis.Sctp.Arguments.ScEvent"/>
+            <code source="..\Ostis.Tests\ArgumentsTest.cs" region="ScEvent" lang="C#"/>
+            </example>
         </member>
         <member name="M:Ostis.Sctp.Arguments.ScEvent.#ctor(Ostis.Sctp.Arguments.SubscriptionId,Ostis.Sctp.Arguments.ScAddress,Ostis.Sctp.Arguments.ScAddress)">
             <summary>
@@ -1615,7 +1719,7 @@
             Получить массив байт для передачи.
             </summary>
         </member>
-        <member name="P:Ostis.Sctp.Arguments.ScEvent.Id">
+        <member name="P:Ostis.Sctp.Arguments.ScEvent.SubscriptionId">
             <summary>
             ID подписки.
             </summary>

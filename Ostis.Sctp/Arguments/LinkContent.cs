@@ -6,10 +6,15 @@ namespace Ostis.Sctp.Arguments
     /// <summary>
     /// Содержимое SC-ссылки (пока поддерживаются только строки).
     /// </summary>
+    ///   /// <example>
+    /// Следующий пример демонстрирует использование класса: <see cref="LinkContent"/>
+    /// <code source="..\Ostis.Tests\ArgumentsTest.cs" region="LinkContent" lang="C#" />
+    /// </example>
     public class LinkContent : IArgument
     {
         /// <summary>
         /// OSTIS-тип содержимого ссылки.
+        /// Принимает значения <see cref="T:Ostis.Sctp.LinkContentType"/>
         /// </summary>
         public LinkContentType ContentType
         { get { return contentType; } }

@@ -1,10 +1,15 @@
 ﻿using Ostis.Sctp.Arguments;
 
+
 namespace Ostis.Sctp.Commands
 {
     /// <summary>
     /// Команда: Проверка существования элемента с указанным SC-адресом.
     /// </summary>
+    /// <example>
+    /// Следующий пример демонстрирует использование класса: <see cref="CheckElementCommand"/>
+    /// <code source="..\Ostis.Tests\CommandsTest.cs" region="CheckElement" lang="C#" />
+    /// </example>
     public class CheckElementCommand : Command
     {
         #region Параметры команды

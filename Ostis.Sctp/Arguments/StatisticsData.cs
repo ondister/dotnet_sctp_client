@@ -5,6 +5,10 @@ namespace Ostis.Sctp.Arguments
     /// <summary>
     /// Статистика сервера для временной метки.
     /// </summary>
+    /// /// <example>
+    /// Следующий пример демонстрирует использование класса: <see cref="StatisticsData"/>
+    /// <code source="..\Ostis.Tests\CommandsTest.cs" region="GetStatistics" lang="C#" />
+    /// </example>
    public class StatisticsData
     {
         private readonly DateTime time;

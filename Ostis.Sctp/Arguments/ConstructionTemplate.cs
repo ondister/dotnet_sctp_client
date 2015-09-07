@@ -1,12 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
+
 namespace Ostis.Sctp.Arguments
 {
     /// <summary>
-    /// Шаблон поиска конструкции для команды CmdGetIterateElements.
+    /// Шаблон поиска конструкции для команды <see cref="T:Ostis.Sctp.Commands.IterateElementsCommand"/>
     /// </summary>
-  
+    /// <remarks>
+    /// <para><b>Стоит запомнить, что a(assign) обозначает неизвестный элемент, для которого известен только тип  <see cref="ElementType"/>, а f(fixed)  <see cref="ScAddress"/> изввестного элемента </b></para>
+    /// </remarks>
+    /// <example>
+    /// Следующий пример демонстрирует использование класса: <see cref="ConstructionTemplate"/>
+    /// <code source="..\Ostis.Tests\ArgumentsTest.cs" region="ConstructionTemplate" lang="C#" />
+    /// </example>
+
+   
+   
     public class ConstructionTemplate : IArgument
     {
         private readonly List<IArgument> arguments;
@@ -26,6 +36,11 @@ namespace Ostis.Sctp.Arguments
         /// <summary>
         /// Инициализирует новый шаблон конструкции типа f_a_a
         /// </summary>
+        /// <remarks>
+        /// <para>На рисунке показаны порядок перечисления и обозначения элементов шаблона</para>
+        /// <para><b>scg код шаблона выглядит так:</b></para>
+        /// <img src="media/template_3_faa.png" />
+        /// </remarks>
         /// <param name="f">адрес начального sc-элемента</param>
         /// <param name="a1">тип исходящей дуги</param>
         /// <param name="a2">тип конечного sc-элемента (дуги или узла)</param>
@@ -43,6 +58,11 @@ namespace Ostis.Sctp.Arguments
         /// <param name="a1">тип начального sc-элемента</param>
         /// <param name="a2">тип входящей дуги</param>
         /// <param name="f">адрес конечного sc-элемента</param>
+        /// <remarks>
+        /// <para>На рисунке показаны порядок перечисления и обозначения элементов шаблона</para>
+        /// <para><b>scg код шаблона выглядит так:</b></para>
+        /// <img src="media/template_3_aaf.png" />
+        /// </remarks>
         public ConstructionTemplate(ElementType a1, ElementType a2, ScAddress f)
             : this(ConstructionTemplateType.t_3A_A_F)
         {
@@ -57,6 +77,11 @@ namespace Ostis.Sctp.Arguments
         /// <param name="f1">адрес начального sc-элемента</param>
         /// <param name="a1">тип искомой дуги</param>
         /// <param name="f2">адрес конечного sc-элемента</param>
+        /// <remarks>
+        /// <para>На рисунке показаны порядок перечисления и обозначения элементов шаблона</para>
+        /// <para><b>scg код шаблона выглядит так:</b></para>
+        /// <img src="media/template_3_faf.png" />
+        /// </remarks>
         public ConstructionTemplate(ScAddress f1, ElementType a1, ScAddress f2)
             : this(ConstructionTemplateType.t_3F_A_F)
         {
@@ -73,6 +98,11 @@ namespace Ostis.Sctp.Arguments
         /// <param name="f">адрес третьего sc-элемента</param>
         /// <param name="a3">тип четвертого sc-элемента конструкции</param>
         /// <param name="a4">тип пятого sc-элемента конструкции</param>
+        /// <remarks>
+        /// <para>На рисунке показаны порядок перечисления и обозначения элементов шаблона</para>
+        /// <para><b>scg код шаблона выглядит так:</b></para>
+        /// <img src="media/template_5_aafaa.png" />
+        /// </remarks>
         public ConstructionTemplate(ElementType a1, ElementType a2, ScAddress f, ElementType a3, ElementType a4)
             : this(ConstructionTemplateType.t_5A_A_F_A_A)
         {
@@ -91,6 +121,11 @@ namespace Ostis.Sctp.Arguments
         /// <param name="f1">адрес третьего sc-элемента</param>
         /// <param name="a3">тип четвертого sc-элемента конструкции</param>
         /// <param name="f2">адрес пятого sc-элемента</param>
+        /// <remarks>
+        /// <para>На рисунке показаны порядок перечисления и обозначения элементов шаблона</para>
+        /// <para><b>scg код шаблона выглядит так:</b></para>
+        /// <img src="media/template_5_aafaf.png" />
+        /// </remarks>
         public ConstructionTemplate(ElementType a1, ElementType a2, ScAddress f1, ElementType a3, ScAddress f2)
             : this(ConstructionTemplateType.t_5A_A_F_A_F)
         {
@@ -109,6 +144,11 @@ namespace Ostis.Sctp.Arguments
         /// <param name="a2">тип третьего sc-элемента конструкции</param>
         /// <param name="a3">тип четвертого sc-элемента конструкции</param>
         /// <param name="a4">тип пятого sc-элемента конструкции</param>
+        /// <remarks>
+        /// <para>На рисунке показаны порядок перечисления и обозначения элементов шаблона</para>
+        /// <para><b>scg код шаблона выглядит так:</b></para>
+        /// <img src="media/template_5_faaaa.png" />
+        /// </remarks>
         public ConstructionTemplate(ScAddress f, ElementType a1, ElementType a2, ElementType a3, ElementType a4)
             : this(ConstructionTemplateType.t_5F_A_A_A_A)
         {
@@ -127,6 +167,11 @@ namespace Ostis.Sctp.Arguments
         /// <param name="a2">тип третьего sc-элемента конструкции</param>
         /// <param name="a3">тип четвертого sc-элемента конструкции</param>
         /// <param name="f2">адрес пятого sc-элемента</param>
+        /// <remarks>
+        /// <para>На рисунке показаны порядок перечисления и обозначения элементов шаблона</para>
+        /// <para><b>scg код шаблона выглядит так:</b></para>
+        /// <img src="media/template_5_faaaf.png" />
+        /// </remarks>
         public ConstructionTemplate(ScAddress f1, ElementType a1, ElementType a2, ElementType a3, ScAddress f2)
             : this(ConstructionTemplateType.t_5F_A_A_A_F)
         {
@@ -145,6 +190,11 @@ namespace Ostis.Sctp.Arguments
         /// <param name="f2">адрес третьего sc-элемента</param>
         /// <param name="a2">тип четвертого sc-элемента конструкции</param>
         /// <param name="a3">тип пятого sc-элемента конструкции</param>
+        /// <remarks>
+        /// <para>На рисунке показаны порядок перечисления и обозначения элементов шаблона</para>
+        /// <para><b>scg код шаблона выглядит так:</b></para>
+        /// <img src="media/template_5_fafaa.png" />
+        /// </remarks>
         public ConstructionTemplate(ScAddress f1, ElementType a1, ScAddress f2, ElementType a2, ElementType a3)
             : this(ConstructionTemplateType.t_5F_A_F_A_A)
         {
@@ -163,6 +213,11 @@ namespace Ostis.Sctp.Arguments
         /// <param name="f2">адрес третьего sc-элемента</param>
         /// <param name="a2">тип четвертого sc-элемента конструкции</param>
         /// <param name="f3">адрес пятого sc-элемента</param>
+        /// <remarks>
+        /// <para>На рисунке показаны порядок перечисления и обозначения элементов шаблона</para>
+        /// <para><b>scg код шаблона выглядит так:</b></para>
+        /// <img src="media/template_5_fafaf.png" />
+        /// </remarks>
         public ConstructionTemplate(ScAddress f1, ElementType a1, ScAddress f2, ElementType a2, ScAddress f3)
             : this(ConstructionTemplateType.t_5F_A_F_A_F)
         {

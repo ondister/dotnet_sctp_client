@@ -5,7 +5,7 @@ namespace Ostis.Sctp.Arguments
     /// <summary>
     /// Аргумент типа элемента.
     /// </summary>
-    public class ElementTypeArgument : IArgument
+    internal class ElementTypeArgument : IArgument
     {
         private ElementType elementType;
 

@@ -5,6 +5,10 @@ namespace Ostis.Sctp.Commands
     /// <summary>
     /// Команда: Получение типа SC-элемента по SC-адресу.
     /// </summary>
+    /// <example>
+    /// Следующий пример демонстрирует использование класса <see cref="GetElementTypeCommand"/>
+    /// <code source="..\Ostis.Tests\CommandsTest.cs" region="GetElementType" lang="C#" />
+    /// </example>
     public class GetElementTypeCommand : Command
     {
         #region Параметры команды

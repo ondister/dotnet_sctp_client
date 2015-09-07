@@ -5,6 +5,10 @@ namespace Ostis.Sctp.Commands
     /// <summary>
     /// Команда: Получение начального элемента SC-дуги.
     /// </summary>
+    /// <example>
+    /// Следующий пример демонстрирует использование класса <see cref="GetArcElementsCommand"/>
+    /// <code source="..\Ostis.Tests\CommandsTest.cs" region="GetArcElements" lang="C#" />
+    /// </example>
     public class GetArcElementsCommand : Command
     {
         #region Параметры команды

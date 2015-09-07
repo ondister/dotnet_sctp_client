@@ -5,6 +5,10 @@ namespace Ostis.Sctp.Commands
     /// <summary>
     /// Команда: Получение содержимого SC-ссылки.
     /// </summary>
+    /// <example>
+    /// Следующий пример демонстрирует использование класса <see cref="GetLinkContentCommand"/>
+    /// <code source="..\Ostis.Tests\CommandsTest.cs" region="GetLinkContent" lang="C#" />
+    /// </example>
     public class GetLinkContentCommand : Command
     {
         #region Параметры команды

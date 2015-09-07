@@ -5,6 +5,10 @@ namespace Ostis.Sctp.Commands
     /// <summary>
     /// Команда: Поиск всех SC-ссылок с указанным содержимым.
     /// </summary>
+    /// <example>
+    /// Следующий пример демонстрирует использование класса <see cref="FindLinksCommand"/>
+    /// <code source="..\Ostis.Tests\CommandsTest.cs" region="FindLinks" lang="C#" />
+    /// </example>
     public class FindLinksCommand : Command
     {
         #region Параметры команды

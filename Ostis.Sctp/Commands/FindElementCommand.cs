@@ -5,6 +5,10 @@ namespace Ostis.Sctp.Commands
     /// <summary>
     /// Команда: Поиск SC-элемента по его системному идентификатору.
     /// </summary>
+    /// <example>
+    /// Следующий пример демонстрирует использование класса <see cref="FindElementCommand"/>
+    /// <code source="..\Ostis.Tests\CommandsTest.cs" region="FindElement" lang="C#" />
+    /// </example>
     public class FindElementCommand : Command
     {
         #region Параметры команды

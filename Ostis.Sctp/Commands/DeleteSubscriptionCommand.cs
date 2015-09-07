@@ -5,6 +5,10 @@ namespace Ostis.Sctp.Commands
     /// <summary>
     /// Команда: Удаление подписки на события.
     /// </summary>
+    /// <example>
+    /// Следующий пример демонстрирует использование класса <see cref="DeleteSubscriptionCommand"/>
+    /// <code source="..\Ostis.Tests\CommandsTest.cs" region="SubScriptions" lang="C#" />
+    /// </example>
     public class DeleteSubscriptionCommand : Command
     {
         #region Параметры команды

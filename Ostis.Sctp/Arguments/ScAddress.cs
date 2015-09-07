@@ -5,6 +5,10 @@ namespace Ostis.Sctp.Arguments
     /// <summary>
     /// Адрес SC-элемента в памяти.
     /// </summary>
+    /// /// <example>
+    /// Следующий пример демонстрирует использование класса: <see cref="ScAddress"/>
+    /// <code source="..\Ostis.Tests\ArgumentsTest.cs" region="ScAddress" lang="C#" />
+    /// </example>
     public class ScAddress : IArgument
     {
         /// <summary>

@@ -3,8 +3,13 @@
 namespace Ostis.Sctp.Arguments
 {
     /// <summary>
-    /// Дата и время в форме Unix (http://en.wikipedia.org/wiki/Unix_time).
+    /// Дата и время в форме Unix.
+    ///  Дополнительная информация о формате Unixdate <a href="https://en.wikipedia.org/wiki/Unix_time"> здесь</a>
     /// </summary>
+    /// <example>
+    /// Следующий пример демонстрирует использование класса: <see cref="ConstructionTemplate"/>
+    /// <code source="..\Ostis.Tests\ArgumentsTest.cs" region="UnixDateTime" lang="C#" />
+    /// </example>
     public class UnixDateTime : IArgument
     {
         private readonly ulong value;
@@ -32,11 +37,11 @@ namespace Ostis.Sctp.Arguments
         /// <summary>
         /// Конвертирует дату и время Unix в дату и время <see cref="System.DateTime"/>
         /// </summary>
-        /// <param name="Seconds">Время в секундах</param>
+        /// <param name="seconds">Время в секундах</param>
         /// <returns></returns>
-        public static DateTime ToDateTime(ulong milliseconds)
+        public static DateTime ToDateTime(ulong seconds)
         {
-            return Origin.AddSeconds(milliseconds);
+            return Origin.AddSeconds(seconds);
         }
 
         public static UnixDateTime FromDateTime(DateTime dateTime)

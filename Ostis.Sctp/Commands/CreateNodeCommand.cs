@@ -5,6 +5,10 @@ namespace Ostis.Sctp.Commands
     /// <summary>
     /// Команда: Создание нового SC-узла указанного типа.
     /// </summary>
+    /// <example>
+    /// Следующий пример демонстрирует использование класса <see cref="CreateNodeCommand"/>
+    /// <code source="..\Ostis.Tests\CommandsTest.cs" region="CreateNode" lang="C#" />
+    /// </example>
     public class CreateNodeCommand : Command
     {
         #region Параметры команды

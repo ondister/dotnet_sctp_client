@@ -8,6 +8,10 @@
         /// <summary>
         /// Инициализирует новую команду.
         /// </summary>
+        /// <example>
+        /// Следующий пример демонстрирует использование класса <see cref="CreateLinkCommand"/>
+        /// <code source="..\Ostis.Tests\CommandsTest.cs" region="CreateLink" lang="C#" />
+        /// </example>
         public CreateLinkCommand()
             : base(CommandCode.CreateLink)
         { }

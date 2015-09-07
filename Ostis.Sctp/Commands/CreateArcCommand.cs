@@ -5,6 +5,10 @@ namespace Ostis.Sctp.Commands
     /// <summary>
     /// Команда: Создание новой SC-дуги указанного типа, с указнным начальным и конечным элементами.
     /// </summary>
+    /// <example>
+    /// Следующий пример демонстрирует использование класса <see cref="CreateArcCommand"/>
+    /// <code source="..\Ostis.Tests\CommandsTest.cs" region="CreateArc" lang="C#" />
+    /// </example>
     public class CreateArcCommand : Command
     {
         #region Параметры команды

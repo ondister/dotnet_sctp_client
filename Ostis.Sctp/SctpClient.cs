@@ -11,6 +11,21 @@ namespace Ostis.Sctp
     /// <summary>
     /// OSTIS-клиент, работающий по протоколу SCTP.
     /// </summary>
+    /// <remarks>
+    /// Клиент реализован по описанию, которое взято <a href="https://github.com/deniskoronchik/sc-machine/wiki/sctp"> в вики репозитория sc-memory</a>
+    ///<para>
+    ///Клиент работает как в синхронном, так и в асинхронном режиме. Несмотря на то, что сервер работает только в синхронном режиме, рекомендуется использовать асинхронный клиент. Он тупо быстрее в реальных приложениях из-за отсутствия блокировки при ожидании ответа от сервера.
+    ///</para>
+    /// <example>
+    /// Следующий пример демонстрирует использование класса для подключения к серверу:
+    /// <code source="..\Ostis.Tests\CommandsTest.cs" region="Connect" lang="C#" />
+    /// </example>
+    /// <example>
+    /// Следующий пример содержит необходимую часть кода, если планируется использовать асинхронный клиент
+    /// <code source="..\Ostis.Tests\CommandsTest.cs" region="AsyncHandlers" lang="C#" />
+    /// </example>
+    /// </remarks>
+
     public class SctpClient : IDisposable
     {
         #region Свойства

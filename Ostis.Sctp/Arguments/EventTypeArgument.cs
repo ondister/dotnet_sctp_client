@@ -5,7 +5,7 @@ namespace Ostis.Sctp.Arguments
     /// <summary>
     /// Аргумент типа события.
     /// </summary>
-    public class EventTypeArgument : IArgument
+    internal class EventTypeArgument : IArgument
     {
         private EventType eventType;
 

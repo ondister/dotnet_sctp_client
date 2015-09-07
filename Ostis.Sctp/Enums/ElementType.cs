@@ -116,7 +116,7 @@ namespace Ostis.Sctp
         /// <summary>
         /// Позитивная константная стационарная SC-дуга принадлежности.
         /// </summary>
-        PositiveConstantPermanetAccessArc = (AccessArc | Constant | PositiveArc | PermanetArc),
+        PositiveConstantPermanentAccessArc = (AccessArc | Constant | PositiveArc | PermanetArc),
 
         /// <summary>
         /// Позитивная константная стационарная SC-дуга общего вида.

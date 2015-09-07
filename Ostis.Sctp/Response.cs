@@ -6,7 +6,7 @@ using Ostis.Sctp.Responses;
 namespace Ostis.Sctp
 {
     /// <summary>
-    /// Базовый класс ответа.
+    /// Абстрактный класс ответа сервера.
     /// </summary>
     public abstract class Response
     {

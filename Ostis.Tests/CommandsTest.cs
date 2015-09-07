@@ -3,12 +3,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using System.Threading;
 
+#region NameSpases
+using Ostis.Sctp;               // общее пространство имен, обязательно для подключения
+using Ostis.Sctp.Arguments;     // пространство имен аргументов команд
+using Ostis.Sctp.Commands;      // пространство имен команд, отправляемых серверу
+using Ostis.Sctp.Responses;      // пространство имен ответов сервера
+#endregion
 
-using Ostis.Sctp;           // общее пространство имен, обязательно для подключения
-using Ostis.Sctp.Arguments; // пространство имен аргументов команд
-using Ostis.Sctp.Commands;  // пространство имен команд, отправляемых серверу
-using Ostis.Sctp.Responses;
-using System.Collections.Generic; // пространство имен ответов сервера
+using System.Collections.Generic; 
 
 namespace Ostis.Tests
 {
@@ -51,7 +53,6 @@ namespace Ostis.Tests
         }
 
         #endregion
-
 
         #region CreateArc
         [TestMethod]
@@ -105,7 +106,6 @@ namespace Ostis.Tests
 
         #endregion
 
-
         #region CreateLink
         [TestMethod]
         [Timeout(3000)]
@@ -140,7 +140,6 @@ namespace Ostis.Tests
         }
 
         #endregion
-
 
         #region DeleteNode
         [TestMethod]
@@ -181,7 +180,6 @@ namespace Ostis.Tests
         }
         #endregion
 
-
         #region CheckElement
         [TestMethod]
         [Timeout(3000)]
@@ -200,6 +198,7 @@ namespace Ostis.Tests
             Assert.AreEqual(ReturnCode.Successfull, response.Header.ReturnCode);
             Assert.AreEqual(true, response.ElementExists);
         }
+
         [TestMethod]
         [Timeout(3000)]
         [TestProperty("Синхронность", "Асинхронный")]
@@ -223,7 +222,6 @@ namespace Ostis.Tests
 
 
         #endregion
-
 
         #region FindElement
         [TestMethod]
@@ -261,7 +259,6 @@ namespace Ostis.Tests
 
         #endregion
 
-
         #region FindLinks
         [TestMethod]
         [Timeout(3000)]
@@ -297,7 +294,6 @@ namespace Ostis.Tests
         }
 
         #endregion
-
 
         #region GetArcElements
         [TestMethod]
@@ -363,7 +359,6 @@ namespace Ostis.Tests
 
         #endregion
 
-
         #region GetElementType
         [TestMethod]
         [Timeout(3000)]
@@ -405,7 +400,6 @@ namespace Ostis.Tests
 
         }
         #endregion
-
 
         #region SetLinkContent
         [TestMethod]
@@ -451,7 +445,6 @@ namespace Ostis.Tests
         }
 
         #endregion
-
 
         #region GetLinkContent
         [TestMethod]
@@ -503,7 +496,6 @@ namespace Ostis.Tests
 
         #endregion
 
-
         #region SetSystemID
         [TestMethod]
         [Timeout(3000)]
@@ -519,7 +511,7 @@ namespace Ostis.Tests
             var command = new SetSystemIdCommand(responseCreate.CreatedNodeAddress, new Identifier("new_sys_id"));
             var response = (SetSystemIdResponse)sctpClient.Send(command);
             Assert.AreEqual(command.Code, response.Header.CommandCode);
-            Assert.AreEqual(ReturnCode.Successfull, response.Header.ReturnCode,"Возможно тест запускается второй раз за сессию сервера и системный идентификатор дублируется");
+            Assert.AreEqual(ReturnCode.Successfull, response.Header.ReturnCode, "Возможно тест запускается второй раз за сессию сервера и системный идентификатор дублируется");
             Assert.IsTrue(response.IsSuccesfull);
             //Get the id
             var commandFindElement = new FindElementCommand(new Identifier("new_sys_id"));
@@ -554,11 +546,10 @@ namespace Ostis.Tests
 
         #endregion
 
-
         #region GetProtocolVersion
         [TestMethod]
         [Timeout(3000)]
-     // [TestProperty("Синхронность", "Синхронный")]
+        // [TestProperty("Синхронность", "Синхронный")]
         [TestProperty("Реализация на сервере", "Не реализована")]
         public void TestGetProtocolVersionSync()
         {
@@ -575,7 +566,7 @@ namespace Ostis.Tests
 
         [TestMethod]
         [Timeout(3000)]
-       // [TestProperty("Синхронность", "Асинхронный")]
+        // [TestProperty("Синхронность", "Асинхронный")]
         [TestProperty("Реализация на сервере", "Не реализована")]
         public void TestGetProtocolVersionASync()
         {
@@ -590,7 +581,6 @@ namespace Ostis.Tests
 
         }
         #endregion
-
 
         #region GetStatistics
         [TestMethod]
@@ -655,14 +645,9 @@ namespace Ostis.Tests
 
         #endregion
 
-
         #region IterateElements
-
-
-
-
         [TestMethod]
-        [Timeout(10000)]
+        [Timeout(3000)]
         [TestProperty("Синхронность", "Синхронный")]
         public void TestIterateElementsSync()
         {
@@ -705,7 +690,7 @@ namespace Ostis.Tests
 
 
         [TestMethod]
-        [Timeout(10000)]
+        [Timeout(3000)]
         [TestProperty("Синхронность", "Асинхронный")]
         public void TestIterateElementsASync()
         {
@@ -752,7 +737,6 @@ namespace Ostis.Tests
         }
 
         #endregion
-
 
         #region SubScriptions
         [TestMethod]
@@ -805,9 +789,9 @@ namespace Ostis.Tests
             Assert.AreEqual(3, eventList.Count);
 
             //find subscriptions
-            Assert.IsTrue(eventList.Exists(ev => ev.Id.Id == SubscriptionCreate1.Id));
-            Assert.IsTrue(eventList.Exists(ev => ev.Id.Id == SubscriptionCreate2.Id));
-            Assert.IsTrue(eventList.Exists(ev => ev.Id.Id == SubscriptionDel.Id));
+            Assert.IsTrue(eventList.Exists(ev => ev.SubscriptionId.Id == SubscriptionCreate1.Id));
+            Assert.IsTrue(eventList.Exists(ev => ev.SubscriptionId.Id == SubscriptionCreate2.Id));
+            Assert.IsTrue(eventList.Exists(ev => ev.SubscriptionId.Id == SubscriptionDel.Id));
 
             Assert.IsTrue(eventList.Exists(ev => ev.ElementAddress.Offset == responseCreateNode1.CreatedNodeAddress.Offset));
             Assert.IsTrue(eventList.Exists(ev => ev.ArcAddress.Offset == responseCreateArc.CreatedArcAddress.Offset));
@@ -884,15 +868,15 @@ namespace Ostis.Tests
             Assert.AreEqual(3, eventList.Count);
 
             //find subscriptions
-            Assert.IsTrue(eventList.Exists(ev => ev.Id.Id == SubscriptionCreate1.Id));
-            Assert.IsTrue(eventList.Exists(ev => ev.Id.Id == SubscriptionCreate2.Id));
-            Assert.IsTrue(eventList.Exists(ev => ev.Id.Id == SubscriptionDel.Id));
+            Assert.IsTrue(eventList.Exists(ev => ev.SubscriptionId.Id == SubscriptionCreate1.Id));
+            Assert.IsTrue(eventList.Exists(ev => ev.SubscriptionId.Id == SubscriptionCreate2.Id));
+            Assert.IsTrue(eventList.Exists(ev => ev.SubscriptionId.Id == SubscriptionDel.Id));
 
             Assert.IsTrue(eventList.Exists(ev => ev.ElementAddress.Offset == responseCreateNode1.CreatedNodeAddress.Offset));
             Assert.IsTrue(eventList.Exists(ev => ev.ArcAddress.Offset == responseCreateArc.CreatedArcAddress.Offset));
             Assert.IsTrue(eventList.Exists(ev => ev.ElementAddress.Offset == responseCreateNode2.CreatedNodeAddress.Offset));
             Assert.IsTrue(eventList.Exists(ev => ev.ArcAddress.Offset == responseCreateArc.CreatedArcAddress.Offset));
-           
+
             //delete subscription
             var commandDeleteSubscriptionDel = new DeleteSubscriptionCommand(SubscriptionDel);
             var responseDeleteSubscriptionDel = (DeleteSubscriptionResponse)sctpClient.Send(commandDeleteSubscriptionDel);
@@ -903,27 +887,21 @@ namespace Ostis.Tests
         }
         #endregion
 
-
-
-
-
-        #region Подключение
+        #region Connect
         private void Connect()
         {
             const string defaultAddress = "127.0.0.1";
-
             string serverAddress = defaultAddress;
-
             int serverPort = SctpProtocol.DefaultPortNumber;
-
             sctpClient = new SctpClient(serverAddress, serverPort);
+            //подписываемся на событие, если планируем использовать асинхронный клиент
             sctpClient.ResponseReceived += asyncHandler;
-
+           //подключаемся
             sctpClient.Connect();
-
         }
+        #endregion
 
-
+        #region AsyncHandlers
         private void runAsyncTest(Command command)
         {
             lastAsyncResponse = null;

@@ -5,6 +5,10 @@ namespace Ostis.Sctp.Arguments
 	/// <summary>
 	/// Событие в SC-памяти.
 	/// </summary>
+    /// /// <example>
+    /// Следующий пример демонстрирует использование класса: <see cref="ScEvent"/>
+    /// <code source="..\Ostis.Tests\ArgumentsTest.cs" region="ScEvent" lang="C#" />
+    /// </example>
 	public class ScEvent : IArgument
 	{
         private readonly SubscriptionId subscriptionId;
@@ -14,7 +18,7 @@ namespace Ostis.Sctp.Arguments
 	    /// <summary>
 	    /// ID подписки.
 	    /// </summary>
-	    public SubscriptionId Id
+	    public SubscriptionId SubscriptionId
 	    { get { return subscriptionId; } }
 
 	    /// <summary>

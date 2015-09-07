@@ -1,7 +1,7 @@
 ﻿namespace Ostis.Sctp
 {
     /// <summary>
-    /// Аргумент команды.
+    /// Интерфейс аргумента команды.
     /// </summary>
     public interface IArgument
     {

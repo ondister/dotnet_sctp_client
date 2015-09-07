@@ -1,4 +1,5 @@
-﻿namespace Ostis.Sctp.Responses
+﻿
+namespace Ostis.Sctp.Responses
 {
     /// <summary>
     /// Ответ на команду: Проверка существования элемента с указанным SC-адресом.

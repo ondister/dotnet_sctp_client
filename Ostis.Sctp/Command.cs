@@ -6,7 +6,7 @@ using System.Text;
 namespace Ostis.Sctp
 {
     /// <summary>
-    /// Команда.
+    /// Абстрактный класс команды
     /// </summary>
     public abstract class Command
     {

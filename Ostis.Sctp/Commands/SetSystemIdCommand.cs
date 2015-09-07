@@ -5,6 +5,10 @@ namespace Ostis.Sctp.Commands
     /// <summary>
     /// Команда: Установка системного идентификатора SC-элемента.
     /// </summary>
+    /// <example>
+    /// Следующий пример демонстрирует использование класса <see cref="SetSystemIdCommand"/>
+    /// <code source="..\Ostis.Tests\CommandsTest.cs" region="SetSystemID" lang="C#" />
+    /// </example>
     public class SetSystemIdCommand : Command
     {
         #region Параметры команды

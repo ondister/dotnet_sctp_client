@@ -5,6 +5,10 @@ namespace Ostis.Sctp.Arguments
 	/// <summary>
 	/// Идентификатор подписки на событие.
 	/// </summary>
+    /// /// <example>
+    /// Следующий пример демонстрирует использование класса: <see cref="SubscriptionId"/>
+    /// <code source="..\Ostis.Tests\ArgumentsTest.cs" region="SubscriptionId" lang="C#" />
+    /// </example>
 	public class SubscriptionId : IArgument
 	{
 		private readonly uint id;

@@ -5,6 +5,10 @@ namespace Ostis.Sctp.Commands
     /// <summary>
     /// Команда: Создание подписки на события.
     /// </summary>
+    /// <example>
+    /// Следующий пример демонстрирует использование класса <see cref="CreateSubscriptionCommand"/>
+    /// <code source="..\Ostis.Tests\CommandsTest.cs" region="SubScriptions" lang="C#" />
+    /// </example>
     public class CreateSubscriptionCommand : Command
     {
         #region Параметры команды
