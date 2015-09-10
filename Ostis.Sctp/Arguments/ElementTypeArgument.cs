@@ -10,23 +10,23 @@ namespace Ostis.Sctp.Arguments
         private ElementType elementType;
 
         /// <summary>
-		/// Тип элемента.
-		/// </summary>
+        /// Тип элемента.
+        /// </summary>
         public ElementType ElementType
-		{
-			get { return elementType; }
-			set { elementType = value; }
-		}
+        {
+            get { return elementType; }
+            set { elementType = value; }
+        }
 
-		/// <summary>
-		/// Инициализирует новый аргумент указанного типа.
-		/// </summary>
+        /// <summary>
+        /// Инициализирует новый аргумент указанного типа.
+        /// </summary>
         /// <param name="elementType">тип элемента</param>
         public ElementTypeArgument(ElementType elementType)
-		{
+        {
             this.elementType = elementType;
-            
-		}
+
+        }
 
         #region Реализация интерфеса IArgument
 
@@ -35,7 +35,7 @@ namespace Ostis.Sctp.Arguments
         /// </summary>
         public byte[] GetBytes()
         {
-            return BitConverter.GetBytes((ushort) elementType);
+                return BitConverter.GetBytes((ushort)elementType);
         }
 
         #endregion

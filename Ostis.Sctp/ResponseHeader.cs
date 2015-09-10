@@ -37,7 +37,7 @@ namespace Ostis.Sctp
         { get { return returnSize; } }
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новый экземпляр класса
         /// </summary>
         /// <param name="bytes">массив байт заголовка</param>
         public ResponseHeader(byte[] bytes)

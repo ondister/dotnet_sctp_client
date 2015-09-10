@@ -10,7 +10,8 @@ using Ostis.Sctp.Commands;      // пространство имен коман�
 using Ostis.Sctp.Responses;      // пространство имен ответов сервера
 #endregion
 
-using System.Collections.Generic; 
+using System.Collections.Generic;
+using Ostis.Sctp.Tools; 
 
 namespace Ostis.Tests
 {
@@ -738,6 +739,63 @@ namespace Ostis.Tests
 
         #endregion
 
+        #region IterateConstructions
+        [TestMethod]
+        [Timeout(3000)]
+        [TestProperty("Синхронность", "Синхронный")]
+        public void TestIterateConstructionsSync()
+        {
+            this.Connect();
+            Assert.IsTrue(sctpClient.IsConnected);
+
+            KnowledgeBase knowledgeBase = new KnowledgeBase("127.0.0.1", Ostis.Sctp.SctpProtocol.DefaultPortNumber);
+            ConstructionTemplate initialIterator = new ConstructionTemplate(knowledgeBase.GetKeyNode("nrel_system_identifier"), ElementType.ConstantCommonArc, ElementType.Link, ElementType.PositiveConstantPermanentAccessArc, knowledgeBase.GetKeyNode("nrel_main_idtf"));
+            ConstructionTemplate nextIterator = new ConstructionTemplate(knowledgeBase.GetKeyNode("lang_ru"), ElementType.PositiveConstantPermanentAccessArc, new ScAddress(0, 0));
+            IteratorsChainMember chainMember = new IteratorsChainMember(new Substitution(2, 2), nextIterator);
+            IteratorsChain iterateChain = new IteratorsChain(initialIterator);
+            iterateChain.ChainMembers.Add(chainMember);
+
+            var command = new IterateConstructionsCommand(iterateChain);
+            var response = (IterateConstructionsResponse)sctpClient.Send(command);
+
+            Assert.AreEqual(knowledgeBase.GetKeyNode("nrel_system_identifier"), response.Constructions[0][0]);
+            Assert.AreEqual(knowledgeBase.GetKeyNode("nrel_main_idtf"), response.Constructions[0][4]);
+            Assert.AreEqual(knowledgeBase.GetKeyNode("lang_ru"), response.Constructions[0][5]);
+            Assert.AreEqual(response.Constructions[0][7], response.Constructions[0][2]);
+
+        }
+
+       
+
+        [TestMethod]
+        [Timeout(3000)]
+        [TestProperty("Синхронность", "Асинхронный")]
+        public void TestIterateConstructionsAsync()
+        {
+            this.Connect();
+            Assert.IsTrue(sctpClient.IsConnected);
+
+            KnowledgeBase knowledgeBase = new KnowledgeBase("127.0.0.1", Ostis.Sctp.SctpProtocol.DefaultPortNumber);
+            ConstructionTemplate initialIterator = new ConstructionTemplate(knowledgeBase.GetKeyNode("nrel_system_identifier"), ElementType.ConstantCommonArc, ElementType.Link, ElementType.PositiveConstantPermanentAccessArc, knowledgeBase.GetKeyNode("nrel_main_idtf"));
+            ConstructionTemplate nextIterator =new ConstructionTemplate(knowledgeBase.GetKeyNode("lang_ru"),ElementType.PositiveConstantPermanentAccessArc,new ScAddress(0,0));
+            IteratorsChainMember chainMember= new IteratorsChainMember(new Substitution(2,2),nextIterator);
+            IteratorsChain iterateChain = new IteratorsChain(initialIterator);
+            iterateChain.ChainMembers.Add(chainMember);
+        
+            var command = new IterateConstructionsCommand(iterateChain);
+            runAsyncTest(command);
+            var response = (IterateConstructionsResponse)lastAsyncResponse;
+
+            Assert.AreEqual(knowledgeBase.GetKeyNode("nrel_system_identifier"), response.Constructions[0][0]);
+            Assert.AreEqual(knowledgeBase.GetKeyNode("nrel_main_idtf"), response.Constructions[0][4]);
+            Assert.AreEqual(knowledgeBase.GetKeyNode("lang_ru"), response.Constructions[0][5]);
+            Assert.AreEqual(response.Constructions[0][7], response.Constructions[0][2]);
+        }
+
+        #endregion
+
+
+
         #region SubScriptions
         [TestMethod]
         [Timeout(3000)]
@@ -886,6 +944,7 @@ namespace Ostis.Tests
 
         }
         #endregion
+
 
         #region Connect
         private void Connect()

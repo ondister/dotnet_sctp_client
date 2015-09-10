@@ -19,7 +19,21 @@ namespace Ostis.Sctp.Arguments
    
     public class ConstructionTemplate : IArgument
     {
-        private readonly List<IArgument> arguments;
+        private readonly int fixedCount;
+
+        public int FixedCount
+        {
+            get { return fixedCount; }
+        } 
+
+
+        private readonly List<IArgument> elements;
+
+        public List<IArgument> Elements
+        {
+            get { return elements; }
+        } 
+
         private readonly ConstructionTemplateType templateType;
 
         internal ConstructionTemplateType Type
@@ -29,7 +43,7 @@ namespace Ostis.Sctp.Arguments
 
         private ConstructionTemplate(ConstructionTemplateType type)
         {
-            arguments = new List<IArgument>();
+            elements = new List<IArgument>();
             templateType = type;
         }
 
@@ -47,9 +61,10 @@ namespace Ostis.Sctp.Arguments
         public ConstructionTemplate(ScAddress f, ElementType a1, ElementType a2)
             : this(ConstructionTemplateType.t_3F_A_A)
         {
-            arguments.Add(f);
-            arguments.Add(new ElementTypeArgument(a1));
-            arguments.Add(new ElementTypeArgument(a2));
+            elements.Add(f);
+            elements.Add(new ElementTypeArgument(a1));
+            elements.Add(new ElementTypeArgument(a2));
+            fixedCount = 1;
         }
 
         /// <summary>
@@ -66,9 +81,10 @@ namespace Ostis.Sctp.Arguments
         public ConstructionTemplate(ElementType a1, ElementType a2, ScAddress f)
             : this(ConstructionTemplateType.t_3A_A_F)
         {
-            arguments.Add(new ElementTypeArgument(a1));
-            arguments.Add(new ElementTypeArgument(a2));
-            arguments.Add(f);
+            elements.Add(new ElementTypeArgument(a1));
+            elements.Add(new ElementTypeArgument(a2));
+            elements.Add(f);
+            fixedCount = 1;
         }
 
         /// <summary>
@@ -85,9 +101,10 @@ namespace Ostis.Sctp.Arguments
         public ConstructionTemplate(ScAddress f1, ElementType a1, ScAddress f2)
             : this(ConstructionTemplateType.t_3F_A_F)
         {
-            arguments.Add(f1);
-            arguments.Add(new ElementTypeArgument(a1));
-            arguments.Add(f2);
+            elements.Add(f1);
+            elements.Add(new ElementTypeArgument(a1));
+            elements.Add(f2);
+            fixedCount = 2;
         }
 
         /// <summary>
@@ -106,11 +123,12 @@ namespace Ostis.Sctp.Arguments
         public ConstructionTemplate(ElementType a1, ElementType a2, ScAddress f, ElementType a3, ElementType a4)
             : this(ConstructionTemplateType.t_5A_A_F_A_A)
         {
-            arguments.Add(new ElementTypeArgument(a1));
-            arguments.Add(new ElementTypeArgument(a2));
-            arguments.Add(f);
-            arguments.Add(new ElementTypeArgument(a3));
-            arguments.Add(new ElementTypeArgument(a4));
+            elements.Add(new ElementTypeArgument(a1));
+            elements.Add(new ElementTypeArgument(a2));
+            elements.Add(f);
+            elements.Add(new ElementTypeArgument(a3));
+            elements.Add(new ElementTypeArgument(a4));
+            fixedCount = 1;
         }
 
         /// <summary>
@@ -129,11 +147,12 @@ namespace Ostis.Sctp.Arguments
         public ConstructionTemplate(ElementType a1, ElementType a2, ScAddress f1, ElementType a3, ScAddress f2)
             : this(ConstructionTemplateType.t_5A_A_F_A_F)
         {
-            arguments.Add(new ElementTypeArgument(a1));
-            arguments.Add(new ElementTypeArgument(a2));
-            arguments.Add(f1);
-            arguments.Add(new ElementTypeArgument(a3));
-            arguments.Add(f2);
+            elements.Add(new ElementTypeArgument(a1));
+            elements.Add(new ElementTypeArgument(a2));
+            elements.Add(f1);
+            elements.Add(new ElementTypeArgument(a3));
+            elements.Add(f2);
+            fixedCount = 2;
         }
 
         /// <summary>
@@ -152,11 +171,12 @@ namespace Ostis.Sctp.Arguments
         public ConstructionTemplate(ScAddress f, ElementType a1, ElementType a2, ElementType a3, ElementType a4)
             : this(ConstructionTemplateType.t_5F_A_A_A_A)
         {
-            arguments.Add(f);
-            arguments.Add(new ElementTypeArgument(a1));
-            arguments.Add(new ElementTypeArgument(a2));
-            arguments.Add(new ElementTypeArgument(a3));
-            arguments.Add(new ElementTypeArgument(a4));
+            elements.Add(f);
+            elements.Add(new ElementTypeArgument(a1));
+            elements.Add(new ElementTypeArgument(a2));
+            elements.Add(new ElementTypeArgument(a3));
+            elements.Add(new ElementTypeArgument(a4));
+            fixedCount = 1;
         }
 
         /// <summary>
@@ -175,11 +195,12 @@ namespace Ostis.Sctp.Arguments
         public ConstructionTemplate(ScAddress f1, ElementType a1, ElementType a2, ElementType a3, ScAddress f2)
             : this(ConstructionTemplateType.t_5F_A_A_A_F)
         {
-            arguments.Add(f1);
-            arguments.Add(new ElementTypeArgument(a1));
-            arguments.Add(new ElementTypeArgument(a2));
-            arguments.Add(new ElementTypeArgument(a3));
-            arguments.Add(f2);
+            elements.Add(f1);
+            elements.Add(new ElementTypeArgument(a1));
+            elements.Add(new ElementTypeArgument(a2));
+            elements.Add(new ElementTypeArgument(a3));
+            elements.Add(f2);
+            fixedCount = 2;
         }
 
         /// <summary>
@@ -198,11 +219,12 @@ namespace Ostis.Sctp.Arguments
         public ConstructionTemplate(ScAddress f1, ElementType a1, ScAddress f2, ElementType a2, ElementType a3)
             : this(ConstructionTemplateType.t_5F_A_F_A_A)
         {
-            arguments.Add(f1);
-            arguments.Add(new ElementTypeArgument(a1));
-            arguments.Add(f2);
-            arguments.Add(new ElementTypeArgument(a2));
-            arguments.Add(new ElementTypeArgument(a3));
+            elements.Add(f1);
+            elements.Add(new ElementTypeArgument(a1));
+            elements.Add(f2);
+            elements.Add(new ElementTypeArgument(a2));
+            elements.Add(new ElementTypeArgument(a3));
+            fixedCount = 2;
         }
 
         /// <summary>
@@ -221,11 +243,12 @@ namespace Ostis.Sctp.Arguments
         public ConstructionTemplate(ScAddress f1, ElementType a1, ScAddress f2, ElementType a2, ScAddress f3)
             : this(ConstructionTemplateType.t_5F_A_F_A_F)
         {
-            arguments.Add(f1);
-            arguments.Add(new ElementTypeArgument(a1));
-            arguments.Add(f2);
-            arguments.Add(new ElementTypeArgument(a2));
-            arguments.Add(f3);
+            elements.Add(f1);
+            elements.Add(new ElementTypeArgument(a1));
+            elements.Add(f2);
+            elements.Add(new ElementTypeArgument(a2));
+            elements.Add(f3);
+            fixedCount = 3;
         }
 
         #endregion
@@ -240,8 +263,9 @@ namespace Ostis.Sctp.Arguments
             using (var stream = new MemoryStream())
             {
                 stream.Write(new[] { (byte) templateType }, 0, 1);
-                foreach (var argument in arguments)
+                foreach (var argument in elements)
                 {
+
                     var bytes = argument.GetBytes();
                     stream.Write(bytes, 0, bytes.Length);
                 }

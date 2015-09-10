@@ -11,6 +11,14 @@ namespace Ostis.Sctp.Arguments
     /// </example>
     public class ScAddress : IArgument
     {
+
+        public bool IsValid 
+        {
+            get
+            {
+                return this.segment != 0 && this.offset != 0;
+            }
+        }
         /// <summary>
         /// Сегмент.
         /// </summary>
@@ -65,6 +73,29 @@ namespace Ostis.Sctp.Arguments
 		    return string.Format("segment: {0}, offset: {1}", segment, offset);
 		}
 
+      
+        public bool Equals(ScAddress obj) 
+        {
+            if (obj == null)
+                return false;
+
+            return obj.Offset == this.Offset && obj.Segment== this.Segment;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+            ScAddress scAddress = obj as ScAddress;
+            if (scAddress as ScAddress == null)
+                return false;
+            return scAddress.Offset == this.Offset && scAddress.Segment== this.Segment;
+        }
+
+        public override int GetHashCode()
+        {  
+            return Convert.ToInt32(this.Segment.ToString() + this.Offset.ToString());
+        }
         #region Реализация интерфеса IArgument
 
         /// <summary>
@@ -73,8 +104,15 @@ namespace Ostis.Sctp.Arguments
         public byte[] GetBytes()
         {
             var bytes = new byte[4];
+           if (this.Equals(new ScAddress(0,0)))
+           {
+               bytes= new byte[0];
+           }
+           else 
+           {
             Array.Copy(BitConverter.GetBytes(segment), bytes, 2);
             Array.Copy(BitConverter.GetBytes(offset), 0, bytes, 2, 2);
+           }
             return bytes;
         }
 

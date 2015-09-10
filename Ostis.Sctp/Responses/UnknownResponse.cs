@@ -6,7 +6,7 @@
     public class UnknownResponse : Response
     {
         /// <summary>
-        /// ctor.
+        /// Инициализирует новый экземпляр класса
         /// </summary>
         /// <param name="bytes">массив байт</param>
         public UnknownResponse(byte[] bytes)

@@ -44,6 +44,11 @@ namespace Ostis.Sctp.Arguments
             return Origin.AddSeconds(seconds);
         }
 
+        /// <summary>
+        /// Получает дату в формате UnixDate из формата <see cref="System.DateTime"/>
+        /// </summary>
+        /// <param name="dateTime"><see cref="System.DateTime"/></param>
+        /// <returns></returns>
         public static UnixDateTime FromDateTime(DateTime dateTime)
         {
             var unixDateTime = new UnixDateTime(dateTime);

@@ -56,6 +56,30 @@
             Тип события.
             </summary>
         </member>
+        <member name="T:Ostis.Sctp.Arguments.IteratorsChain">
+            <summary>
+            Цепочка итераторов. Это аргумент команды <see cref="T:Ostis.Sctp.Commands.IterateConstructionsCommand"/>
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.IteratorsChain.#ctor(Ostis.Sctp.Arguments.ConstructionTemplate)">
+            <summary>
+            Инициализирует новый экземпляр класса <see cref="T:Ostis.Sctp.Arguments.IteratorsChain"/>
+            </summary>
+            <param name="initialTemplate">Первый шаблон цепочки</param>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.IteratorsChain.GetBytes">
+            <summary>
+            Получить массив байт для передачи.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.IteratorsChain.ChainMembers">
+            <summary>
+            Возвращает или задает набор звеньев <see cref="T:Ostis.Sctp.Arguments.IteratorsChainMember"/> цепочки итераторов
+            </summary>
+            <value>
+            Звено <see cref="T:Ostis.Sctp.Arguments.IteratorsChainMember"/> цепочки итераторов
+            </value>
+        </member>
         <member name="T:Ostis.Sctp.Arguments.SubscriptionId">
             <summary>
             Идентификатор подписки на событие.
@@ -88,6 +112,35 @@
             <summary>
             Идентификатор.
             </summary>
+        </member>
+        <member name="T:Ostis.Sctp.Arguments.Substitution">
+            <summary>
+            Класс подстановка для цепочки итераторов
+            Он определяет индекс какого элеманта первого итератора будет подставлен вместо неизвестного адреса слудующего итератора
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.Substitution.#ctor(System.Byte,System.Byte)">
+            <summary>
+            Инициализирует новый экземпляр класса <see cref="T:Ostis.Sctp.Arguments.Substitution"/>
+            </summary>
+            <param name="firstIteratorElement">Индекс элемента первого итератора</param>
+            <param name="nextIteratorElement">Индекс элемента следующего итератора</param>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.Substitution.FirstIteratorElementIndex">
+            <summary>
+            Получает индекс элемента первого итератора
+            </summary>
+            <value>
+            Индекс элемента первого итератора
+            </value>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.Substitution.NextIteratorElementIndex">
+            <summary>
+            Получает индекс элемента следующего итератора
+            </summary>
+            <value>
+            Индекс элемента следующего итератора
+            </value>
         </member>
         <member name="T:Ostis.Sctp.CommandCode">
             <summary>
@@ -377,6 +430,13 @@
             Конвертирует дату и время Unix в дату и время <see cref="T:System.DateTime"/>
             </summary>
             <param name="seconds">Время в секундах</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.UnixDateTime.FromDateTime(System.DateTime)">
+            <summary>
+            Получает дату в формате UnixDate из формата <see cref="T:System.DateTime"/>
+            </summary>
+            <param name="dateTime"><see cref="T:System.DateTime"/></param>
             <returns></returns>
         </member>
         <member name="F:Ostis.Sctp.Arguments.UnixDateTime.Origin">
@@ -871,7 +931,7 @@
         </member>
         <member name="M:Ostis.Sctp.Command.#ctor(Ostis.Sctp.CommandCode)">
             <summary>
-            ctor.
+            Инициализирует новый экземпляр класса
             </summary>
             <param name="code">код</param>
         </member>
@@ -1272,7 +1332,7 @@
         </member>
         <member name="M:Ostis.Sctp.Response.#ctor(System.Byte[])">
             <summary>
-            ctor.
+            Инициализирует новый экземпляр класса
             </summary>
             <param name="bytes">массив байт ответа</param>
         </member>
@@ -1288,7 +1348,7 @@
         </member>
         <member name="M:Ostis.Sctp.Responses.CheckElementResponse.#ctor(System.Byte[])">
             <summary>
-            ctor.
+            Инициализирует новый экземпляр класса
             </summary>
             <param name="bytes">массив байт</param>
         </member>
@@ -1304,7 +1364,7 @@
         </member>
         <member name="M:Ostis.Sctp.Responses.CreateArcResponse.#ctor(System.Byte[])">
             <summary>
-            ctor.
+            Инициализирует новый экземпляр класса
             </summary>
             <param name="bytes">массив байт</param>
         </member>
@@ -1320,7 +1380,7 @@
         </member>
         <member name="M:Ostis.Sctp.Responses.CreateSubscriptionResponse.#ctor(System.Byte[])">
             <summary>
-            ctor.
+            Инициализирует новый экземпляр класса
             </summary>
             <param name="bytes">массив байт</param>
         </member>
@@ -1336,7 +1396,7 @@
         </member>
         <member name="M:Ostis.Sctp.Responses.CreateLinkResponse.#ctor(System.Byte[])">
             <summary>
-            ctor.
+            Инициализирует новый экземпляр класса
             </summary>
             <param name="bytes">массив байт</param>
         </member>
@@ -1352,7 +1412,7 @@
         </member>
         <member name="M:Ostis.Sctp.Responses.CreateNodeResponse.#ctor(System.Byte[])">
             <summary>
-            ctor.
+            Инициализирует новый экземпляр класса
             </summary>
             <param name="bytes">массив байт</param>
         </member>
@@ -1368,7 +1428,7 @@
         </member>
         <member name="M:Ostis.Sctp.Responses.DeleteElementResponse.#ctor(System.Byte[])">
             <summary>
-            ctor.
+            Инициализирует новый экземпляр класса
             </summary>
             <param name="bytes">массив байт</param>
         </member>
@@ -1384,7 +1444,7 @@
         </member>
         <member name="M:Ostis.Sctp.Responses.DeleteSubscriptionResponse.#ctor(System.Byte[])">
             <summary>
-            ctor.
+            Инициализирует новый экземпляр класса
             </summary>
             <param name="bytes">массив байт</param>
         </member>
@@ -1400,7 +1460,7 @@
         </member>
         <member name="M:Ostis.Sctp.Responses.FindElementResponse.#ctor(System.Byte[])">
             <summary>
-            ctor.
+            Инициализирует новый экземпляр класса
             </summary>
             <param name="bytes">массив байт</param>
         </member>
@@ -1416,7 +1476,7 @@
         </member>
         <member name="M:Ostis.Sctp.Responses.FindLinksResponse.#ctor(System.Byte[])">
             <summary>
-            ctor.
+            Инициализирует новый экземпляр класса
             </summary>
             <param name="bytes">массив байт</param>
         </member>
@@ -1432,7 +1492,7 @@
         </member>
         <member name="M:Ostis.Sctp.Responses.GetArcElementsResponse.#ctor(System.Byte[])">
             <summary>
-            ctor.
+            Инициализирует новый экземпляр класса
             </summary>
             <param name="bytes">массив байт</param>
         </member>
@@ -1453,7 +1513,7 @@
         </member>
         <member name="M:Ostis.Sctp.Responses.GetElementTypeResponse.#ctor(System.Byte[])">
             <summary>
-            ctor.
+            Инициализирует новый экземпляр класса
             </summary>
             <param name="bytes">массив байт</param>
         </member>
@@ -1469,7 +1529,7 @@
         </member>
         <member name="M:Ostis.Sctp.Responses.GetLinkContentResponse.#ctor(System.Byte[])">
             <summary>
-            ctor.
+            Инициализирует новый экземпляр класса
             </summary>
             <param name="bytes">массив байт</param>
         </member>
@@ -1485,7 +1545,7 @@
         </member>
         <member name="M:Ostis.Sctp.Responses.GetProtocolVersionResponse.#ctor(System.Byte[])">
             <summary>
-            ctor.
+            Инициализирует новый экземпляр класса
             </summary>
             <param name="bytes">массив байт</param>
         </member>
@@ -1501,7 +1561,7 @@
         </member>
         <member name="M:Ostis.Sctp.Responses.GetStatisticsResponse.#ctor(System.Byte[])">
             <summary>
-            ctor.
+            Инициализирует новый экземпляр класса
             </summary>
             <param name="bytes">массив байт</param>
         </member>
@@ -1515,6 +1575,17 @@
             Количество проверок времени.
             </summary>
         </member>
+        <member name="T:Ostis.Sctp.Responses.IterateConstructionsResponse">
+            <summary>
+            Ответ на команду: Итерирование сложных конструкций.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Responses.IterateConstructionsResponse.#ctor(System.Byte[])">
+            <summary>
+            Инициализирует новый экземпляр класса
+            </summary>
+            <param name="bytes">массив байт</param>
+        </member>
         <member name="T:Ostis.Sctp.Responses.IterateElementsResponse">
             <summary>
             Ответ на команду: Поиск конструкции по указанному 3-х или 5-ти элементному шаблону.
@@ -1522,7 +1593,7 @@
         </member>
         <member name="M:Ostis.Sctp.Responses.IterateElementsResponse.#ctor(System.Byte[])">
             <summary>
-            ctor.
+            Инициализирует новый экземпляр класса
             </summary>
             <param name="bytes">массив байт</param>
         </member>
@@ -1538,7 +1609,7 @@
         </member>
         <member name="M:Ostis.Sctp.Responses.SetLinkContentResponse.#ctor(System.Byte[])">
             <summary>
-            ctor.
+            Инициализирует новый экземпляр класса
             </summary>
             <param name="bytes">массив байт</param>
         </member>
@@ -1554,7 +1625,7 @@
         </member>
         <member name="M:Ostis.Sctp.Responses.SetSystemIdResponse.#ctor(System.Byte[])">
             <summary>
-            ctor.
+            Инициализирует новый экземпляр класса
             </summary>
             <param name="bytes">массив байт</param>
         </member>
@@ -1570,7 +1641,7 @@
         </member>
         <member name="M:Ostis.Sctp.Responses.UnknownResponse.#ctor(System.Byte[])">
             <summary>
-            ctor.
+            Инициализирует новый экземпляр класса
             </summary>
             <param name="bytes">массив байт</param>
         </member>
@@ -1640,21 +1711,21 @@
         </member>
         <member name="M:Ostis.Sctp.SctpClient.#ctor(System.String,System.Int32)">
             <summary>
-            ctor.
+            Инициализирует новый экземпляр класса
             </summary>
             <param name="address">IP-адрес сервера</param>
             <param name="port">номер порта</param>
         </member>
         <member name="M:Ostis.Sctp.SctpClient.#ctor(System.Net.IPAddress,System.Int32)">
             <summary>
-            ctor.
+            Инициализирует новый экземпляр класса
             </summary>
             <param name="address">IP-адрес сервера</param>
             <param name="port">номер порта</param>
         </member>
         <member name="M:Ostis.Sctp.SctpClient.#ctor(System.Net.IPEndPoint)">
             <summary>
-            ctor.
+            Инициализирует новый экземпляр класса
             </summary>
             <param name="endPoint">конечная точка подключения на сервере</param>
         </member>
@@ -1716,7 +1787,7 @@
         </member>
         <member name="M:Ostis.Sctp.ResponseHeader.#ctor(System.Byte[])">
             <summary>
-            ctor.
+            Инициализирует новый экземпляр класса
             </summary>
             <param name="bytes">массив байт заголовка</param>
         </member>
@@ -1810,7 +1881,7 @@
         </member>
         <member name="M:Ostis.Sctp.Responses.EmitEventsResponse.#ctor(System.Byte[])">
             <summary>
-            ctor.
+            Инициализирует новый экземпляр класса
             </summary>
             <param name="bytes">массив байт</param>
         </member>
@@ -1824,16 +1895,48 @@
             Команда: Итерирование конструкций.
             </summary>
         </member>
-        <member name="M:Ostis.Sctp.Commands.IterateConstructionsCommand.#ctor(Ostis.Sctp.Arguments.ConstructionTemplate)">
+        <member name="M:Ostis.Sctp.Commands.IterateConstructionsCommand.#ctor(Ostis.Sctp.Arguments.IteratorsChain)">
             <summary>
             Инициализирует новую команду.
             </summary>
-            <param name="template">шаблон поиска</param>
+            <param name="iteratorsChain">цепочка итераторов</param>
         </member>
-        <member name="P:Ostis.Sctp.Commands.IterateConstructionsCommand.Template">
+        <member name="T:Ostis.Sctp.Tools.KnowledgeBase">
             <summary>
-            Шаблон поиска.
+            Класс, реализующий работу с некой базой знаний на сервере
             </summary>
+            <example>
+            Следующий пример демонстрирует использование класса <see cref="T:Ostis.Sctp.Tools.KnowledgeBase"/>
+            <code source="..\Ostis.Tests\ToolsTest.cs" region="KeyNodes" lang="C#"/>
+            </example>
+        </member>
+        <member name="M:Ostis.Sctp.Tools.KnowledgeBase.#ctor(System.String,System.Int32)">
+            <summary>
+            Инициализирует новый экземпляр класса
+            </summary>
+            <param name="address">IP-адрес сервера</param>
+            <param name="port">номер порта</param>
+        </member>
+        <member name="M:Ostis.Sctp.Tools.KnowledgeBase.#ctor(System.Net.IPAddress,System.Int32)">
+            <summary>
+            Инициализирует новый экземпляр класса
+            </summary>
+            <param name="address">IP-адрес сервера</param>
+            <param name="port">номер порта</param>
+        </member>
+        <member name="M:Ostis.Sctp.Tools.KnowledgeBase.#ctor(System.Net.IPEndPoint)">
+            <summary>
+            Инициализирует новый экземпляр класса
+            </summary>
+            <param name="endPoint">конечная точка подключения на сервере</param>
+        </member>
+        <member name="P:Ostis.Sctp.Tools.KnowledgeBase.KeyNodesDictionary">
+            <summary>
+            Возвращает словарь с ключевыми узлами базы знаний
+            </summary>
+            <value>
+            Наименование и адрес ключевых узлов базы знаний
+            </value>
         </member>
     </members>
 </doc>
