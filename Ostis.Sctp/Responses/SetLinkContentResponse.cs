@@ -14,7 +14,7 @@
         { get { return contentIsSet; } }
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новый экземпляр класса
         /// </summary>
         /// <param name="bytes">массив байт</param>
         public SetLinkContentResponse(byte[] bytes)

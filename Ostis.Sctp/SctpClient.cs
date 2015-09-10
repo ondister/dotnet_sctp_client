@@ -51,7 +51,7 @@ namespace Ostis.Sctp
         #region Конструкторы
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новый экземпляр класса
         /// </summary>
         /// <param name="address">IP-адрес сервера</param>
         /// <param name="port">номер порта</param>
@@ -60,7 +60,7 @@ namespace Ostis.Sctp
         { }
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новый экземпляр класса
         /// </summary>
         /// <param name="address">IP-адрес сервера</param>
         /// <param name="port">номер порта</param>
@@ -69,7 +69,7 @@ namespace Ostis.Sctp
         { }
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новый экземпляр класса
         /// </summary>
         /// <param name="endPoint">конечная точка подключения на сервере</param>
         public SctpClient(IPEndPoint endPoint)
