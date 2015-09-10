@@ -39,7 +39,7 @@ namespace Ostis.Sctp
         #endregion
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новый экземпляр класса
         /// </summary>
         /// <param name="code">код</param>
         protected Command(CommandCode code)
