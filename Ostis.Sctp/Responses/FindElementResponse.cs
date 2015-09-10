@@ -16,7 +16,7 @@ namespace Ostis.Sctp.Responses
                private readonly ScAddress address;
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новый экземпляр класса
         /// </summary>
         /// <param name="bytes">массив байт</param>
         public FindElementResponse(byte[] bytes)

@@ -16,7 +16,7 @@ namespace Ostis.Sctp.Responses
 		{ get { return protocolVersion; } }
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новый экземпляр класса
         /// </summary>
         /// <param name="bytes">массив байт</param>
         public GetProtocolVersionResponse(byte[] bytes)

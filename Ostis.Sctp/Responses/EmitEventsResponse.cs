@@ -19,7 +19,7 @@ namespace Ostis.Sctp.Responses
         { get { return events; } }
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новый экземпляр класса
         /// </summary>
         /// <param name="bytes">массив байт</param>
         public EmitEventsResponse(byte[] bytes)

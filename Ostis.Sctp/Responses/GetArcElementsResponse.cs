@@ -23,7 +23,7 @@ namespace Ostis.Sctp.Responses
 		{ get { return endElementAddress; } }
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новый экземпляр класса
         /// </summary>
         /// <param name="bytes">массив байт</param>
         public GetArcElementsResponse(byte[] bytes)
