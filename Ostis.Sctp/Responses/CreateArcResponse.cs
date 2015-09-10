@@ -16,7 +16,7 @@ namespace Ostis.Sctp.Responses
         { get { return createdArcAddress; } }
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новый экземпляр класса
         /// </summary>
         /// <param name="bytes">массив байт</param>
         public CreateArcResponse(byte[] bytes)

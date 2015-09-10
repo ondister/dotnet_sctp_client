@@ -16,7 +16,7 @@ namespace Ostis.Sctp.Responses
         { get { return createdNodeAddress; } }
 
         /// <summary>
-        /// ctor.
+        /// Инициализирует новый экземпляр класса
         /// </summary>
         /// <param name="bytes">массив байт</param>
         public CreateNodeResponse(byte[] bytes)
