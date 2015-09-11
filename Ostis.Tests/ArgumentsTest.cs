@@ -1,7 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ostis.Sctp;
-using Ostis.Sctp.Arguments; // пространство имен аргументов команд
+using Ostis.Sctp.Arguments;
+using Ostis.Sctp.Tools; // пространство имен аргументов команд
 namespace Ostis.Tests
 {
     [TestClass]
@@ -159,6 +160,20 @@ namespace Ostis.Tests
         {
             UnixDateTime unixDateTime = new UnixDateTime(DateTime.Today);
             Assert.AreEqual(DateTime.Today, unixDateTime.ToDateTime());
+        }
+        #endregion
+
+        #region IteratorsChain
+        [TestMethod]
+        [Timeout(3000)]
+        public void TestIteratorsChain()
+        {
+            KnowledgeBase knowledgeBase = new KnowledgeBase("127.0.0.1", Ostis.Sctp.SctpProtocol.DefaultPortNumber);
+            ConstructionTemplate initialIterator = new ConstructionTemplate(knowledgeBase.GetNodeAddress("nrel_system_identifier"), ElementType.ConstantCommonArc, ElementType.Link, ElementType.PositiveConstantPermanentAccessArc, knowledgeBase.GetNodeAddress("nrel_main_idtf"));
+            ConstructionTemplate nextIterator = new ConstructionTemplate(knowledgeBase.GetNodeAddress("lang_ru"), ElementType.PositiveConstantPermanentAccessArc, new ScAddress(0, 0));
+            IteratorsChainMember chainMember = new IteratorsChainMember(new Substitution(2, 2), nextIterator);
+            IteratorsChain iterateChain = new IteratorsChain(initialIterator);
+            iterateChain.ChainMembers.Add(chainMember);
         }
         #endregion
     }

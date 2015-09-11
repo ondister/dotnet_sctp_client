@@ -749,18 +749,27 @@ namespace Ostis.Tests
             Assert.IsTrue(sctpClient.IsConnected);
 
             KnowledgeBase knowledgeBase = new KnowledgeBase("127.0.0.1", Ostis.Sctp.SctpProtocol.DefaultPortNumber);
-            ConstructionTemplate initialIterator = new ConstructionTemplate(knowledgeBase.GetKeyNode("nrel_system_identifier"), ElementType.ConstantCommonArc, ElementType.Link, ElementType.PositiveConstantPermanentAccessArc, knowledgeBase.GetKeyNode("nrel_main_idtf"));
-            ConstructionTemplate nextIterator = new ConstructionTemplate(knowledgeBase.GetKeyNode("lang_ru"), ElementType.PositiveConstantPermanentAccessArc, new ScAddress(0, 0));
+            //создаем новый начальный итератор
+            ConstructionTemplate initialIterator = new ConstructionTemplate(knowledgeBase.GetNodeAddress("nrel_system_identifier"), ElementType.ConstantCommonArc, ElementType.Link, ElementType.PositiveConstantPermanentAccessArc, knowledgeBase.GetNodeAddress("nrel_main_idtf"));
+            //создаем следующий итератор. Неизвестный пока адрес делаем ScAddress.Unknown
+            ConstructionTemplate nextIterator = new ConstructionTemplate(knowledgeBase.GetNodeAddress("lang_ru"), ElementType.PositiveConstantPermanentAccessArc, ScAddress.Unknown);
+            //второй элемент итератора initialIterator (ElementType.Link) будет подставлен (в результате первого итерирования будет известен его адрес) вместо пока неизвестного второго элемента итератора nextIterator
+            //поэтому подстановка выглядит как: Substitution(2, 2)
+            //создаем элемент цепочки итераторов. Это подстановка и шаблон итератора
             IteratorsChainMember chainMember = new IteratorsChainMember(new Substitution(2, 2), nextIterator);
+            //создаем цепочку итераторов
             IteratorsChain iterateChain = new IteratorsChain(initialIterator);
+            //добавляем звено цепочки
             iterateChain.ChainMembers.Add(chainMember);
 
             var command = new IterateConstructionsCommand(iterateChain);
             var response = (IterateConstructionsResponse)sctpClient.Send(command);
-
-            Assert.AreEqual(knowledgeBase.GetKeyNode("nrel_system_identifier"), response.Constructions[0][0]);
-            Assert.AreEqual(knowledgeBase.GetKeyNode("nrel_main_idtf"), response.Constructions[0][4]);
-            Assert.AreEqual(knowledgeBase.GetKeyNode("lang_ru"), response.Constructions[0][5]);
+            //в результате в свойстве response.Constructions первый индекс это номер конструкции, второй индекс номер элемента в цепочке итераторов
+            Assert.AreEqual(ReturnCode.Successfull, response.Header.ReturnCode);
+            Assert.AreNotEqual(0, response.Constructions.Count);
+            Assert.AreEqual(knowledgeBase.GetNodeAddress("nrel_system_identifier"), response.Constructions[0][0]);
+            Assert.AreEqual(knowledgeBase.GetNodeAddress("nrel_main_idtf"), response.Constructions[0][4]);
+            Assert.AreEqual(knowledgeBase.GetNodeAddress("lang_ru"), response.Constructions[0][5]);
             Assert.AreEqual(response.Constructions[0][7], response.Constructions[0][2]);
 
         }
@@ -776,25 +785,32 @@ namespace Ostis.Tests
             Assert.IsTrue(sctpClient.IsConnected);
 
             KnowledgeBase knowledgeBase = new KnowledgeBase("127.0.0.1", Ostis.Sctp.SctpProtocol.DefaultPortNumber);
-            ConstructionTemplate initialIterator = new ConstructionTemplate(knowledgeBase.GetKeyNode("nrel_system_identifier"), ElementType.ConstantCommonArc, ElementType.Link, ElementType.PositiveConstantPermanentAccessArc, knowledgeBase.GetKeyNode("nrel_main_idtf"));
-            ConstructionTemplate nextIterator =new ConstructionTemplate(knowledgeBase.GetKeyNode("lang_ru"),ElementType.PositiveConstantPermanentAccessArc,new ScAddress(0,0));
+            //создаем новый начальный итератор
+            ConstructionTemplate initialIterator = new ConstructionTemplate(knowledgeBase.GetNodeAddress("nrel_system_identifier"), ElementType.ConstantCommonArc, ElementType.Link, ElementType.PositiveConstantPermanentAccessArc, knowledgeBase.GetNodeAddress("nrel_main_idtf"));
+            //создаем следующий итератор. Неизвестный пока адрес делаем ScAddress.Unknown
+            ConstructionTemplate nextIterator =new ConstructionTemplate(knowledgeBase.GetNodeAddress("lang_ru"),ElementType.PositiveConstantPermanentAccessArc,ScAddress.Unknown);
+            //второй элемент итератора initialIterator (ElementType.Link) будет подставлен (в результате первого итерирования будет известен его адрес) вместо пока неизвестного второго элемента итератора nextIterator
+            //поэтому подстановка выглядит как: Substitution(2, 2)
+            //создаем элемент цепочки итераторов. Это подстановка и шаблон итератора
             IteratorsChainMember chainMember= new IteratorsChainMember(new Substitution(2,2),nextIterator);
+            //создаем цепочку итераторов
             IteratorsChain iterateChain = new IteratorsChain(initialIterator);
+            //добавляем звено цепочки
             iterateChain.ChainMembers.Add(chainMember);
         
             var command = new IterateConstructionsCommand(iterateChain);
             runAsyncTest(command);
             var response = (IterateConstructionsResponse)lastAsyncResponse;
-
-            Assert.AreEqual(knowledgeBase.GetKeyNode("nrel_system_identifier"), response.Constructions[0][0]);
-            Assert.AreEqual(knowledgeBase.GetKeyNode("nrel_main_idtf"), response.Constructions[0][4]);
-            Assert.AreEqual(knowledgeBase.GetKeyNode("lang_ru"), response.Constructions[0][5]);
+            //в результате в свойстве response.Constructions первый индекс это номер конструкции, второй индекс номер элемента в цепочке итераторов
+            Assert.AreEqual(ReturnCode.Successfull, response.Header.ReturnCode);
+            Assert.AreNotEqual(0, response.Constructions.Count, "Проверьте, имееется ли в наличии конструкция, которую вы ищете, на всякий случай добввьте в базу знаний конструкцию nrel_system_identifier  => nrel_main_idtf:[Основной идентификатор] (*  <- lang_ru;;*);;");
+            Assert.AreEqual(knowledgeBase.GetNodeAddress("nrel_system_identifier"), response.Constructions[0][0]);
+            Assert.AreEqual(knowledgeBase.GetNodeAddress("nrel_main_idtf"), response.Constructions[0][4]);
+            Assert.AreEqual(knowledgeBase.GetNodeAddress("lang_ru"), response.Constructions[0][5]);
             Assert.AreEqual(response.Constructions[0][7], response.Constructions[0][2]);
         }
 
         #endregion
-
-
 
         #region SubScriptions
         [TestMethod]
