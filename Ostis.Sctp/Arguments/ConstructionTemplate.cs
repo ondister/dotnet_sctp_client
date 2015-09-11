@@ -21,7 +21,7 @@ namespace Ostis.Sctp.Arguments
     {
         private readonly int fixedCount;
 
-        public int FixedCount
+        internal int FixedCount
         {
             get { return fixedCount; }
         } 
@@ -29,7 +29,7 @@ namespace Ostis.Sctp.Arguments
 
         private readonly List<IArgument> elements;
 
-        public List<IArgument> Elements
+        internal List<IArgument> Elements
         {
             get { return elements; }
         } 
@@ -59,7 +59,7 @@ namespace Ostis.Sctp.Arguments
         /// <param name="a1">тип исходящей дуги</param>
         /// <param name="a2">тип конечного sc-элемента (дуги или узла)</param>
         public ConstructionTemplate(ScAddress f, ElementType a1, ElementType a2)
-            : this(ConstructionTemplateType.t_3F_A_A)
+            : this(ConstructionTemplateType.Fixed_Assign_Assign)
         {
             elements.Add(f);
             elements.Add(new ElementTypeArgument(a1));
@@ -79,7 +79,7 @@ namespace Ostis.Sctp.Arguments
         /// <img src="media/template_3_aaf.png" />
         /// </remarks>
         public ConstructionTemplate(ElementType a1, ElementType a2, ScAddress f)
-            : this(ConstructionTemplateType.t_3A_A_F)
+            : this(ConstructionTemplateType.Assign_Assign_Fixed)
         {
             elements.Add(new ElementTypeArgument(a1));
             elements.Add(new ElementTypeArgument(a2));
@@ -99,7 +99,7 @@ namespace Ostis.Sctp.Arguments
         /// <img src="media/template_3_faf.png" />
         /// </remarks>
         public ConstructionTemplate(ScAddress f1, ElementType a1, ScAddress f2)
-            : this(ConstructionTemplateType.t_3F_A_F)
+            : this(ConstructionTemplateType.Fixed_Assign_Fixed)
         {
             elements.Add(f1);
             elements.Add(new ElementTypeArgument(a1));
@@ -121,7 +121,7 @@ namespace Ostis.Sctp.Arguments
         /// <img src="media/template_5_aafaa.png" />
         /// </remarks>
         public ConstructionTemplate(ElementType a1, ElementType a2, ScAddress f, ElementType a3, ElementType a4)
-            : this(ConstructionTemplateType.t_5A_A_F_A_A)
+            : this(ConstructionTemplateType.Assign_Assign_Fixed_Assign_Assign)
         {
             elements.Add(new ElementTypeArgument(a1));
             elements.Add(new ElementTypeArgument(a2));
@@ -145,7 +145,7 @@ namespace Ostis.Sctp.Arguments
         /// <img src="media/template_5_aafaf.png" />
         /// </remarks>
         public ConstructionTemplate(ElementType a1, ElementType a2, ScAddress f1, ElementType a3, ScAddress f2)
-            : this(ConstructionTemplateType.t_5A_A_F_A_F)
+            : this(ConstructionTemplateType.Assign_Assign_Fixed_Assign_Fixed)
         {
             elements.Add(new ElementTypeArgument(a1));
             elements.Add(new ElementTypeArgument(a2));
@@ -169,7 +169,7 @@ namespace Ostis.Sctp.Arguments
         /// <img src="media/template_5_faaaa.png" />
         /// </remarks>
         public ConstructionTemplate(ScAddress f, ElementType a1, ElementType a2, ElementType a3, ElementType a4)
-            : this(ConstructionTemplateType.t_5F_A_A_A_A)
+            : this(ConstructionTemplateType.Fixed_Assign_Assign_Assign_Assign)
         {
             elements.Add(f);
             elements.Add(new ElementTypeArgument(a1));
@@ -193,7 +193,7 @@ namespace Ostis.Sctp.Arguments
         /// <img src="media/template_5_faaaf.png" />
         /// </remarks>
         public ConstructionTemplate(ScAddress f1, ElementType a1, ElementType a2, ElementType a3, ScAddress f2)
-            : this(ConstructionTemplateType.t_5F_A_A_A_F)
+            : this(ConstructionTemplateType.Fixed_Assign_Assign_Assign_Fixed)
         {
             elements.Add(f1);
             elements.Add(new ElementTypeArgument(a1));
@@ -217,7 +217,7 @@ namespace Ostis.Sctp.Arguments
         /// <img src="media/template_5_fafaa.png" />
         /// </remarks>
         public ConstructionTemplate(ScAddress f1, ElementType a1, ScAddress f2, ElementType a2, ElementType a3)
-            : this(ConstructionTemplateType.t_5F_A_F_A_A)
+            : this(ConstructionTemplateType.Fixed_Assign_Fixed_Assign_Assign)
         {
             elements.Add(f1);
             elements.Add(new ElementTypeArgument(a1));
@@ -241,7 +241,7 @@ namespace Ostis.Sctp.Arguments
         /// <img src="media/template_5_fafaf.png" />
         /// </remarks>
         public ConstructionTemplate(ScAddress f1, ElementType a1, ScAddress f2, ElementType a2, ScAddress f3)
-            : this(ConstructionTemplateType.t_5F_A_F_A_F)
+            : this(ConstructionTemplateType.Fixed_Assign_Fixed_Assign_Fixed)
         {
             elements.Add(f1);
             elements.Add(new ElementTypeArgument(a1));

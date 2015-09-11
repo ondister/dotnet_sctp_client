@@ -21,7 +21,7 @@ namespace Ostis.Sctp.Arguments
         /// <value>
         /// Индекс элемента первого итератора
         /// </value>
-        public byte FirstIteratorElementIndex
+       internal byte FirstIteratorElementIndex
         {
             get { return firstIteratorElementIndex; }
         }
@@ -34,7 +34,7 @@ namespace Ostis.Sctp.Arguments
         /// <value>
         /// Индекс элемента следующего итератора
         /// </value>
-        public byte NextIteratorElementIndex
+        internal byte NextIteratorElementIndex
         {
             get { return nextIteratorElementIndex; }
         }

@@ -72,6 +72,11 @@
             Получить массив байт для передачи.
             </summary>
         </member>
+        <member name="M:Ostis.Sctp.Arguments.IteratorsChain.findFIndex(Ostis.Sctp.Arguments.IteratorsChainMember)">
+            <summary>
+            ищем какой это f по счету на основании инджекса элемента
+            </summary>
+        </member>
         <member name="P:Ostis.Sctp.Arguments.IteratorsChain.ChainMembers">
             <summary>
             Возвращает или задает набор звеньев <see cref="T:Ostis.Sctp.Arguments.IteratorsChainMember"/> цепочки итераторов
@@ -79,6 +84,41 @@
             <value>
             Звено <see cref="T:Ostis.Sctp.Arguments.IteratorsChainMember"/> цепочки итераторов
             </value>
+        </member>
+        <member name="T:Ostis.Sctp.Arguments.IteratorsChainMember">
+            <summary>
+            Звено для цепочки итераторов <see cref="T:Ostis.Sctp.Arguments.IteratorsChain"/>
+            </summary>
+            <remarks>
+            <para><b>Стоит запомнить, что a(assign) обозначает неизвестный элемент, для которого известен только тип  <see cref="T:Ostis.Sctp.ElementType"/>, а f(fixed)  <see cref="T:Ostis.Sctp.Arguments.ScAddress"/> изввестного элемента </b></para>
+            </remarks>
+            <example>
+            Следующий пример демонстрирует использование класса: <see cref="T:Ostis.Sctp.Arguments.IteratorsChainMember"/>
+            <code source="..\Ostis.Tests\ArgumentsTest.cs" region="IteratorsChain" lang="C#"/>
+            </example>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.IteratorsChainMember.#ctor(Ostis.Sctp.Arguments.Substitution,Ostis.Sctp.Arguments.ConstructionTemplate)">
+            <summary>
+            Инициализирует новый экземпляр класса <see cref="T:Ostis.Sctp.Arguments.IteratorsChainMember"/>
+            </summary>
+            <param name="substitution">Подстановка <see cref="P:Ostis.Sctp.Arguments.IteratorsChainMember.Substitution"/></param>
+            /// <param name="constructionTemplate">Шаблон итератора <see cref="P:Ostis.Sctp.Arguments.IteratorsChainMember.ConstructionTemplate"/></param>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.IteratorsChainMember.GetBytes">
+            <summary>
+            Получить массив байт для передачи.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.IteratorsChainMember.ConstructionTemplate">
+            <summary>
+            Возвращает шаблон итератора <see cref="P:Ostis.Sctp.Arguments.IteratorsChainMember.ConstructionTemplate"/> звена 
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.IteratorsChainMember.Substitution">
+            <summary>
+            Возвращает подстановку <see cref="P:Ostis.Sctp.Arguments.IteratorsChainMember.Substitution"/> звена 
+            </summary>
+            <remarks>Более подробно про подстановки смотрите здесь <see cref="T:Ostis.Sctp.Commands.IterateConstractionsCommand"/></remarks>
         </member>
         <member name="T:Ostis.Sctp.Arguments.SubscriptionId">
             <summary>
@@ -773,6 +813,11 @@
             <code source="..\Ostis.Tests\ArgumentsTest.cs" region="ScAddress" lang="C#"/>
             </example>
         </member>
+        <member name="F:Ostis.Sctp.Arguments.ScAddress.Unknown">
+            <summary>
+            Возвращает неизвестный или недействительный Sc адрес
+            </summary>
+        </member>
         <member name="M:Ostis.Sctp.Arguments.ScAddress.#ctor(System.UInt16,System.UInt16)">
             <summary>
             Инициализирует новый sc-адрес, используя смещение и сегмент.
@@ -797,9 +842,31 @@
             </returns>
             <filterpriority>2</filterpriority>
         </member>
+        <member name="M:Ostis.Sctp.Arguments.ScAddress.Equals(Ostis.Sctp.Arguments.ScAddress)">
+            <summary>
+            Определяет равен ли заданный объект <see cref="T:Ostis.Sctp.Arguments.ScAddress"/> текущему объекту
+            </summary>
+            <param name="obj">объект <see cref="T:Ostis.Sctp.Arguments.ScAddress"/></param>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.ScAddress.Equals(System.Object)">
+            <summary>
+            Определяет равен ли заданный объект <see cref="T:System.Object"/> текущему объекту
+            </summary>
+            <param name="obj">объект <see cref="T:System.Object"/></param>
+        </member>
+        <member name="M:Ostis.Sctp.Arguments.ScAddress.GetHashCode">
+            <summary>
+            Возвращает Hash код текущего объекта
+            </summary>
+        </member>
         <member name="M:Ostis.Sctp.Arguments.ScAddress.GetBytes">
             <summary>
             Получить массив байт для передачи.
+            </summary>
+        </member>
+        <member name="P:Ostis.Sctp.Arguments.ScAddress.IsValid">
+            <summary>
+            Возвращает действительность адреса
             </summary>
         </member>
         <member name="P:Ostis.Sctp.Arguments.ScAddress.Segment">
@@ -1586,6 +1653,11 @@
             </summary>
             <param name="bytes">массив байт</param>
         </member>
+        <member name="P:Ostis.Sctp.Responses.IterateConstructionsResponse.Constructions">
+            <summary>
+            Список конструкций.
+            </summary>
+        </member>
         <member name="T:Ostis.Sctp.Responses.IterateElementsResponse">
             <summary>
             Ответ на команду: Поиск конструкции по указанному 3-х или 5-ти элементному шаблону.
@@ -1894,6 +1966,13 @@
             <summary>
             Команда: Итерирование конструкций.
             </summary>
+            <example>
+            Следующий пример демонстрирует использование класса <see cref="T:Ostis.Sctp.Commands.GetArcElementsCommand"/>
+            <code source="..\Ostis.Tests\CommandsTest.cs" region="IterateConstructions" lang="C#"/>
+            </example>
+            <remarks>
+            Итерирование конструкций необходимо для ускорения работы сервера с итераторами и позволяет строить сложные итераторы для поиска конструкций.
+            </remarks>
         </member>
         <member name="M:Ostis.Sctp.Commands.IterateConstructionsCommand.#ctor(Ostis.Sctp.Arguments.IteratorsChain)">
             <summary>
@@ -1901,9 +1980,21 @@
             </summary>
             <param name="iteratorsChain">цепочка итераторов</param>
         </member>
+        <member name="M:Ostis.Sctp.Tools.Diagnostic.GetNodesWithoutMainIdtf(System.String)">
+            <summary>
+            Выводит в указанный файл системные идентификаторы узлов, у которых отсутствует хотя бы один основной идентификатор
+            Как правило, при разработке баз знаний всем узлам назначают основные идентификаторы и их отсутствие позволяет выявить ошибки.
+            </summary>
+        </member>
+        <member name="M:Ostis.Sctp.Tools.Diagnostic.GetNodesWithoutInputArcs(System.String)">
+            <summary>
+            Выводит в указанный файл идентиффикаторы узлов к которым нет входящих дуг.
+            Это позволяет искать ошибки из-за неправильного написания системных идентификаторов.
+            </summary>
+        </member>
         <member name="T:Ostis.Sctp.Tools.KnowledgeBase">
             <summary>
-            Класс, реализующий работу с некой базой знаний на сервере
+            Класс, реализующий работу с абстрактной базой знаний на сервере
             </summary>
             <example>
             Следующий пример демонстрирует использование класса <see cref="T:Ostis.Sctp.Tools.KnowledgeBase"/>
@@ -1930,13 +2021,19 @@
             </summary>
             <param name="endPoint">конечная точка подключения на сервере</param>
         </member>
-        <member name="P:Ostis.Sctp.Tools.KnowledgeBase.KeyNodesDictionary">
+        <member name="M:Ostis.Sctp.Tools.KnowledgeBase.GetNodeAddress(System.String)">
             <summary>
-            Возвращает словарь с ключевыми узлами базы знаний
+            Возвращает адрес произвольного узла базы знаний
             </summary>
-            <value>
-            Наименование и адрес ключевых узлов базы знаний
-            </value>
+            <param name="identifierString">Строка идентификатора</param>
+            <returns>Адрес узла <see cref="T:Ostis.Sctp.Arguments.ScAddress"/></returns>
+        </member>
+        <member name="M:Ostis.Sctp.Tools.KnowledgeBase.GetNodeAddress(Ostis.Sctp.Arguments.Identifier)">
+            <summary>
+            Возвращает адрес произвольного узла базы знаний
+            </summary>
+            <param name="identifier">Идентификатор</param>
+            <returns>Адрес узла <see cref="T:Ostis.Sctp.Arguments.ScAddress"/></returns>
         </member>
     </members>
 </doc>

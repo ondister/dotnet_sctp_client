@@ -106,6 +106,7 @@
     <Compile Include="Arguments\ScEvent.cs" />
     <Compile Include="Responses\EmitEventsResponse.cs" />
     <Compile Include="Commands\IterateConstructionsCommand.cs" />
+    <Compile Include="Tools\Diagnostic.cs" />
     <Compile Include="Tools\KnowledgeBase.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -11,12 +11,19 @@ namespace Ostis.Sctp.Arguments
     /// </example>
     public class ScAddress : IArgument
     {
+        /// <summary>
+        /// Возвращает неизвестный или недействительный Sc адрес
+        /// </summary>
+        public static readonly ScAddress Unknown = new ScAddress(0, 0);
 
+        /// <summary>
+        /// Возвращает действительность адреса
+        /// </summary>
         public bool IsValid 
         {
             get
             {
-                return this.segment != 0 && this.offset != 0;
+               return !this.Equals(ScAddress.Unknown);
             }
         }
         /// <summary>
@@ -73,15 +80,22 @@ namespace Ostis.Sctp.Arguments
 		    return string.Format("segment: {0}, offset: {1}", segment, offset);
 		}
 
-      
+        /// <summary>
+        /// Определяет равен ли заданный объект <see cref="ScAddress"/> текущему объекту
+        /// </summary>
+        /// <param name="obj">объект <see cref="ScAddress"/></param>
         public bool Equals(ScAddress obj) 
         {
             if (obj == null)
                 return false;
-
+          
             return obj.Offset == this.Offset && obj.Segment== this.Segment;
         }
 
+        /// <summary>
+        /// Определяет равен ли заданный объект <see cref="T:System.Object"/> текущему объекту
+        /// </summary>
+        /// <param name="obj">объект <see cref="T:System.Object"/></param>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -92,10 +106,16 @@ namespace Ostis.Sctp.Arguments
             return scAddress.Offset == this.Offset && scAddress.Segment== this.Segment;
         }
 
+        /// <summary>
+        /// Возвращает Hash код текущего объекта
+        /// </summary>
         public override int GetHashCode()
         {  
             return Convert.ToInt32(this.Segment.ToString() + this.Offset.ToString());
         }
+
+
+
         #region Реализация интерфеса IArgument
 
         /// <summary>
@@ -104,7 +124,7 @@ namespace Ostis.Sctp.Arguments
         public byte[] GetBytes()
         {
             var bytes = new byte[4];
-           if (this.Equals(new ScAddress(0,0)))
+           if (this.Equals(ScAddress.Unknown))
            {
                bytes= new byte[0];
            }

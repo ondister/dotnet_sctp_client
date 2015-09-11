@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace Ostis.Sctp.Tools
 {
     /// <summary>
-    /// Класс, реализующий работу с некой базой знаний на сервере
+    /// Класс, реализующий работу с абстрактной базой знаний на сервере
     /// </summary>
     /// <example>
     /// Следующий пример демонстрирует использование класса <see cref="KnowledgeBase"/>
@@ -21,18 +21,15 @@ namespace Ostis.Sctp.Tools
     {
         private readonly SctpClient sctpClient;
         private Dictionary<String, ScAddress> keyNodesDictionary;
-        private readonly List<String> nodesList;
-        /// <summary>
-        /// Возвращает словарь с ключевыми узлами базы знаний
-        /// </summary>
-        /// <value>
-        /// Наименование и адрес ключевых узлов базы знаний
-        /// </value>
-        public Dictionary<String, ScAddress> KeyNodesDictionary
-        {
-            get { return keyNodesDictionary; }
-        }
 
+        private readonly Diagnostic diagnostic;
+
+        public Diagnostic Diagnostic
+        {
+            get { return diagnostic; }
+        } 
+
+        
         #region Конструкторы
 
         /// <summary>
@@ -62,54 +59,53 @@ namespace Ostis.Sctp.Tools
             sctpClient = new SctpClient(endPoint);
             sctpClient.ResponseReceived += asyncHandler;
             sctpClient.Connect();
-            keyNodesDictionary = new Dictionary<string, ScAddress>();
-            this.GetKeyNodes();
 
+            keyNodesDictionary = new Dictionary<string, ScAddress>();
+
+            diagnostic=new Diagnostic(this);
         }
 
         #endregion
-        #region keynodes
-        public void GetKeyNodes(List<String> nodesList)
+
+
+        /// <summary>
+        /// Возвращает адрес произвольного узла базы знаний
+        /// </summary>
+        /// <param name="identifierString">Строка идентификатора</param>
+        /// <returns>Адрес узла <see cref="ScAddress"/></returns>
+        public ScAddress GetNodeAddress(string identifierString)
         {
+            return GetNodeAddress(new Identifier(identifierString));
+        }
+
+        /// <summary>
+        /// Возвращает адрес произвольного узла базы знаний
+        /// </summary>
+        /// <param name="identifier">Идентификатор</param>
+        /// <returns>Адрес узла <see cref="ScAddress"/></returns>
+        public ScAddress GetNodeAddress(Identifier identifier)
+        {
+            ScAddress address = ScAddress.Unknown;
             if (sctpClient.IsConnected)
             {
-                //set the main nodes
-                List<String> listNodes = new List<string>();
-                listNodes.Add("nrel_system_identifier");
-                listNodes.Add("nrel_main_idtf");
-                listNodes.Add("lang_ru");
-                listNodes.Add("lang_en");
-                listNodes.AddRange(nodesList);
-                //find them
-                foreach (var keynode in listNodes)
+                if (!keyNodesDictionary.ContainsKey(identifier.Value))//если не содержит словарь, то достаем из базы
                 {
-                    var command = new FindElementCommand(new Identifier(keynode));
-                    runAsyncCommand(command);
+                    var command = new FindElementCommand(identifier);
+                    RunAsyncCommand(command);
                     var response = (FindElementResponse)lastAsyncResponse;
-                    if (response.Header.ReturnCode == ReturnCode.Successfull & !keyNodesDictionary.ContainsKey(keynode))
-                    {
-                        
-                        keyNodesDictionary.Add(keynode, response.FoundAddress);
-                    }
+                    keyNodesDictionary.Add(identifier.Value, response.FoundAddress);
                 }
 
+                keyNodesDictionary.TryGetValue(identifier.Value, out address);
+
             }
-        }
-        private void GetKeyNodes()
-        {
-            this.GetKeyNodes(new List<String> { });
-        }
-        
-        
-        public ScAddress GetKeyNode(string identifier)
-        {
-            ScAddress address = new ScAddress(0, 0);
-            keyNodesDictionary.TryGetValue(identifier, out address);
+
             return address;
         }
-        #endregion
+
+
         #region AsyncHandlers
-        private void runAsyncCommand(Command command)
+       public void RunAsyncCommand(Command command)
         {
             lastAsyncResponse = null;
             synchronizer.Reset();
@@ -125,6 +121,11 @@ namespace Ostis.Sctp.Tools
 
         private readonly ManualResetEvent synchronizer = new ManualResetEvent(false);
         private Response lastAsyncResponse;
+
+        public Response LastAsyncResponse
+        {
+            get { return lastAsyncResponse; }
+        }
         #endregion
     }
 
