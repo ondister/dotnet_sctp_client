@@ -2,15 +2,14 @@
 {
     internal enum ConstructionTemplateType : byte
     {
-#warning Переименовать члены!
-        t_3F_A_A = 0,
-        t_3A_A_F = 1,
-        t_3F_A_F = 2,
-        t_5F_A_A_A_F = 3,
-        t_5A_A_F_A_F = 4,
-        t_5F_A_F_A_F = 5,
-        t_5F_A_F_A_A = 6,
-        t_5F_A_A_A_A = 7,
-        t_5A_A_F_A_A = 8
+        Fixed_Assign_Assign = 0,
+        Assign_Assign_Fixed = 1,
+        Fixed_Assign_Fixed = 2,
+        Fixed_Assign_Assign_Assign_Fixed = 3,
+        Assign_Assign_Fixed_Assign_Fixed=4,
+        Fixed_Assign_Fixed_Assign_Fixed=5,
+        Fixed_Assign_Fixed_Assign_Assign=6,
+        Fixed_Assign_Assign_Assign_Assign=7,
+        Assign_Assign_Fixed_Assign_Assign=8
     }
 }
