@@ -6,6 +6,13 @@ namespace Ostis.Sctp.Commands
     /// <summary>
     /// Команда: Итерирование конструкций.
     /// </summary>
+    /// <example>
+    /// Следующий пример демонстрирует использование класса <see cref="GetArcElementsCommand"/>
+    /// <code source="..\Ostis.Tests\CommandsTest.cs" region="IterateConstructions" lang="C#" />
+    /// </example>
+    /// <remarks>
+    /// Итерирование конструкций необходимо для ускорения работы сервера с итераторами и позволяет строить сложные итераторы для поиска конструкций.
+    /// </remarks>
     public class IterateConstructionsCommand : Command
     {
         #region Параметры команды

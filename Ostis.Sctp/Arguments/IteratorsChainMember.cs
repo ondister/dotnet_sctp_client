@@ -7,24 +7,45 @@ using System.Threading.Tasks;
 
 namespace Ostis.Sctp.Arguments
 {
+    /// <summary>
+    /// Звено для цепочки итераторов <see cref="IteratorsChain"/>
+    /// </summary>
+    /// <remarks>
+    /// <para><b>Стоит запомнить, что a(assign) обозначает неизвестный элемент, для которого известен только тип  <see cref="ElementType"/>, а f(fixed)  <see cref="ScAddress"/> изввестного элемента </b></para>
+    /// </remarks>
+    /// <example>
+    /// Следующий пример демонстрирует использование класса: <see cref="IteratorsChainMember"/>
+    /// <code source="..\Ostis.Tests\ArgumentsTest.cs" region="IteratorsChain" lang="C#" />
+    /// </example>
     public class IteratorsChainMember : IArgument
     {
         private readonly ConstructionTemplate constructionTemplate;
 
-        public ConstructionTemplate ConstructionTemplate
+        /// <summary>
+        /// Возвращает шаблон итератора <see cref="ConstructionTemplate"/> звена 
+        /// </summary>
+        internal ConstructionTemplate ConstructionTemplate
         {
             get { return constructionTemplate; }
         }
 
         private readonly Substitution substitution;
 
-        public Substitution Substitution
+        /// <summary>
+        /// Возвращает подстановку <see cref="Substitution"/> звена 
+        /// </summary>
+        /// <remarks>Более подробно про подстановки смотрите здесь <see cref="T:Ostis.Sctp.Commands.IterateConstractionsCommand"/></remarks>
+        internal Substitution Substitution
         {
             get { return substitution; }
         }
 
 
-
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="IteratorsChainMember"/>
+        /// </summary>
+        /// <param name="substitution">Подстановка <see cref="Substitution"/></param>
+        /// /// <param name="constructionTemplate">Шаблон итератора <see cref="ConstructionTemplate"/></param>
         public IteratorsChainMember(Substitution substitution, ConstructionTemplate constructionTemplate)
         {
             this.substitution = substitution;
@@ -32,12 +53,10 @@ namespace Ostis.Sctp.Arguments
         }
 
 
-
-
-
-
-
-
+        #region Реализация интерфеса IArgument
+        /// <summary>
+        /// Получить массив байт для передачи.
+        /// </summary>
         public byte[] GetBytes()
         {
             using (var stream = new MemoryStream())
@@ -56,5 +75,6 @@ namespace Ostis.Sctp.Arguments
                 return stream.ToArray();
             }
         }
+        #endregion
     }
 }

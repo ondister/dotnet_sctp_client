@@ -11,6 +11,10 @@ namespace Ostis.Sctp.Responses
     public class IterateConstructionsResponse : Response
     {
         private readonly List<List<ScAddress>> constructions;
+
+        /// <summary>
+        /// Список конструкций.
+        /// </summary>
         public List<List<ScAddress>> Constructions
         { get { return constructions; } }
 
@@ -44,7 +48,7 @@ namespace Ostis.Sctp.Responses
                 }
             }
 
-           
+
         }
     }
 }
