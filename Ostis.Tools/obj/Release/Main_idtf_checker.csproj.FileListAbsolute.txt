@@ -1,9 +1,0 @@
-D:\OSTIS\OSTIS_MED_PROJECT\Ostis_Sctp_Client\Main_idtf_checker\bin\Release\Main_idtf_checker.exe.config
-D:\OSTIS\OSTIS_MED_PROJECT\Ostis_Sctp_Client\Main_idtf_checker\bin\Release\Main_idtf_checker.exe
-D:\OSTIS\OSTIS_MED_PROJECT\Ostis_Sctp_Client\Main_idtf_checker\bin\Release\Main_idtf_checker.pdb
-D:\OSTIS\OSTIS_MED_PROJECT\Ostis_Sctp_Client\Main_idtf_checker\obj\Release\Main_idtf_checker.csprojResolveAssemblyReference.cache
-D:\OSTIS\OSTIS_MED_PROJECT\Ostis_Sctp_Client\Main_idtf_checker\obj\Release\Main_idtf_checker.exe
-D:\OSTIS\OSTIS_MED_PROJECT\Ostis_Sctp_Client\Main_idtf_checker\obj\Release\Main_idtf_checker.pdb
-D:\OSTIS\OSTIS_MED_PROJECT\Ostis_Sctp_Client\Main_idtf_checker\bin\Release\Ostis.Sctp.dll
-D:\OSTIS\OSTIS_MED_PROJECT\Ostis_Sctp_Client\Main_idtf_checker\bin\Release\Ostis.Sctp.pdb
-D:\OSTIS\OSTIS_MED_PROJECT\Ostis_Sctp_Client\Main_idtf_checker\bin\Release\Ostis.Sctp.xml

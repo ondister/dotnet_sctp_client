@@ -24,6 +24,12 @@ namespace Ostis.Sctp.Tools
 
         private readonly Diagnostic diagnostic;
 
+        /// <summary>
+        /// Возвращает объект, в котором есть методы для диагностики абстрактной базы знаний
+        /// </summary>
+        /// <value>
+        ///  <see cref="Diagnostic"/>
+        /// </value>
         public Diagnostic Diagnostic
         {
             get { return diagnostic; }
@@ -105,6 +111,10 @@ namespace Ostis.Sctp.Tools
 
 
         #region AsyncHandlers
+        /// <summary>
+        /// Запуск асинхронной команды для базы знаний
+        /// </summary>
+        /// <param name="command">Команда</param>
        public void RunAsyncCommand(Command command)
         {
             lastAsyncResponse = null;
@@ -122,6 +132,12 @@ namespace Ostis.Sctp.Tools
         private readonly ManualResetEvent synchronizer = new ManualResetEvent(false);
         private Response lastAsyncResponse;
 
+        /// <summary>
+        /// Возвращает последний ответ на асинхронную команду
+        /// </summary>
+        /// <value>
+        /// Ответ
+        /// </value>
         public Response LastAsyncResponse
         {
             get { return lastAsyncResponse; }

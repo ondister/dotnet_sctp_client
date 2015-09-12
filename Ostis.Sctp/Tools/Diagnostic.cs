@@ -10,9 +10,16 @@ using System.IO;
 
 namespace Ostis.Sctp.Tools
 {
+    /// <summary>
+    /// Класс с методами для диагностики абстрактной базы знаний
+    /// </summary>
     public class Diagnostic
     {
         private KnowledgeBase knowledgeBase;
+        /// <summary>
+        /// Инициализирует новый класс<see cref="Diagnostic"/>.
+        /// </summary>
+        /// <param name="knowledgeBase">Абстрактная база знаний</param>
         public Diagnostic(KnowledgeBase knowledgeBase)
         {
             this.knowledgeBase = knowledgeBase;
@@ -20,50 +27,98 @@ namespace Ostis.Sctp.Tools
 
         /// <summary>
         /// Выводит в указанный файл системные идентификаторы узлов, у которых отсутствует хотя бы один основной идентификатор
-        /// Как правило, при разработке баз знаний всем узлам назначают основные идентификаторы и их отсутствие позволяет выявить ошибки.
         /// </summary>
+        /// <param name="fileName">Имя файла для результата</param>
+        /// <remarks>
+        /// Как правило, при разработке баз знаний всем узлам назначают основные идентификаторы и их отсутствие может означать, что либо узел не описан, либо это ошибочное название узла, то есть узел дубликат.
+        /// <para>Например есть узел test_node, а в другом scs файле он записан с ошибкой, например test_nade</para>
+        /// </remarks>
         public void GetNodesWithoutMainIdtf(String fileName)
         {
-            
-                    //ищем адреса всех дуг, в которые входит идентификатор
-                    var template = new ConstructionTemplate(knowledgeBase.GetNodeAddress("nrel_system_identifier"), ElementType.AccessArc, ElementType.CommonArc);
-                    var cmdIterateArcs = new IterateElementsCommand(template);
-                    knowledgeBase.RunAsyncCommand(cmdIterateArcs);
-                    var rspIterateArcs = (IterateElementsResponse)knowledgeBase.LastAsyncResponse;
+            using (System.IO.StreamWriter file =
+            new System.IO.StreamWriter(fileName))
+            {
+                //ищем адреса всех дуг, в которые входит идентификатор
+                var template = new ConstructionTemplate(knowledgeBase.GetNodeAddress("nrel_system_identifier"), ElementType.AccessArc, ElementType.CommonArc);
+                var cmdIterateArcs = new IterateElementsCommand(template);
+                knowledgeBase.RunAsyncCommand(cmdIterateArcs);
+                var rspIterateArcs = (IterateElementsResponse)knowledgeBase.LastAsyncResponse;
 
-                    foreach (var construction in rspIterateArcs.Constructions)
+                foreach (var construction in rspIterateArcs.Constructions)
+                {
+                    //ищем узел, из которого отходит дуга
+                    var cmdGetNode = new GetArcElementsCommand(construction[2]);
+                    knowledgeBase.RunAsyncCommand(cmdGetNode);
+                    var responseGetNode = (GetArcElementsResponse)knowledgeBase.LastAsyncResponse;
+                    //искомый узел будет responseGetNode.BeginElementAddress, а ссылка  responseGetNode.EndElementAddress
+                    var cmdGetLinkContent = new GetLinkContentCommand(responseGetNode.EndElementAddress);
+                    knowledgeBase.RunAsyncCommand(cmdGetLinkContent);
+                    var rspGetLinkContent = (GetLinkContentResponse)knowledgeBase.LastAsyncResponse;
+                    //теперь смотрим, есть ли у него хотя бы один основной идентификатор 
+                    //для этого смотрим адрес идентификатора
+                    var itertemplate = new ConstructionTemplate(responseGetNode.BeginElementAddress, ElementType.CommonArc, ElementType.Link, ElementType.AccessArc, knowledgeBase.GetNodeAddress("nrel_main_idtf"));
+                    var cmdIterate = new IterateElementsCommand(itertemplate);
+                    knowledgeBase.RunAsyncCommand(cmdIterate);
+                    var rspIterate = (IterateElementsResponse)knowledgeBase.LastAsyncResponse;
+                    //и если нет, то записываем системный идентификатор в файл
+                    if (rspIterate.Constructions.Count == 0)
                     {
-                        //ищем узел, из которого отходит дуга
-                        var cmdGetNode = new GetArcElementsCommand(construction[2]);
-                        knowledgeBase.RunAsyncCommand(cmdGetNode);
-                        var responseGetNode = (GetArcElementsResponse)knowledgeBase.LastAsyncResponse;
-                        //искомый узел будет responseGetNode.BeginElementAddress, а ссылка  responseGetNode.EndElementAddress
-                        var cmdGetLinkContent = new GetLinkContentCommand(responseGetNode.EndElementAddress);
-                        knowledgeBase.RunAsyncCommand(cmdGetLinkContent);
-                        var rspGetLinkContent = (GetLinkContentResponse)knowledgeBase.LastAsyncResponse;
-                        //теперь смотрим, есть ли у него хотя бы один основной идентификатор 
-                        //для этого смотрим адрес идентификатора
-                        var itertemplate = new ConstructionTemplate(responseGetNode.BeginElementAddress, ElementType.CommonArc, ElementType.Link, ElementType.AccessArc, knowledgeBase.GetNodeAddress("nrel_main_idtf"));
-                        var cmdIterate = new IterateElementsCommand(itertemplate);
-                        knowledgeBase.RunAsyncCommand(cmdIterate);
-                        var rspIterate = (IterateElementsResponse)knowledgeBase.LastAsyncResponse;
-                        int i=rspIterate.Constructions.Count;
-                        //и если нет, то записываем системный идентификатор в файл
-                        if (rspIterate.Constructions.Count == 0)
-                        {
-                         //LinkContent.ToString(rspGetLinkContent.LinkContent);
-                        }
+                        file.WriteLine(LinkContent.ToString(rspGetLinkContent.LinkContent));
                     }
+                }
+            }
         }
 
         /// <summary>
         /// Выводит в указанный файл идентиффикаторы узлов к которым нет входящих дуг.
-        /// Это позволяет искать ошибки из-за неправильного написания системных идентификаторов.
         /// </summary>
-        public void GetNodesWithoutInputArcs(String FileName)
+        /// <param name="fileName">Имя файла для результата</param>
+        /// <remarks>
+        /// В семантической сети количество узлов, к которым нет входящих дуг должно быть минимально. Это узлы ключевых понятий, их можно по пальцам посчитать.
+        /// <para>И если к узлу нет входящих дуг, то он или верхнего уровня, или узел дубликат, идентификатор, которого написан с ошибкой</para>
+        /// </remarks>
+        public void GetNodesWithoutInputArcs(String fileName)
         {
+            using (System.IO.StreamWriter file =
+            new System.IO.StreamWriter(fileName))
+            {
+                //ищем адреса всех дуг, в которые входит идентификатор
+                var template = new ConstructionTemplate(knowledgeBase.GetNodeAddress("nrel_system_identifier"), ElementType.AccessArc, ElementType.CommonArc);
+                var cmdIterateArcs = new IterateElementsCommand(template);
+                knowledgeBase.RunAsyncCommand(cmdIterateArcs);
+                var rspIterateArcs = (IterateElementsResponse)knowledgeBase.LastAsyncResponse;
 
+                foreach (var construction in rspIterateArcs.Constructions)
+                {
+                    //ищем узел, из которого отходит дуга
+                    var cmdGetNode = new GetArcElementsCommand(construction[2]);
+                    knowledgeBase.RunAsyncCommand(cmdGetNode);
+                    var responseGetNode = (GetArcElementsResponse)knowledgeBase.LastAsyncResponse;
+                    //искомый узел будет responseGetNode.BeginElementAddress, а ссылка  responseGetNode.EndElementAddress
+                    var cmdGetLinkContent = new GetLinkContentCommand(responseGetNode.EndElementAddress);
+                    knowledgeBase.RunAsyncCommand(cmdGetLinkContent);
+                    var rspGetLinkContent = (GetLinkContentResponse)knowledgeBase.LastAsyncResponse;
+                    //и итерируем по дугам общего вида
+                    var itertemplateComm = new ConstructionTemplate(ElementType.Node, ElementType.CommonArc, responseGetNode.BeginElementAddress);
+                    var cmdIterateComm = new IterateElementsCommand(itertemplateComm);
+                    knowledgeBase.RunAsyncCommand(cmdIterateComm);
+                    var rspIterateComm = (IterateElementsResponse)knowledgeBase.LastAsyncResponse;
+                    //и итерируем по дугам принадлежности
+                    var itertemplateAcc = new ConstructionTemplate(ElementType.Node, ElementType.AccessArc, responseGetNode.BeginElementAddress);
+                    var cmdIterateAcc = new IterateElementsCommand(itertemplateAcc);
+                    knowledgeBase.RunAsyncCommand(cmdIterateAcc);
+                    var rspIterateAcc = (IterateElementsResponse)knowledgeBase.LastAsyncResponse;
+
+                    if (rspIterateComm.Constructions.Count + rspIterateAcc.Constructions.Count == 0)
+                    {
+                        file.WriteLine(LinkContent.ToString(rspGetLinkContent.LinkContent));
+                    }
+
+
+                }
+            }
         }
+
 
     }
 }

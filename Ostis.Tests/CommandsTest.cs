@@ -765,8 +765,8 @@ namespace Ostis.Tests
             var command = new IterateConstructionsCommand(iterateChain);
             var response = (IterateConstructionsResponse)sctpClient.Send(command);
             //в результате в свойстве response.Constructions первый индекс это номер конструкции, второй индекс номер элемента в цепочке итераторов
-            Assert.AreEqual(ReturnCode.Successfull, response.Header.ReturnCode);
-            Assert.AreNotEqual(0, response.Constructions.Count);
+            Assert.AreEqual(ReturnCode.Successfull, response.Header.ReturnCode, "Проверьте, имееется ли в наличии конструкция, которую вы ищете, на всякий случай добавьте в базу знаний конструкцию nrel_system_identifier  => nrel_main_idtf:[Основной идентификатор] (*  <- lang_ru;;*);;");
+            Assert.AreNotEqual(0, response.Constructions.Count, "Проверьте, имееется ли в наличии конструкция, которую вы ищете, на всякий случай добавьте в базу знаний конструкцию nrel_system_identifier  => nrel_main_idtf:[Основной идентификатор] (*  <- lang_ru;;*);;");
             Assert.AreEqual(knowledgeBase.GetNodeAddress("nrel_system_identifier"), response.Constructions[0][0]);
             Assert.AreEqual(knowledgeBase.GetNodeAddress("nrel_main_idtf"), response.Constructions[0][4]);
             Assert.AreEqual(knowledgeBase.GetNodeAddress("lang_ru"), response.Constructions[0][5]);
@@ -802,8 +802,8 @@ namespace Ostis.Tests
             runAsyncTest(command);
             var response = (IterateConstructionsResponse)lastAsyncResponse;
             //в результате в свойстве response.Constructions первый индекс это номер конструкции, второй индекс номер элемента в цепочке итераторов
-            Assert.AreEqual(ReturnCode.Successfull, response.Header.ReturnCode);
-            Assert.AreNotEqual(0, response.Constructions.Count, "Проверьте, имееется ли в наличии конструкция, которую вы ищете, на всякий случай добввьте в базу знаний конструкцию nrel_system_identifier  => nrel_main_idtf:[Основной идентификатор] (*  <- lang_ru;;*);;");
+            Assert.AreEqual(ReturnCode.Successfull, response.Header.ReturnCode, "Проверьте, имееется ли в наличии конструкция, которую вы ищете, на всякий случай добавьте в базу знаний конструкцию nrel_system_identifier  => nrel_main_idtf:[Основной идентификатор] (*  <- lang_ru;;*);;");
+            Assert.AreNotEqual(0, response.Constructions.Count, "Проверьте, имееется ли в наличии конструкция, которую вы ищете, на всякий случай добавьте в базу знаний конструкцию nrel_system_identifier  => nrel_main_idtf:[Основной идентификатор] (*  <- lang_ru;;*);;");
             Assert.AreEqual(knowledgeBase.GetNodeAddress("nrel_system_identifier"), response.Constructions[0][0]);
             Assert.AreEqual(knowledgeBase.GetNodeAddress("nrel_main_idtf"), response.Constructions[0][4]);
             Assert.AreEqual(knowledgeBase.GetNodeAddress("lang_ru"), response.Constructions[0][5]);
