@@ -28,7 +28,15 @@ namespace Ostis.Tests
         public void TestGetNodesWithoutMainIdtf()
         {
             KnowledgeBase knowledgeBase = new KnowledgeBase("127.0.0.1", Ostis.Sctp.SctpProtocol.DefaultPortNumber);
-            knowledgeBase.Diagnostic.GetNodesWithoutMainIdtf("");
+            knowledgeBase.Diagnostic.GetNodesWithoutMainIdtf("NodesWithoutMainIdtf.txt");
+        }
+
+        [TestMethod]
+        [Timeout(3000)]
+        public void TestGetNodesWithoutInputArcs()
+        {
+            KnowledgeBase knowledgeBase = new KnowledgeBase("127.0.0.1", Ostis.Sctp.SctpProtocol.DefaultPortNumber);
+            knowledgeBase.Diagnostic.GetNodesWithoutInputArcs("NodesWithoutInputsArcs.txt");
         }
         #endregion
     }
