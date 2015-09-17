@@ -20,9 +20,29 @@ namespace Ostis.Sctp.Tools
     public class KnowledgeBase
     {
         private readonly SctpClient sctpClient;
-        private Dictionary<String, ScAddress> keyNodesDictionary;
 
         private readonly Diagnostic diagnostic;
+
+        private readonly Nodes nodes;
+        private readonly Links links;
+        private readonly Arcs arcs;
+
+        public Arcs Arcs
+        {
+            get { return arcs; }
+        }
+
+
+        public Links Links
+        {
+            get { return links; }
+        }
+
+
+        public Nodes Nodes
+        {
+            get { return nodes; }
+        } 
 
         /// <summary>
         /// Возвращает объект, в котором есть методы для диагностики абстрактной базы знаний
@@ -65,9 +85,9 @@ namespace Ostis.Sctp.Tools
             sctpClient = new SctpClient(endPoint);
             sctpClient.ResponseReceived += asyncHandler;
             sctpClient.Connect();
-
-            keyNodesDictionary = new Dictionary<string, ScAddress>();
-
+            nodes=new Tools.Nodes(this);
+            links = new Tools.Links(this);
+            arcs = new Tools.Arcs(this);
             diagnostic=new Diagnostic(this);
         }
 
@@ -94,19 +114,70 @@ namespace Ostis.Sctp.Tools
             ScAddress address = ScAddress.Unknown;
             if (sctpClient.IsConnected)
             {
-                if (!keyNodesDictionary.ContainsKey(identifier.Value))//если не содержит словарь, то достаем из базы
-                {
-                    var command = new FindElementCommand(identifier);
-                    RunAsyncCommand(command);
-                    var response = (FindElementResponse)lastAsyncResponse;
-                    keyNodesDictionary.Add(identifier.Value, response.FoundAddress);
-                }
-
-                keyNodesDictionary.TryGetValue(identifier.Value, out address);
-
+                var command = new FindElementCommand(identifier);
+                RunAsyncCommand(command);
+                var response = (FindElementResponse)lastAsyncResponse;
+                address = response.FoundAddress;
             }
 
             return address;
+        }
+
+        public Identifier GetNodeSysIdentifier(ScAddress scAddress)
+        {
+            Identifier sysidtf = "";
+            if (sctpClient.IsConnected)
+            {
+                ConstructionTemplate template = new ConstructionTemplate(scAddress, ElementType.ConstantCommonArc, ElementType.Link, ElementType.PositiveConstantPermanentAccessArc, GetNodeAddress("nrel_system_identifier"));
+                var command = new IterateElementsCommand(template);
+                RunAsyncCommand(command);
+                var response = (IterateElementsResponse)lastAsyncResponse;
+                if (response.Constructions.Count == 1)
+                {
+                    ScAddress link = response.Constructions[0][2];
+                    var commandGetLink = new GetLinkContentCommand(link);
+                    RunAsyncCommand(commandGetLink);
+                    var responseGetLink = (GetLinkContentResponse)lastAsyncResponse;
+                    if (responseGetLink.Header.ReturnCode == ReturnCode.Successfull)
+                    {
+                        sysidtf = LinkContent.ToString(responseGetLink.LinkContent);
+                    }
+                }
+            }
+
+            return sysidtf;
+        }
+
+        public ElementType GetElementType(ScAddress scAddress)
+        {
+            ElementType type = ElementType.Unknown;
+            if (sctpClient.IsConnected)
+            {
+                var command = new GetElementTypeCommand(scAddress);
+                RunAsyncCommand(command);
+                var response = (GetElementTypeResponse)lastAsyncResponse;
+                type = response.ElementType;
+            }
+            return type;
+        }
+
+        public LinkContent GetLinkContent(ScAddress scAddress)
+        {
+            LinkContent content = new LinkContent("");
+            if (sctpClient.IsConnected)
+            {
+                var command = new GetLinkContentCommand(scAddress);
+                RunAsyncCommand(command);
+                var response = (GetLinkContentResponse)lastAsyncResponse;
+                content = new LinkContent(response.LinkContent);
+            }
+            return content;
+        }
+
+        public static  bool CompareElementTypes(ElementType typeOfElement, ElementType type)
+        {
+            return ((typeOfElement & type) != 0);
+
         }
 
 

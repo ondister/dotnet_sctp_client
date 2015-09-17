@@ -176,5 +176,6 @@ namespace Ostis.Tests
             iterateChain.ChainMembers.Add(chainMember);
         }
         #endregion
+
     }
 }

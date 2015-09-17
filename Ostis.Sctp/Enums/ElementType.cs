@@ -52,7 +52,7 @@ namespace Ostis.Sctp
         /// Позитивная SC-дуга.
         /// </summary>
         PositiveArc = 0x80,
-
+#warning ошибка со структурны нодом
         /// <summary>
         /// Негативная SC-дуга.
         /// </summary>
@@ -71,7 +71,7 @@ namespace Ostis.Sctp
         /// <summary>
         /// Стационарная SC-дуга.
         /// </summary>
-        PermanetArc = 0x800,
+        PermanentArc = 0x800,
 
         /// <summary>
         /// SC-узел, обозначающий небинарную связку.
@@ -116,7 +116,7 @@ namespace Ostis.Sctp
         /// <summary>
         /// Позитивная константная стационарная SC-дуга принадлежности.
         /// </summary>
-        PositiveConstantPermanentAccessArc = (AccessArc | Constant | PositiveArc | PermanetArc),
+        PositiveConstantPermanentAccessArc = (AccessArc | Constant | PositiveArc | PermanentArc),
 
         /// <summary>
         /// Позитивная константная стационарная SC-дуга общего вида.
@@ -141,7 +141,7 @@ namespace Ostis.Sctp
         /// <summary>
         /// Маска стационарности/нестационарности,
         /// </summary>
-        PermanencyMask = (PermanetArc | TemporaryArc),
+        PermanencyMask = (PermanentArc | TemporaryArc),
 
         /// <summary>
         /// Маска типов узлов.

@@ -106,8 +106,15 @@
     <Compile Include="Arguments\ScEvent.cs" />
     <Compile Include="Responses\EmitEventsResponse.cs" />
     <Compile Include="Commands\IterateConstructionsCommand.cs" />
+    <Compile Include="Tools\Arc.cs" />
+    <Compile Include="Tools\Arcs.cs" />
     <Compile Include="Tools\Diagnostic.cs" />
+    <Compile Include="Tools\IElement.cs" />
     <Compile Include="Tools\KnowledgeBase.cs" />
+    <Compile Include="Tools\Link.cs" />
+    <Compile Include="Tools\Links.cs" />
+    <Compile Include="Tools\Node.cs" />
+    <Compile Include="Tools\Nodes.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
