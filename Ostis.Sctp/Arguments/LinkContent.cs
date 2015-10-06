@@ -13,6 +13,11 @@ namespace Ostis.Sctp.Arguments
     public class LinkContent : IArgument
     {
         /// <summary>
+        /// Возвращает пустой контент
+        /// </summary>
+        public static readonly LinkContent Unknown = new LinkContent(String.Empty);
+
+        /// <summary>
         /// OSTIS-тип содержимого ссылки.
         /// Принимает значения <see cref="T:Ostis.Sctp.LinkContentType"/>
         /// </summary>
@@ -97,7 +102,17 @@ namespace Ostis.Sctp.Arguments
         /// <returns></returns>
         public static int ToInt32(byte[] data)
         {
-            return BitConverter.ToInt32(data,0);
+            int result;
+            if (data.Length == 4)
+            {
+                result = BitConverter.ToInt32(data, 0);
+            }
+            else
+            {
+                string stringData = LinkContent.ToString(data);
+                result = Int32.Parse(stringData);
+            }
+            return result;
         }
 
         /// <summary>
@@ -107,7 +122,17 @@ namespace Ostis.Sctp.Arguments
         /// <returns></returns>
         public static double ToDouble(byte[] data)
         {
-            return BitConverter.ToDouble(data,0);
+            double result = double.NaN;
+            if (data.Length == 8)
+            {
+                result= BitConverter.ToDouble(data,0);
+            }
+            else
+            {
+                string stringData = LinkContent.ToString(data);
+                result= Double.Parse(stringData);
+            }
+            return result;
         }
 
         #endregion

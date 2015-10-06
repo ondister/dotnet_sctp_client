@@ -32,18 +32,43 @@ namespace Ostis.Tests
             Identifier nextidentifier = "new_system_id";
             Assert.AreEqual("new_system_id", nextidentifier.Value);
             Assert.AreEqual("new_system_id", nextidentifier.ToString());
+            Assert.AreEqual(identifier, nextidentifier);
         }
 
         #endregion
+
+        #region ElementType
+        [TestMethod]
+        [Timeout(3000)]
+        public void TestElementType()
+        {
+          ElementType elementType= ElementType.Node_a;
+          elementType = elementType.AddType(ElementType.Constant_a);
+          Assert.AreEqual(ElementType.ConstantNode_c, elementType);
+          Assert.IsTrue(elementType.IsType(ElementType.Constant_a));
+          Assert.IsTrue(elementType.HasAnyType(ElementType.AnyElementMask_c));
+          elementType = elementType.RemoveType(ElementType.Constant_a);
+          Assert.IsFalse(elementType.IsType(ElementType.Constant_a));
+          Assert.IsTrue(elementType.IsType(ElementType.Node_a));
+          Assert.IsTrue(ElementType.PositiveArc_a.HasAnyType(ElementType.PositiveConstantPermanentAccessArc_c));
+          Assert.IsTrue(ElementType.ConstantNode_c.IsType(ElementType.Node_a));
+          Assert.IsFalse(ElementType.PositiveArc_a.IsType(ElementType.NegativeArc_a));
+
+        }
+
+        #endregion
+
+
+
 
         #region ConstructionTemplate
         [TestMethod]
         [Timeout(3000)]
         public void TestConstructionTemplate()
         {
-            var elementNode = ElementType.ConstantNode;
-            var elementArcCommon = ElementType.ConstantCommonArc;
-            var elementArcAccess = ElementType.PositiveConstantPermanentAccessArc;
+            var elementNode = ElementType.ConstantNode_c;
+            var elementArcCommon = ElementType.ConstantCommonArc_c;
+            var elementArcAccess = ElementType.PositiveConstantPermanentAccessArc_c;
             var scAddress1 = new ScAddress(1, 1);
             var scAddress2 = new ScAddress(1, 2);
             var scAddress3 = new ScAddress(1, 3);
@@ -104,6 +129,7 @@ namespace Ostis.Tests
         {
             //new scaddress
             ScAddress scAddress = new ScAddress(1, 2);
+            ScAddress nextscAddress = new ScAddress(1, 2);
             //get  bytes
             var bytes = scAddress.GetBytes();
             Assert.AreNotEqual(0, bytes.Length);
@@ -112,6 +138,8 @@ namespace Ostis.Tests
             ScAddress scAddressFromBytes = ScAddress.Parse(bytesAddress, 0);
             Assert.AreEqual(scAddress.Segment, scAddressFromBytes.Segment);
             Assert.AreEqual(scAddress.Offset, scAddressFromBytes.Offset);
+            Assert.AreEqual(scAddress, nextscAddress);
+
         }
         #endregion
 
@@ -169,8 +197,8 @@ namespace Ostis.Tests
         public void TestIteratorsChain()
         {
             KnowledgeBase knowledgeBase = new KnowledgeBase("127.0.0.1", Ostis.Sctp.SctpProtocol.DefaultPortNumber);
-            ConstructionTemplate initialIterator = new ConstructionTemplate(knowledgeBase.GetNodeAddress("nrel_system_identifier"), ElementType.ConstantCommonArc, ElementType.Link, ElementType.PositiveConstantPermanentAccessArc, knowledgeBase.GetNodeAddress("nrel_main_idtf"));
-            ConstructionTemplate nextIterator = new ConstructionTemplate(knowledgeBase.GetNodeAddress("lang_ru"), ElementType.PositiveConstantPermanentAccessArc, new ScAddress(0, 0));
+            ConstructionTemplate initialIterator = new ConstructionTemplate(knowledgeBase.Commands.GetNodeAddress("nrel_system_identifier"), ElementType.ConstantCommonArc_c, ElementType.Link_a, ElementType.PositiveConstantPermanentAccessArc_c, knowledgeBase.Commands.GetNodeAddress("nrel_main_idtf"));
+            ConstructionTemplate nextIterator = new ConstructionTemplate(knowledgeBase.Commands.GetNodeAddress("lang_ru"), ElementType.PositiveConstantPermanentAccessArc_c, new ScAddress(0, 0));
             IteratorsChainMember chainMember = new IteratorsChainMember(new Substitution(2, 2), nextIterator);
             IteratorsChain iterateChain = new IteratorsChain(initialIterator);
             iterateChain.ChainMembers.Add(chainMember);

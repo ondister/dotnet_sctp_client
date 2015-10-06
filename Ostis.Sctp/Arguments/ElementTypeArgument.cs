@@ -28,8 +28,6 @@ namespace Ostis.Sctp.Arguments
 
         }
 
-      
-
 
         #region Реализация интерфеса IArgument
 

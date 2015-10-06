@@ -62,7 +62,7 @@ namespace Ostis.Sctp
             { CommandCode.FindLinks, bytes => new FindLinksResponse(bytes) },
             { CommandCode.SetLinkContent, bytes => new SetLinkContentResponse(bytes) },
             { CommandCode.IterateElements, bytes => new IterateElementsResponse(bytes) },
-             { CommandCode.IterateConstructions, bytes => new IterateConstructionsResponse(bytes) },
+            { CommandCode.IterateConstructions, bytes => new IterateConstructionsResponse(bytes) },
             { CommandCode.CreateSubscription, bytes => new CreateSubscriptionResponse(bytes) },
             { CommandCode.DeleteSubscription, bytes => new DeleteSubscriptionResponse(bytes) },
             { CommandCode.EmitEvents, bytes => new EmitEventsResponse(bytes) },

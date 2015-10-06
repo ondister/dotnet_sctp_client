@@ -11,11 +11,10 @@ namespace Ostis.Sctp.Tools
     {
       
 
-        private LinkContent content;
 
         public LinkContent Content
         {
-            get { return knowledgeBase.GetLinkContent(scAddress); }
+            get { return knowledgeBase.Commands.GetLinkContent(scAddress); }
         }
 
         private ScAddress scAddress;
@@ -45,7 +44,7 @@ namespace Ostis.Sctp.Tools
 
       public ElementType Type
       {
-          get { return ElementType.Link; }
+          get { return ElementType.Link_a; }
       }
     }
 }

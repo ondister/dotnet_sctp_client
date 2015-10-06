@@ -29,11 +29,10 @@ namespace Ostis.Sctp.Tools
         } 
 
 
-        private ElementType type;
-
+      
         public ElementType Type
         {
-            get { return knowledgeBase.GetElementType(address); }
+            get { return knowledgeBase.Commands.GetElementType(address); }
         }
 
         private ScAddress address;
@@ -53,15 +52,14 @@ namespace Ostis.Sctp.Tools
           this.address = scAddress;
 
           var command = new GetArcElementsCommand(scAddress);
-          knowledgeBase.RunAsyncCommand(command);
-          var response = (GetArcElementsResponse)knowledgeBase.LastAsyncResponse;
+          var response = (GetArcElementsResponse)knowledgeBase.ExecuteCommand(command);
 
-          if (knowledgeBase.GetElementType(response.BeginElementAddress) == ElementType.Link)
+          if (knowledgeBase.Commands.GetElementType(response.BeginElementAddress) == ElementType.Link_a)
           { beginElement = knowledgeBase.Links[response.BeginElementAddress]; }
           else
           { beginElement = knowledgeBase.Nodes[response.BeginElementAddress]; }
-         
-          if (knowledgeBase.GetElementType(response.EndElementAddress) == ElementType.Link)
+
+          if (knowledgeBase.Commands.GetElementType(response.EndElementAddress) == ElementType.Link_a)
           { endElement = knowledgeBase.Links[response.EndElementAddress]; }
           else
           { endElement = knowledgeBase.Nodes[response.EndElementAddress]; }

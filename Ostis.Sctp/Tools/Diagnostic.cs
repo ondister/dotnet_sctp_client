@@ -39,27 +39,23 @@ namespace Ostis.Sctp.Tools
             new System.IO.StreamWriter(fileName))
             {
                 //ищем адреса всех дуг, в которые входит идентификатор
-                var template = new ConstructionTemplate(knowledgeBase.GetNodeAddress("nrel_system_identifier"), ElementType.AccessArc, ElementType.CommonArc);
+                var template = new ConstructionTemplate(knowledgeBase.Commands.GetNodeAddress("nrel_system_identifier"), ElementType.AccessArc_a, ElementType.CommonArc_a);
                 var cmdIterateArcs = new IterateElementsCommand(template);
-                knowledgeBase.RunAsyncCommand(cmdIterateArcs);
-                var rspIterateArcs = (IterateElementsResponse)knowledgeBase.LastAsyncResponse;
+                var rspIterateArcs = (IterateElementsResponse)knowledgeBase.ExecuteCommand(cmdIterateArcs);
 
                 foreach (var construction in rspIterateArcs.Constructions)
                 {
                     //ищем узел, из которого отходит дуга
                     var cmdGetNode = new GetArcElementsCommand(construction[2]);
-                    knowledgeBase.RunAsyncCommand(cmdGetNode);
-                    var responseGetNode = (GetArcElementsResponse)knowledgeBase.LastAsyncResponse;
+                    var responseGetNode = (GetArcElementsResponse)knowledgeBase.ExecuteCommand(cmdGetNode);
                     //искомый узел будет responseGetNode.BeginElementAddress, а ссылка  responseGetNode.EndElementAddress
                     var cmdGetLinkContent = new GetLinkContentCommand(responseGetNode.EndElementAddress);
-                    knowledgeBase.RunAsyncCommand(cmdGetLinkContent);
-                    var rspGetLinkContent = (GetLinkContentResponse)knowledgeBase.LastAsyncResponse;
+                    var rspGetLinkContent = (GetLinkContentResponse)knowledgeBase.ExecuteCommand(cmdGetLinkContent);
                     //теперь смотрим, есть ли у него хотя бы один основной идентификатор 
                     //для этого смотрим адрес идентификатора
-                    var itertemplate = new ConstructionTemplate(responseGetNode.BeginElementAddress, ElementType.CommonArc, ElementType.Link, ElementType.AccessArc, knowledgeBase.GetNodeAddress("nrel_main_idtf"));
+                    var itertemplate = new ConstructionTemplate(responseGetNode.BeginElementAddress, ElementType.CommonArc_a, ElementType.Link_a, ElementType.AccessArc_a, knowledgeBase.Commands.GetNodeAddress("nrel_main_idtf"));
                     var cmdIterate = new IterateElementsCommand(itertemplate);
-                    knowledgeBase.RunAsyncCommand(cmdIterate);
-                    var rspIterate = (IterateElementsResponse)knowledgeBase.LastAsyncResponse;
+                    var rspIterate = (IterateElementsResponse)knowledgeBase.ExecuteCommand(cmdIterate);
                     //и если нет, то записываем системный идентификатор в файл
                     if (rspIterate.Constructions.Count == 0)
                     {
@@ -83,31 +79,26 @@ namespace Ostis.Sctp.Tools
             new System.IO.StreamWriter(fileName))
             {
                 //ищем адреса всех дуг, в которые входит идентификатор
-                var template = new ConstructionTemplate(knowledgeBase.GetNodeAddress("nrel_system_identifier"), ElementType.AccessArc, ElementType.CommonArc);
+                var template = new ConstructionTemplate(knowledgeBase.Commands.GetNodeAddress("nrel_system_identifier"), ElementType.AccessArc_a, ElementType.CommonArc_a);
                 var cmdIterateArcs = new IterateElementsCommand(template);
-                knowledgeBase.RunAsyncCommand(cmdIterateArcs);
-                var rspIterateArcs = (IterateElementsResponse)knowledgeBase.LastAsyncResponse;
+                var rspIterateArcs = (IterateElementsResponse)knowledgeBase.ExecuteCommand(cmdIterateArcs);
 
                 foreach (var construction in rspIterateArcs.Constructions)
                 {
                     //ищем узел, из которого отходит дуга
                     var cmdGetNode = new GetArcElementsCommand(construction[2]);
-                    knowledgeBase.RunAsyncCommand(cmdGetNode);
-                    var responseGetNode = (GetArcElementsResponse)knowledgeBase.LastAsyncResponse;
+                    var responseGetNode = (GetArcElementsResponse)knowledgeBase.ExecuteCommand(cmdGetNode);
                     //искомый узел будет responseGetNode.BeginElementAddress, а ссылка  responseGetNode.EndElementAddress
                     var cmdGetLinkContent = new GetLinkContentCommand(responseGetNode.EndElementAddress);
-                    knowledgeBase.RunAsyncCommand(cmdGetLinkContent);
-                    var rspGetLinkContent = (GetLinkContentResponse)knowledgeBase.LastAsyncResponse;
+                    var rspGetLinkContent = (GetLinkContentResponse)knowledgeBase.ExecuteCommand(cmdGetLinkContent);
                     //и итерируем по дугам общего вида
-                    var itertemplateComm = new ConstructionTemplate(ElementType.Node, ElementType.CommonArc, responseGetNode.BeginElementAddress);
+                    var itertemplateComm = new ConstructionTemplate(ElementType.Node_a, ElementType.CommonArc_a, responseGetNode.BeginElementAddress);
                     var cmdIterateComm = new IterateElementsCommand(itertemplateComm);
-                    knowledgeBase.RunAsyncCommand(cmdIterateComm);
-                    var rspIterateComm = (IterateElementsResponse)knowledgeBase.LastAsyncResponse;
+                    var rspIterateComm = (IterateElementsResponse)knowledgeBase.ExecuteCommand(cmdIterateComm);
                     //и итерируем по дугам принадлежности
-                    var itertemplateAcc = new ConstructionTemplate(ElementType.Node, ElementType.AccessArc, responseGetNode.BeginElementAddress);
+                    var itertemplateAcc = new ConstructionTemplate(ElementType.Node_a, ElementType.AccessArc_a, responseGetNode.BeginElementAddress);
                     var cmdIterateAcc = new IterateElementsCommand(itertemplateAcc);
-                    knowledgeBase.RunAsyncCommand(cmdIterateAcc);
-                    var rspIterateAcc = (IterateElementsResponse)knowledgeBase.LastAsyncResponse;
+                    var rspIterateAcc = (IterateElementsResponse)knowledgeBase.ExecuteCommand(cmdIterateAcc);
 
                     if (rspIterateComm.Constructions.Count + rspIterateAcc.Constructions.Count == 0)
                     {

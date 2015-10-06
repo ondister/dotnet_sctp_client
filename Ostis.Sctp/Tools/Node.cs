@@ -15,7 +15,7 @@ namespace Ostis.Sctp.Tools
 
         public Identifier SysIdentifier
         {
-            get { return knowledgeBase.GetNodeSysIdentifier(scAddress); }
+            get { return knowledgeBase.Commands.GetNodeSysIdentifier(scAddress); }
         }
 
         private ScAddress scAddress;
@@ -25,11 +25,10 @@ namespace Ostis.Sctp.Tools
             get { return scAddress; }
         }
 
-        private ElementType type;
 
         public ElementType Type
         {
-            get { return knowledgeBase.GetElementType(scAddress); }
+            get { return knowledgeBase.Commands.GetElementType(scAddress); }
         }
 
       private KnowledgeBase knowledgeBase;
@@ -38,7 +37,7 @@ namespace Ostis.Sctp.Tools
           :this(knowledgeBase)
       {
           this.sysIdentifier = sysIdentifier;
-          this.scAddress = knowledgeBase.GetNodeAddress(sysIdentifier);
+          this.scAddress = knowledgeBase.Commands.GetNodeAddress(sysIdentifier);
       }
 
       internal Node(KnowledgeBase knowledgeBase, ScAddress scAddress)

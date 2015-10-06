@@ -108,7 +108,7 @@ namespace Ostis.Sctp
             var buffer = new byte[SctpProtocol.DefaultBufferSize];
             using (var stream = new MemoryStream())
             {
-#warning Здесь ошибка, приводящая к обрезке данных если буфер меньше передаваемых данных при синхронной передаче
+#warning Здесь ошибка, приводящая к обрезке данных если буфер меньше передаваемых данных при синхронной передаче. Проявляется при итерировании элементов, если возвращается большое количество элементов
                 do
                 {
                     int receivedBytes = socket.Receive(buffer, 0, buffer.Length, SocketFlags.None);

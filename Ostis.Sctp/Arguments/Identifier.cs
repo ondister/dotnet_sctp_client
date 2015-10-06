@@ -30,6 +30,11 @@ namespace Ostis.Sctp.Arguments
         }
 
         /// <summary>
+        /// Возвращает пустой идентификатор, который не разрешен в системе
+        /// </summary>
+        public static readonly Identifier Unknown = String.Empty;
+
+        /// <summary>
         /// Преобразование Идентификатора из строки.
         /// </summary>
         /// <param name="value">строковое значение</param>
@@ -50,6 +55,42 @@ namespace Ostis.Sctp.Arguments
         {
             return value;
         }
+
+        /// <summary>
+        /// Определяет равен ли заданный объект <see cref="Identifier"/> текущему объекту
+        /// </summary>
+        /// <param name="obj">объект <see cref="Identifier"/></param>
+        public bool Equals(Identifier obj)
+        {
+            if (obj == null)
+                return false;
+
+            return obj.Value == this.Value;
+        }
+
+        /// <summary>
+        /// Определяет равен ли заданный объект <see cref="T:System.Object"/> текущему объекту
+        /// </summary>
+        /// <param name="obj">объект <see cref="T:System.Object"/></param>
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+            Identifier identifier = obj as Identifier;
+            if (identifier as Identifier == null)
+                return false;
+            return identifier.Value == this.Value;
+        }
+
+        /// <summary>
+        /// Возвращает хэш-код значения
+        /// </summary>
+        /// <returns>Хэш-код значения</returns>
+        public override int GetHashCode()
+        {
+            return value.GetHashCode();
+        }
+
 
         #region Реализация интерфеса IArgument
 

@@ -28,7 +28,7 @@ namespace Ostis.Tests
         {
             this.Connect();
             Assert.AreEqual(true, sctpClient.IsConnected);
-            var command = new CreateNodeCommand(ElementType.ConstantNode);
+            var command = new CreateNodeCommand(ElementType.ConstantNode_c);
             var response = (CreateNodeResponse)sctpClient.Send(command);
 
             Assert.AreEqual(command.Code, response.Header.CommandCode);
@@ -44,7 +44,7 @@ namespace Ostis.Tests
         {
             this.Connect();
             Assert.AreEqual(true, sctpClient.IsConnected);
-            var command = new CreateNodeCommand(ElementType.ConstantNode);
+            var command = new CreateNodeCommand(ElementType.ConstantNode_c);
             runAsyncTest(command);
             var response = (CreateNodeResponse)lastAsyncResponse;
             Assert.AreEqual(command.Code, response.Header.CommandCode);
@@ -64,15 +64,15 @@ namespace Ostis.Tests
             //create the node1
             this.Connect();
             Assert.AreEqual(true, sctpClient.IsConnected);
-            var commandCreateNode1 = new CreateNodeCommand(ElementType.ConstantNode);
+            var commandCreateNode1 = new CreateNodeCommand(ElementType.ConstantNode_c);
             var responseCreateNode1 = (CreateNodeResponse)sctpClient.Send(commandCreateNode1);
             //create the node2
             this.Connect();
             Assert.AreEqual(true, sctpClient.IsConnected);
-            var commandCreateNode2 = new CreateNodeCommand(ElementType.ConstantNode);
+            var commandCreateNode2 = new CreateNodeCommand(ElementType.ConstantNode_c);
             var responseCreateNode2 = (CreateNodeResponse)sctpClient.Send(commandCreateNode2);
             //Create the Arc
-            var command = new CreateArcCommand(ElementType.ConstantCommonArc, responseCreateNode1.CreatedNodeAddress, responseCreateNode2.CreatedNodeAddress);
+            var command = new CreateArcCommand(ElementType.ConstantCommonArc_c, responseCreateNode1.CreatedNodeAddress, responseCreateNode2.CreatedNodeAddress);
             var response = (CreateArcResponse)sctpClient.Send(command);
             Assert.AreEqual(command.Code, response.Header.CommandCode);
             Assert.AreEqual(ReturnCode.Successfull, response.Header.ReturnCode);
@@ -87,17 +87,17 @@ namespace Ostis.Tests
             //create the node1
             this.Connect();
             Assert.AreEqual(true, sctpClient.IsConnected);
-            var commandCreateNode1 = new CreateNodeCommand(ElementType.ConstantNode);
+            var commandCreateNode1 = new CreateNodeCommand(ElementType.ConstantNode_c);
             runAsyncTest(commandCreateNode1);
             var responseCreateNode1 = (CreateNodeResponse)lastAsyncResponse;
             //create the node2
             this.Connect();
             Assert.AreEqual(true, sctpClient.IsConnected);
-            var commandCreateNode2 = new CreateNodeCommand(ElementType.ConstantNode);
+            var commandCreateNode2 = new CreateNodeCommand(ElementType.ConstantNode_c);
             runAsyncTest(commandCreateNode2);
             var responseCreateNode2 = (CreateNodeResponse)lastAsyncResponse;
             //Create the Arc
-            var command = new CreateArcCommand(ElementType.ConstantCommonArc, responseCreateNode1.CreatedNodeAddress, responseCreateNode2.CreatedNodeAddress);
+            var command = new CreateArcCommand(ElementType.ConstantCommonArc_c, responseCreateNode1.CreatedNodeAddress, responseCreateNode2.CreatedNodeAddress);
             runAsyncTest(command);
             var response = (CreateArcResponse)lastAsyncResponse;
             Assert.AreEqual(command.Code, response.Header.CommandCode);
@@ -151,7 +151,7 @@ namespace Ostis.Tests
             //create the node
             this.Connect();
             Assert.AreEqual(true, sctpClient.IsConnected);
-            var commandCreate = new CreateNodeCommand(ElementType.ConstantNode);
+            var commandCreate = new CreateNodeCommand(ElementType.ConstantNode_c);
             var responseCreate = (CreateNodeResponse)sctpClient.Send(commandCreate);
             //delete the node
             var command = new DeleteElementCommand(responseCreate.CreatedNodeAddress);
@@ -168,7 +168,7 @@ namespace Ostis.Tests
             //create the node
             this.Connect();
             Assert.AreEqual(true, sctpClient.IsConnected);
-            var commandCreate = new CreateNodeCommand(ElementType.ConstantNode);
+            var commandCreate = new CreateNodeCommand(ElementType.ConstantNode_c);
             runAsyncTest(commandCreate);
             var responseCreate = (CreateNodeResponse)lastAsyncResponse;
             //delete the node
@@ -190,7 +190,7 @@ namespace Ostis.Tests
             //create the node
             this.Connect();
             Assert.AreEqual(true, sctpClient.IsConnected);
-            var commandCreate = new CreateNodeCommand(ElementType.ConstantNode);
+            var commandCreate = new CreateNodeCommand(ElementType.ConstantNode_c);
             var responseCreate = (CreateNodeResponse)sctpClient.Send(commandCreate);
             //check the node
             var command = new CheckElementCommand(responseCreate.CreatedNodeAddress);
@@ -208,7 +208,7 @@ namespace Ostis.Tests
             //create the node
             this.Connect();
             Assert.AreEqual(true, sctpClient.IsConnected);
-            var commandCreate = new CreateNodeCommand(ElementType.ConstantNode);
+            var commandCreate = new CreateNodeCommand(ElementType.ConstantNode_c);
             runAsyncTest(commandCreate);
             var responseCreate = (CreateNodeResponse)lastAsyncResponse;
             //check the node
@@ -305,15 +305,15 @@ namespace Ostis.Tests
             //create the node1
             this.Connect();
             Assert.AreEqual(true, sctpClient.IsConnected);
-            var commandCreateNode1 = new CreateNodeCommand(ElementType.ConstantNode);
+            var commandCreateNode1 = new CreateNodeCommand(ElementType.ConstantNode_c);
             var responseCreateNode1 = (CreateNodeResponse)sctpClient.Send(commandCreateNode1);
             //create the node2
             this.Connect();
             Assert.AreEqual(true, sctpClient.IsConnected);
-            var commandCreateNode2 = new CreateNodeCommand(ElementType.ConstantNode);
+            var commandCreateNode2 = new CreateNodeCommand(ElementType.ConstantNode_c);
             var responseCreateNode2 = (CreateNodeResponse)sctpClient.Send(commandCreateNode2);
             //Create the Arc
-            var commandCreateArc = new CreateArcCommand(ElementType.ConstantCommonArc, responseCreateNode1.CreatedNodeAddress, responseCreateNode2.CreatedNodeAddress);
+            var commandCreateArc = new CreateArcCommand(ElementType.ConstantCommonArc_c, responseCreateNode1.CreatedNodeAddress, responseCreateNode2.CreatedNodeAddress);
             var responseCreateArc = (CreateArcResponse)sctpClient.Send(commandCreateArc);
             //Get arc elements
             var command = new GetArcElementsCommand(responseCreateArc.CreatedArcAddress);
@@ -333,17 +333,17 @@ namespace Ostis.Tests
             //create the node1
             this.Connect();
             Assert.AreEqual(true, sctpClient.IsConnected);
-            var commandCreateNode1 = new CreateNodeCommand(ElementType.ConstantNode);
+            var commandCreateNode1 = new CreateNodeCommand(ElementType.ConstantNode_c);
             runAsyncTest(commandCreateNode1);
             var responseCreateNode1 = (CreateNodeResponse)lastAsyncResponse;
             //create the node2
             this.Connect();
             Assert.AreEqual(true, sctpClient.IsConnected);
-            var commandCreateNode2 = new CreateNodeCommand(ElementType.ConstantNode);
+            var commandCreateNode2 = new CreateNodeCommand(ElementType.ConstantNode_c);
             runAsyncTest(commandCreateNode2);
             var responseCreateNode2 = (CreateNodeResponse)lastAsyncResponse;
             //Create the Arc
-            var commandCreateArc = new CreateArcCommand(ElementType.ConstantCommonArc, responseCreateNode1.CreatedNodeAddress, responseCreateNode2.CreatedNodeAddress);
+            var commandCreateArc = new CreateArcCommand(ElementType.ConstantCommonArc_c, responseCreateNode1.CreatedNodeAddress, responseCreateNode2.CreatedNodeAddress);
             runAsyncTest(commandCreateArc);
             var responseCreateArc = (CreateArcResponse)lastAsyncResponse;
             //Get arc elements
@@ -369,14 +369,14 @@ namespace Ostis.Tests
             this.Connect();
             Assert.AreEqual(true, sctpClient.IsConnected);
             //create the node
-            var commandCreateNode = new CreateNodeCommand(ElementType.ConstantNode);
+            var commandCreateNode = new CreateNodeCommand(ElementType.ConstantNode_c);
             var responseCreateNode = (CreateNodeResponse)sctpClient.Send(commandCreateNode);
             //check the element type
             var command = new GetElementTypeCommand(responseCreateNode.CreatedNodeAddress);
             var response = (GetElementTypeResponse)sctpClient.Send(command);
             Assert.AreEqual(command.Code, response.Header.CommandCode);
             Assert.AreEqual(response.Header.ReturnCode, ReturnCode.Successfull);
-            Assert.AreEqual(response.ElementType, ElementType.ConstantNode);
+            Assert.AreEqual(response.ElementType, ElementType.ConstantNode_c);
 
         }
 
@@ -388,7 +388,7 @@ namespace Ostis.Tests
             this.Connect();
             Assert.AreEqual(true, sctpClient.IsConnected);
             //create the node
-            var commandCreateNode = new CreateNodeCommand(ElementType.ConstantNode);
+            var commandCreateNode = new CreateNodeCommand(ElementType.ConstantNode_c);
             runAsyncTest(commandCreateNode);
             var responseCreateNode = (CreateNodeResponse)lastAsyncResponse;
             //check the element type
@@ -397,7 +397,7 @@ namespace Ostis.Tests
             var response = (GetElementTypeResponse)lastAsyncResponse;
             Assert.AreEqual(command.Code, response.Header.CommandCode);
             Assert.AreEqual(response.Header.ReturnCode, ReturnCode.Successfull);
-            Assert.AreEqual(response.ElementType, ElementType.ConstantNode);
+            Assert.AreEqual(response.ElementType, ElementType.ConstantNode_c);
 
         }
         #endregion
@@ -506,7 +506,7 @@ namespace Ostis.Tests
             //create the node
             this.Connect();
             Assert.AreEqual(true, sctpClient.IsConnected);
-            var commandCreate = new CreateNodeCommand(ElementType.ConstantNode);
+            var commandCreate = new CreateNodeCommand(ElementType.ConstantNode_c);
             var responseCreate = (CreateNodeResponse)sctpClient.Send(commandCreate);
             //Set the ID
             var command = new SetSystemIdCommand(responseCreate.CreatedNodeAddress, new Identifier("new_sys_id"));
@@ -528,7 +528,7 @@ namespace Ostis.Tests
             //create the node
             this.Connect();
             Assert.AreEqual(true, sctpClient.IsConnected);
-            var commandCreate = new CreateNodeCommand(ElementType.ConstantNode);
+            var commandCreate = new CreateNodeCommand(ElementType.ConstantNode_c);
             runAsyncTest(commandCreate);
             var responseCreate = (CreateNodeResponse)lastAsyncResponse;
             //Set the ID
@@ -648,7 +648,6 @@ namespace Ostis.Tests
 
         #region IterateElements
         [TestMethod]
-        [Timeout(3000)]
         [TestProperty("Синхронность", "Синхронный")]
         public void TestIterateElementsSync()
         {
@@ -663,7 +662,7 @@ namespace Ostis.Tests
             {
 
                 //ищем адреса всех дуг, в которые входит идентификатор
-                var template = new ConstructionTemplate(responseFindByID.FoundAddress, ElementType.AccessArc, ElementType.CommonArc);
+                var template = new ConstructionTemplate(responseFindByID.FoundAddress, ElementType.AccessArc_a, ElementType.CommonArc_a);
                 var commandIterate = new IterateElementsCommand(template);
                 var responseIterate = (IterateElementsResponse)sctpClient.Send(commandIterate);
                 Assert.AreNotEqual(responseIterate.Constructions.Count, 0);
@@ -681,7 +680,7 @@ namespace Ostis.Tests
                     var rspFindById = (FindElementResponse)sctpClient.Send(cmdFindBydId);
 
                     //и итерируем 
-                    var itertemplate = new ConstructionTemplate(responseGetNode.BeginElementAddress, ElementType.CommonArc, ElementType.Link, ElementType.AccessArc, rspFindById.FoundAddress);
+                    var itertemplate = new ConstructionTemplate(responseGetNode.BeginElementAddress, ElementType.CommonArc_a, ElementType.Link_a, ElementType.AccessArc_a, rspFindById.FoundAddress);
                     var cmdIterate = new IterateElementsCommand(itertemplate);
                     var rspIterate = (IterateElementsResponse)sctpClient.Send(cmdIterate);
 
@@ -691,7 +690,6 @@ namespace Ostis.Tests
 
 
         [TestMethod]
-        [Timeout(3000)]
         [TestProperty("Синхронность", "Асинхронный")]
         public void TestIterateElementsASync()
         {
@@ -706,7 +704,7 @@ namespace Ostis.Tests
             {
 
                 //ищем адреса всех дуг, в которые входит идентификатор
-                var template = new ConstructionTemplate(responseFindByID.FoundAddress, ElementType.AccessArc, ElementType.CommonArc);
+                var template = new ConstructionTemplate(responseFindByID.FoundAddress, ElementType.AccessArc_a, ElementType.CommonArc_a);
                 var commandIterate = new IterateElementsCommand(template);
                 runAsyncTest(commandIterate);
                 var responseIterate = (IterateElementsResponse)lastAsyncResponse;
@@ -728,7 +726,7 @@ namespace Ostis.Tests
                     var rspFindById = (FindElementResponse)lastAsyncResponse;
 
                     //и итерируем 
-                    var itertemplate = new ConstructionTemplate(responseGetNode.BeginElementAddress, ElementType.CommonArc, ElementType.Link, ElementType.AccessArc, rspFindById.FoundAddress);
+                    var itertemplate = new ConstructionTemplate(responseGetNode.BeginElementAddress, ElementType.CommonArc_a, ElementType.Link_a, ElementType.AccessArc_a, rspFindById.FoundAddress);
                     var cmdIterate = new IterateElementsCommand(itertemplate);
                     runAsyncTest(cmdIterate);
                     var rspIterate = (IterateElementsResponse)lastAsyncResponse;
@@ -750,9 +748,9 @@ namespace Ostis.Tests
 
             KnowledgeBase knowledgeBase = new KnowledgeBase("127.0.0.1", Ostis.Sctp.SctpProtocol.DefaultPortNumber);
             //создаем новый начальный итератор
-            ConstructionTemplate initialIterator = new ConstructionTemplate(knowledgeBase.GetNodeAddress("nrel_system_identifier"), ElementType.ConstantCommonArc, ElementType.Link, ElementType.PositiveConstantPermanentAccessArc, knowledgeBase.GetNodeAddress("nrel_main_idtf"));
+            ConstructionTemplate initialIterator = new ConstructionTemplate(knowledgeBase.Commands.GetNodeAddress("nrel_system_identifier"), ElementType.ConstantCommonArc_c, ElementType.Link_a, ElementType.PositiveConstantPermanentAccessArc_c, knowledgeBase.Commands.GetNodeAddress("nrel_main_idtf"));
             //создаем следующий итератор. Неизвестный пока адрес делаем ScAddress.Unknown
-            ConstructionTemplate nextIterator = new ConstructionTemplate(knowledgeBase.GetNodeAddress("lang_ru"), ElementType.PositiveConstantPermanentAccessArc, ScAddress.Unknown);
+            ConstructionTemplate nextIterator = new ConstructionTemplate(knowledgeBase.Commands.GetNodeAddress("lang_ru"), ElementType.PositiveConstantPermanentAccessArc_c, ScAddress.Unknown);
             //второй элемент итератора initialIterator (ElementType.Link) будет подставлен (в результате первого итерирования будет известен его адрес) вместо пока неизвестного второго элемента итератора nextIterator
             //поэтому подстановка выглядит как: Substitution(2, 2)
             //создаем элемент цепочки итераторов. Это подстановка и шаблон итератора
@@ -767,9 +765,9 @@ namespace Ostis.Tests
             //в результате в свойстве response.Constructions первый индекс это номер конструкции, второй индекс номер элемента в цепочке итераторов
             Assert.AreEqual(ReturnCode.Successfull, response.Header.ReturnCode, "Проверьте, имееется ли в наличии конструкция, которую вы ищете, на всякий случай добавьте в базу знаний конструкцию nrel_system_identifier  => nrel_main_idtf:[Основной идентификатор] (*  <- lang_ru;;*);;");
             Assert.AreNotEqual(0, response.Constructions.Count, "Проверьте, имееется ли в наличии конструкция, которую вы ищете, на всякий случай добавьте в базу знаний конструкцию nrel_system_identifier  => nrel_main_idtf:[Основной идентификатор] (*  <- lang_ru;;*);;");
-            Assert.AreEqual(knowledgeBase.GetNodeAddress("nrel_system_identifier"), response.Constructions[0][0]);
-            Assert.AreEqual(knowledgeBase.GetNodeAddress("nrel_main_idtf"), response.Constructions[0][4]);
-            Assert.AreEqual(knowledgeBase.GetNodeAddress("lang_ru"), response.Constructions[0][5]);
+            Assert.AreEqual(knowledgeBase.Commands.GetNodeAddress("nrel_system_identifier"), response.Constructions[0][0]);
+            Assert.AreEqual(knowledgeBase.Commands.GetNodeAddress("nrel_main_idtf"), response.Constructions[0][4]);
+            Assert.AreEqual(knowledgeBase.Commands.GetNodeAddress("lang_ru"), response.Constructions[0][5]);
             Assert.AreEqual(response.Constructions[0][7], response.Constructions[0][2]);
 
         }
@@ -786,9 +784,9 @@ namespace Ostis.Tests
 
             KnowledgeBase knowledgeBase = new KnowledgeBase("127.0.0.1", Ostis.Sctp.SctpProtocol.DefaultPortNumber);
             //создаем новый начальный итератор
-            ConstructionTemplate initialIterator = new ConstructionTemplate(knowledgeBase.GetNodeAddress("nrel_system_identifier"), ElementType.ConstantCommonArc, ElementType.Link, ElementType.PositiveConstantPermanentAccessArc, knowledgeBase.GetNodeAddress("nrel_main_idtf"));
+            ConstructionTemplate initialIterator = new ConstructionTemplate(knowledgeBase.Commands.GetNodeAddress("nrel_system_identifier"), ElementType.ConstantCommonArc_c, ElementType.Link_a, ElementType.PositiveConstantPermanentAccessArc_c, knowledgeBase.Commands.GetNodeAddress("nrel_main_idtf"));
             //создаем следующий итератор. Неизвестный пока адрес делаем ScAddress.Unknown
-            ConstructionTemplate nextIterator =new ConstructionTemplate(knowledgeBase.GetNodeAddress("lang_ru"),ElementType.PositiveConstantPermanentAccessArc,ScAddress.Unknown);
+            ConstructionTemplate nextIterator = new ConstructionTemplate(knowledgeBase.Commands.GetNodeAddress("lang_ru"), ElementType.PositiveConstantPermanentAccessArc_c, ScAddress.Unknown);
             //второй элемент итератора initialIterator (ElementType.Link) будет подставлен (в результате первого итерирования будет известен его адрес) вместо пока неизвестного второго элемента итератора nextIterator
             //поэтому подстановка выглядит как: Substitution(2, 2)
             //создаем элемент цепочки итераторов. Это подстановка и шаблон итератора
@@ -804,9 +802,9 @@ namespace Ostis.Tests
             //в результате в свойстве response.Constructions первый индекс это номер конструкции, второй индекс номер элемента в цепочке итераторов
             Assert.AreEqual(ReturnCode.Successfull, response.Header.ReturnCode, "Проверьте, имееется ли в наличии конструкция, которую вы ищете, на всякий случай добавьте в базу знаний конструкцию nrel_system_identifier  => nrel_main_idtf:[Основной идентификатор] (*  <- lang_ru;;*);;");
             Assert.AreNotEqual(0, response.Constructions.Count, "Проверьте, имееется ли в наличии конструкция, которую вы ищете, на всякий случай добавьте в базу знаний конструкцию nrel_system_identifier  => nrel_main_idtf:[Основной идентификатор] (*  <- lang_ru;;*);;");
-            Assert.AreEqual(knowledgeBase.GetNodeAddress("nrel_system_identifier"), response.Constructions[0][0]);
-            Assert.AreEqual(knowledgeBase.GetNodeAddress("nrel_main_idtf"), response.Constructions[0][4]);
-            Assert.AreEqual(knowledgeBase.GetNodeAddress("lang_ru"), response.Constructions[0][5]);
+            Assert.AreEqual(knowledgeBase.Commands.GetNodeAddress("nrel_system_identifier"), response.Constructions[0][0]);
+            Assert.AreEqual(knowledgeBase.Commands.GetNodeAddress("nrel_main_idtf"), response.Constructions[0][4]);
+            Assert.AreEqual(knowledgeBase.Commands.GetNodeAddress("lang_ru"), response.Constructions[0][5]);
             Assert.AreEqual(response.Constructions[0][7], response.Constructions[0][2]);
         }
 
@@ -821,12 +819,12 @@ namespace Ostis.Tests
             this.Connect();
             Assert.IsTrue(sctpClient.IsConnected);
             //create the node1 
-            var commandCreateNode1 = new CreateNodeCommand(ElementType.ConstantNode);
+            var commandCreateNode1 = new CreateNodeCommand(ElementType.ConstantNode_c);
             var responseCreateNode1 = (CreateNodeResponse)sctpClient.Send(commandCreateNode1);
 
             // create the node2
             Assert.AreEqual(true, sctpClient.IsConnected);
-            var commandCreateNode2 = new CreateNodeCommand(ElementType.ConstantNode);
+            var commandCreateNode2 = new CreateNodeCommand(ElementType.ConstantNode_c);
             var responseCreateNode2 = (CreateNodeResponse)sctpClient.Send(commandCreateNode2);
 
             //subscriptionsNode1
@@ -840,7 +838,7 @@ namespace Ostis.Tests
 
 
             //Create the Arc
-            var commandCreateArc = new CreateArcCommand(ElementType.ConstantCommonArc, responseCreateNode1.CreatedNodeAddress, responseCreateNode2.CreatedNodeAddress);
+            var commandCreateArc = new CreateArcCommand(ElementType.ConstantCommonArc_c, responseCreateNode1.CreatedNodeAddress, responseCreateNode2.CreatedNodeAddress);
             var responseCreateArc = (CreateArcResponse)sctpClient.Send(commandCreateArc);
             Assert.AreEqual(commandCreateArc.Code, responseCreateArc.Header.CommandCode);
             Assert.AreEqual(ReturnCode.Successfull, responseCreateArc.Header.ReturnCode);
@@ -890,13 +888,13 @@ namespace Ostis.Tests
             Assert.IsTrue(sctpClient.IsConnected);
 
             //create the node1
-            var commandCreateNode1 = new CreateNodeCommand(ElementType.ConstantNode);
+            var commandCreateNode1 = new CreateNodeCommand(ElementType.ConstantNode_c);
             runAsyncTest(commandCreateNode1);
             var responseCreateNode1 = (CreateNodeResponse)lastAsyncResponse;
 
             //create the node2
             Assert.AreEqual(true, sctpClient.IsConnected);
-            var commandCreateNode2 = new CreateNodeCommand(ElementType.ConstantNode);
+            var commandCreateNode2 = new CreateNodeCommand(ElementType.ConstantNode_c);
             runAsyncTest(commandCreateNode2);
             var responseCreateNode2 = (CreateNodeResponse)lastAsyncResponse;
 
@@ -915,7 +913,7 @@ namespace Ostis.Tests
             Assert.AreEqual(ReturnCode.Successfull, responseCreateSubscriptionCreate2.Header.ReturnCode);
 
             //Create the Arc
-            var commandCreateArc = new CreateArcCommand(ElementType.ConstantCommonArc, responseCreateNode1.CreatedNodeAddress, responseCreateNode2.CreatedNodeAddress);
+            var commandCreateArc = new CreateArcCommand(ElementType.ConstantCommonArc_c, responseCreateNode1.CreatedNodeAddress, responseCreateNode2.CreatedNodeAddress);
             runAsyncTest(commandCreateArc);
             var responseCreateArc = (CreateArcResponse)lastAsyncResponse;
             Assert.AreEqual(commandCreateArc.Code, responseCreateArc.Header.CommandCode);

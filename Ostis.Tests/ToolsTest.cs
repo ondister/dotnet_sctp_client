@@ -24,20 +24,37 @@ namespace Ostis.Tests
         }
 
         #endregion
-        
+
+        #region UniqueNode
+        [TestMethod]
+        public void TestUniqueNodes()
+        {
+            KnowledgeBase knowledgeBase = new KnowledgeBase("127.0.0.1", Ostis.Sctp.SctpProtocol.DefaultPortNumber);
+            for (int count = 0; count < 100000; count++)
+            {
+                knowledgeBase.Nodes.AddUnique(ElementType.ConstantNode_c, "preffix");
+            }
+
+        }
+
+        #endregion
+
+
+
+
         #region KeyNodes
         [TestMethod]
         [Timeout(3000)]
         public void TestKeyNodes()
         {
             KnowledgeBase knowledgeBase = new KnowledgeBase("127.0.0.1", Ostis.Sctp.SctpProtocol.DefaultPortNumber);
-            Assert.AreNotEqual(ScAddress.Unknown, knowledgeBase.GetNodeAddress("nrel_inclusion"));
-            Assert.AreNotEqual(ScAddress.Unknown, knowledgeBase.GetNodeAddress("nrel_system_identifier"));
-            Assert.AreNotEqual(ScAddress.Unknown, knowledgeBase.GetNodeAddress("nrel_main_idtf"));
-            Assert.AreNotEqual(ScAddress.Unknown, knowledgeBase.GetNodeAddress("lang_ru"));
-            Assert.AreNotEqual(ScAddress.Unknown, knowledgeBase.GetNodeAddress("nlang_en"));
+            Assert.AreNotEqual(ScAddress.Unknown, knowledgeBase.Commands.GetNodeAddress("nrel_inclusion"));
+            Assert.AreNotEqual(ScAddress.Unknown, knowledgeBase.Commands.GetNodeAddress("nrel_system_identifier"));
+            Assert.AreNotEqual(ScAddress.Unknown, knowledgeBase.Commands.GetNodeAddress("nrel_main_idtf"));
+            Assert.AreNotEqual(ScAddress.Unknown, knowledgeBase.Commands.GetNodeAddress("lang_ru"));
+            Assert.AreNotEqual(ScAddress.Unknown, knowledgeBase.Commands.GetNodeAddress("nlang_en"));
 
-            Assert.AreEqual("nrel_system_identifier", knowledgeBase.GetNodeSysIdentifier(knowledgeBase.GetNodeAddress("nrel_system_identifier")).Value);
+            Assert.AreEqual("nrel_system_identifier", knowledgeBase.Commands.GetNodeSysIdentifier(knowledgeBase.Commands.GetNodeAddress("nrel_system_identifier")).Value);
         }
         #endregion
 
@@ -60,15 +77,5 @@ namespace Ostis.Tests
         #endregion
 
        
-        #region ElementType
-        [TestMethod]
-        [Timeout(3000)]
-        public void TestElementType()
-        {
-            Assert.IsTrue(KnowledgeBase.CompareElementTypes(ElementType.PositiveConstantPermanentAccessArc, ElementType.PositiveArc));
-            Assert.IsTrue(KnowledgeBase.CompareElementTypes(ElementType.ConstantNode, ElementType.Node));
-            Assert.IsFalse(KnowledgeBase.CompareElementTypes(ElementType.PositiveArc, ElementType.NegativeArc));
-        }
-        #endregion
     }
 }

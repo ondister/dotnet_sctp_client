@@ -15,8 +15,9 @@ namespace Ostis.Sctp.Tools
         {
             this.knowledgeBase = knowledgeBase;
         }
-       
-        
+
+
+
         public Node this[Identifier sysIdentifier]
         {
             get
@@ -31,5 +32,39 @@ namespace Ostis.Sctp.Tools
                 return new Node(knowledgeBase, scAddress);
             }
         }
+
+
+        public void Add(ElementType nodeType, Identifier sysIdentifier)
+        {
+            knowledgeBase.Commands.CreateNode(nodeType, sysIdentifier);
+        }
+
+
+        public void Add(ElementType nodeType, string stringSysIdentifier)
+        {
+            knowledgeBase.Commands.CreateNode(nodeType, stringSysIdentifier);
+        }
+
+        public void Add(ElementType nodeType)
+        {
+            knowledgeBase.Commands.CreateNode(nodeType);
+        }
+
+        /// <summary>
+        /// Добавляет в базу новый узел с уникальным идентификатором
+        /// </summary>
+        /// <param name="nodeType">Тип узла</param>
+        /// <param name="nodePreffix">Преффикс для узла</param>
+        /// <returns>Идентификатор, присвоенный узлу</returns>
+        public Identifier AddUnique(ElementType nodeType, string nodePreffix)
+        {
+            ScAddress nodeAddress = knowledgeBase.Commands.CreateNode(nodeType);
+            Identifier nodeIdtf = knowledgeBase.Commands.FindUniqueSysIdentifier(nodeAddress, nodePreffix);
+            knowledgeBase.Commands.SetSysIdentifier(nodeAddress, nodeIdtf);
+
+
+            return nodeIdtf;
+        }
+
     }
 }
