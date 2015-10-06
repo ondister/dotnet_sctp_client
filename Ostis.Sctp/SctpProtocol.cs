@@ -14,6 +14,11 @@ namespace Ostis.Sctp
         public const int DefaultBufferSize = 1024;
 
         /// <summary>
+        /// Адрес сервера по умолчанию.
+        /// </summary>
+        public const string TestServerIp = "127.0.0.1";
+
+        /// <summary>
         /// Номер порта по умолчанию.
         /// </summary>
         public const int DefaultPortNumber = 55770;
