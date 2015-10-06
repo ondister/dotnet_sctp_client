@@ -746,7 +746,7 @@ namespace Ostis.Tests
             this.Connect();
             Assert.IsTrue(sctpClient.IsConnected);
 
-            KnowledgeBase knowledgeBase = new KnowledgeBase("127.0.0.1", Ostis.Sctp.SctpProtocol.DefaultPortNumber);
+            KnowledgeBase knowledgeBase = new KnowledgeBase(SctpProtocol.TestServerIp, Ostis.Sctp.SctpProtocol.DefaultPortNumber);
             //создаем новый начальный итератор
             ConstructionTemplate initialIterator = new ConstructionTemplate(knowledgeBase.Commands.GetNodeAddress("nrel_system_identifier"), ElementType.ConstantCommonArc_c, ElementType.Link_a, ElementType.PositiveConstantPermanentAccessArc_c, knowledgeBase.Commands.GetNodeAddress("nrel_main_idtf"));
             //создаем следующий итератор. Неизвестный пока адрес делаем ScAddress.Unknown
@@ -782,7 +782,7 @@ namespace Ostis.Tests
             this.Connect();
             Assert.IsTrue(sctpClient.IsConnected);
 
-            KnowledgeBase knowledgeBase = new KnowledgeBase("127.0.0.1", Ostis.Sctp.SctpProtocol.DefaultPortNumber);
+            KnowledgeBase knowledgeBase = new KnowledgeBase(SctpProtocol.TestServerIp, Ostis.Sctp.SctpProtocol.DefaultPortNumber);
             //создаем новый начальный итератор
             ConstructionTemplate initialIterator = new ConstructionTemplate(knowledgeBase.Commands.GetNodeAddress("nrel_system_identifier"), ElementType.ConstantCommonArc_c, ElementType.Link_a, ElementType.PositiveConstantPermanentAccessArc_c, knowledgeBase.Commands.GetNodeAddress("nrel_main_idtf"));
             //создаем следующий итератор. Неизвестный пока адрес делаем ScAddress.Unknown
@@ -812,7 +812,7 @@ namespace Ostis.Tests
 
         #region SubScriptions
         [TestMethod]
-        [Timeout(3000)]
+        [Timeout(4000)]
         [TestProperty("Синхронность", "Синхронный")]
         public void TestSubscriptionsSync()
         {
@@ -854,7 +854,7 @@ namespace Ostis.Tests
 
 
             //emit any events
-            Thread.Sleep(1000);
+            Thread.Sleep(3000);
             var commandEmit = new EmitEventsCommand();
             var responseEmit = (EmitEventsResponse)sctpClient.Send(commandEmit);
             List<ScEvent> eventList = responseEmit.ScEvents;
@@ -880,7 +880,7 @@ namespace Ostis.Tests
         }
 
         [TestMethod]
-        [Timeout(3000)]
+        [Timeout(4000)]
         [TestProperty("Синхронность", "Асинхронный")]
         public void TestSubscriptionsASync()
         {
@@ -933,7 +933,7 @@ namespace Ostis.Tests
             var reaponseDelete = (DeleteElementResponse)lastAsyncResponse;
 
             //emit any events
-            Thread.Sleep(1000);
+            Thread.Sleep(3000);
             var commandEmit = new EmitEventsCommand();
             var responseEmit = (EmitEventsResponse)sctpClient.Send(commandEmit);
             List<ScEvent> eventList = responseEmit.ScEvents;
@@ -963,7 +963,7 @@ namespace Ostis.Tests
         #region Connect
         private void Connect()
         {
-            const string defaultAddress = "127.0.0.1";
+            const string defaultAddress = SctpProtocol.TestServerIp;
             string serverAddress = defaultAddress;
             int serverPort = SctpProtocol.DefaultPortNumber;
             sctpClient = new SctpClient(serverAddress, serverPort);

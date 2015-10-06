@@ -58,7 +58,7 @@ namespace Ostis.Tests
         [TestProperty("Синхронность", "Синхронный")]
         public void TestPerfCreateNodesTools()
         {
-            KnowledgeBase knowledgeBase = new KnowledgeBase("127.0.0.1", Ostis.Sctp.SctpProtocol.DefaultPortNumber);
+            KnowledgeBase knowledgeBase = new KnowledgeBase(SctpProtocol.TestServerIp, Ostis.Sctp.SctpProtocol.DefaultPortNumber);
             for (int count = 0; count < 100000; count++)
             {
                 knowledgeBase.Nodes.Add(ElementType.Node_a, "idtf_" + count.ToString());
@@ -72,7 +72,7 @@ namespace Ostis.Tests
         #region Connect
         private void Connect()
         {
-            const string defaultAddress = "127.0.0.1";
+            const string defaultAddress = SctpProtocol.TestServerIp;
             string serverAddress = defaultAddress;
             int serverPort = SctpProtocol.DefaultPortNumber;
             sctpClient = new SctpClient(serverAddress, serverPort);

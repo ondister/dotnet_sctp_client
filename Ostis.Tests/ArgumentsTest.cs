@@ -196,7 +196,7 @@ namespace Ostis.Tests
         [Timeout(3000)]
         public void TestIteratorsChain()
         {
-            KnowledgeBase knowledgeBase = new KnowledgeBase("127.0.0.1", Ostis.Sctp.SctpProtocol.DefaultPortNumber);
+            KnowledgeBase knowledgeBase = new KnowledgeBase(SctpProtocol.TestServerIp, Ostis.Sctp.SctpProtocol.DefaultPortNumber);
             ConstructionTemplate initialIterator = new ConstructionTemplate(knowledgeBase.Commands.GetNodeAddress("nrel_system_identifier"), ElementType.ConstantCommonArc_c, ElementType.Link_a, ElementType.PositiveConstantPermanentAccessArc_c, knowledgeBase.Commands.GetNodeAddress("nrel_main_idtf"));
             ConstructionTemplate nextIterator = new ConstructionTemplate(knowledgeBase.Commands.GetNodeAddress("lang_ru"), ElementType.PositiveConstantPermanentAccessArc_c, new ScAddress(0, 0));
             IteratorsChainMember chainMember = new IteratorsChainMember(new Substitution(2, 2), nextIterator);

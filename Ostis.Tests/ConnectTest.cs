@@ -11,7 +11,7 @@ namespace Ostis.Tests
         public void TestSocketConnect()
         {
             SctpClient sctpClient;
-            const string defaultAddress = "127.0.0.1";
+            const string defaultAddress = SctpProtocol.TestServerIp;
             string serverAddress = defaultAddress;
             int serverPort = SctpProtocol.DefaultPortNumber;
             sctpClient = new SctpClient(serverAddress, serverPort);

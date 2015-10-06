@@ -11,7 +11,7 @@ using System.IO;
 namespace Ostis.Sctp.Tools
 {
     /// <summary>
-    /// Класс с методами для диагностики абстрактной базы знаний
+    /// Класс с методами выполнение команд в базе знаний
     /// </summary>
     public class Commands
     {
@@ -58,6 +58,18 @@ namespace Ostis.Sctp.Tools
             }
             return isSuccesful;
 
+        }
+
+        public ScAddress CreateArc(ElementType arcType, ScAddress beginElement, ScAddress endElement)
+        {
+             ScAddress arcAddress = ScAddress.Unknown;
+             if (knowledgeBase.IsAvaible)
+             {
+                 var cmdCreateArc = new CreateArcCommand(arcType, beginElement, endElement);
+                 var rspcreateArc= (CreateArcResponse)knowledgeBase.ExecuteCommand(cmdCreateArc);
+                 arcAddress = rspcreateArc.CreatedArcAddress;
+             }
+            return arcAddress;
         }
 
         public ScAddress CreateNode(ElementType nodeType)

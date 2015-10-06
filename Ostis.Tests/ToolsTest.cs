@@ -15,7 +15,7 @@ namespace Ostis.Tests
         [Timeout(3000)]
         public void TestNodes()
         {
-            KnowledgeBase knowledgeBase = new KnowledgeBase("127.0.0.1", Ostis.Sctp.SctpProtocol.DefaultPortNumber);
+            KnowledgeBase knowledgeBase = new KnowledgeBase(SctpProtocol.TestServerIp, Ostis.Sctp.SctpProtocol.DefaultPortNumber);
             Assert.AreNotEqual(ScAddress.Unknown, knowledgeBase.Nodes["nrel_system_identifier"].ScAddress);
             Assert.AreEqual("nrel_system_identifier", knowledgeBase.Nodes["nrel_system_identifier"].SysIdentifier.Value);
             Assert.AreNotEqual(ElementType.Unknown, knowledgeBase.Nodes["nrel_system_identifier"].Type);
@@ -29,8 +29,8 @@ namespace Ostis.Tests
         [TestMethod]
         public void TestUniqueNodes()
         {
-            KnowledgeBase knowledgeBase = new KnowledgeBase("127.0.0.1", Ostis.Sctp.SctpProtocol.DefaultPortNumber);
-            for (int count = 0; count < 100000; count++)
+            KnowledgeBase knowledgeBase = new KnowledgeBase(SctpProtocol.TestServerIp, Ostis.Sctp.SctpProtocol.DefaultPortNumber);
+            for (int count = 0; count < 10000; count++)
             {
                 knowledgeBase.Nodes.AddUnique(ElementType.ConstantNode_c, "preffix");
             }
@@ -40,6 +40,23 @@ namespace Ostis.Tests
         #endregion
 
 
+        #region CreateArc
+        [TestMethod]
+        public void TestCreateArc()
+        {
+            KnowledgeBase knowledgeBase = new KnowledgeBase(SctpProtocol.TestServerIp, Ostis.Sctp.SctpProtocol.DefaultPortNumber);
+            for (int count = 0; count < 1000; count++)
+            {
+             Identifier beginNodeId=  knowledgeBase.Nodes.AddUnique(ElementType.ClassNode_a, "begin");
+             Identifier endNodeId = knowledgeBase.Nodes.AddUnique(ElementType.ConstantNode_c, "end");
+             knowledgeBase.Arcs.Add(ElementType.PositiveConstantPermanentAccessArc_c, knowledgeBase.Nodes[beginNodeId], knowledgeBase.Nodes[endNodeId]);
+
+            }
+
+        }
+
+        #endregion
+
 
 
         #region KeyNodes
@@ -47,7 +64,7 @@ namespace Ostis.Tests
         [Timeout(3000)]
         public void TestKeyNodes()
         {
-            KnowledgeBase knowledgeBase = new KnowledgeBase("127.0.0.1", Ostis.Sctp.SctpProtocol.DefaultPortNumber);
+            KnowledgeBase knowledgeBase = new KnowledgeBase(SctpProtocol.TestServerIp, Ostis.Sctp.SctpProtocol.DefaultPortNumber);
             Assert.AreNotEqual(ScAddress.Unknown, knowledgeBase.Commands.GetNodeAddress("nrel_inclusion"));
             Assert.AreNotEqual(ScAddress.Unknown, knowledgeBase.Commands.GetNodeAddress("nrel_system_identifier"));
             Assert.AreNotEqual(ScAddress.Unknown, knowledgeBase.Commands.GetNodeAddress("nrel_main_idtf"));
@@ -63,7 +80,7 @@ namespace Ostis.Tests
         [Timeout(3000)]
         public void TestGetNodesWithoutMainIdtf()
         {
-            KnowledgeBase knowledgeBase = new KnowledgeBase("127.0.0.1", Ostis.Sctp.SctpProtocol.DefaultPortNumber);
+            KnowledgeBase knowledgeBase = new KnowledgeBase(SctpProtocol.TestServerIp, Ostis.Sctp.SctpProtocol.DefaultPortNumber);
             knowledgeBase.Diagnostic.GetNodesWithoutMainIdtf("NodesWithoutMainIdtf.txt");
         }
 
@@ -71,7 +88,7 @@ namespace Ostis.Tests
         [Timeout(3000)]
         public void TestGetNodesWithoutInputArcs()
         {
-            KnowledgeBase knowledgeBase = new KnowledgeBase("127.0.0.1", Ostis.Sctp.SctpProtocol.DefaultPortNumber);
+            KnowledgeBase knowledgeBase = new KnowledgeBase(SctpProtocol.TestServerIp, Ostis.Sctp.SctpProtocol.DefaultPortNumber);
             knowledgeBase.Diagnostic.GetNodesWithoutInputArcs("NodesWithoutInputsArcs.txt");
         }
         #endregion

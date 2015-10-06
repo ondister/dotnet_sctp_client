@@ -4,6 +4,7 @@ namespace Ostis.Sctp
 {
     /// <summary>
     /// Тип элемента.
+    /// Суффикс a указывает на атомарность типа элемента, суффикс c указывает, что это тип составлен из нескольких
     /// </summary>
     [Flags]
     public enum ElementType : ushort

@@ -25,5 +25,11 @@ namespace Ostis.Sctp.Tools
                 return new Arc(knowledgeBase, scAddress);
             }
         }
+
+        public ScAddress Add(ElementType arcType, IElement beginElement, IElement endElement)
+        {
+            return knowledgeBase.Commands.CreateArc(arcType, beginElement.ScAddress, endElement.ScAddress);
+        }
+
     }
 }
