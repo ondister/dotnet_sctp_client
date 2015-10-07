@@ -15,7 +15,7 @@ namespace Ostis.Sctp.Arguments
         /// <summary>
         /// Возвращает пустой контент
         /// </summary>
-        public static readonly LinkContent Unknown = new LinkContent(String.Empty);
+        public static readonly LinkContent Invalid = new LinkContent(String.Empty);
 
         /// <summary>
         /// OSTIS-тип содержимого ссылки.

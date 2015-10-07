@@ -33,6 +33,10 @@ namespace Ostis.Tests
             Assert.AreEqual("new_system_id", nextidentifier.Value);
             Assert.AreEqual("new_system_id", nextidentifier.ToString());
             Assert.AreEqual(identifier, nextidentifier);
+            Assert.IsTrue(identifier == nextidentifier);
+            Assert.IsFalse(identifier != nextidentifier);
+            nextidentifier = null;
+            Assert.IsTrue(identifier != null);
         }
 
         #endregion
@@ -57,9 +61,6 @@ namespace Ostis.Tests
         }
 
         #endregion
-
-
-
 
         #region ConstructionTemplate
         [TestMethod]
@@ -139,7 +140,10 @@ namespace Ostis.Tests
             Assert.AreEqual(scAddress.Segment, scAddressFromBytes.Segment);
             Assert.AreEqual(scAddress.Offset, scAddressFromBytes.Offset);
             Assert.AreEqual(scAddress, nextscAddress);
-
+            Assert.IsTrue(scAddress == nextscAddress);
+            Assert.IsFalse(scAddress != nextscAddress);
+            nextscAddress = null;
+            Assert.IsTrue(scAddress != nextscAddress);
         }
         #endregion
 

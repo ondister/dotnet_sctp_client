@@ -71,5 +71,14 @@ namespace Ostis.Sctp.Arguments
         }
 
         #endregion
+
+        /// <summary>
+        /// Возвращает хэш-код значения
+        /// </summary>
+        /// <returns>Хэш-код значения</returns>
+        public override int GetHashCode()
+        {
+            return value.GetHashCode();
+        }
     }
 }

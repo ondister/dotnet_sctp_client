@@ -7,7 +7,7 @@ namespace Ostis.Sctp.Responses
     /// </summary>
     public class CreateNodeResponse : Response
     {
-        private readonly ScAddress createdNodeAddress;
+        private readonly ScAddress createdNodeAddress = ScAddress.Invalid;
 
         /// <summary>
         /// Адрес созданного узла.

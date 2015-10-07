@@ -8,6 +8,12 @@ using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Tools
 {
+   /// <summary>
+   /// Класс, инкапсулирующий коллекцию узлов базы знаний
+   /// </summary>
+   /// <remarks>
+   /// Сам по себе класс не содержит никаких кешируемых данных, так как данные узлов могут меняться, а постоянно запрашивает необходимую информацию из базы знаний
+   /// </remarks>
     public class Nodes
     {
         private KnowledgeBase knowledgeBase;
@@ -17,7 +23,11 @@ namespace Ostis.Sctp.Tools
         }
 
 
-
+        /// <summary>
+        /// Возвращает узел по его системному идентификатору
+        /// </summary>
+        /// <param name="sysIdentifier">Системный идентификатор узла</param>
+        /// <returns>Найденный узел</returns>
         public Node this[Identifier sysIdentifier]
         {
             get
@@ -25,6 +35,12 @@ namespace Ostis.Sctp.Tools
                 return new Node(knowledgeBase, sysIdentifier);
             }
         }
+
+        /// <summary>
+        /// Возвращает узел по известному адресу
+        /// </summary>
+        /// <param name="scAddress">Адрес узла</param>
+        /// <returns>Найденный узел</returns>
         public Node this[ScAddress scAddress]
         {
             get
@@ -34,17 +50,21 @@ namespace Ostis.Sctp.Tools
         }
 
 
-        public void Add(ElementType nodeType, Identifier sysIdentifier)
+        /// <summary>
+        /// Добавляет в базу знаний узел определенного типа с указанным идентификатором
+        /// </summary>
+        /// <param name="nodeType">Тип узла</param>
+        /// <param name="sysIdentifier">Системный идентификатор</param>
+        public ScAddress Add(ElementType nodeType, Identifier sysIdentifier)
         {
-            knowledgeBase.Commands.CreateNode(nodeType, sysIdentifier);
+           return  knowledgeBase.Commands.CreateNode(nodeType, sysIdentifier);
         }
 
 
-        public void Add(ElementType nodeType, string stringSysIdentifier)
-        {
-            knowledgeBase.Commands.CreateNode(nodeType, stringSysIdentifier);
-        }
-
+        /// <summary>
+        /// Добавляет в базу знаний узел определенного типа
+        /// </summary>
+        /// <param name="nodeType">Тип узла</param>
         public void Add(ElementType nodeType)
         {
             knowledgeBase.Commands.CreateNode(nodeType);
@@ -59,7 +79,7 @@ namespace Ostis.Sctp.Tools
         public Identifier AddUnique(ElementType nodeType, string nodePreffix)
         {
             ScAddress nodeAddress = knowledgeBase.Commands.CreateNode(nodeType);
-            Identifier nodeIdtf = knowledgeBase.Commands.FindUniqueSysIdentifier(nodeAddress, nodePreffix);
+            Identifier nodeIdtf = knowledgeBase.Commands.GenerateUniqueSysIdentifier(nodeAddress, nodePreffix);
             knowledgeBase.Commands.SetSysIdentifier(nodeAddress, nodeIdtf);
 
 

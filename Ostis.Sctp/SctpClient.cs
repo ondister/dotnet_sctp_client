@@ -244,7 +244,7 @@ namespace Ostis.Sctp
         }
 
         /// <summary>
-        /// dtor.
+        /// Деструктор
         /// </summary>
         ~SctpClient()
         {

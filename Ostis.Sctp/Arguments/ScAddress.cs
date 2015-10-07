@@ -12,20 +12,25 @@ namespace Ostis.Sctp.Arguments
     public class ScAddress : IArgument
     {
         /// <summary>
-        /// Возвращает неизвестный или недействительный Sc адрес
+        /// Возвращает неизвестный  Sc адрес
         /// </summary>
-        public static readonly ScAddress Unknown = new ScAddress(0, 0);
+        public static readonly ScAddress Invalid = new ScAddress(0, 0);
 
+     
         /// <summary>
-        /// Возвращает действительность адреса
+        /// Возвращает известность адреса
         /// </summary>
-        public bool IsValid 
+        public bool IsValid
         {
             get
             {
-               return !this.Equals(ScAddress.Unknown);
+               return !this.Equals(ScAddress.Invalid);
             }
         }
+
+      
+
+
         /// <summary>
         /// Сегмент.
         /// </summary>
@@ -80,6 +85,7 @@ namespace Ostis.Sctp.Arguments
 		    return string.Format("segment: {0}, offset: {1}", segment, offset);
 		}
 
+        #region Реализация сравнения
         /// <summary>
         /// Определяет равен ли заданный объект <see cref="ScAddress"/> текущему объекту
         /// </summary>
@@ -114,7 +120,35 @@ namespace Ostis.Sctp.Arguments
             return Convert.ToInt32(this.Segment.ToString() + this.Offset.ToString());
         }
 
+        /// <summary>
+        /// Оператор сравнения адресов
+        /// </summary>
+        /// <param name="scAddress1">Первый адрес</param>
+        /// <param name="scAddress2">Второй адрес</param>
+        /// <returns>Возвращает True, если адреса равны</returns>
+        public static bool operator ==(ScAddress scAddress1, ScAddress scAddress2)
+        {
+            bool isEqual = false;
+            if (((object)scAddress1 != null) && ((object)scAddress2 != null))
+            {
+                isEqual = scAddress1.Equals(scAddress2);
+            }
 
+            return isEqual;
+        }
+
+        /// <summary>
+        /// Оператор сравнения адресов
+        /// </summary>
+        /// <param name="scAddress1">Первый адрес</param>
+        /// <param name="scAddress2">Второй адрес</param>
+        /// <returns>Возвращает True, если адреса равны</returns>
+        public static bool operator !=(ScAddress scAddress1, ScAddress scAddress2)
+        {
+            return !(scAddress1 == scAddress2);
+        }
+
+        #endregion 
 
         #region Реализация интерфеса IArgument
 
@@ -124,15 +158,8 @@ namespace Ostis.Sctp.Arguments
         public byte[] GetBytes()
         {
             var bytes = new byte[4];
-           if (this.Equals(ScAddress.Unknown))
-           {
-               bytes= new byte[0];
-           }
-           else 
-           {
             Array.Copy(BitConverter.GetBytes(segment), bytes, 2);
             Array.Copy(BitConverter.GetBytes(offset), 0, bytes, 2, 2);
-           }
             return bytes;
         }
 

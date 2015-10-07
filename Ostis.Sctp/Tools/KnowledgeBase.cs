@@ -17,7 +17,7 @@ namespace Ostis.Sctp.Tools
     /// Следующий пример демонстрирует использование класса <see cref="KnowledgeBase"/>
     /// <code source="..\Ostis.Tests\ToolsTest.cs" region="KeyNodes" lang="C#" />
     /// </example>
-    public class KnowledgeBase
+    public class KnowledgeBase:IDisposable
     {
         private readonly SctpClient sctpClient;
 
@@ -25,32 +25,47 @@ namespace Ostis.Sctp.Tools
 
         private readonly Commands commands;
 
+        private readonly Nodes nodes;
+        private readonly Links links;
+        private readonly Arcs arcs;
+
+        /// <summary>
+        /// Возвращает True, если подклучение к базе знаний установлено
+        /// </summary>
         public bool IsAvaible 
         {
             get { return sctpClient.IsConnected; }
         }
+
+        /// <summary>
+        /// Возвращает комманды, доступные к исполнению над базой знаний
+        /// </summary>
         public Commands Commands
         {
             get { return commands; }
         } 
 
 
-        private readonly Nodes nodes;
-        private readonly Links links;
-        private readonly Arcs arcs;
-
+      
+        /// <summary>
+        /// Возвращает коллекцию дуг базы знаний
+        /// </summary>
         public Arcs Arcs
         {
             get { return arcs; }
         }
 
-
+        /// <summary>
+        /// Возвращает коллекцию ссылок базы знаний
+        /// </summary>
         public Links Links
         {
             get { return links; }
         }
 
-
+        /// <summary>
+        /// Возвращает коллекцию узлов базы знаний
+        /// </summary>
         public Nodes Nodes
         {
             get { return nodes; }
@@ -122,6 +137,34 @@ namespace Ostis.Sctp.Tools
         }
 
 
+
+         #region Implementation of IDisposable
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <filterpriority>2</filterpriority>
+        public void Dispose()
+        {
+            disconnect();
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Деструктор
+        /// </summary>
+        ~KnowledgeBase()
+        {
+            disconnect();
+        }
+
+      
+        private void disconnect()
+        {
+            sctpClient.Dispose();
+        }
+
+        #endregion
     }
 
 

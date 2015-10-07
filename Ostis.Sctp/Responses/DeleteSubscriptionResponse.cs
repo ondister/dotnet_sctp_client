@@ -7,7 +7,7 @@ namespace Ostis.Sctp.Responses
     /// </summary>
     public class DeleteSubscriptionResponse : Response
     {
-        private readonly SubscriptionId subscriptionId;
+        private readonly SubscriptionId subscriptionId=new SubscriptionId(0);
 
         /// <summary>
         /// Идентификатор подписки.

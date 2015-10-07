@@ -16,8 +16,9 @@ namespace Ostis.Sctp.Tools
     public class Commands
     {
         private KnowledgeBase knowledgeBase;
+
         /// <summary>
-        /// Инициализирует новый класс<see cref="Diagnostic"/>.
+        /// Инициализирует новый класс<see cref="Commands"/>.
         /// </summary>
         /// <param name="knowledgeBase">Абстрактная база знаний</param>
         public Commands(KnowledgeBase knowledgeBase)
@@ -25,15 +26,19 @@ namespace Ostis.Sctp.Tools
             this.knowledgeBase = knowledgeBase;
         }
 
-        #region Commands
-
-
-        public Identifier FindUniqueSysIdentifier(ScAddress nodeAddress, string preffix)
+        #region Nodes
+        /// <summary>
+        /// Генерирует уникальный системный идентификатор для узла на основе адреса узла и префикса
+        /// </summary>
+        /// <param name="nodeAddress">Адрес узла</param>
+        /// <param name="preffix">Префикс для узла</param>
+        /// <returns>Возвращает уникальный идентификатор для узла</returns>
+        public Identifier GenerateUniqueSysIdentifier(ScAddress nodeAddress, string preffix)
         {
-            Identifier sysIdtf = Identifier.Unknown;
+            Identifier sysIdtf = Identifier.Invalid;
             StringBuilder stringBilder = new StringBuilder();
 
-            Identifier probablySysIdtf = stringBilder.AppendFormat(preffix, "_", nodeAddress.GetHashCode()).ToString();
+            Identifier probablySysIdtf = stringBilder.AppendFormat(preffix, "_", UnixDateTime.FromDateTime(DateTime.Now).GetHashCode().ToString(), "_", nodeAddress.GetHashCode()).ToString();
             LinkContent content = new LinkContent(probablySysIdtf.Value);
             var cmdFindLink = new FindLinksCommand(content);
             var rspFindLink = (FindLinksResponse)knowledgeBase.ExecuteCommand(cmdFindLink);
@@ -43,10 +48,16 @@ namespace Ostis.Sctp.Tools
                 sysIdtf = probablySysIdtf;
             }
 
-
             return sysIdtf;
         }
 
+
+        /// <summary>
+        /// Задает системный идентификатор для узла
+        /// </summary>
+        /// <param name="nodeAddress">Адрес узла</param>
+        /// <param name="nodeSysIdtf">Системный идентификатор узла</param>
+        /// <returns>Возвращает True, если системный идентификатор был установлен</returns>
         public bool SetSysIdentifier(ScAddress nodeAddress, Identifier nodeSysIdtf)
         {
             bool isSuccesful = false;
@@ -60,21 +71,15 @@ namespace Ostis.Sctp.Tools
 
         }
 
-        public ScAddress CreateArc(ElementType arcType, ScAddress beginElement, ScAddress endElement)
-        {
-             ScAddress arcAddress = ScAddress.Unknown;
-             if (knowledgeBase.IsAvaible)
-             {
-                 var cmdCreateArc = new CreateArcCommand(arcType, beginElement, endElement);
-                 var rspcreateArc= (CreateArcResponse)knowledgeBase.ExecuteCommand(cmdCreateArc);
-                 arcAddress = rspcreateArc.CreatedArcAddress;
-             }
-            return arcAddress;
-        }
 
+        /// <summary>
+        /// Создает новый узел заданного типа
+        /// </summary>
+        /// <param name="nodeType">Тип создаваемого узла</param>
+        /// <returns>Адрес созданного узла</returns>
         public ScAddress CreateNode(ElementType nodeType)
         {
-            ScAddress nodeAddress = ScAddress.Unknown;
+            ScAddress nodeAddress = ScAddress.Invalid;
 
             if (knowledgeBase.IsAvaible)
             {
@@ -88,6 +93,7 @@ namespace Ostis.Sctp.Tools
             return nodeAddress;
         }
 
+
         /// <summary>
         /// Создает новый узел с заданным системным идентификатором
         /// </summary>
@@ -96,7 +102,7 @@ namespace Ostis.Sctp.Tools
         /// <returns></returns>
         public ScAddress CreateNode(ElementType nodeType, Identifier sysIdentifier)
         {
-            ScAddress nodeAddress = ScAddress.Unknown;
+            ScAddress nodeAddress = ScAddress.Invalid;
 
             if (knowledgeBase.IsAvaible)
             {
@@ -118,35 +124,13 @@ namespace Ostis.Sctp.Tools
         }
 
         /// <summary>
-        /// Создает новый узел с заданным системным идентификатором
-        /// </summary>
-        /// <param name="nodeType">Тип узла</param>
-        /// <param name="identifierString">Системный идентификатор в виде строки</param>
-        /// <returns></returns>
-        public ScAddress CreateNode(ElementType nodeType, string identifierString)
-        {
-            return this.CreateNode(nodeType, new Identifier(identifierString));
-        }
-
-
-        /// <summary>
-        /// Возвращает адрес произвольного узла базы знаний
-        /// </summary>
-        /// <param name="identifierString">Строка идентификатора</param>
-        /// <returns>Адрес узла <see cref="ScAddress"/></returns>
-        public ScAddress GetNodeAddress(string identifierString)
-        {
-            return GetNodeAddress(new Identifier(identifierString));
-        }
-
-        /// <summary>
         /// Возвращает адрес произвольного узла базы знаний
         /// </summary>
         /// <param name="identifier">Идентификатор</param>
         /// <returns>Адрес узла <see cref="ScAddress"/></returns>
         public ScAddress GetNodeAddress(Identifier identifier)
         {
-            ScAddress address = ScAddress.Unknown;
+            ScAddress address = ScAddress.Invalid;
             if (knowledgeBase.IsAvaible)
             {
                 var command = new FindElementCommand(identifier);
@@ -165,7 +149,7 @@ namespace Ostis.Sctp.Tools
         /// <returns></returns>
         public Identifier GetNodeIdentifier(ScAddress scAddress, Identifier identifierType)
         {
-            Identifier idtf = Identifier.Unknown;
+            Identifier idtf = Identifier.Invalid;
             if (knowledgeBase.IsAvaible)
             {
                 ConstructionTemplate template = new ConstructionTemplate(scAddress, ElementType.ConstantCommonArc_c, ElementType.Link_a, ElementType.PositiveConstantPermanentAccessArc_c, GetNodeAddress(identifierType));
@@ -194,8 +178,86 @@ namespace Ostis.Sctp.Tools
         public Identifier GetNodeSysIdentifier(ScAddress scAddress)
         {
             return GetNodeIdentifier(scAddress, new Identifier("nrel_system_identifier"));
+        }    
+        
+        #endregion
+
+        #region Links
+        /// <summary>
+        /// Получает контент ссылки по известному адресу ссылки
+        /// </summary>
+        /// <param name="scAddress">Адрес ссылки</param>
+        /// <returns></returns>
+        public LinkContent GetLinkContent(ScAddress scAddress)
+        {
+            LinkContent content = LinkContent.Invalid;
+            if (knowledgeBase.IsAvaible)
+            {
+                var command = new GetLinkContentCommand(scAddress);
+                var response = (GetLinkContentResponse)knowledgeBase.ExecuteCommand(command);
+                content = new LinkContent(response.LinkContent);
+            }
+            return content;
         }
 
+        /// <summary>
+        /// Создает ссылку
+        /// </summary>
+        /// <returns>Адрес созданной ссылки</returns>
+        public ScAddress CreateLink()
+        {
+            ScAddress linkAddress = ScAddress.Invalid;
+            if (knowledgeBase.IsAvaible)
+            {
+                var cmdCreateLink = new CreateLinkCommand();
+                var rspCreateLink = (CreateLinkResponse)knowledgeBase.ExecuteCommand(cmdCreateLink);
+                linkAddress = rspCreateLink.CreatedLinkAddress;
+            }
+            return linkAddress;
+        }
+
+        /// <summary>
+        /// Задает контент для ссылки
+        /// </summary>
+        /// <param name="linkAddress">Адрес ссылки</param>
+        /// <param name="content">Контент для ссылки</param>
+        /// <returns>True, если контент задан</returns>
+        public bool SetLinkContent(ScAddress linkAddress, LinkContent content)
+        {
+            bool isSet = false;
+            if (knowledgeBase.IsAvaible)
+            {
+                var cmdSetLinkContent = new SetLinkContentCommand(linkAddress, content);
+                var rspSetLinkContent = (SetLinkContentResponse)knowledgeBase.ExecuteCommand(cmdSetLinkContent);
+                isSet = rspSetLinkContent.ContentIsSet;
+            }
+            return isSet;
+        }
+
+        #endregion
+
+        #region Arcs
+        /// <summary>
+        /// Создает дугу между двумя элементами базы знаний
+        /// </summary>
+        /// <param name="arcType">Тип дуги</param>
+        /// <param name="beginElement">Адрес начального элемента дуги</param>
+        /// <param name="endElement">Адрес конечного элемента дуги</param>
+        /// <returns>Адрес созданной дуги</returns>
+        public ScAddress CreateArc(ElementType arcType, ScAddress beginElement, ScAddress endElement)
+        {
+            ScAddress arcAddress = ScAddress.Invalid;
+            if (knowledgeBase.IsAvaible)
+            {
+                var cmdCreateArc = new CreateArcCommand(arcType, beginElement, endElement);
+                var rspcreateArc = (CreateArcResponse)knowledgeBase.ExecuteCommand(cmdCreateArc);
+                arcAddress = rspcreateArc.CreatedArcAddress;
+            }
+            return arcAddress;
+        }
+        #endregion
+
+        #region Elements
         /// <summary>
         /// Получает тип элемента по известному адресу
         /// </summary>
@@ -212,27 +274,27 @@ namespace Ostis.Sctp.Tools
             }
             return type;
         }
-
-        /// <summary>
-        /// Получает контент ссылки по известному адресу ссылки
-        /// </summary>
-        /// <param name="scAddress">Адрес ссылки</param>
-        /// <returns></returns>
-        public LinkContent GetLinkContent(ScAddress scAddress)
-        {
-            LinkContent content = LinkContent.Unknown;
-            if (knowledgeBase.IsAvaible)
-            {
-                var command = new GetLinkContentCommand(scAddress);
-                var response = (GetLinkContentResponse)knowledgeBase.ExecuteCommand(command);
-                content = new LinkContent(response.LinkContent);
-            }
-            return content;
-        }
-
-
         #endregion
 
+       
+
+
+       
+
+       
+
+
+      
+
+      
+
+      
+
+      
+
+       
+
+        
 
     }
 }

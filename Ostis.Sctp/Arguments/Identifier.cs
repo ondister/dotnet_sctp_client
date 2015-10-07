@@ -32,7 +32,7 @@ namespace Ostis.Sctp.Arguments
         /// <summary>
         /// Возвращает пустой идентификатор, который не разрешен в системе
         /// </summary>
-        public static readonly Identifier Unknown = String.Empty;
+        public static readonly Identifier Invalid = String.Empty;
 
         /// <summary>
         /// Преобразование Идентификатора из строки.
@@ -91,6 +91,33 @@ namespace Ostis.Sctp.Arguments
             return value.GetHashCode();
         }
 
+     /// <summary>
+     /// Оператор сравнения идентификаторов
+     /// </summary>
+     /// <param name="identifier1">Первый идентификатор</param>
+     /// <param name="identifier2">Второй идентификатор</param>
+     /// <returns>Возвращает True, если значения идентификаторов равны</returns>
+        public static bool operator ==(Identifier identifier1,Identifier identifier2)
+        {
+          bool  isEqual = false;
+          if (((object)identifier1 != null) && ((object)identifier2 != null))
+          {
+              isEqual = identifier1.Equals(identifier2);
+          }
+
+            return isEqual;
+        }
+
+        /// <summary>
+        /// Оператор сравнения идентификаторов
+        /// </summary>
+        /// <param name="identifier1">Первый идентификатор</param>
+        /// <param name="identifier2">Второй идентификатор</param>
+        /// <returns>Возвращает True, если значения идентификаторов не равны</returns>
+        public static bool operator !=(Identifier identifier1, Identifier identifier2)
+        {
+            return !(identifier1 == identifier2);
+        }
 
         #region Реализация интерфеса IArgument
 

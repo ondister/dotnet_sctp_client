@@ -7,7 +7,7 @@ namespace Ostis.Sctp.Responses
     /// </summary>
     public class CreateLinkResponse : Response
     {
-        private readonly ScAddress createdLinkAddress;
+        private readonly ScAddress createdLinkAddress = ScAddress.Invalid;
 
         /// <summary>
         /// Адрес созданной ссылки.

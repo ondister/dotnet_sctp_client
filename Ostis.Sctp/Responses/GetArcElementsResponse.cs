@@ -7,8 +7,8 @@ namespace Ostis.Sctp.Responses
     /// </summary>
     public class GetArcElementsResponse : Response
     {
-        private readonly ScAddress beginElementAddress;
-        private readonly ScAddress endElementAddress;
+        private readonly ScAddress beginElementAddress = ScAddress.Invalid;
+        private readonly ScAddress endElementAddress = ScAddress.Invalid;
 
         /// <summary>
         /// Адрес начального элемента.

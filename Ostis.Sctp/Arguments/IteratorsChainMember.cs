@@ -61,10 +61,10 @@ namespace Ostis.Sctp.Arguments
         {
             using (var stream = new MemoryStream())
             {
-               //нужно записать сначала тип итератора, затем подстановки, затем данные итератора
-                var voidbyte=(byte)255;
-                var bytes = constructionTemplate.GetBytes();
-                var templateTypeByte=bytes[0];
+                //нужно записать сначала тип итератора, затем подстановки, затем данные итератора
+                var voidbyte = (byte)255;
+                var bytes = GetBytesWithoutInvalidAddresses(constructionTemplate);
+                var templateTypeByte = bytes[0];
                 //записали тип шаблона
                 stream.WriteByte(templateTypeByte);
                 //пишем нулевые подстановки
@@ -75,6 +75,38 @@ namespace Ostis.Sctp.Arguments
                 return stream.ToArray();
             }
         }
+
+        private byte[] GetBytesWithoutInvalidAddresses(ConstructionTemplate template)
+        {
+            using (var stream = new MemoryStream())
+            {
+                stream.Write(new[] { (byte)template.Type }, 0, 1);
+
+                foreach (var argument in template.Elements)
+                {
+                   
+                    if (argument is ScAddress)
+                    {
+                        var bytes = argument.GetBytes();
+                        stream.Write(bytes, 0, bytes.Length);
+                    }
+                    else 
+                    {
+                        if ((argument as ScAddress) != ScAddress.Invalid)
+                        {
+                            var bytes = argument.GetBytes();
+                            stream.Write(bytes, 0, bytes.Length);
+                        }
+                    }
+
+
+                }
+                return stream.ToArray();
+            }
+
+        }
+
+
         #endregion
     }
 }

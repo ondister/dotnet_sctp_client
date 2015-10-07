@@ -13,7 +13,7 @@ namespace Ostis.Sctp.Responses
         public ScAddress FoundAddress
         { get { return address; } }
 
-               private readonly ScAddress address;
+        private readonly ScAddress address = ScAddress.Invalid;
 
         /// <summary>
         /// Инициализирует новый экземпляр класса

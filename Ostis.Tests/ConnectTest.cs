@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ostis.Sctp;
+using System.Net;
 
 namespace Ostis.Tests
 {
@@ -18,6 +19,8 @@ namespace Ostis.Tests
 
             sctpClient.Connect();
             Assert.AreEqual(true, sctpClient.IsConnected, "Подключение не удалось");
+            Assert.AreEqual(SctpProtocol.TestServerIp, sctpClient.ServerEndPoint.Address.ToString());
+            Assert.AreEqual(SctpProtocol.DefaultPortNumber, sctpClient.ServerEndPoint.Port);
 
         }
     }

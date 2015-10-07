@@ -31,6 +31,7 @@ namespace Ostis.Tests
             var command = new CreateNodeCommand(ElementType.ConstantNode_c);
             var response = (CreateNodeResponse)sctpClient.Send(command);
 
+            Assert.AreEqual(command.Id, response.Header.Id);
             Assert.AreEqual(command.Code, response.Header.CommandCode);
             Assert.AreEqual(response.Header.ReturnCode, ReturnCode.Successfull);
             Assert.AreNotEqual(response.CreatedNodeAddress.Offset, 0);
@@ -159,6 +160,7 @@ namespace Ostis.Tests
             Assert.AreEqual(command.Code, response.Header.CommandCode);
             Assert.AreEqual(ReturnCode.Successfull, response.Header.ReturnCode);
             Assert.AreEqual(true, response.IsDeleted);
+
         }
         [TestMethod]
         [Timeout(3000)]
@@ -750,7 +752,7 @@ namespace Ostis.Tests
             //создаем новый начальный итератор
             ConstructionTemplate initialIterator = new ConstructionTemplate(knowledgeBase.Commands.GetNodeAddress("nrel_system_identifier"), ElementType.ConstantCommonArc_c, ElementType.Link_a, ElementType.PositiveConstantPermanentAccessArc_c, knowledgeBase.Commands.GetNodeAddress("nrel_main_idtf"));
             //создаем следующий итератор. Неизвестный пока адрес делаем ScAddress.Unknown
-            ConstructionTemplate nextIterator = new ConstructionTemplate(knowledgeBase.Commands.GetNodeAddress("lang_ru"), ElementType.PositiveConstantPermanentAccessArc_c, ScAddress.Unknown);
+            ConstructionTemplate nextIterator = new ConstructionTemplate(knowledgeBase.Commands.GetNodeAddress("lang_ru"), ElementType.PositiveConstantPermanentAccessArc_c, ScAddress.Invalid);
             //второй элемент итератора initialIterator (ElementType.Link) будет подставлен (в результате первого итерирования будет известен его адрес) вместо пока неизвестного второго элемента итератора nextIterator
             //поэтому подстановка выглядит как: Substitution(2, 2)
             //создаем элемент цепочки итераторов. Это подстановка и шаблон итератора
@@ -769,7 +771,7 @@ namespace Ostis.Tests
             Assert.AreEqual(knowledgeBase.Commands.GetNodeAddress("nrel_main_idtf"), response.Constructions[0][4]);
             Assert.AreEqual(knowledgeBase.Commands.GetNodeAddress("lang_ru"), response.Constructions[0][5]);
             Assert.AreEqual(response.Constructions[0][7], response.Constructions[0][2]);
-
+          
         }
 
        
@@ -786,7 +788,7 @@ namespace Ostis.Tests
             //создаем новый начальный итератор
             ConstructionTemplate initialIterator = new ConstructionTemplate(knowledgeBase.Commands.GetNodeAddress("nrel_system_identifier"), ElementType.ConstantCommonArc_c, ElementType.Link_a, ElementType.PositiveConstantPermanentAccessArc_c, knowledgeBase.Commands.GetNodeAddress("nrel_main_idtf"));
             //создаем следующий итератор. Неизвестный пока адрес делаем ScAddress.Unknown
-            ConstructionTemplate nextIterator = new ConstructionTemplate(knowledgeBase.Commands.GetNodeAddress("lang_ru"), ElementType.PositiveConstantPermanentAccessArc_c, ScAddress.Unknown);
+            ConstructionTemplate nextIterator = new ConstructionTemplate(knowledgeBase.Commands.GetNodeAddress("lang_ru"), ElementType.PositiveConstantPermanentAccessArc_c, ScAddress.Invalid);
             //второй элемент итератора initialIterator (ElementType.Link) будет подставлен (в результате первого итерирования будет известен его адрес) вместо пока неизвестного второго элемента итератора nextIterator
             //поэтому подстановка выглядит как: Substitution(2, 2)
             //создаем элемент цепочки итераторов. Это подстановка и шаблон итератора
@@ -812,7 +814,7 @@ namespace Ostis.Tests
 
         #region SubScriptions
         [TestMethod]
-        [Timeout(4000)]
+        [Timeout(11000)]
         [TestProperty("Синхронность", "Синхронный")]
         public void TestSubscriptionsSync()
         {
@@ -880,7 +882,7 @@ namespace Ostis.Tests
         }
 
         [TestMethod]
-        [Timeout(4000)]
+        [Timeout(11000)]
         [TestProperty("Синхронность", "Асинхронный")]
         public void TestSubscriptionsASync()
         {
@@ -933,7 +935,7 @@ namespace Ostis.Tests
             var reaponseDelete = (DeleteElementResponse)lastAsyncResponse;
 
             //emit any events
-            Thread.Sleep(3000);
+            Thread.Sleep(10000);
             var commandEmit = new EmitEventsCommand();
             var responseEmit = (EmitEventsResponse)sctpClient.Send(commandEmit);
             List<ScEvent> eventList = responseEmit.ScEvents;

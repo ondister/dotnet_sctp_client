@@ -1,9 +1,19 @@
 ﻿using Ostis.Sctp.Arguments;
 namespace Ostis.Sctp.Tools
 {
-   public  interface IElement
+    /// <summary>
+    /// Интерфейс элемента базы знаний
+    /// </summary>
+    public interface IElement
     {
-       ScAddress ScAddress { get; }
-       ElementType Type { get; }
+        /// <summary>
+        /// Возвращает адрес элемента
+        /// </summary>
+        ScAddress ScAddress { get; }
+
+        /// <summary>
+        /// Возвращает тип элемента
+        /// </summary>
+        ElementType Type { get; }
     }
 }

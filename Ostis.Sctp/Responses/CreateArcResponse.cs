@@ -7,7 +7,7 @@ namespace Ostis.Sctp.Responses
     /// </summary>
     public class CreateArcResponse : Response
     {
-        private readonly ScAddress createdArcAddress;
+        private readonly ScAddress createdArcAddress=ScAddress.Invalid;
 
         /// <summary>
         /// Адрес созданной дуги.
