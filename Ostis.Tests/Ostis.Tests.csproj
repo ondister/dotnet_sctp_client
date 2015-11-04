@@ -68,6 +68,10 @@
       <Project>{b0ec7362-1026-4e1b-967a-a9292ede17d8}</Project>
       <Name>Ostis.Sctp</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Ostis.Tools\Ostis.Sctp.Tools.csproj">
+      <Project>{3a39c3ec-2114-4b6b-adef-3dc6b61f3d75}</Project>
+      <Name>Ostis.Sctp.Tools</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

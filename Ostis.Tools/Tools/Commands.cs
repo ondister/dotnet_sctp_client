@@ -36,9 +36,8 @@ namespace Ostis.Sctp.Tools
         public Identifier GenerateUniqueSysIdentifier(ScAddress nodeAddress, string preffix)
         {
             Identifier sysIdtf = Identifier.Invalid;
-            StringBuilder stringBilder = new StringBuilder();
-
-            Identifier probablySysIdtf = stringBilder.AppendFormat(preffix, "_", UnixDateTime.FromDateTime(DateTime.Now).GetHashCode().ToString(), "_", nodeAddress.GetHashCode()).ToString();
+          
+            Identifier probablySysIdtf = preffix + "_"+UnixDateTime.FromDateTime(DateTime.Now).GetHashCode().ToString()+ "_"+nodeAddress.GetHashCode().ToString();
             LinkContent content = new LinkContent(probablySysIdtf.Value);
             var cmdFindLink = new FindLinksCommand(content);
             var rspFindLink = (FindLinksResponse)knowledgeBase.ExecuteCommand(cmdFindLink);
@@ -102,10 +101,13 @@ namespace Ostis.Sctp.Tools
         /// <returns></returns>
         public ScAddress CreateNode(ElementType nodeType, Identifier sysIdentifier)
         {
-            ScAddress nodeAddress = ScAddress.Invalid;
+            ScAddress nodeAddress = GetNodeAddress(sysIdentifier);
 
             if (knowledgeBase.IsAvaible)
             {
+                if (nodeAddress == ScAddress.Invalid)
+                { 
+
                 var cmdCreateNode = new CreateNodeCommand(nodeType);
                 var rspCreateNode = (CreateNodeResponse)knowledgeBase.ExecuteCommand(cmdCreateNode);
 
@@ -117,7 +119,8 @@ namespace Ostis.Sctp.Tools
                         nodeAddress = rspCreateNode.CreatedNodeAddress;
                     }
                 }
-
+            }
+           
             }
 
             return nodeAddress;
@@ -178,8 +181,8 @@ namespace Ostis.Sctp.Tools
         public Identifier GetNodeSysIdentifier(ScAddress scAddress)
         {
             return GetNodeIdentifier(scAddress, new Identifier("nrel_system_identifier"));
-        }    
-        
+        }
+
         #endregion
 
         #region Links
@@ -215,6 +218,21 @@ namespace Ostis.Sctp.Tools
             }
             return linkAddress;
         }
+
+        public List<ScAddress> GetLinksByContent(LinkContent linkContent)
+        {
+            List<ScAddress> listAddresses = new List<ScAddress>();
+            if (knowledgeBase.IsAvaible)
+            {
+                var cmdGetLinks = new FindLinksCommand(linkContent);
+                var rspGetLinks = (FindLinksResponse)knowledgeBase.ExecuteCommand(cmdGetLinks);
+                listAddresses = rspGetLinks.Addresses;
+            }
+
+
+            return listAddresses;
+        }
+
 
         /// <summary>
         /// Задает контент для ссылки
@@ -255,6 +273,9 @@ namespace Ostis.Sctp.Tools
             }
             return arcAddress;
         }
+
+      
+
         #endregion
 
         #region Elements
@@ -274,27 +295,60 @@ namespace Ostis.Sctp.Tools
             }
             return type;
         }
+
+        /// <summary>
+        /// Проверяет наличие элемента
+        /// </summary>
+        /// <param name="scAddress">Адрес элемента</param>
+        /// <returns></returns>
+        public bool IsElementExist(ScAddress scAddress)
+        {
+            bool isExist = false;
+            if (knowledgeBase.IsAvaible)
+            {
+                var command = new CheckElementCommand(scAddress);
+                var response = (CheckElementResponse)knowledgeBase.ExecuteCommand(command);
+                isExist = response.ElementExists;
+            }
+            return isExist;
+        }
+
+
+        public bool DeleteElement(ScAddress scAddress)
+        {
+            bool isDeleted = false;
+            if (knowledgeBase.IsAvaible)
+            {
+                var command = new DeleteElementCommand(scAddress);
+                var response = (DeleteElementResponse)knowledgeBase.ExecuteCommand(command);
+                isDeleted = response.IsDeleted;
+            }
+            return isDeleted;
+
+        }
+
+
         #endregion
 
-       
 
 
-       
-
-       
 
 
-      
 
-      
 
-      
 
-      
 
-       
 
-        
+
+
+
+
+
+
+
+
+
+
 
     }
 }

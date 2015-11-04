@@ -37,6 +37,9 @@ namespace Ostis.Tests
 
         }
 
+       
+
+
         [TestMethod]
         [TestProperty("Синхронность", "Асинхронный")]
         public void TestPerfCreateNodesASync()
@@ -54,20 +57,27 @@ namespace Ostis.Tests
 
         }
 
+        
+
+        #endregion
+
+
+        #region ArgumentsPerformance
         [TestMethod]
-        [TestProperty("Синхронность", "Синхронный")]
-        public void TestPerfCreateNodesTools()
+        public void TestArgumentPerformance()
         {
-            KnowledgeBase knowledgeBase = new KnowledgeBase(SctpProtocol.TestServerIp, Ostis.Sctp.SctpProtocol.DefaultPortNumber);
-            for (int count = 0; count < 100000; count++)
+           
+            for (int count = 0; count < 1000000; count++)
             {
-                knowledgeBase.Nodes.Add(ElementType.Node_a, "idtf_" + count.ToString());
+                ConstructionTemplate template = new ConstructionTemplate(ElementType.AbstractNode_a, ElementType.CommonArc_a, new ScAddress(1, 1));
+                template.GetBytes();
 
             }
 
         }
-
         #endregion
+
+
 
         #region Connect
         private void Connect()

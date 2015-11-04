@@ -9,7 +9,7 @@ namespace Ostis.Sctp.Arguments
     /// Следующий пример демонстрирует использование класса: <see cref="ScAddress"/>
     /// <code source="..\Ostis.Tests\ArgumentsTest.cs" region="ScAddress" lang="C#" />
     /// </example>
-    public class ScAddress : IArgument
+    public class ScAddress : IArgument,IEquatable<ScAddress>
     {
         /// <summary>
         /// Возвращает неизвестный  Sc адрес

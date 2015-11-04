@@ -10,7 +10,7 @@ namespace Ostis.Sctp.Arguments
     /// Следующий пример демонстрирует использование класса: <see cref="Identifier"/>
     /// <code source="..\Ostis.Tests\ArgumentsTest.cs" region="Identifier" lang="C#" />
     /// </example>
-    public class Identifier : IArgument
+    public class Identifier : IArgument,IEquatable<Identifier>
     {
         /// <summary>
         /// Значение.
@@ -33,6 +33,12 @@ namespace Ostis.Sctp.Arguments
         /// Возвращает пустой идентификатор, который не разрешен в системе
         /// </summary>
         public static readonly Identifier Invalid = String.Empty;
+
+        /// <summary>
+        /// Возвращает метку уникального идентификатора
+        /// </summary>
+        public static readonly Identifier Unique = "identifierUnique";
+
 
         /// <summary>
         /// Преобразование Идентификатора из строки.

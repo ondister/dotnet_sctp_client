@@ -1,8 +1,12 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ostis.Sctp;
 using System.Net;
-
+#region NameSpases
+using Ostis.Sctp;               // общее пространство имен, обязательно для подключения
+using Ostis.Sctp.Arguments;     // пространство имен аргументов команд
+using Ostis.Sctp.Commands;      // пространство имен команд, отправляемых серверу
+using Ostis.Sctp.Responses;      // пространство имен ответов сервера
+#endregion
 namespace Ostis.Tests
 {
     [TestClass]
@@ -23,5 +27,9 @@ namespace Ostis.Tests
             Assert.AreEqual(SctpProtocol.DefaultPortNumber, sctpClient.ServerEndPoint.Port);
 
         }
+
+
+
+
     }
 }

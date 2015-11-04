@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ostis.Sctp", "Ostis.Sctp\Os
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ostis.Tests", "Ostis.Tests\Ostis.Tests.csproj", "{072839D6-21AA-4F7A-899E-D5027F709CF2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ostis.Sctp.Tools", "Ostis.Tools\Ostis.Sctp.Tools.csproj", "{3A39C3EC-2114-4B6B-ADEF-3DC6B61F3D75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "Demo\Demo.csproj", "{4A0D70AE-F1BC-4A73-BB3E-62B9818029D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{072839D6-21AA-4F7A-899E-D5027F709CF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{072839D6-21AA-4F7A-899E-D5027F709CF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{072839D6-21AA-4F7A-899E-D5027F709CF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A39C3EC-2114-4B6B-ADEF-3DC6B61F3D75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A39C3EC-2114-4B6B-ADEF-3DC6B61F3D75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A39C3EC-2114-4B6B-ADEF-3DC6B61F3D75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A39C3EC-2114-4B6B-ADEF-3DC6B61F3D75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A0D70AE-F1BC-4A73-BB3E-62B9818029D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A0D70AE-F1BC-4A73-BB3E-62B9818029D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A0D70AE-F1BC-4A73-BB3E-62B9818029D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A0D70AE-F1BC-4A73-BB3E-62B9818029D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

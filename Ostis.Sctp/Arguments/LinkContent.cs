@@ -10,7 +10,7 @@ namespace Ostis.Sctp.Arguments
     /// Следующий пример демонстрирует использование класса: <see cref="LinkContent"/>
     /// <code source="..\Ostis.Tests\ArgumentsTest.cs" region="LinkContent" lang="C#" />
     /// </example>
-    public class LinkContent : IArgument
+    public class LinkContent : IArgument,IEquatable<LinkContent>
     {
         /// <summary>
         /// Возвращает пустой контент
@@ -136,5 +136,10 @@ namespace Ostis.Sctp.Arguments
         }
 
         #endregion
+
+        public bool Equals(LinkContent other)
+        {
+            return this.data == other.data & this.contentType==other.contentType;
+        }
     }
 }

@@ -20,14 +20,41 @@ namespace Ostis.Sctp.Tools
     public class KnowledgeBase:IDisposable
     {
         private readonly SctpClient sctpClient;
-
-        private readonly Diagnostic diagnostic;
-
         private readonly Commands commands;
 
-        private readonly Nodes nodes;
-        private readonly Links links;
-        private readonly Arcs arcs;
+        public Commands Commands
+        {
+            get { return commands; }
+        } 
+
+        private readonly ElementCollection<Node> nodes;
+
+        public ElementCollection<Node> Nodes
+        {
+            get { return nodes; }
+        }
+
+        private readonly ElementCollection<Arc> arcs;
+
+        public ElementCollection<Arc> Arcs
+        {
+            get { return arcs; }
+        }
+
+        private readonly ElementCollection<Link> links;
+
+        public ElementCollection<Link> Links
+        {
+            get { return links; }
+        }
+
+        public void SaveChanges()
+        {
+            this.arcs.SaveChanged();
+            this.nodes.SaveChanged();
+            this.links.SaveChanged();
+        }
+        
 
         /// <summary>
         /// Возвращает True, если подклучение к базе знаний установлено
@@ -37,51 +64,7 @@ namespace Ostis.Sctp.Tools
             get { return sctpClient.IsConnected; }
         }
 
-        /// <summary>
-        /// Возвращает комманды, доступные к исполнению над базой знаний
-        /// </summary>
-        public Commands Commands
-        {
-            get { return commands; }
-        } 
-
-
       
-        /// <summary>
-        /// Возвращает коллекцию дуг базы знаний
-        /// </summary>
-        public Arcs Arcs
-        {
-            get { return arcs; }
-        }
-
-        /// <summary>
-        /// Возвращает коллекцию ссылок базы знаний
-        /// </summary>
-        public Links Links
-        {
-            get { return links; }
-        }
-
-        /// <summary>
-        /// Возвращает коллекцию узлов базы знаний
-        /// </summary>
-        public Nodes Nodes
-        {
-            get { return nodes; }
-        }
-
-        /// <summary>
-        /// Возвращает объект, в котором есть методы для диагностики абстрактной базы знаний
-        /// </summary>
-        /// <value>
-        ///  <see cref="Diagnostic"/>
-        /// </value>
-        public Diagnostic Diagnostic
-        {
-            get { return diagnostic; }
-        }
-
 
         #region Конструкторы
 
@@ -111,10 +94,9 @@ namespace Ostis.Sctp.Tools
         {
             sctpClient = new SctpClient(endPoint);
             sctpClient.Connect();
-            nodes = new Tools.Nodes(this);
-            links = new Tools.Links(this);
-            arcs = new Tools.Arcs(this);
-            diagnostic = new Diagnostic(this);
+            arcs = new ElementCollection<Arc>(this);
+            nodes = new ElementCollection<Node>(this);
+            links = new ElementCollection<Link>(this);
             commands = new Commands(this);
         }
 
@@ -136,7 +118,7 @@ namespace Ostis.Sctp.Tools
             return rsp;
         }
 
-
+        
 
          #region Implementation of IDisposable
 

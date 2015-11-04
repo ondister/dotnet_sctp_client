@@ -771,10 +771,10 @@ namespace Ostis.Tests
             Assert.AreEqual(knowledgeBase.Commands.GetNodeAddress("nrel_main_idtf"), response.Constructions[0][4]);
             Assert.AreEqual(knowledgeBase.Commands.GetNodeAddress("lang_ru"), response.Constructions[0][5]);
             Assert.AreEqual(response.Constructions[0][7], response.Constructions[0][2]);
-          
+
         }
 
-       
+
 
         [TestMethod]
         [Timeout(3000)]
@@ -792,12 +792,12 @@ namespace Ostis.Tests
             //второй элемент итератора initialIterator (ElementType.Link) будет подставлен (в результате первого итерирования будет известен его адрес) вместо пока неизвестного второго элемента итератора nextIterator
             //поэтому подстановка выглядит как: Substitution(2, 2)
             //создаем элемент цепочки итераторов. Это подстановка и шаблон итератора
-            IteratorsChainMember chainMember= new IteratorsChainMember(new Substitution(2,2),nextIterator);
+            IteratorsChainMember chainMember = new IteratorsChainMember(new Substitution(2, 2), nextIterator);
             //создаем цепочку итераторов
             IteratorsChain iterateChain = new IteratorsChain(initialIterator);
             //добавляем звено цепочки
             iterateChain.ChainMembers.Add(chainMember);
-        
+
             var command = new IterateConstructionsCommand(iterateChain);
             runAsyncTest(command);
             var response = (IterateConstructionsResponse)lastAsyncResponse;
