@@ -74,10 +74,12 @@ namespace Ostis.Sctp.Arguments
         /// </summary>
         public byte[] GetBytes()
         {
-            var bytes = new List<byte>();
-            bytes.AddRange(BitConverter.GetBytes(data.Length));
-            bytes.AddRange(data);
-            return bytes.ToArray();
+#warning Здесь проблема с преобразованием из-за которой лишние байты в начале
+            //var bytes = new List<byte>();
+            //bytes.AddRange(BitConverter.GetBytes(data.Length));
+            //bytes.AddRange(data);
+            //return bytes.ToArray();
+            return data;
         }
 
         #endregion
