@@ -39,6 +39,7 @@ namespace Ostis.Sctp.Commands
             : base(CommandCode.SetLinkContent)
         {
             Arguments.Add(this.linkAddress = linkAddress);
+            Arguments.Add(new LinkContent(content.Data.Length));//это число байт контента
             Arguments.Add(this.content = content);
         }
     }
