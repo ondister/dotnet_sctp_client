@@ -65,6 +65,14 @@ namespace Ostis.Sctp.Arguments
             : this(LinkContentType.Numeric, BitConverter.GetBytes(value))
 		{ }
 
+        /// <summary>
+        /// Инициализирует новое содержимое ссылки из типа Int.
+        /// </summary>
+        /// <param name="value">значение</param>
+        public LinkContent(int value)
+            : this(LinkContentType.Numeric, BitConverter.GetBytes(value))
+        { }
+
         #endregion
 
         #region Реализация интерфеса IArgument
@@ -74,7 +82,7 @@ namespace Ostis.Sctp.Arguments
         /// </summary>
         public byte[] GetBytes()
         {
-#warning Здесь проблема с преобразованием из-за которой лишние байты в начале
+#warning закоментированные строки заменены добавлением аргумента с числом байт ссылки в команде setlinccontent
             //var bytes = new List<byte>();
             //bytes.AddRange(BitConverter.GetBytes(data.Length));
             //bytes.AddRange(data);
