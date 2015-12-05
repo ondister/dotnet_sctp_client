@@ -1,17 +1,12 @@
 ﻿using System;
-
-using Ostis.Sctp;
-using Ostis.Sctp.Arguments;
-using Ostis.Sctp.Commands;
-using Ostis.Sctp.Responses;
 using System.Net;
-using System.Threading;
-using System.Collections.Generic;
+
+using Ostis.Sctp.Responses;
 
 namespace Ostis.Sctp.Tools
 {
     /// <summary>
-    /// Класс, реализующий работу с абстрактной базой знаний на сервере
+    /// Класс, реализующий работу с абстрактной базой знаний на сервере.
     /// </summary>
     /// <example>
     /// Следующий пример демонстрирует использование класса <see cref="KnowledgeBase"/>
@@ -19,57 +14,50 @@ namespace Ostis.Sctp.Tools
     /// </example>
     public class KnowledgeBase:IDisposable
     {
+        #region Свойства
+
         private readonly SctpClient sctpClient;
         private readonly Commands commands;
-
-        public Commands Commands
-        {
-            get { return commands; }
-        } 
-
         private readonly ElementCollection<Node> nodes;
-
-        public ElementCollection<Node> Nodes
-        {
-            get { return nodes; }
-        }
-
         private readonly ElementCollection<Arc> arcs;
-
-        public ElementCollection<Arc> Arcs
-        {
-            get { return arcs; }
-        }
-
         private readonly ElementCollection<Link> links;
 
-        public ElementCollection<Link> Links
-        {
-            get { return links; }
-        }
-
-        public void SaveChanges()
-        {
-            this.arcs.SaveChanged();
-            this.nodes.SaveChanged();
-            this.links.SaveChanged();
-        }
-        
+        /// <summary>
+        /// Операции с данной базой знаний.
+        /// </summary>
+        public Commands Commands
+        { get { return commands; } } 
 
         /// <summary>
-        /// Возвращает True, если подклучение к базе знаний установлено
+        /// Список узлов.
         /// </summary>
-        public bool IsAvaible 
-        {
-            get { return sctpClient.IsConnected; }
-        }
+        public ElementCollection<Node> Nodes
+        { get { return nodes; } }
 
-      
+        /// <summary>
+        /// Список дуг.
+        /// </summary>
+        public ElementCollection<Arc> Arcs
+        { get { return arcs; } }
+
+        /// <summary>
+        /// Список ссылок.
+        /// </summary>
+        public ElementCollection<Link> Links
+        { get { return links; } }
+
+        /// <summary>
+        /// Подключение к базе знаний установлено.
+        /// </summary>
+        public bool IsAvaible
+        { get { return sctpClient.IsConnected; } }
+
+        #endregion
 
         #region Конструкторы
 
         /// <summary>
-        /// Инициализирует новый экземпляр класса
+        /// ctor.
         /// </summary>
         /// <param name="address">IP-адрес сервера</param>
         /// <param name="port">номер порта</param>
@@ -78,7 +66,7 @@ namespace Ostis.Sctp.Tools
         { }
 
         /// <summary>
-        /// Инициализирует новый экземпляр класса
+        /// ctor.
         /// </summary>
         /// <param name="address">IP-адрес сервера</param>
         /// <param name="port">номер порта</param>
@@ -87,7 +75,7 @@ namespace Ostis.Sctp.Tools
         { }
 
         /// <summary>
-        /// Инициализирует новый экземпляр класса
+        /// ctor.
         /// </summary>
         /// <param name="endPoint">конечная точка подключения на сервере</param>
         public KnowledgeBase(IPEndPoint endPoint)
@@ -102,25 +90,32 @@ namespace Ostis.Sctp.Tools
 
         #endregion
 
-
         /// <summary>
-        /// Посылает произвольную команду серверу синхронно
+        /// Сохранение изменений.
         /// </summary>
-        /// <param name="command">Команда</param>
-        /// <returns></returns>
-        public Response ExecuteCommand(Command command)
+        public void SaveChanges()
         {
-            Response rsp = new UnknownResponse(new byte[0]);
-            if (sctpClient.IsConnected)
-            {
-                rsp = sctpClient.Send(command);
-            }
-            return rsp;
+            arcs.SaveChanged();
+            nodes.SaveChanged();
+            links.SaveChanged();
         }
 
-        
+        /// <summary>
+        /// Отправка произвольной синхронной команды на сервер.
+        /// </summary>
+        /// <param name="command">команда</param>
+        /// <returns>полученный ответ</returns>
+        public Response ExecuteCommand(Command command)
+        {
+            Response response = new UnknownResponse(new byte[0]);
+            if (sctpClient.IsConnected)
+            {
+                response = sctpClient.Send(command);
+            }
+            return response;
+        }
 
-         #region Implementation of IDisposable
+        #region Implementation of IDisposable
 
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
@@ -139,7 +134,6 @@ namespace Ostis.Sctp.Tools
         {
             disconnect();
         }
-
       
         private void disconnect()
         {
@@ -148,6 +142,4 @@ namespace Ostis.Sctp.Tools
 
         #endregion
     }
-
-
 }
