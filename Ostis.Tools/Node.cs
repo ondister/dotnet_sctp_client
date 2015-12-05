@@ -1,16 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ostis.Sctp.Arguments;
+﻿using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Tools
 {
-   public class Node:ElementBase
+    /// <summary>
+    /// Элемент - узел.
+    /// </summary>
+    public class Node : ElementBase
     {
+        #region Свойства
+
         private Identifier systemIdentifier;
-        private string prefix;
+        private readonly string prefix;
+
+        /// <summary>
+        /// Системный идентификатор.
+        /// </summary>
         public Identifier SystemIdentifier
         {
             get { return systemIdentifier; }
@@ -21,83 +25,96 @@ namespace Ostis.Sctp.Tools
             }
         }
 
-       
-         public Node(ElementType type,Identifier systemIdentifier)
-             : base(type)
-         {
-             this.systemIdentifier = systemIdentifier;
-         }
-         public Node(ElementType type, string prefix)
-             : base(type)
-         {
-             this.prefix = prefix;
-             this.SystemIdentifier = Identifier.Unique;
-            base.State= base.State.AddState(ElementState.Edited);
-          
-         }
+        #endregion
 
+        #region Конструкторы
         
-       internal static Node Load(KnowledgeBase knowledgeBase, ScAddress scAddress)
-       {
-           Node node = new Node(ElementType.Unknown,Identifier.Invalid);
-           bool isExist = knowledgeBase.Commands.IsElementExist(scAddress);
-           if (isExist == true)
-           {
-               node.Address = scAddress;
-               node.SystemIdentifier = knowledgeBase.Commands.GetNodeSysIdentifier(scAddress);
-               node.Type = knowledgeBase.Commands.GetElementType(scAddress);
-               node.State = ElementState.Synchronized;
-               node.OnPropertyChanged += node_OnPropertyChanged;
-           }
-           return node;
-       }
+        private Node(ElementType type, Identifier systemIdentifier)
+            : base(type)
+        {
+            this.systemIdentifier = systemIdentifier;
+        }
 
-       static void node_OnPropertyChanged(ElementBase sender)
-       {
-           sender.State = sender.State.RemoveState(ElementState.Synchronized);
-           sender.State = sender.State.AddState(ElementState.Edited);
-       }
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="type">тип</param>
+        /// <param name="prefix">префикс</param>
+        public Node(ElementType type, string prefix)
+            : this(type, Identifier.Unique)
+        {
+            this.prefix = prefix;
+            State = State.AddState(ElementState.Edited);
+        }
 
-      
+        #endregion
 
-      internal override bool Save(KnowledgeBase knowledgeBase)
-       {
+        #region CRUD-методы
 
-           bool isSaved = false;
-           if (base.State.HasAnyState(ElementState.New))
-           {
-               this.CreateNew(knowledgeBase);
-               base.State = base.State.RemoveState(ElementState.New);
-           }
-           if (base.State.HasAnyState(ElementState.Edited))
-           {
-               this.Modify(knowledgeBase);
-               base.State = base.State.RemoveState(ElementState.Edited);
-           }
-           if (base.State.HasAnyState(ElementState.Deleted))
-           {
-               this.Delete(knowledgeBase);
-               base.State = base.State.RemoveState(ElementState.Deleted);
-           }
-           base.State = base.State.AddState(ElementState.Synchronized);
-           return isSaved;
-       }
+        internal static Node Load(KnowledgeBase knowledgeBase, ScAddress scAddress)
+        {
+            var node = new Node(ElementType.Unknown, Identifier.Invalid);
+            if (knowledgeBase.Commands.IsElementExist(scAddress))
+            {
+                node.Address = scAddress;
+                node.SystemIdentifier = knowledgeBase.Commands.GetNodeSysIdentifier(scAddress);
+                node.Type = knowledgeBase.Commands.GetElementType(scAddress);
+                node.State = ElementState.Synchronized;
+                node.OnPropertyChanged += node_OnPropertyChanged;
+            }
+            return node;
+        }
 
-       private void CreateNew(KnowledgeBase knowledgeBase)
-       {
-           base.Address= knowledgeBase.Commands.CreateNode(base.Type);
-       }
+        internal override bool Save(KnowledgeBase knowledgeBase)
+        {
+#warning Непрозрачная логика метода. Можно одновременно создать, отредактировать и удалить. Confusing зело.
+#warning Вынести в родительский класс, так как дублирование кода.
+            bool isSaved = false;
+            if (State.HasAnyState(ElementState.New))
+            {
+                CreateNew(knowledgeBase);
+                State = State.RemoveState(ElementState.New);
+            }
+            if (State.HasAnyState(ElementState.Edited))
+            {
+                Modify(knowledgeBase);
+                State = State.RemoveState(ElementState.Edited);
+            }
+            if (State.HasAnyState(ElementState.Deleted))
+            {
+                Delete(knowledgeBase);
+                State = State.RemoveState(ElementState.Deleted);
+            }
+            State = State.AddState(ElementState.Synchronized);
+            return isSaved;
+        }
 
-       private bool Modify(KnowledgeBase knowledgeBase)
-       {
-           if (this.systemIdentifier == Identifier.Unique) {this.SystemIdentifier= knowledgeBase.Commands.GenerateUniqueSysIdentifier(base.Address,this.prefix); }
-           return knowledgeBase.Commands.SetSysIdentifier(base.Address, this.SystemIdentifier);
-       }
+        private void CreateNew(KnowledgeBase knowledgeBase)
+        {
+            Address = knowledgeBase.Commands.CreateNode(Type);
+        }
 
+        private bool Modify(KnowledgeBase knowledgeBase)
+        {
+            if (systemIdentifier == Identifier.Unique)
+            {
+                SystemIdentifier = knowledgeBase.Commands.GenerateUniqueSysIdentifier(Address, prefix);
+            }
+            return knowledgeBase.Commands.SetSysIdentifier(Address, SystemIdentifier);
+        }
 
-       private bool Delete(KnowledgeBase knowledgeBase)
-       {
-           return knowledgeBase.Commands.DeleteElement(base.Address);
-       }
+        private bool Delete(KnowledgeBase knowledgeBase)
+        {
+            return knowledgeBase.Commands.DeleteElement(Address);
+        }
+
+        #endregion
+        
+#warning Стоит преобразовать в protected
+        private static void node_OnPropertyChanged(ElementBase sender)
+        {
+            sender.State = sender.State.RemoveState(ElementState.Synchronized);
+            sender.State = sender.State.AddState(ElementState.Edited);
+        }
     }
 }

@@ -1,95 +1,104 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ostis.Sctp.Arguments;
+﻿using Ostis.Sctp.Arguments;
 
 namespace Ostis.Sctp.Tools
 {
-    public class Link:ElementBase
+    /// <summary>
+    /// Элемент - ссылка.
+    /// </summary>
+    public class Link : ElementBase
     {
+        #region Свойства
+
         private LinkContent linkContent;
 
+        /// <summary>
+        /// Содержимое ссылки.
+        /// </summary>
         public LinkContent LinkContent
         {
             get { return linkContent; }
-            set 
+            set
             {
                 linkContent = value;
                 base.PropertyChanged();
             }
         }
 
-       static void link_OnPropertyChanged(ElementBase sender)
-        {
-            sender.State = sender.State.RemoveState(ElementState.Synchronized);
-            sender.State = sender.State.AddState(ElementState.Edited);
-        }
-         public Link(LinkContent linkContent)
+        #endregion
+
+        private Link(LinkContent linkContent)
             : base(ElementType.Link_a)
         {
             this.linkContent = linkContent;
-         }
+        }
+
+        #region CRUD-методы
+
         internal static Link Load(KnowledgeBase knowledgeBase, ScAddress scAddress)
         {
-            Link link = new Link(LinkContent.Invalid);
-            bool isExist = knowledgeBase.Commands.IsElementExist(scAddress);
-            if (isExist == true)
+            var link = new Link(LinkContent.Invalid);
+            if (knowledgeBase.Commands.IsElementExist(scAddress))
             {
                 ElementType type = knowledgeBase.Commands.GetElementType(scAddress);
-                 bool isLink= type.IsType(ElementType.Link_a);
-                 if (isLink == true)
-                 {
-                     link.Address = scAddress;
-                     link.LinkContent = knowledgeBase.Commands.GetLinkContent(scAddress);
-                     link.Type = ElementType.Link_a;
-                     link.State = ElementState.Synchronized;
-                     link.OnPropertyChanged += link_OnPropertyChanged;
-                 }
+                if (type.IsType(ElementType.Link_a))
+                {
+                    link.Address = scAddress;
+                    link.LinkContent = knowledgeBase.Commands.GetLinkContent(scAddress);
+                    link.Type = ElementType.Link_a;
+                    link.State = ElementState.Synchronized;
+                    link.OnPropertyChanged += link_OnPropertyChanged;
+                }
             }
             return link;
         }
 
         internal override bool Save(KnowledgeBase knowledgeBase)
         {
-
+#warning Непрозрачная логика метода. Можно одновременно создать, отредактировать и удалить. Confusing зело.
+#warning Вынести в родительский класс, так как дублирование кода.
             bool isSaved = false;
-            if (base.State.HasAnyState(ElementState.New))
+            if (State.HasAnyState(ElementState.New))
             {
-                this.CreateNew(knowledgeBase);
-                base.State = base.State.RemoveState(ElementState.New);
+                CreateNew(knowledgeBase);
+                State = State.RemoveState(ElementState.New);
             }
-            if (base.State.HasAnyState(ElementState.Edited))
+            if (State.HasAnyState(ElementState.Edited))
             {
-                this.Modify(knowledgeBase);
-                base.State = base.State.RemoveState(ElementState.Edited);
+                Modify(knowledgeBase);
+                State = State.RemoveState(ElementState.Edited);
             }
-            if (base.State.HasAnyState(ElementState.Deleted))
+            if (State.HasAnyState(ElementState.Deleted))
             {
-                this.Delete(knowledgeBase);
-                base.State = base.State.RemoveState(ElementState.Deleted);
+                Delete(knowledgeBase);
+                State = State.RemoveState(ElementState.Deleted);
             }
-            base.State = base.State.AddState(ElementState.Synchronized);
+            State = State.AddState(ElementState.Synchronized);
             return isSaved;
         }
 
         private void CreateNew(KnowledgeBase knowledgeBase)
         {
-            base.Address = knowledgeBase.Commands.CreateLink();
-            knowledgeBase.Commands.SetLinkContent(base.Address, this.linkContent);
-
+            Address = knowledgeBase.Commands.CreateLink();
+            knowledgeBase.Commands.SetLinkContent(Address, linkContent);
         }
 
         private bool Modify(KnowledgeBase knowledgeBase)
         {
-            return knowledgeBase.Commands.SetLinkContent(base.Address, this.linkContent);
+            return knowledgeBase.Commands.SetLinkContent(Address, linkContent);
         }
-
 
         private bool Delete(KnowledgeBase knowledgeBase)
         {
-            return knowledgeBase.Commands.DeleteElement(base.Address);
+            return knowledgeBase.Commands.DeleteElement(Address);
+        }
+
+        #endregion
+
+#warning Стоит преобразовать в protected
+        private static void link_OnPropertyChanged(ElementBase sender)
+        {
+            sender.State = sender.State.RemoveState(ElementState.Synchronized);
+            sender.State = sender.State.AddState(ElementState.Edited);
         }
     }
 }
