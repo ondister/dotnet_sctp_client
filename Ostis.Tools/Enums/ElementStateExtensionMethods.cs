@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ostis.Sctp.Tools
 {
+#warning Чтобы работать с ElementState, как с набором флагов (что крайне не рекомендуется), стоит пометить это перечисление атрибутом [Flags], в противном случае класс ElementStateExtensionMethods должен быть предан огню и мечу.
     /// <summary>
     /// Методы расширения для <see cref="ElementState"/>
     /// </summary>

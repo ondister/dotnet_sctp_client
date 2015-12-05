@@ -1,17 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ostis.Sctp.Tools
+﻿namespace Ostis.Sctp.Tools
 {
-    public enum ElementState:byte
+    /// <summary>
+    /// Состояние синхронизации элемента базы знаний.
+    /// </summary>
+    public enum ElementState : byte
     {
-        UnKnown=0,
-        Synchronized=1,
-        New=2,
-        Edited=3,
-        Deleted=4,
+        /// <summary>
+        /// Неизвестно (рассинхронизация).
+        /// </summary>
+        Unknown = 0,
+
+        /// <summary>
+        /// Синхронизирован.
+        /// </summary>
+        Synchronized = 1,
+
+        /// <summary>
+        /// добавлен новый (отсутствует на сервере).
+        /// </summary>
+        New = 2,
+
+        /// <summary>
+        /// Отредактиован существующий.
+        /// </summary>
+        Edited = 3,
+
+        /// <summary>
+        /// Удалён (но ещё присутствует на сервере).
+        /// </summary>
+        Deleted = 4,
     }
 }
