@@ -20,7 +20,7 @@ namespace Ostis.Sctp.Tools
             set
             {
                 linkContent = value;
-                base.PropertyChanged();
+                OnChanged();
             }
         }
 
@@ -46,7 +46,6 @@ namespace Ostis.Sctp.Tools
                     link.LinkContent = knowledgeBase.Commands.GetLinkContent(scAddress);
                     link.Type = ElementType.Link_a;
                     link.State = ElementState.Synchronized;
-                    link.OnPropertyChanged += link_OnPropertyChanged;
                 }
             }
             return link;
@@ -94,11 +93,13 @@ namespace Ostis.Sctp.Tools
 
         #endregion
 
-#warning Стоит преобразовать в protected
-        private static void link_OnPropertyChanged(ElementBase sender)
+        /// <summary>
+        /// Обработка собственного изменения.
+        /// </summary>
+        protected override void OnChanged()
         {
-            sender.State = sender.State.RemoveState(ElementState.Synchronized);
-            sender.State = sender.State.AddState(ElementState.Edited);
+            State = State.RemoveState(ElementState.Synchronized);
+            State = State.AddState(ElementState.Edited);
         }
     }
 }

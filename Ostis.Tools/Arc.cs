@@ -70,7 +70,6 @@ namespace Ostis.Sctp.Tools
                 CreateNew(knowledgeBase);
                 State = State.RemoveState(ElementState.New);
             }
-#warning А почему нет Modify?
             /*if (State.HasAnyState(ElementState.Edited))
             {
                 Modify(knowledgeBase);

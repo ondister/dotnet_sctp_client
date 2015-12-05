@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 
 using Ostis.Sctp.Arguments;
 
@@ -10,34 +9,6 @@ namespace Ostis.Sctp.Tools
     /// </summary>
     public abstract class ElementBase
     {
-        #region Реакция на изменения
-#warning Заменить весь этот цирк на реализацию INotifyPropertyChanged.
-
-        /// <summary>
-        /// Делегат события изменения свойства.
-        /// </summary>
-        /// <param name="sender">изменённый элемент</param>
-        public delegate void ElementHandler(ElementBase sender);
-
-        /// <summary>
-        /// Событие изменения свойства.
-        /// </summary>
-        public event ElementHandler OnPropertyChanged;
-
-        /// <summary>
-        /// Вызов обработчика изменения.
-        /// </summary>
-        protected void PropertyChanged()
-        {
-            var handler = Volatile.Read(ref OnPropertyChanged);
-            if (handler != null)
-            {
-                handler(this);
-            }
-        }
-
-        #endregion
-
         #region Свойства
 
         /// <summary>
@@ -77,6 +48,12 @@ namespace Ostis.Sctp.Tools
         /// <param name="knowledgeBase">база знаний</param>
         /// <returns><b>true</b>, если сохранено успешно, иначе - <b>false</b></returns>
         internal abstract bool Save(KnowledgeBase knowledgeBase);
+
+        /// <summary>
+        /// Обработка собственного изменения.
+        /// </summary>
+        protected virtual void OnChanged()
+        { }
 
         #region костыли и велосипеды
 #warning Kill it with fire!

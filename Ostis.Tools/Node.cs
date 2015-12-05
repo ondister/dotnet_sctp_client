@@ -21,7 +21,7 @@ namespace Ostis.Sctp.Tools
             set
             {
                 systemIdentifier = value;
-                base.PropertyChanged();
+                OnChanged();
             }
         }
 
@@ -60,7 +60,6 @@ namespace Ostis.Sctp.Tools
                 node.SystemIdentifier = knowledgeBase.Commands.GetNodeSysIdentifier(scAddress);
                 node.Type = knowledgeBase.Commands.GetElementType(scAddress);
                 node.State = ElementState.Synchronized;
-                node.OnPropertyChanged += node_OnPropertyChanged;
             }
             return node;
         }
@@ -109,12 +108,14 @@ namespace Ostis.Sctp.Tools
         }
 
         #endregion
-        
-#warning Стоит преобразовать в protected
-        private static void node_OnPropertyChanged(ElementBase sender)
+
+        /// <summary>
+        /// Обработка собственного изменения.
+        /// </summary>
+        protected override void OnChanged()
         {
-            sender.State = sender.State.RemoveState(ElementState.Synchronized);
-            sender.State = sender.State.AddState(ElementState.Edited);
+            State = State.RemoveState(ElementState.Synchronized);
+            State = State.AddState(ElementState.Edited);
         }
     }
 }
