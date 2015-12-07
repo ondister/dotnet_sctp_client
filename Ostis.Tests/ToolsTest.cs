@@ -18,21 +18,6 @@ namespace Ostis.Tests
             kb.Nodes.Add(n);
             kb.SaveChanges();
 
-
-        }
-
-
-        [TestMethod]
-        [TestProperty("Синхронность", "Синхронный")]
-        public void TestPerfCreateNodesTools()
-        {
-            KnowledgeBase kb = new KnowledgeBase(SctpProtocol.TestServerIp, SctpProtocol.DefaultPortNumber);
-            for (int count = 0; count < 10000; count++)
-            {
-                Node n = new Node(ElementType.ClassNode_a, "newNode" + count.ToString());
-                kb.Nodes.Add(n);
-            }
-
         }
         #endregion
 
