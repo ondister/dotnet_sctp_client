@@ -271,7 +271,7 @@ namespace Ostis.Tests
             this.Connect();
             Assert.AreEqual(true, sctpClient.IsConnected);
             //looking for system identifier
-            var command = new FindLinksCommand(new LinkContent("nrel_system_identifier"));
+            var command = new FindLinksCommand(new LinkContent("nrel_inclusion"));
             var response = (FindLinksResponse)sctpClient.Send(command);
             Assert.AreEqual(command.Code, response.Header.CommandCode);
             Assert.AreEqual(response.Header.ReturnCode, ReturnCode.Successfull);
@@ -287,7 +287,7 @@ namespace Ostis.Tests
             this.Connect();
             Assert.AreEqual(true, sctpClient.IsConnected);
             //looking for system identifier
-            var command = new FindLinksCommand(new LinkContent("nrel_system_identifier"));
+            var command = new FindLinksCommand(new LinkContent("nrel_inclusion"));
             runAsyncTest(command);
             var response = (FindLinksResponse)lastAsyncResponse;
             Assert.AreEqual(command.Code, response.Header.CommandCode);
@@ -960,7 +960,6 @@ namespace Ostis.Tests
 
         }
         #endregion
-
 
         #region Connect
         private void Connect()

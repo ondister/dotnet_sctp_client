@@ -30,6 +30,7 @@ namespace Ostis.Sctp.Commands
         public FindLinksCommand(LinkContent content)
             : base(CommandCode.FindLinks)
         {
+            Arguments.Add(new LinkContent(content.Data.Length));//это число байт контента
             Arguments.Add(this.content = content);
         }
     }
