@@ -29,6 +29,12 @@ namespace Ostis.Sctp
         /// <summary>
         /// Удаление sc-элемента.
         /// </summary>
-        DeleteElement = 4
+        DeleteElement = 4,
+
+         /// <summary>
+        /// Изменение содержимого ссылки
+        /// </summary>
+        LinkContentChange= 5
+    
     }
 }
