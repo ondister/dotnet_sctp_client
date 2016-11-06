@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using Ostis.Sctp.Arguments;
 using Ostis.Sctp.Commands;
 using Ostis.Sctp.Responses;
@@ -8,7 +7,7 @@ using Ostis.Sctp.Responses;
 namespace Ostis.Sctp.Tools
 {
     /// <summary>
-    /// Класс с методами выполнение команд в базе знаний.
+    /// Класс с методами выполнения команд в базе знаний.
     /// </summary>
     public class Commands
     {
@@ -313,6 +312,19 @@ namespace Ostis.Sctp.Tools
                 isDeleted = response.IsDeleted;
             }
             return isDeleted;
+        }
+
+        /// <summary>
+        /// Получить коллекцию конструкций, соответствующих указанной конструкции-шаблону.
+        /// </summary>
+        /// <param name="template">Конструкция-шаблон.</param>
+        /// <returns>Список конструкций (списков элементов).</returns>
+        public List<List<ScAddress>> IterateElements(ConstructionTemplate template)
+        {
+            if (!knowledgeBase.IsAvaible) return new List<List<ScAddress>>();
+            var cmd = new IterateElementsCommand(template);
+            var rsp = (IterateElementsResponse) knowledgeBase.ExecuteCommand(cmd);
+            return rsp.Constructions;
         }
 
         #endregion
