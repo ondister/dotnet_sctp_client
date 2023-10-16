@@ -1,3 +1,6 @@
 *.suo
 Ostis.userprefs
 TestResults
+.vs/*
+*/.vs/*
+Ostis.Sctp.sln.DotSettings.user
