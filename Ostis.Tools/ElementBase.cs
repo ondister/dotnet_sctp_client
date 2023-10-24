@@ -82,8 +82,14 @@ namespace Ostis.Sctp.Tools
         /// <summary>
         /// Обработка собственного изменения.
         /// </summary>
-        protected virtual void OnChanged()
-        { }
+        protected void OnChanged()
+        {
+            if (CanBeEdited)
+            {
+                State = State.RemoveState(ElementState.Synchronized);
+                State = State.AddState(ElementState.Edited);
+            }
+        }
 
         #region костыли и велосипеды
 #warning Kill it with fire!

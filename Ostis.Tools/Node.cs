@@ -84,14 +84,5 @@ namespace Ostis.Sctp.Tools
         }
 
         #endregion
-
-        /// <summary>
-        /// Обработка собственного изменения.
-        /// </summary>
-        protected override void OnChanged()
-        {
-            State = State.RemoveState(ElementState.Synchronized);
-            State = State.AddState(ElementState.Edited);
-        }
     }
 }
