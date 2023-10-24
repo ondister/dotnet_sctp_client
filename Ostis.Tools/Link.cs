@@ -51,42 +51,18 @@ namespace Ostis.Sctp.Tools
             return link;
         }
 
-        internal override bool Save(KnowledgeBase knowledgeBase)
-        {
-#warning Непрозрачная логика метода. Можно одновременно создать, отредактировать и удалить. Confusing зело.
-#warning Вынести в родительский класс, так как дублирование кода.
-            bool isSaved = false;
-            if (State.HasAnyState(ElementState.New))
-            {
-                CreateNew(knowledgeBase);
-                State = State.RemoveState(ElementState.New);
-            }
-            if (State.HasAnyState(ElementState.Edited))
-            {
-                Modify(knowledgeBase);
-                State = State.RemoveState(ElementState.Edited);
-            }
-            if (State.HasAnyState(ElementState.Deleted))
-            {
-                Delete(knowledgeBase);
-                State = State.RemoveState(ElementState.Deleted);
-            }
-            State = State.AddState(ElementState.Synchronized);
-            return isSaved;
-        }
-
-        private void CreateNew(KnowledgeBase knowledgeBase)
+        protected override void CreateNew(KnowledgeBase knowledgeBase)
         {
             Address = knowledgeBase.Commands.CreateLink();
             knowledgeBase.Commands.SetLinkContent(Address, linkContent);
         }
 
-        private bool Modify(KnowledgeBase knowledgeBase)
+        protected override bool Modify(KnowledgeBase knowledgeBase)
         {
             return knowledgeBase.Commands.SetLinkContent(Address, linkContent);
         }
 
-        private bool Delete(KnowledgeBase knowledgeBase)
+        protected override bool Delete(KnowledgeBase knowledgeBase)
         {
             return knowledgeBase.Commands.DeleteElement(Address);
         }

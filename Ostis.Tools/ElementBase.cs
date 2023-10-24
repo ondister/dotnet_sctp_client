@@ -47,7 +47,37 @@ namespace Ostis.Sctp.Tools
         /// </summary>
         /// <param name="knowledgeBase">база знаний</param>
         /// <returns><b>true</b>, если сохранено успешно, иначе - <b>false</b></returns>
-        internal abstract bool Save(KnowledgeBase knowledgeBase);
+        internal bool Save(KnowledgeBase knowledgeBase)
+        {
+#warning Непрозрачная логика метода. Можно одновременно создать, отредактировать и удалить. Confusing зело.
+            bool isSaved = false;
+            if (State.HasAnyState(ElementState.New))
+            {
+                CreateNew(knowledgeBase);
+                State = State.RemoveState(ElementState.New);
+            }
+            if (CanBeEdited && State.HasAnyState(ElementState.Edited))
+            {
+                Modify(knowledgeBase);
+                State = State.RemoveState(ElementState.Edited);
+            }
+            if (State.HasAnyState(ElementState.Deleted))
+            {
+                Delete(knowledgeBase);
+                State = State.RemoveState(ElementState.Deleted);
+            }
+            State = State.AddState(ElementState.Synchronized);
+            return isSaved;
+        }
+
+        protected virtual bool CanBeEdited
+        { get { return true; } }
+
+        protected abstract void CreateNew(KnowledgeBase knowledgeBase);
+
+        protected abstract bool Modify(KnowledgeBase knowledgeBase);
+
+        protected abstract bool Delete(KnowledgeBase knowledgeBase);
 
         /// <summary>
         /// Обработка собственного изменения.

@@ -60,38 +60,22 @@ namespace Ostis.Sctp.Tools
             return arc;
         }
 
-        internal override bool Save(KnowledgeBase knowledgeBase)
-        {
-#warning Непрозрачная логика метода. Можно одновременно создать, отредактировать и удалить. Confusing зело.
-#warning Вынести в родительский класс, так как дублирование кода.
-            bool isSaved = false;
-            if (State.HasAnyState(ElementState.New))
-            {
-                CreateNew(knowledgeBase);
-                State = State.RemoveState(ElementState.New);
-            }
-            /*if (State.HasAnyState(ElementState.Edited))
-            {
-                Modify(knowledgeBase);
-                State = State.RemoveState(ElementState.Edited);
-            }*/
-            if (State.HasAnyState(ElementState.Deleted))
-            {
-                Delete(knowledgeBase);
-                State = State.RemoveState(ElementState.Deleted);
-            }
-            State = State.AddState(ElementState.Synchronized);
-            return isSaved;
-        }
+        protected override bool CanBeEdited
+        { get { return false; } }
 
-        private void CreateNew(KnowledgeBase knowledgeBase)
+        protected override void CreateNew(KnowledgeBase knowledgeBase)
         {
 #warning См. комментарий.
             //добавлять в соответствующие коллекции элементов перед использованием в виде вершин дуг
             Address = knowledgeBase.Commands.CreateArc(Type, beginElement.Address, endElement.Address);
         }
 
-        private bool Delete(KnowledgeBase knowledgeBase)
+        protected override bool Modify(KnowledgeBase knowledgeBase)
+        {
+            throw new NotSupportedException();
+        }
+
+        protected override bool Delete(KnowledgeBase knowledgeBase)
         {
             return knowledgeBase.Commands.DeleteElement(Address);
         }
